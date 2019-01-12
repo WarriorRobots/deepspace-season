@@ -7,14 +7,12 @@ import frc.robot.util.enums.StartingPosition;
 /**
  * Sends miscellaneous data to the dashboard. Call in robotInit() of Robot.java
  */
+@SuppressWarnings("unused")
 public class DashboardHandler {
 	
 	private static DashboardHandler instance = null;
 	
-	@SuppressWarnings("unused")
 	private static StartingPosition positionTarget = StartingPosition.MIDDLE;
-	@SuppressWarnings("unused")
-	
 	private static SendableChooser<StartingPosition> positionDropdown;
 	
 	@Deprecated
