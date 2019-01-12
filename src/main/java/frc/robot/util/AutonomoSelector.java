@@ -2,19 +2,6 @@ package frc.robot.util;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.commands.autonomous.routines.CrossLine;
-import frc.robot.commands.autonomous.routines.LefttoLeftScale;
-import frc.robot.commands.autonomous.routines.LefttoLeftSwitch;
-import frc.robot.commands.autonomous.routines.LefttoRightScale;
-import frc.robot.commands.autonomous.routines.LefttoRightSwitch;
-import frc.robot.commands.autonomous.routines.MidtoLeftSwitch;
-import frc.robot.commands.autonomous.routines.MidtoLeftSwitchDouble;
-import frc.robot.commands.autonomous.routines.MidtoRightSwitch;
-import frc.robot.commands.autonomous.routines.MidtoRightSwitchDouble;
-import frc.robot.commands.autonomous.routines.RighttoLeftScale;
-import frc.robot.commands.autonomous.routines.RighttoLeftSwitch;
-import frc.robot.commands.autonomous.routines.RighttoRightScale;
-import frc.robot.commands.autonomous.routines.RighttoRightSwitch;
 
 /**
  * Contains methods that select the Autonomous case of the robot.
@@ -26,12 +13,6 @@ public class AutonomoSelector {
 	
 	private String gameData = null;
 	private Command autoCommand = null;
-
-	private boolean atLeftPos, atMiddlePos, atRightPos = false;
-	private boolean goToScale, goToSwitch, goToLine = false;
-	private boolean switchOnLeft, switchOnRight = false;
-	private boolean scaleOnLeft, scaleOnRight = false;
-	private boolean oneCube, twoCube = false;
 	
 	public static AutonomoSelector getInstance() {
 		if (instance == null) {
@@ -56,77 +37,9 @@ public class AutonomoSelector {
 	public void selectAutoCase() {
 		initData();
 		
-		if (goToLine) {
-				autoCommand = new CrossLine();
-				DriverStation.reportWarning("CrossLine, I choose you!", false);
-		} else if (atMiddlePos) {
-			if (goToSwitch) {
-				if (switchOnLeft) {
-					if (oneCube) {
-						autoCommand = new MidtoLeftSwitch();
-						DriverStation.reportWarning("MidtoLeftSwitch, I choose you!", false);
-					} else if (twoCube) {
-						autoCommand = new MidtoLeftSwitchDouble();
-						DriverStation.reportWarning("MidtoLeftSwitchDouble, I choose you!", false);
-					}
-				} else if (switchOnRight) {
-					if (oneCube) {
-						autoCommand = new MidtoRightSwitch();
-						DriverStation.reportWarning("MidtoRightSwitch, I choose you!", false);
-					} else if (twoCube) {
-						autoCommand = new MidtoRightSwitchDouble();
-						DriverStation.reportWarning("MidtoRightSwitchDouble, I choose you!", false);
-					}
-				}
-			} else if (goToScale) {
-				if (scaleOnLeft) {
-					autoCommand = new CrossLine();
-					DriverStation.reportWarning("MidtoLeftScale is unfinished. Crossing line.", false);
-				} else if (scaleOnRight) {
-					autoCommand = new CrossLine();
-					DriverStation.reportWarning("MidtoRightScale is unfinished. Crossing line.", false);
-				}
-			}
-		} else if (atLeftPos) {
-			if (goToSwitch) {
-				if (switchOnLeft) {
-					autoCommand = new LefttoLeftSwitch();
-					DriverStation.reportWarning("LefttoLeftSwitch, I choose you!", false);
-				} else if (switchOnRight) {
-					autoCommand = new LefttoRightSwitch();
-					DriverStation.reportWarning("LefttoRightSwitch, I choose you!", false);
-				}
-			} else if (goToScale) {
-				if (scaleOnLeft) {
-					autoCommand = new LefttoLeftScale();
-					DriverStation.reportWarning("LefttoLeftScale, I choose you!", false);
-				} else if (scaleOnRight) {
-					autoCommand = new LefttoRightScale();
-					DriverStation.reportWarning("LefttoRightScale, I choose you!", false);
-				}
-			}
-		} else if (atRightPos) {
-			if (goToSwitch) {
-				if (switchOnLeft) {
-					autoCommand = new RighttoLeftSwitch();
-					DriverStation.reportWarning("RighttoLeftSwitch, I choose you!", false);
-				} else if (switchOnRight) {
-					autoCommand = new RighttoRightSwitch();
-					DriverStation.reportWarning("RighttoRightSwitch, I choose you!", false);
-				}
-			} else if (goToScale) {
-				if (scaleOnLeft) {
-					autoCommand = new RighttoLeftScale();
-					DriverStation.reportWarning("RighttoLeftScale, I choose you!", false);
-				} else if (scaleOnRight) {
-					autoCommand = new RighttoRightScale();
-					DriverStation.reportWarning("RighttoRightScale, I choose you!", false);
-				}
-			}
-		} else {
-			DriverStation.reportError("FAILURE TO CHOOSE AUTO", false);
+		
 		}
-	}
+
 	
 	public void startAuto() {
 		try {
@@ -139,66 +52,11 @@ public class AutonomoSelector {
 	private void initData() {
 		resetData();
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-
-		switch (DashboardHandler.getInstance().getStartingPosition()) {
-		case MIDDLE:
-			atMiddlePos = true;
-			break;
-		case LEFT:
-			atLeftPos = true;
-			break;
-		case RIGHT:
-			atRightPos = true;
-			break;
-		}
-
-		switch (DashboardHandler.getInstance().getAutoTarget()) {
-		case SWITCH:
-			goToSwitch = true;
-			break;
-		case SCALE:
-			goToScale = true;
-			break;
-		case LINE:
-			goToLine = true;
-			break;
-		}
 		
-		switch (DashboardHandler.getInstance().getNumberOfCubes()) {
-		case ONE:
-			oneCube = true;
-			break;
-		case TWO:
-			twoCube = true;
-			break;
-		}
-
-		switch (gameData.charAt(0)) {
-		case 'L':
-			switchOnLeft = true;
-			break;
-		case 'R':
-			switchOnRight = true;
-			break;
-		}
-
-		switch (gameData.charAt(1)) {
-		case 'L':
-			scaleOnLeft = true;
-			break;
-		case 'R':
-			scaleOnRight = true;
-			break;
-		}
 	}
 
 
 	private void resetData() {
-		gameData = null;
-		oneCube = twoCube = false;
-		atLeftPos = atMiddlePos = atRightPos = false;
-		goToScale = goToSwitch = goToLine = false;
-		switchOnLeft = switchOnRight = false;
-		scaleOnLeft = scaleOnRight = false;
+		
 	}
 }
