@@ -11,35 +11,13 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.EmergencyResetAll;
-import frc.robot.commands.climb.HookBackwards;
-import frc.robot.commands.climb.HookForwards;
-import frc.robot.commands.climb.WinchInwards;
-import frc.robot.commands.climb.WinchOutwards;
-import frc.robot.commands.drive.ArcadeDriveAlignment;
-import frc.robot.commands.drive.CameraAlign;
-import frc.robot.commands.drive.TankDriveTurnLock;
-import frc.robot.commands.pneumatics.ClosePickup;
-import frc.robot.commands.pneumatics.LowerHood;
-import frc.robot.commands.pneumatics.OpenPickup;
-import frc.robot.commands.pneumatics.RaiseAndClose;
-import frc.robot.commands.pneumatics.RaiseHood;
-import frc.robot.commands.scoring.PickupCubeFromPortal;
-import frc.robot.commands.scoring.feed.RunFeedAtDefault;
-import frc.robot.commands.scoring.sequence.EjectCube;
-import frc.robot.commands.scoring.sequence.PickupCube;
-import frc.robot.commands.scoring.sequence.TopLoadCube;
-import frc.robot.commands.scoring.shooter.ShootHigh;
-import frc.robot.commands.scoring.shooter.ShootLow;
-import frc.robot.commands.scoring.shooter.ShootMid;
-import frc.robot.commands.scoring.shooter.ShootSuperHigh;
-import frc.robot.commands.scoring.shooter.ShootSwitch;
 import frc.robot.util.triggers.DpadTrigger;
 import frc.robot.util.triggers.ThresholdTrigger;
 
 /**
  * Contains methods for receiving data from Joysticks and the Xbox controller.
  */
+@SuppressWarnings("unused")
 public final class ControlHandler {
 
 	public static final int LEFT_JOY = 1;
@@ -72,18 +50,6 @@ public final class ControlHandler {
 		rightJoyButton4 = new JoystickButton(rightJoy, 4);
 		rightJoyButton6 = new JoystickButton(rightJoy, 6);
 		rightJoyButton7 = new JoystickButton(rightJoy, 7);
-		
-		leftJoyTriggerButton.whileHeld(new CameraAlign());
-		leftJoyButton3.whileHeld(new TopLoadCube());
-		leftJoyButton4.whenPressed(new ClosePickup());
-		leftJoyButton5.whileHeld(new WinchOutwards());
-		rightJoyTriggerButton.whileHeld(new TankDriveTurnLock());
-		rightJoyThumbButton.whileHeld(new ArcadeDriveAlignment());
-		rightJoyButton3.whenPressed(new OpenPickup());
-		rightJoyButton4.whileHeld(new ShootSwitch());
-		rightJoyButton4.whileHeld(new RunFeedAtDefault());
-		rightJoyButton6.whileHeld(new WinchInwards());
-		rightJoyButton7.whenPressed(new EmergencyResetAll());
 
 		leftXboxTrigger = new ThresholdTrigger( () -> xbox.getTriggerAxis(Hand.kLeft), 0.5);
 		rightXboxTrigger = new ThresholdTrigger( () -> xbox.getTriggerAxis(Hand.kRight), 0.5);
@@ -99,22 +65,6 @@ public final class ControlHandler {
 		xboxY = new JoystickButton(xbox, 4);
 		xboxSTART = new JoystickButton(xbox, 8);
 		xboxBACK = new JoystickButton(xbox, 7);
-
-		leftXboxTrigger.whileHeld(new PickupCube());
-		rightXboxTrigger.whileHeld(new ShootSwitch());
-		leftXboxBumper.whileHeld(new EjectCube());
-		rightXboxBumper.whileHeld(new PickupCubeFromPortal());
-		xboxUp.whileHeld(new ShootHigh());
-		xboxDown.whileHeld(new ShootLow());
-		xboxRight.whileHeld(new ShootMid());
-		xboxLeft.whileHeld(new ShootSuperHigh());
-		xboxA.whileHeld(new RunFeedAtDefault());
-		xboxB.whenPressed(new ClosePickup());
-		xboxX.whenPressed(new LowerHood());
-		xboxY.whenPressed(new RaiseAndClose());
-		xboxSTART.whenPressed(new RaiseHood());
-		xboxSTART.whileHeld(new HookForwards());
-		xboxBACK.whileHeld(new HookBackwards());
 	}
 
 	/**

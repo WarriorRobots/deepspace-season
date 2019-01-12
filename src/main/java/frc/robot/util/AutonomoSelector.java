@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.command.Command;
  * Contains methods that select the Autonomous case of the robot.
  * Place these methods inside autonomousInit() of Robot.java
  */
+//TODO
+@SuppressWarnings("unused")
 public class AutonomoSelector {
 
 	private static AutonomoSelector instance = null;

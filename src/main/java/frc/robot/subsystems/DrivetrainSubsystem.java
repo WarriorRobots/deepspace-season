@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
-import frc.robot.commands.drive.TankDriveTeleop;
 import frc.robot.util.enums.RobotSide;
 
 /**
@@ -19,19 +18,19 @@ import frc.robot.util.enums.RobotSide;
  */
 public class DrivetrainSubsystem extends Subsystem {
 
-	private static final int LEFT_FRONT = 4;
-	private static final int LEFT_MIDDLE = 5;
-	private static final int LEFT_BACK = 6;
-	private static final int RIGHT_FRONT = 1;
-	private static final int RIGHT_MIDDLE = 2;
-	private static final int RIGHT_BACK = 3;
+	private static final int LEFT_FRONT = 1;
+	private static final int LEFT_MIDDLE = 2;
+	private static final int LEFT_BACK = 3;
+	private static final int RIGHT_FRONT = 4;
+	private static final int RIGHT_MIDDLE = 5;
+	private static final int RIGHT_BACK = 6;
 	
-	private static final int LEFT_ENCODER_PORTA = 2;
-	private static final int LEFT_ENCODER_PORTB = 3;
-	private static final int RIGHT_ENCODER_PORTA = 0;
-	private static final int RIGHT_ENCODER_PORTB = 1;
+	private static final int LEFT_ENCODER_PORTA = 0;
+	private static final int LEFT_ENCODER_PORTB = 1;
+	private static final int RIGHT_ENCODER_PORTA = 2;
+	private static final int RIGHT_ENCODER_PORTB = 3;
 	
-	private static final double RAMPRATE_SECONDS = 0.15;
+	private static final double RAMPRATE_SECONDS = 0.0; //TODO
 	private static final int TIMEOUT_MS = 10;
 	
 	private Encoder leftEnc, rightEnc;
@@ -197,6 +196,6 @@ public class DrivetrainSubsystem extends Subsystem {
 	
 	@Override
 	public void initDefaultCommand() {
-		setDefaultCommand(new TankDriveTeleop());
+		//TODO
 	}
 }

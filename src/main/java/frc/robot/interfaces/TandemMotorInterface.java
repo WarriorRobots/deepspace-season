@@ -2,8 +2,6 @@ package frc.robot.interfaces;
 
 /**
  * This interface is for subsystems that use two or more motors running in the same direction.
- * @author westwood
- *
  */
 public interface TandemMotorInterface {
 	
