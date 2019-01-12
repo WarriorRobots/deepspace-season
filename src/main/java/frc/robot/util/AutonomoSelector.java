@@ -36,10 +36,7 @@ public class AutonomoSelector {
 	 */
 	public void selectAutoCase() {
 		initData();
-		
-		
-		}
-
+	}
 	
 	public void startAuto() {
 		try {
@@ -55,8 +52,7 @@ public class AutonomoSelector {
 		
 	}
 
-
 	private void resetData() {
-		
+		gameData = null;
 	}
 }
