@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
+import frc.robot.commands.TeleopTankDrive;
 import frc.robot.util.enums.RobotSide;
 
 /**
@@ -30,7 +31,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	private static final int RIGHT_ENCODER_PORTA = 2;
 	private static final int RIGHT_ENCODER_PORTB = 3;
 	
-	private static final double RAMPRATE_SECONDS = 0.0; //TODO
+	private static final double RAMPRATE_SECONDS = 0.25;
 	private static final int TIMEOUT_MS = 10;
 	
 	private Encoder leftEnc, rightEnc;
@@ -196,6 +197,6 @@ public class DrivetrainSubsystem extends Subsystem {
 	
 	@Override
 	public void initDefaultCommand() {
-		//TODO
+		setDefaultCommand(new TeleopTankDrive());
 	}
 }

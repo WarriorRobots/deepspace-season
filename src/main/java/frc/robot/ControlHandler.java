@@ -106,12 +106,22 @@ public final class ControlHandler {
 		return value * scalingFactor;
 	}
 
+	public double getXboxLeftX(double scalingFactor) {
+		double value = xbox.getX(Hand.kLeft);
+		return value * scalingFactor;
+	}
+
 	/**
 	 * Gets Y-value of right Xbox joystick multiplied by scalingFactor.
 	 * @param scalingFactor  Decimal value that proportionally alters Xbox joystick output.
 	 */	
 	public double getXboxRightY(double scalingFactor) {
 		double value = -xbox.getY(Hand.kRight);
+		return value * scalingFactor;
+	}
+
+	public double getXboxRightX(double scalingFactor) {
+		double value = xbox.getX(Hand.kRight);
 		return value * scalingFactor;
 	}
 
@@ -122,12 +132,20 @@ public final class ControlHandler {
 		return this.getXboxLeftY(1);
 	}
 
+	public double getXboxLeftX() {
+		return this.getXboxLeftX(1);
+	}
+
 	/**
 	 * Gets Y-value of right Xbox joystick.
 	 * @return Y-value of right Xbox joystick.
 	 */	
 	public double getXboxRightY() {
 		return this.getXboxRightY(1);
+	}
+
+	public double getXboxRightX() {
+		return this.getXboxRightX(1);
 	}
 	
 	/**
