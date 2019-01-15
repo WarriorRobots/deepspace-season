@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.PneumaticSubsystem;
 import frc.robot.util.AutonomoSelector;
 import frc.robot.util.DashboardHandler;
 
@@ -20,6 +21,8 @@ import frc.robot.util.DashboardHandler;
 public class Robot extends TimedRobot {
 	
 	public static final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
+	public static final PneumaticSubsystem pneumatic = new PneumaticSubsystem();
+
 	public static ControlHandler controlHandler;
 	
 	@Override

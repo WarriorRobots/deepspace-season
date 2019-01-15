@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.util.triggers.DpadTrigger;
 import frc.robot.util.triggers.ThresholdTrigger;
+import frc.robot.commands.SolenoidIn;
+import frc.robot.commands.SolenoidOut;
 
 /**
  * Contains methods for receiving data from Joysticks and the Xbox controller.
@@ -58,13 +60,16 @@ public final class ControlHandler {
 		xboxUp = new DpadTrigger( () -> xbox.getPOV(), 0);
 		xboxDown = new DpadTrigger( () -> xbox.getPOV(), 180);
 		xboxRight = new DpadTrigger( () -> xbox.getPOV(), 90);
-		xboxLeft = new DpadTrigger( () -> xbox.getPOV(), 270);
+		xboxLeft = new DpadTrigger(() -> xbox.getPOV(), 270);
 		xboxA = new JoystickButton(xbox, 1);
 		xboxB = new JoystickButton(xbox, 2);
 		xboxX = new JoystickButton(xbox, 3);
 		xboxY = new JoystickButton(xbox, 4);
 		xboxSTART = new JoystickButton(xbox, 8);
 		xboxBACK = new JoystickButton(xbox, 7);
+
+		rightXboxBumper.whenPressed(new SolenoidOut(2));
+		rightXboxTrigger.whenPressed(new SolenoidIn(2));
 	}
 
 	/**

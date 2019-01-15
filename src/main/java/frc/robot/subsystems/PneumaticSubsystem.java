@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.util.enums.SolenoidMode;
 
 public class PneumaticSubsystem extends Subsystem {
 
@@ -18,23 +17,24 @@ public class PneumaticSubsystem extends Subsystem {
     }
 
     public void setSolenoid(int id, Value mode) {
-        if(id == 1) {
-            solenoid1.set(mode);
-        }else if(id == 2) {
-            solenoid2.set(mode);
-        }else if(id == 3) {
-            solenoid3.set(mode);
-        }else if(id == 4) {
-            solenoid4.set(mode);
-        }else{
-            DriverStation.reportError("Wrong solenoid id", false);
+        switch(id) {
+            case 1: solenoid1.set(mode);
+                break;
+            case 2: solenoid2.set(mode);
+                break;
+            case 3: solenoid3.set(mode);
+                break;
+            case 4: solenoid4.set(mode);
+                break;
+            default: DriverStation.reportError("Wrong solenoid id", false);
+                break;
         }
     }
 
     //TODO
     @Override
     protected void initDefaultCommand() {
-        setSolenoid(0, Value.kForward);
+    
     }
 
 }
