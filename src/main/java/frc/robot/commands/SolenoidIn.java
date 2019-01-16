@@ -23,7 +23,7 @@ public class SolenoidIn extends TimedCommand {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.pneumatic);
-    id = solenoidId;
+    solenoidId = id;
   }
 
   // Called just before this Command runs the first time
