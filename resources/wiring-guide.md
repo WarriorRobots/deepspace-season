@@ -1,109 +1,174 @@
-## Westwood FRC Wiring Guide (2018-2019)
+# Westwood FRC Wiring Guide (2018-2019)
 
-<!-- Author: Alex Vuong -->
-<!-- Date: 01/31/2018 -->
-<!-- Revised: 1703 013118-->
+<!-- Author: Joshua Budd -->
+<!-- Date: 2019/01/23 -->
+<!-- Revised: 2019/01/23 -->
 
-### Battery + Breaker
+![Narwals scematic](https://www.chiefdelphi.com/uploads/default/optimized/3X/5/c/5c9037bbfb8bf6c847796320417f68c02262fb1a_2_690x500.jpeg "3128 Aluminum Narwals' scematic")
 
-![](https://s3.amazonaws.com/screensteps_live/image_assets/assets/001/189/964/medium/cd04b5d8-d171-4259-87d6-d18a3bda2c8a.jpg)
+## Table of Contents
 
-- NEGATIVE LEAD goes to PDP
-- POSITIVE LEAD goes to breaker
-    + on side that reads "THERMAL CIRCUIT BREAKER"
+* [Battery & Breaker](#battery)
+* [PDP](#pdp)
+* [RoboRIO](#rio)
+* [VRM](#vrm)
+* [PCM](#pcm)
+* [Radio](#radio)
+* [Talon](#talon)
+* [RSL](#rls)
+* [DIO](#dio)
+* [Encoder](#encoder)
+* [CAN Wiring](#can)
+* [Wire Gauge](#gauge)
 
+<a id="battery"></a>
+### Battery & Breaker
+![Breaker image](https://camo.githubusercontent.com/0b495433d0d9e651cb5396a8a9f3491c686d3d36/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f73637265656e73746570735f6c6976652f696d6167655f6173736574732f6173736574732f3030312f3138392f3936342f6d656469756d2f63643034623564382d643137312d343235392d383764362d6431386133626461326338612e6a7067)
+
+* **Negative** lead goes to [PDP](#pdp)
+* **Positive** lead goes to breaker
+    * Attaches to side reading "THERMAL CIRCUIT BREAKER"
+
+<a id="pdp"></a>
+### Power Distribution Panel (PDP)
+![PDP image](https://camo.githubusercontent.com/830473ea9f270823bfd61f35b4557cb827954140/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f73637265656e73746570735f6c6976652f696d6167655f6173736574732f6173736574732f3030302f3238392f3930342f6f726967696e616c2f34373936383838382d626566312d343161622d623831652d3335653333626464373439632e706e67)
+
+(Down is the side with the power ports.)
+
+* **Red** 10 Amp breaker in top left
+    * [RoboRIO](#rio) goes in **blue** "Vbat CONTROLLER POWER"
+* **Yellow** 20 Amp breaker in top right
+    * [VRM](#vrm) and [PCM](#pcm) goes in **green** "Vbat VRM PCM PWR"
+* ports (0, 1, 3, 4, 12, 13, 14, 15):
+    * 40 Amp breaker
+    * [Talons](#talon) plug in here
+* ports (4, 5, 6, 7, 8, 9, 10, 11):
+    * 10 - 20 Amp breaker
+    * Camera plugs in here
+* [CAN](#can) Cable in CAN (bottom right):
+    Jumper switch must be in ON position
+
+<a id="rio"></a>
 ### RoboRIO
+![RIO image](https://camo.githubusercontent.com/d9bde9dbed2c45394b65d95f4e130a4581ef81f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f73637265656e73746570735f6c6976652f696d6167655f6173736574732f6173736574732f3030302f3238392f3930332f6f726967696e616c2f62373061653839342d653063352d343964332d623865322d3032346537366264376336632e706e67)
 
-![](https://s3.amazonaws.com/screensteps_live/image_assets/assets/000/289/903/original/b70ae894-e0c5-49d3-b8e2-024e76bd7c6c.png)
+(Up is the the side with the USB ports.)
 
-- 22gauge POWER CABLES to the left of USB port
-    + POSITIVE goes in V
-    + NEGATIVE goes in C
-- terminate CAN CABLES to left of POWER CABLES
-    + YELLOW goes in H
-    + GREEN goes in L
-- DIO ports (left side):
-    + all boolean sensors go here (anything that has on & off state)
-    + for example: infared sensors, limit switches
-    + start plugging sensors in at 0, and count upwards
-- PWM ports (right side):
-    + all analog sensors go here (anything that has a range of outputs)
-    + for example: ultrasonic rangefinders, potentiometers
-    + start plugging sensors in at 0, and count upwards
-- RSL port (left bottom):
-    + \+ is red, other is black
-- MXP, long port in center
-    + NavX gyroscope goes here, centered in RoboRIO
+* 22 guage Power Cable in INPUT (left of USB ports)
+    * **Positive** goes in V
+    * **Negative** goes in C
+* [CAN](#can) Cable in CAN (left of power cable)
+    * **Yellow** goes in H
+    * **Green** goes in L
+* [DIO](#dio) sensors in DIO (left side)
+    * Boolean sensors go in DIO ports (Boolean sensors are sensors with only on and off states.)
+    * (e.g. Infrared sensors, limit switches)
+    * Begin plugging in sensors at 0 and count up (not required, good wiring practice)
+* [PWM](#pwm) sensors in PWM (right side)
+    * Analog sensors go in PWM ports (Analog sensors are sensors with a range of outputs)
+    * (e.g. ultrasonic sensors, potentiometers)
+    * Begin plugging in sensors at 0 and count up
+* [RSL](#rsl) light in RSL (left-most bottom port)
+    * **Positive** goes in S
+    * **Negative** goes in ground (the dashed lines)
+* NavX in MXP (center)
+    * NavX gyroscope is mounted with majority of sensor closer to USB ports
 
-### PDP
+<a id="vrm"></a>
+### Voltage Regulator Module (VRM)
+![VRM image](https://camo.githubusercontent.com/cefd54640d976bda2b24c11119e1a0acef85805f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f73637265656e73746570735f6c6976652f696d6167655f6173736574732f6173736574732f3030302f3238392f3930362f6f726967696e616c2f62373762363261622d623963612d346530332d393431352d6664656533373839616634322e706e673f31343833353439323130)
 
-![](https://s3.amazonaws.com/screensteps_live/image_assets/assets/000/289/904/original/47968888-bef1-41ab-b81e-35e33bdd749c.png)
+(Down is the side with the 12V and 5V lights)
 
-- 10-AMP FUSE top left
-    + ROBORIO POWER goes here
-- 20-AMP FUSE top right
-    + VRM and PCM POWER goes here
-- ports: 0 1 2 3 12 13 14 15
-    + 40-AMP BREAKERS + Red&Black TALON POWER goes here
-- ports: 4 5 6 7 8 9 10 11
-    + 10-20AMP BREAKERS + CAMERA POWER goes here
-- terminate CAN CABLES in bottom right
-    + jumper switch must be in ON position
+* Power Cables in 12V (top)
+* 12V/2A (upper left)
+    * [Radio](#radio) Power (circular plug)
 
-### VRM
+<a id="pcm"></a>
+### Pneumatic Control Module (PCM)
+![PCM image](https://camo.githubusercontent.com/233e3fb008c2e5af5def9a2148eaabbe69380d9e/687474703a2f2f736c696465706c617965722e636f6d2f736c6964652f373334363433342f32342f696d616765732f392f506e65756d617469632b436f6e74726f6c2b4d6f64756c652b2850434d292e6a7067)
 
-![](https://s3.amazonaws.com/screensteps_live/image_assets/assets/000/289/906/original/b77b62ab-b9ca-4e03-9415-fdee3789af42.png?1483549210)
+(Left is the side with the Vin)
 
-- POWER CABLES on top, connect to PDP
-- 12V/2A
-    + RADIO POWER (circular plug)
+* [PCM](#pcm) power in Vin (left)
+* [CAN](#can) Cable in CAN (top left)
+* Pressure Meter Power in **blue** PRESSURE SW.
+* Air compressor Power in **green** COMPRESSOR OUT
+* ports (0, 1, 2, 3, 4, 5, 6, 7)
+    * Solenoid Power goes here
 
-### PCM
-
-![](http://slideplayer.com/slide/7346434/24/images/9/Pneumatic+Control+Module+(PCM).jpg)
-
-- PCM POWER from PDP, left side
-- include in CAN LOOP, top left
-- PRESSURE METER POWER, bottom & first from left
-- AIR COMPRESSOR POWER, bottom & second from left
-- ports: 0 1 2 3 4 5 6 7
-    + SOLENOID POWER goes here
-
+<a id="radio"></a>
 ### Radio (OM5P-AC)
+![Radio image](https://camo.githubusercontent.com/03df5f5152b9223cab19e8c20c678cd58acadde3/68747470733a2f2f7777772e62726f616462616e6462757965722e636f6d2f696d616765732f70726f64756374732f6f70656e6d6573682f6f6d35702d61632d372e706e673f77696474683d343030)
 
-![](https://www.broadbandbuyer.com/images/products/openmesh/om5p-ac-7.png?width=400)
+* Radio Power circular plug in left
+* Camera ethernet in middle (not required)
+* [RoboRIO](#rio) ethernet in right
 
-<!-- - must be imaged before use, [download here](https://firstfrc.blob.core.windows.net/frc2018/Radio/FRC_Radio_Configuration_18_1_0.zip) -->
-- RADIO POWER far left
-- CAMERA ETHERNET middle (not required)
-- ROBORIO ETHERNET far right
+<a id="talon"></a>
+### Talon SRX & Victor
+![Talon image](https://camo.githubusercontent.com/440f1a79acac64e95bc5f25d42493260b2a4c763/68747470733a2f2f7777772e766578726f626f746963732e636f6d2f6d656469612f636174616c6f672f70726f647563742f63616368652f312f696d6167652f39646637386561623333353235643038643665356662386432373133366539352f322f312f3231372d343335382d6f6e2d74616c6f6e2e6a7067)
 
-### Talon SRX
+* Talon & Victor power are red and black
+    * plug in 40 Amp PDP port
+    * ***DO NOT PLUG INTO MOTORS***
+* Motor Power is green and white
+* Talon only: Encoder data cable on top, covered with hex screws & plastic cover 
 
-![](https://www.vexrobotics.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/2/1/217-4358-on-talon.jpg)
+<a id="rsl"></a>
+### Robot Signal Light (orange RSL)
+![RSL image](https://camo.githubusercontent.com/7a5fef32a7def38ab32085348a5896fdeb144583/68747470733a2f2f6d696c696c616e69726f626f746963732e676974626f6f6b732e696f2f6672632d656c656374726963616c2d6269626c652f636f6e74656e742f726f626f52494f2f72736c2e6a7067)
 
-- TALON POWER is red and black, plug into 40-AMP PDP port
-    + ***DO NOT PLUG INTO MOTORS***
-- MOTOR POWER is green and white
-- ENCODER DATA CABLE on top, covered by hex screws & plastic cover
-- include in CAN LOOP
+* Power cable from [RoboRIO](#rio)
+    * **Positive** in La and Lb
+    * **Negative** in N
 
-### Orange RSL Light
+<a id="dio"></a>
+### Digital Input and Output (DIO)
+![DIO image](http://khengineering.github.io/RoboRio/Images/roborio.jpg)
 
-![](https://mililanirobotics.gitbooks.io/frc-electrical-bible/content/roboRIO/rsl.jpg)
+* Ports labled 0 through 9 on [RoboRIO](#rio)
+* All digital sensors go in DIO ports
+* Begin plugging in sensors at 0 and count up (not required, good wiring practice)
 
-- POWER CABLES from RoboRIO
+<a id="encoder"></a>
+#### Grayhill Encoder
+![Encoder image](https://www.newark.com/productimages/standard/en_US/3753231.jpg)
+
+(Up is the direction so DIO and the numbers are upside up)
+
+* ***DO NOT RELY ON COLORS OF DIO CABLES***
+* DO NOT BEND PINS
+* Encoder has 5 pins labeled `B + A _ G` (\_ is blank)
+* On 5 pin cable, connect to encoder so the missing wire goes to the \_
+* On 3 pin cable, connect to [RIO](#rio) so G is on the ground (bottom pin) of an EVEN position (not required wiring practice)
+* On 2 pin cable, connect to RIO so signal (A or B) is on S (top pin) of the NEXT position (not required, good wiring practice)
+* (e.g. if 3 pin cable is in position 4, the 2 pin cable goes in position 5)
+* There are 128 clicks in a rotation
 
 ---
 
-### CAN LOOP instructions
+<a id="can"></a>
+### CAN LOOP Instructions
 
-- start at PDP CAN
-- end at ROBORIO CAN
-- all Talons and PCMs must be wired in between
+* Start CAN at [PDP](#pdp)
+* Connect through all [Talons](#talon), Victors, and [PCM](#pcm)
+* End CAN at [RoboRIO](#rio)
 
-### Wire Gauge guide
+<a id="gauge"></a>
+### Wiring Gauge guide
 
-- 22 gauge: CAN LOOP, VRM POWER, PCM POWER, RADIO POWER, ROBORIO POWER, RSL POWER
-- 16 gauge: TALON POWER, MOTOR POWER
-- 6 gauge: BATTERY POWER, BREAKER POWER
+* 22 gauge:
+    * [CAN](#can) Loop
+    * [VRM](#vrm) Power
+    * [PCM](#pcm) Power
+    * [Radio](#radio) Power
+    * [RoboRIO](#rio) Power
+    * [RSL](#rsl) Power
+* 16 gauge:
+    * [Talon](#talon) Power
+    * Victor Power
+    * Motor Power
+* 6 gauge:
+    * [Battery](#battery) Power
+    * Breaker Power
