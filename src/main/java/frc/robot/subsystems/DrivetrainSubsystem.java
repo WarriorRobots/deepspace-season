@@ -19,12 +19,10 @@ import frc.robot.util.enums.RobotSide;
  */
 public class DrivetrainSubsystem extends Subsystem {
 
-	private static final int LEFT_FRONT = 1;
-	private static final int LEFT_MIDDLE = 2;
-	private static final int LEFT_BACK = 3;
+	private static final int LEFT_FRONT = 3;
+	private static final int LEFT_BACK = 1;
 	private static final int RIGHT_FRONT = 4;
-	private static final int RIGHT_MIDDLE = 5;
-	private static final int RIGHT_BACK = 6;
+	private static final int RIGHT_BACK = 2;
 	
 	private static final int LEFT_ENCODER_PORTA = 0;
 	private static final int LEFT_ENCODER_PORTB = 1;
@@ -37,29 +35,25 @@ public class DrivetrainSubsystem extends Subsystem {
 	private Encoder leftEnc, rightEnc;
 	private AHRS navx;
 	
-	private WPI_TalonSRX leftFront, leftMiddle, leftBack, rightFront, rightMiddle, rightBack;
+	private WPI_TalonSRX leftFront, leftBack, rightFront, rightBack;
 	private SpeedControllerGroup leftGroup, rightGroup;
 	private DifferentialDrive differentialDrive;
 	
 	public DrivetrainSubsystem() {
 		leftFront = new WPI_TalonSRX(LEFT_FRONT);
-		leftMiddle = new WPI_TalonSRX(LEFT_MIDDLE);
 		leftBack = new WPI_TalonSRX(LEFT_BACK);
 		leftFront.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
-		leftMiddle.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
 		leftBack.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
 		
 		rightFront = new WPI_TalonSRX(RIGHT_FRONT);
-		rightMiddle = new WPI_TalonSRX(RIGHT_MIDDLE);
 		rightBack = new WPI_TalonSRX(RIGHT_BACK);
 		rightFront.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
-		rightMiddle.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
 		rightBack.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
 
-		leftGroup = new SpeedControllerGroup(leftFront, leftMiddle, leftBack);
-		leftGroup.setInverted(true);
-		rightGroup = new SpeedControllerGroup(rightFront, rightMiddle, rightBack);
-		rightGroup.setInverted(true);
+		leftGroup = new SpeedControllerGroup(leftFront, leftBack);
+		leftGroup.setInverted(false);
+		rightGroup = new SpeedControllerGroup(rightFront, rightBack);
+		rightGroup.setInverted(false);
 
 		differentialDrive = new DifferentialDrive(leftGroup, rightGroup);
 		differentialDrive.setSafetyEnabled(false);

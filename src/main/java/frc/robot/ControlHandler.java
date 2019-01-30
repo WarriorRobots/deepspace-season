@@ -68,8 +68,8 @@ public final class ControlHandler {
 		xboxSTART = new JoystickButton(xbox, 8);
 		xboxBACK = new JoystickButton(xbox, 7);
 
-		rightXboxBumper.whenPressed(new SolenoidOut(2));
-		rightXboxTrigger.whenPressed(new SolenoidIn(2));
+		rightXboxBumper.whenPressed(new SolenoidOut(4));
+		rightXboxTrigger.whenPressed(new SolenoidIn(4));
 	}
 
 	/**

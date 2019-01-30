@@ -24,9 +24,9 @@ public class TeleopTankDrive extends Command {
   @Override
   protected void execute() {
     // Robot.drivetrain.tankDriveSquared(Robot.controlHandler.getLeftY(), Robot.controlHandler.getRightY());
-    Robot.drivetrain.arcadeDriveSquared(
+    Robot.drivetrain.tankDriveSquared(
       Robot.controlHandler.getXboxLeftY(0.75),
-      Robot.controlHandler.getXboxRightX(0.75)
+      Robot.controlHandler.getXboxRightY(0.75)
     );
   }
 

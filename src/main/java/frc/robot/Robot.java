@@ -10,10 +10,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.AutoDrive;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.PneumaticSubsystem;
 import frc.robot.util.AutonomoSelector;
 import frc.robot.util.DashboardHandler;
+import frc.robot.util.enums.RobotSide;
 
 /**
  * Main class of the Robot.
@@ -40,8 +42,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		Scheduler.getInstance().removeAll();
-		AutonomoSelector.getInstance().selectAutoCase();
-		AutonomoSelector.getInstance().startAuto();
+		new AutoDrive().start();
 	}
 
 	@Override

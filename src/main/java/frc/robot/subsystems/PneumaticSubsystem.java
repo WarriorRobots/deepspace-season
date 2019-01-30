@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -8,12 +9,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class PneumaticSubsystem extends Subsystem {
 
     DoubleSolenoid solenoid1, solenoid2, solenoid3, solenoid4;
+    Compressor c;
 
     public PneumaticSubsystem() {
         solenoid1 = new DoubleSolenoid(0, 7); 
         solenoid2 = new DoubleSolenoid(1, 6); 
         solenoid3 = new DoubleSolenoid(2, 5); 
-        solenoid4 = new DoubleSolenoid(3, 4); 
+        solenoid4 = new DoubleSolenoid(1, 3, 4);
+        c = new Compressor();
+        c.stop();
     }
 
     public void setSolenoid(int id, Value mode) {

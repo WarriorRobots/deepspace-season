@@ -7,47 +7,46 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.command.TimedCommand;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.util.PathfinderTest;
 
-/**
- * Add your docs here.
- */
-public class SolenoidIn extends TimedCommand {
-
-  private int solenoidId;
-
-  public SolenoidIn(int id) {
-    super(0.1);
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.pneumatic);
-    solenoidId = id;
+public class AutoDrive extends Command {
+  
+  PathfinderTest p;
+  
+  public AutoDrive() {
+    requires(Robot.drivetrain);
+    p = new PathfinderTest();
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
+    Robot.drivetrain.resetEncoders();
+    Robot.drivetrain.resetAngle();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.pneumatic.setSolenoid(solenoidId, Value.kReverse);
+    Robot.drivetrain.tankDriveRaw(p.calcLeft(), p.calcRight());
   }
 
-  // Called once after timeout
+  // Make this return true when this Command no longer needs to run execute()
+  @Override
+  protected boolean isFinished() {
+    return false;
+  }
+
+  // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.pneumatic.setSolenoid(solenoidId, Value.kOff);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }
