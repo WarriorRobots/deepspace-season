@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.util.triggers.DpadTrigger;
 import frc.robot.util.triggers.ThresholdTrigger;
+import frc.robot.commands.AutoDrive;
 import frc.robot.commands.SolenoidIn;
 import frc.robot.commands.SolenoidOut;
 
@@ -70,6 +71,7 @@ public final class ControlHandler {
 
 		rightXboxBumper.whenPressed(new SolenoidOut(4));
 		rightXboxTrigger.whenPressed(new SolenoidIn(4));
+		xboxA.whileHeld(new AutoDrive());
 	}
 
 	/**

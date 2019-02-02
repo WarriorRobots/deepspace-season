@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		Scheduler.getInstance().removeAll();
-		new AutoDrive().start();
+		// new AutoDrive().start();
 	}
 
 	@Override
