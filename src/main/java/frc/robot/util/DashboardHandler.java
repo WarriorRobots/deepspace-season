@@ -9,6 +9,7 @@ import frc.robot.util.enums.StartingPosition;
  */
 public class DashboardHandler {
 	
+	@SuppressWarnings("unused") //TODO delete this line
 	private static StartingPosition positionTarget = StartingPosition.UNSELECTED;
 	private static SendableChooser<StartingPosition> positionDropdown;
 

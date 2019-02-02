@@ -1,8 +1,5 @@
 package frc.robot.util;
 
-//TODO
-// fix exception bypass with null return
-
 /**
  * Code from Team 254, used under the MIT License.
  * This class implements a PID Control Loop.
@@ -209,9 +206,9 @@ public class SynchronousPIDF {
      * @param minimumI  minimum bound of i; should be negative
      * @param maximumI  maximum bound of i; should be positive
      */
-    public void setIzone(double minimumI, double maximumI) {
+    public void setIzone(double minimumI, double maximumI) throws Exception {
     	if (minimumI > maximumI) {
-            return;
+            throw new Exception("Minimum is greater than maximum");
         }
     	m_minimumI = minimumI;
     	m_maximumI = maximumI;
@@ -249,14 +246,13 @@ public class SynchronousPIDF {
     /**
      * Sets the maximum and minimum values expected from the input.
      *
-     * @param minimumInput
-     *            the minimum value expected from the input
-     * @param maximumInput
-     *            the maximum value expected from the output
+     * @param minimumInput the minimum value expected from the input
+     * @param maximumInput the maximum value expected from the output
+     * @throws Exception
      */
-    public void setInputRange(double minimumInput, double maximumInput) {
+    public void setInputRange(double minimumInput, double maximumInput) throws Exception {
         if (minimumInput > maximumInput) {
-            return;
+            throw new Exception("Minimum is greater than maximum");
         }
         m_minimumInput = minimumInput;
         m_maximumInput = maximumInput;
@@ -266,14 +262,13 @@ public class SynchronousPIDF {
     /**
      * Sets the minimum and maximum values to write.
      *
-     * @param minimumOutput
-     *            the minimum value to write to the output
-     * @param maximumOutput
-     *            the maximum value to write to the output
+     * @param minimumOutput the minimum value to write to the output
+     * @param maximumOutput the maximum value to write to the output
+     * @throws Exception
      */
-    public void setOutputRange(double minimumOutput, double maximumOutput) {
+    public void setOutputRange(double minimumOutput, double maximumOutput) throws Exception {
         if (minimumOutput > maximumOutput) {
-            return;
+            throw new Exception("Minimum is greater than maximum");
         }
         m_minimumOutput = minimumOutput;
         m_maximumOutput = maximumOutput;
