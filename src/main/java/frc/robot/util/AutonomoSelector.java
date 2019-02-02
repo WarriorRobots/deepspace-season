@@ -2,59 +2,46 @@ package frc.robot.util;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.commands.TeleopTankDrive;
 
 /**
  * Contains methods that select the Autonomous case of the robot.
  * Place these methods inside autonomousInit() of Robot.java
- */
-//TODO
-@SuppressWarnings("unused")
+ */ // TODO joysticks take priority
+ //TODO documentation
 public class AutonomoSelector {
 
-	private static AutonomoSelector instance = null;
+	private static Command autoCommand = null;
 	
-	private String gameData = null;
-	private Command autoCommand = null;
-	
-	public static AutonomoSelector getInstance() {
-		if (instance == null) {
-			instance = new AutonomoSelector();
-		}
-		return instance;
+	// Do not use this constructor
+	private AutonomoSelector() throws Exception {
+		throw new Exception("Do not create an AutonomoSelector object, call it statically");
 	}
 	
-	@Deprecated
-	public void selectTestCase() {
-		DriverStation.reportError("Robot tried to select debugging case, check Robot.java!", false);
-//		autoCommand = new TestCase();
+	//TODO write this
+	public static void selectDebugSequence() {
+		// autoCommand = new TestCase();
 	}
 	
-	public void stopAuto() {
+	public static void stopAuto() {
 		autoCommand.cancel();
 	}
 	
 	/**
 	 * Selects autonomous case and calls {@code start()} on the chosen {@code CommandGroup}.
 	 */
-	public void selectAutoCase() {
-		initData();
+	public static void selectAutoSequence() {
+		// write logic to select Autonomous sequence, probably using dashboard
 	}
 	
-	public void startAuto() {
+	public static void start() {
 		try {
 			autoCommand.start();
 		} catch (Exception e) {
-			DriverStation.reportError(e.getMessage(), false);
+			DriverStation.reportError("No autonomous was selected, defaulting to teleop", false);
+			autoCommand = new TeleopTankDrive();
+			autoCommand.start();
 		}
 	}
-	
-	private void initData() {
-		resetData();
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		
-	}
 
-	private void resetData() {
-		gameData = null;
-	}
 }

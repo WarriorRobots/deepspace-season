@@ -4,6 +4,7 @@ import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 
+//TODO documentation
 public class ThresholdTrigger extends Button {
 
 	private DoubleSupplier input;

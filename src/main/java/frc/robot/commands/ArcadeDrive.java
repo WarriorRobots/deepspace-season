@@ -8,16 +8,10 @@ public class ArcadeDrive extends Command {
     requires(Robot.drivetrain);
   }
 
-  // Called just before this Command runs the first time
-  @Override
-  protected void initialize() {
-    Robot.drivetrain.stopDrive();
-  }
-
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.drivetrain.arcadeDriveSquared(Robot.controlHandler.getRightY(0.5), Robot.controlHandler.getRightX(0.5));
+    Robot.drivetrain.arcadeDriveTeleop(Robot.input.getRightY(0.5), Robot.input.getRightX(0.5));
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -30,12 +24,5 @@ public class ArcadeDrive extends Command {
   @Override
   protected void end() {
     Robot.drivetrain.stopDrive();
-  }
-
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-    end();
   }
 }

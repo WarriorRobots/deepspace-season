@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DrivetrainSubsystem;
-import frc.robot.util.AutonomoSelector;
 import frc.robot.util.DashboardHandler;
 
 /**
@@ -20,25 +19,22 @@ import frc.robot.util.DashboardHandler;
 public class Robot extends TimedRobot {
 	
 	public static final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
-	public static ControlHandler controlHandler;
-	
+	public static ControlHandler input;
+
 	@Override
 	public void robotInit() {
-		controlHandler = new ControlHandler();
+		input = new ControlHandler();
 		SmartDashboard.putData(drivetrain);
-	}		
+	}
 
 	@Override
 	public void disabledInit() {
-		DashboardHandler.getInstance().init();
 		Scheduler.getInstance().removeAll();
 	}
 	
 	@Override
 	public void autonomousInit() {
 		Scheduler.getInstance().removeAll();
-		AutonomoSelector.getInstance().selectAutoCase();
-		AutonomoSelector.getInstance().startAuto();
 	}
 
 	@Override
