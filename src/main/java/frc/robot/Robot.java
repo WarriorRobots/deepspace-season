@@ -10,7 +10,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.AutoDrive;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.PneumaticSubsystem;
 
 /**
  * Main class of the Robot.
@@ -18,6 +20,8 @@ import frc.robot.subsystems.DrivetrainSubsystem;
 public class Robot extends TimedRobot {
 	
 	public static final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
+	public static final PneumaticSubsystem pneumatic = new PneumaticSubsystem();
+	
 	public static ControlHandler input;
 
 	@Override

@@ -12,7 +12,6 @@ package frc.robot;
  * easily.
  */
 public final class Constants {
-
 	// Do not use this constructor
 	private Constants() throws Exception {
 		throw new Exception("Do not create an Constants object!");
@@ -31,16 +30,8 @@ public final class Constants {
 		return (int) (inches / INCHES_PER_CLICK);
 	}
 
-	/**
-	 * Contains values that are multiplied by joystick input to slow the robot.
-	 */
-	public static final class DriveScalars {
-		// see ArcadeDriveAlignment
-		public static final double ALIGNMENT_FORWARDSPEED = 0.5;
-		public static final double ALIGNMENT_TURNSPEED = 0.6;
-		// see TankDriveTurnLock
-		public static final double LOCKMODE_TOLERANCE = 0.2;
-
+	public static double mToFt(double mPerSec) {
+		return mPerSec * (1/0.3048);
 	}
 
 	/**

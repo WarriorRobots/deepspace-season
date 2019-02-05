@@ -19,13 +19,11 @@ import frc.robot.commands.TeleopTankDrive;
  */
 public class DrivetrainSubsystem extends Subsystem {
 
-	private static final int LEFT_FRONT = 1;
-	private static final int LEFT_MIDDLE = 2;
-	private static final int LEFT_BACK = 3;
+	private static final int LEFT_FRONT = 3;
+	private static final int LEFT_BACK = 1;
 	private static final int RIGHT_FRONT = 4;
-	private static final int RIGHT_MIDDLE = 5;
-	private static final int RIGHT_BACK = 6;
-
+	private static final int RIGHT_BACK = 2;
+	
 	private static final int LEFT_ENCODER_PORTA = 0;
 	private static final int LEFT_ENCODER_PORTB = 1;
 	private static final int RIGHT_ENCODER_PORTA = 2;
@@ -33,8 +31,11 @@ public class DrivetrainSubsystem extends Subsystem {
 
 	private static final double RAMPRATE_SECONDS = 0.25;
 	private static final int TIMEOUT_MS = 10;
-
-	private WPI_TalonSRX leftFront, leftMiddle, leftBack, rightFront, rightMiddle, rightBack;
+	
+	private Encoder leftEnc, rightEnc;
+	private AHRS navx;
+	
+	private WPI_TalonSRX leftFront, leftBack, rightFront, rightBack;
 	private SpeedControllerGroup leftGroup, rightGroup;
 	private DifferentialDrive differentialDrive;
 
@@ -43,22 +44,17 @@ public class DrivetrainSubsystem extends Subsystem {
 
 	public DrivetrainSubsystem() {
 		leftFront = new WPI_TalonSRX(LEFT_FRONT);
-		leftMiddle = new WPI_TalonSRX(LEFT_MIDDLE);
 		leftBack = new WPI_TalonSRX(LEFT_BACK);
-		rightFront = new WPI_TalonSRX(RIGHT_FRONT);
-		rightMiddle = new WPI_TalonSRX(RIGHT_MIDDLE);
-		rightBack = new WPI_TalonSRX(RIGHT_BACK);
-
 		leftFront.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
-		leftMiddle.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
 		leftBack.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
-		rightFront.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
-		rightMiddle.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
+		
+		rightFront = new WPI_TalonSRX(RIGHT_FRONT);
+		rightBack = new WPI_TalonSRX(RIGHT_BACK);
+    rightFront.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
 		rightBack.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
 
 		leftGroup = new SpeedControllerGroup(leftFront, leftMiddle, leftBack);
 		rightGroup = new SpeedControllerGroup(rightFront, rightMiddle, rightBack);
-
 		leftGroup.setInverted(Constants.Inversions.LEFT_DRIVE_REVERSED);
 		rightGroup.setInverted(Constants.Inversions.RIGHT_DRIVE_REVERSED);
 
