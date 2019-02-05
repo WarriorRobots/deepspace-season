@@ -8,7 +8,7 @@ import frc.robot.util.enums.StartingPosition;
  * Sends miscellaneous data to the dashboard. Call in robotInit() of Robot.java
  */
 public class DashboardHandler {
-	
+	@SuppressWarnings("unused")
 	private static StartingPosition positionTarget = StartingPosition.UNSELECTED;
 	private static SendableChooser<StartingPosition> positionDropdown;
 
