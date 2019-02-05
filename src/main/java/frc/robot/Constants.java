@@ -8,15 +8,26 @@
 package frc.robot;
 
 /**
- * Contains all constants that are used in the program, grouped into subclasses.
+ * Contains all values used program-wide or constants that need to be changed
+ * easily.
  */
 public final class Constants {
-	
-	/**
-	 * 0.3048 meters per foot
-	 */
-	public static double ftToM(double ftPerSec) {
-		return ftPerSec * 0.3048; //TODO documentation
+	// Do not use this constructor
+	private Constants() throws Exception {
+		throw new Exception("Do not create an Constants object!");
+	}
+
+	public static final double WHEEL_DIAMETER = 6;
+	public static final int CLICKS_PER_REVOLUTION = 128;
+	/** {@value} */
+	public static final double INCHES_PER_CLICK = (WHEEL_DIAMETER * Math.PI) / CLICKS_PER_REVOLUTION;
+
+	public static double ClicksToInches(int clicks) {
+		return ((double) clicks) * INCHES_PER_CLICK;
+	}
+
+	public static int InchesToClicks(double inches) {
+		return (int) (inches / INCHES_PER_CLICK);
 	}
 
 	public static double mToFt(double mPerSec) {
@@ -24,10 +35,17 @@ public final class Constants {
 	}
 
 	/**
-	 * Contains booleans that define whether certain motor or encoder polarities are reversed.
+	 * Contains booleans that define whether certain motor or encoder polarities are
+	 * reversed.
 	 */
 	public static final class Inversions {
-		public static final boolean LEFT_ENCODER_REVERSED = false;
-		public static final boolean RIGHT_ENCODER_REVERSED = true;
+		/** {@value} */
+		public static final boolean LEFT_ENCODER_REVERSED = true;
+		/** {@value} */
+		public static final boolean RIGHT_ENCODER_REVERSED = false;
+		/** {@value} */
+		public static final boolean LEFT_DRIVE_REVERSED = true;
+		/** {@value} */
+		public static final boolean RIGHT_DRIVE_REVERSED = true;
 	}
 }

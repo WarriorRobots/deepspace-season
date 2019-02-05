@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 
+//TODO documentation
 public class DpadTrigger extends Button {
 
 	private Supplier<Integer> input;

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.ArcadeDrive;
 import frc.robot.util.triggers.DpadTrigger;
 import frc.robot.util.triggers.ThresholdTrigger;
 import frc.robot.commands.AutoDrive;
@@ -72,6 +73,7 @@ public final class ControlHandler {
 		rightXboxBumper.whenPressed(new SolenoidOut(4));
 		rightXboxTrigger.whenPressed(new SolenoidIn(4));
 		xboxA.whileHeld(new AutoDrive());
+		rightJoyThumbButton.whileHeld(new ArcadeDrive()); 
 	}
 
 	/**

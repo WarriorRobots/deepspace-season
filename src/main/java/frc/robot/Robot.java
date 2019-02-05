@@ -13,9 +13,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.AutoDrive;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.PneumaticSubsystem;
-import frc.robot.util.AutonomoSelector;
-import frc.robot.util.DashboardHandler;
-import frc.robot.util.enums.RobotSide;
 
 /**
  * Main class of the Robot.
@@ -24,25 +21,23 @@ public class Robot extends TimedRobot {
 	
 	public static final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
 	public static final PneumaticSubsystem pneumatic = new PneumaticSubsystem();
-
-	public static ControlHandler controlHandler;
 	
+	public static ControlHandler input;
+
 	@Override
 	public void robotInit() {
-		controlHandler = new ControlHandler();
+		input = new ControlHandler();
 		SmartDashboard.putData(drivetrain);
-	}		
+	}
 
 	@Override
 	public void disabledInit() {
-		DashboardHandler.getInstance().init();
 		Scheduler.getInstance().removeAll();
 	}
 	
 	@Override
 	public void autonomousInit() {
 		Scheduler.getInstance().removeAll();
-		// new AutoDrive().start();
 	}
 
 	@Override
