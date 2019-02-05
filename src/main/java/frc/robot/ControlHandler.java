@@ -67,7 +67,7 @@ public final class ControlHandler {
 		xboxSTART = new JoystickButton(xbox, 8);
 		xboxBACK = new JoystickButton(xbox, 7);
 
-		rightJoyTriggerButton.whileHeld(new ArcadeDrive()); 
+		rightJoyThumbButton.whileHeld(new ArcadeDrive()); 
 	}
 
 	/**

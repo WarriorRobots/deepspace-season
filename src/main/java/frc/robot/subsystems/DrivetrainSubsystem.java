@@ -140,24 +140,36 @@ public class DrivetrainSubsystem extends Subsystem {
 	}
 
 	/**
-	 * Shuts off all drive motors and feeds watchdog timer.
-	 */ //TODO redo documentation
+	 * Safely shuts off all drive motors.
+	 */
 	public void stopDrive() {
 		differentialDrive.stopMotor();
 	}
 
-	public int getLeftEncoderTicks() {
+	/**
+	 * Returns integer value of left encoder (128 clicks per rotation).
+	 */
+	public int getLeftEncoderClicks() {
 		return leftEnc.get();
 	}
 
-	public int getRightEncoderTicks() {
+	/**
+	 * Returns integer value of right encoder (128 clicks per rotation).
+	 */
+	public int getRightEncoderClicks() {
 		return rightEnc.get();
 	}
 
+	/**
+	 * Sets left encoder to zero.
+	 */
 	public void resetLeftEncoder() {
 		leftEnc.reset();
 	}
 
+	/**
+	 * Sets right encoder to zero.
+	 */
 	public void resetRightEncoder() {
 		rightEnc.reset();
 	}
@@ -194,6 +206,10 @@ public class DrivetrainSubsystem extends Subsystem {
 		navx.zeroYaw();
 	}
 
+	/**
+	 * Return compass reading in degrees, where 0 is magnetic north.
+	 * Susceptible to magnetic interference.
+	 */
 	public double getCompassHeading() {
 		return navx.getCompassHeading();
 	}
@@ -202,8 +218,8 @@ public class DrivetrainSubsystem extends Subsystem {
 	public void initSendable(SendableBuilder builder) {
 		builder.setSmartDashboardType("subsystem-drivetrain");
 		builder.addStringProperty("encoder-ticks", () -> {
-			return (Integer.toString(getLeftEncoderTicks()) + " "
-					+ Integer.toString(getRightEncoderTicks()));
+			return (Integer.toString(getLeftEncoderClicks()) + " "
+					+ Integer.toString(getRightEncoderClicks()));
 		}, null);
 		builder.addDoubleProperty("angle", () -> getAngleDegrees(), null);
 	}

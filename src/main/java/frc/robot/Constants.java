@@ -18,13 +18,6 @@ public final class Constants {
 		throw new Exception("Do not create an Constants object!");
 	}
 
-	public static final class PathfinderValues {
-		// TODO tune these values or move them into the Pathfinder object
-		public static final double PATHFINDER_P = 0;
-		public static final double PATHFINDER_I = 0;
-		public static final double PATHFINDER_D = 0;
-	}
-
 	public static final double WHEEL_DIAMETER = 6;
 	public static final int CLICKS_PER_REVOLUTION = 128;
 	/** {@value} */
