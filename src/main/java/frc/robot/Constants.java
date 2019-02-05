@@ -30,6 +30,10 @@ public final class Constants {
 		return (int) (inches / INCHES_PER_CLICK);
 	}
 
+	public static double ftToM(double ftPerSec) {
+		return ftPerSec * 0.3048; //TODO documentation
+	}
+
 	public static double mToFt(double mPerSec) {
 		return mPerSec * (1/0.3048);
 	}

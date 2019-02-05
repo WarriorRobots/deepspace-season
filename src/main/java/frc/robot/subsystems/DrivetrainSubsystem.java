@@ -32,9 +32,6 @@ public class DrivetrainSubsystem extends Subsystem {
 	private static final double RAMPRATE_SECONDS = 0.25;
 	private static final int TIMEOUT_MS = 10;
 	
-	private Encoder leftEnc, rightEnc;
-	private AHRS navx;
-	
 	private WPI_TalonSRX leftFront, leftBack, rightFront, rightBack;
 	private SpeedControllerGroup leftGroup, rightGroup;
 	private DifferentialDrive differentialDrive;
@@ -50,11 +47,11 @@ public class DrivetrainSubsystem extends Subsystem {
 		
 		rightFront = new WPI_TalonSRX(RIGHT_FRONT);
 		rightBack = new WPI_TalonSRX(RIGHT_BACK);
-    rightFront.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
+		rightFront.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
 		rightBack.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
 
-		leftGroup = new SpeedControllerGroup(leftFront, leftMiddle, leftBack);
-		rightGroup = new SpeedControllerGroup(rightFront, rightMiddle, rightBack);
+		leftGroup = new SpeedControllerGroup(leftFront, leftBack);
+		rightGroup = new SpeedControllerGroup(rightFront, rightBack);
 		leftGroup.setInverted(Constants.Inversions.LEFT_DRIVE_REVERSED);
 		rightGroup.setInverted(Constants.Inversions.RIGHT_DRIVE_REVERSED);
 
