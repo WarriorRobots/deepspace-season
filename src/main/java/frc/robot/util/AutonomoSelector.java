@@ -2,7 +2,7 @@ package frc.robot.util;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.commands.TeleopTankDrive;
+import frc.robot.commands.drive.TeleopTankDrive;
 
 /**
  * Contains methods that select the Autonomous case of the robot.

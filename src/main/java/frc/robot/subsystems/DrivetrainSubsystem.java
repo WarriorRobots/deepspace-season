@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
-import frc.robot.commands.TeleopTankDrive;
+import frc.robot.commands.drive.TeleopTankDrive;
 
 /**
  * Contains the drivetrain, the encoders for the left and right wheels, and the
