@@ -7,14 +7,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 //TODO documentation
 public class HatchPlacer extends Subsystem {
 
-    public static final int MAIN_PCM = 1;
-    public static final int EXTRA_PCM = 2;
-    public static final int SCISSOR_IN = 1;
-    public static final int SCISSOR_OUT = 6;
-    public static final int L_LAUNCH_IN = 2;
-    public static final int L_LAUNCH_OUT = 5;
-    public static final int R_LAUNCH_IN = 3;
-    public static final int R_LAUNCH_OUT = 4;
+    private static final int MAIN_PCM = 1;
+    private static final int EXTRA_PCM = 2;
+
+    private static final int SCISSOR_IN = 1;
+    private static final int SCISSOR_OUT = 6;
+    private static final int L_LAUNCH_IN = 2;
+    private static final int L_LAUNCH_OUT = 5;
+    private static final int R_LAUNCH_IN = 3;
+    private static final int R_LAUNCH_OUT = 4;
 
     private DoubleSolenoid scissorHolder, leftLauncher, rightLauncher;
 

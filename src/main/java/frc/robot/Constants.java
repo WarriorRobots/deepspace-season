@@ -16,7 +16,7 @@ public final class Constants {
 	private Constants() throws Exception {
 		throw new Exception("Do not create an Constants object!");
 	}
-
+	//TODO write degrees<-->radians conversion
 	public static final double WHEEL_DIAMETER = 6;
 	public static final int CLICKS_PER_REVOLUTION = 128;
 	/** {@value} */
