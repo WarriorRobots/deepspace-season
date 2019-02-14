@@ -36,7 +36,7 @@ public class CargoSubsystem extends Subsystem {
    */
   public CargoSubsystem() {
     pickup = new WPI_VictorSPX(PICKUP_PORT);
-    pickup.setNeutralMode(NeutralMode.Brake);
+    pickup.setNeutralMode(NeutralMode.Brake); // TODO do this for all talons
 
     rotator = new WPI_TalonSRX(ROTATOR_PORT);
     rotator.setNeutralMode(NeutralMode.Brake);
