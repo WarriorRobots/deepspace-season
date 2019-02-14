@@ -16,7 +16,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * Contains the motors used to pickup cargo, and to rotate the mechanism in and out.
+ * Contains the motors used to pickup cargo, and to rotate the mechanism in and
+ * out.
  */
 public class CargoSubsystem extends Subsystem {
 
@@ -30,13 +31,13 @@ public class CargoSubsystem extends Subsystem {
 
   /**
    * Instantiates new subsystem; make ONLY ONE.
-   * <p><code>
-   * public static final CargoSubsystem cargo = new CargoSubsystem();
+   * <p>
+   * <code> public static final CargoSubsystem cargo = new CargoSubsystem();
    */
   public CargoSubsystem() {
     pickup = new WPI_VictorSPX(PICKUP_PORT);
     pickup.setNeutralMode(NeutralMode.Brake);
-    
+
     rotator = new WPI_TalonSRX(ROTATOR_PORT);
     rotator.setNeutralMode(NeutralMode.Brake);
 
@@ -48,6 +49,7 @@ public class CargoSubsystem extends Subsystem {
 
   /**
    * Run the motor that holds cargo balls.
+   * 
    * @param speed Decimal value from -1 to 1.
    */
   public void runPickupMotor(double speed) {
@@ -56,17 +58,18 @@ public class CargoSubsystem extends Subsystem {
 
   /**
    * Rotate the pickup assembly to the specified angle in degrees.
+   * 
    * @param positionDegrees Intended position in degrees (TODO specify range).
    */
   public void rotatePickupDegrees(double positionDegrees) {
-    rotator.set(ControlMode.Position, positionDegrees); //TODO degrees and ticks
+    rotator.set(ControlMode.Position, positionDegrees); // TODO degrees and ticks
   }
 
   /**
    * Returns the angular position, in [degrees or ticks], of the pickup assembly.
    */
   public int getPickupPosition() {
-    return rotator.getSelectedSensorPosition(); //TODO degrees conversion
+    return rotator.getSelectedSensorPosition(); // TODO degrees conversion
   }
 
   /**
@@ -77,9 +80,10 @@ public class CargoSubsystem extends Subsystem {
   }
 
   /**
-   * <b>Do not use except in emergencies!
-   * </b>Shuts off the rotator motor.
-   * <p><i>Warning:</i> Leaving the pickup in a half-rotated position could cause damage.
+   * <b>Do not use except in emergencies! </b>Shuts off the rotator motor.
+   * <p>
+   * <i>Warning:</i> Leaving the pickup in a half-rotated position could cause
+   * damage.
    */
   @Deprecated
   public void stopRotator() {
@@ -88,7 +92,7 @@ public class CargoSubsystem extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    //TODO run pickup command? possibly joystick, or leave blank
+    // TODO run pickup command? possibly joystick, or leave blank
   }
 
 }

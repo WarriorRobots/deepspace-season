@@ -13,33 +13,38 @@ public class PneumaticSubsystem extends Subsystem {
     private Compressor c;
 
     public PneumaticSubsystem() {
-        solenoid1 = new DoubleSolenoid(0, 7); 
-        solenoid2 = new DoubleSolenoid(1, 6); 
-        solenoid3 = new DoubleSolenoid(2, 5); 
+        solenoid1 = new DoubleSolenoid(0, 7);
+        solenoid2 = new DoubleSolenoid(1, 6);
+        solenoid3 = new DoubleSolenoid(2, 5);
         solenoid4 = new DoubleSolenoid(1, 3, 4);
         c = new Compressor();
         c.stop();
     }
 
     public void setSolenoid(int id, Value mode) {
-        switch(id) {
-            case 1: solenoid1.set(mode);
-                break;
-            case 2: solenoid2.set(mode);
-                break;
-            case 3: solenoid3.set(mode);
-                break;
-            case 4: solenoid4.set(mode);
-                break;
-            default: DriverStation.reportError("Wrong solenoid id", false);
-                break;
+        switch (id) {
+        case 1:
+            solenoid1.set(mode);
+            break;
+        case 2:
+            solenoid2.set(mode);
+            break;
+        case 3:
+            solenoid3.set(mode);
+            break;
+        case 4:
+            solenoid4.set(mode);
+            break;
+        default:
+            DriverStation.reportError("Wrong solenoid id", false);
+            break;
         }
     }
 
-    //TODO
+    // TODO
     @Override
     protected void initDefaultCommand() {
-    
+
     }
 
 }

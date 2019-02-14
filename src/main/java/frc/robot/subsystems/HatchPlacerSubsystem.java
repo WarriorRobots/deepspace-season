@@ -24,7 +24,8 @@ public class HatchPlacerSubsystem extends Subsystem {
     /**
      * Instantiates new subsystem; make ONLY ONE.
      * <p>
-     * <code> public static final HatchPlacerSubsystem hatchPlacer = new HatchPlacerSubsystem();
+     * <code> public static final HatchPlacerSubsystem hatchPlacer = new
+     * HatchPlacerSubsystem();
      */
     public HatchPlacerSubsystem() {
         scissorHolder = new DoubleSolenoid(EXTRA_PCM, SCISSOR_IN, SCISSOR_OUT);
@@ -40,8 +41,8 @@ public class HatchPlacerSubsystem extends Subsystem {
     }
 
     /**
-     * Releases the hatch by closing the scissors;
-     * it will hang loosely and can be knocked off.
+     * Releases the hatch by closing the scissors; it will hang loosely and can be
+     * knocked off.
      */
     public void releaseHatch() {
         scissorHolder.set(Value.kForward);
@@ -49,7 +50,8 @@ public class HatchPlacerSubsystem extends Subsystem {
 
     /**
      * Extend the pistons that push the hatch off the scissors.
-     * <p><b>Warning:</b> only use if the hatch is loose (scissors are closed)!
+     * <p>
+     * <b>Warning:</b> only use if the hatch is loose (scissors are closed)!
      */
     public void extendLauncher() {
         leftLauncher.set(Value.kForward);

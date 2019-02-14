@@ -4,10 +4,11 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * Contains methods used for reading three line followers;
- * two on the outside of a 2-inch line and one inside.
- * <p>When properly lined up, the middle line follower should read true,
- * and the other two should read false.
+ * Contains methods used for reading three line followers; two on the outside of
+ * a 2-inch line and one inside.
+ * <p>
+ * When properly lined up, the middle line follower should read true, and the
+ * other two should read false.
  */
 public class LineFollowerSubsystem extends Subsystem {
 
@@ -19,8 +20,9 @@ public class LineFollowerSubsystem extends Subsystem {
 
     /**
      * Instantiates new subsystem; make ONLY ONE.
-     * <p><code>
-     * public static final LineFollowerSubsystem lineFollowers = new LineFollowerSubsystem();
+     * <p>
+     * <code> public static final LineFollowerSubsystem lineFollowers = new
+     * LineFollowerSubsystem();
      */
     public LineFollowerSubsystem() {
         leftFollower = new DigitalInput(LEFT_PORT);
@@ -50,11 +52,11 @@ public class LineFollowerSubsystem extends Subsystem {
     }
 
     /**
-     * Returns true if left and right followers don't see line, and middle follower does; false otherwise;
+     * Returns true if left and right followers don't see line, and middle follower
+     * does; false otherwise;
      */
     public boolean onLine() {
-        return (!getLeftLineFollower() && !getRightLineFollower())
-                && getMiddleLineFollower();
+        return (!getLeftLineFollower() && !getRightLineFollower()) && getMiddleLineFollower();
     }
 
     /**
@@ -71,8 +73,9 @@ public class LineFollowerSubsystem extends Subsystem {
         return getLeftLineFollower();
     }
 
-    //TODO determine if this needs a command
+    // TODO determine if this needs a command
     @Override
-    protected void initDefaultCommand() {}
+    protected void initDefaultCommand() {
+    }
 
 }

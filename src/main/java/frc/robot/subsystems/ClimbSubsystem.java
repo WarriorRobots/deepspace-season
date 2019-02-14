@@ -13,14 +13,19 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Add your docs here.
  */
 public class ClimbSubsystem extends Subsystem {
-  
-  public ClimbSubsystem() {}
 
-  public void extend_climb() {}
+  public ClimbSubsystem() {
+  }
 
-  public void retract_climb() {}
+  public void extend_climb() {
+  }
 
-  public boolean get_state() {return false;}
+  public void retract_climb() {
+  }
+
+  public boolean get_state() {
+    return false;
+  }
 
   @Override
   public void initDefaultCommand() {
