@@ -24,9 +24,9 @@ import frc.robot.commands.SolenoidOut;
 @SuppressWarnings("unused")
 public final class ControlHandler {
 
-	public static final int LEFT_JOY = 1;
-	public static final int RIGHT_JOY = 0;
-	public static final int XBOX = 2;
+	private static final int LEFT_JOY = 1;
+	private static final int RIGHT_JOY = 0;
+	private static final int XBOX = 2;
 	
 	private Joystick leftJoy, rightJoy;
 	private XboxController xbox;
