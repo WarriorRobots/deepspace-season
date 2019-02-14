@@ -6,10 +6,11 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+@Deprecated
 public class PneumaticSubsystem extends Subsystem {
 
-    DoubleSolenoid solenoid1, solenoid2, solenoid3, solenoid4;
-    Compressor c;
+    private DoubleSolenoid solenoid1, solenoid2, solenoid3, solenoid4;
+    private Compressor c;
 
     public PneumaticSubsystem() {
         solenoid1 = new DoubleSolenoid(0, 7); 
