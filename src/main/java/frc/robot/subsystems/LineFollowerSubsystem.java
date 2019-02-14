@@ -16,6 +16,8 @@ public class LineFollowerSubsystem extends Subsystem {
     private static final int MIDDLE_PORT = 8;
     private static final int RIGHT_PORT = 9;
 
+    // DigitalInput is the class that reads any digital data,
+    // in this case line followers
     private DigitalInput leftFollower, middleFollower, rightFollower;
 
     /**

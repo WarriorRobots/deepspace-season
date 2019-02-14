@@ -16,6 +16,16 @@ public final class Constants {
 	private Constants() throws Exception {
 		throw new Exception("Do not create an Constants object!");
 	}
+
+	/**
+	 * ID number ({@value}) of the main PCM, which has the compressor and pressure switch plugged in.
+	 */
+	public static final int MAIN_PCM_ID = 1;
+	/**
+	 * ID number ({@value}) of the extra PCM, used only for extra solenoid ports.
+	 */
+	public static final int EXTRA_PCM_ID = 2;
+
 	//TODO write degrees<-->radians conversion
 	public static final double WHEEL_DIAMETER = 6;
 	public static final int CLICKS_PER_REVOLUTION = 128;

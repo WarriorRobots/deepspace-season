@@ -3,14 +3,12 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Constants;
 
 /**
  * Contains the pneumatics required to place hatches on the velcro targets.
  */
 public class HatchPlacerSubsystem extends Subsystem {
-
-    private static final int MAIN_PCM = 1;
-    private static final int EXTRA_PCM = 2;
 
     private static final int SCISSOR_IN = 1;
     private static final int SCISSOR_OUT = 6;
@@ -28,9 +26,9 @@ public class HatchPlacerSubsystem extends Subsystem {
      * HatchPlacerSubsystem();
      */
     public HatchPlacerSubsystem() {
-        scissorHolder = new DoubleSolenoid(EXTRA_PCM, SCISSOR_IN, SCISSOR_OUT);
-        leftLauncher = new DoubleSolenoid(EXTRA_PCM, L_LAUNCH_IN, L_LAUNCH_OUT);
-        rightLauncher = new DoubleSolenoid(EXTRA_PCM, R_LAUNCH_IN, R_LAUNCH_OUT);
+        scissorHolder = new DoubleSolenoid(Constants.EXTRA_PCM_ID, SCISSOR_IN, SCISSOR_OUT);
+        leftLauncher = new DoubleSolenoid(Constants.EXTRA_PCM_ID, L_LAUNCH_IN, L_LAUNCH_OUT);
+        rightLauncher = new DoubleSolenoid(Constants.EXTRA_PCM_ID, R_LAUNCH_IN, R_LAUNCH_OUT);
     }
 
     /**
