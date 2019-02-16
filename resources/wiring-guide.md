@@ -18,6 +18,8 @@
 * [RSL](#rls)
 * [DIO](#dio)
 * [Encoder](#encoder)
+* [IR Sensor](#ir)
+* [Hall Effect Sensor](#halleffect)
 * [CAN Wiring](#can)
 * [Wire Gauge](#gauge)
 
@@ -147,15 +149,25 @@
 * There are 128 clicks in a rotation
 
 <a id="ir"></a>
-### IR sensor
+### IR Sensor
 ![IR Sensor image]()
 
 (Up is the direction so DIO and the numbers are upside up)
 
-* DO NOT BEND PINS
 * **Blue** or **Green** cable from sensor goes in ground (bottom pin)
 * **Brown** or **Red** cable from sensor goes in positive (middle pin)
 * **Black** or **Yellow** cable from sensor goes in signal (top pin)
+
+<a id="halleffect"></a>
+### Hall Effect Sensor
+![Hall Effect image]()
+
+(Up is the direction so DIO and the numbers are upside up)
+
+* The Hall Effect Sensor detects whether there is a magnet nearby the sensor (using the Hall Effect)
+* **GND** on the sensor goes in ground (bottom pin)
+* **5V** on the sensor goes in the positive (middle pin)
+* **SIG** on the sensor goes in signal (top pin)
 
 ---
 
