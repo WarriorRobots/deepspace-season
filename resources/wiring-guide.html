@@ -1,9 +1,215 @@
-<!DOCTYPE html>
+<h1 id="westwood-frc-wiring-guide-2018-2019">Westwood FRC Wiring Guide (2018-2019)</h1>
+<!-- Author: Joshua Budd -->
 
-<html>
-    <head></head>    
-    <body>
-            <script>document.write('<link rel="stylesheet" href="https://github.githubassets.com/assets/gist-embed-63fc2ca24394c22bceba3d657c0df880.css">')
-                document.write('<div id=\"gist94296356\" class=\"gist\">\n    <div class=\"gist-file\">\n      <div class=\"gist-data\">\n        <div class=\"js-gist-file-update-container js-task-list-container file-box\">\n  <div id=\"file-wiringguidedraft-md\" class=\"file\">\n    \n  <div id=\"readme\" class=\"readme blob instapaper_body js-code-block-container\">\n    <article class=\"markdown-body entry-content\" itemprop=\"text\"><h1><a id=\"user-content-westwood-frc-wiring-guide-2018-2019\" class=\"anchor\" aria-hidden=\"true\" href=\"#westwood-frc-wiring-guide-2018-2019\"><svg class=\"octicon octicon-link\" viewBox=\"0 0 16 16\" version=\"1.1\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z\"><\/path><\/svg><\/a>Westwood FRC Wiring Guide (2018-2019)<\/h1>\n\n\n\n<p><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://camo.githubusercontent.com/442cff5bea215aeb53778f4791f0b210c43953f0/68747470733a2f2f7777772e636869656664656c7068692e636f6d2f75706c6f6164732f64656661756c742f6f7074696d697a65642f33582f352f632f356339303337626266623862663663383437373936333230343137663638633032323632666231615f325f363930783530302e6a706567\"><img src=\"https://camo.githubusercontent.com/442cff5bea215aeb53778f4791f0b210c43953f0/68747470733a2f2f7777772e636869656664656c7068692e636f6d2f75706c6f6164732f64656661756c742f6f7074696d697a65642f33582f352f632f356339303337626266623862663663383437373936333230343137663638633032323632666231615f325f363930783530302e6a706567\" alt=\"Narwals scematic\" title=\"3128 Aluminum Narwals\' scematic\" data-canonical-src=\"https://www.chiefdelphi.com/uploads/default/optimized/3X/5/c/5c9037bbfb8bf6c847796320417f68c02262fb1a_2_690x500.jpeg\" style=\"max-width:100%;\"><\/a><\/p>\n<h2><a id=\"user-content-table-of-contents\" class=\"anchor\" aria-hidden=\"true\" href=\"#table-of-contents\"><svg class=\"octicon octicon-link\" viewBox=\"0 0 16 16\" version=\"1.1\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z\"><\/path><\/svg><\/a>Table of Contents<\/h2>\n<ul>\n<li><a href=\"#battery\">Battery &amp; Breaker<\/a><\/li>\n<li><a href=\"#pdp\">PDP<\/a><\/li>\n<li><a href=\"#rio\">RoboRIO<\/a><\/li>\n<li><a href=\"#vrm\">VRM<\/a><\/li>\n<li><a href=\"#pcm\">PCM<\/a><\/li>\n<li><a href=\"#radio\">Radio<\/a><\/li>\n<li><a href=\"#talon\">Talon<\/a><\/li>\n<li><a href=\"#rls\">RSL<\/a><\/li>\n<li><a href=\"#dio\">DIO<\/a><\/li>\n<li><a href=\"#encoder\">Encoder<\/a><\/li>\n<li><a href=\"#can\">CAN Wiring<\/a><\/li>\n<li><a href=\"#gauge\">Wire Gauge<\/a><\/li>\n<\/ul>\n<p><a id=\"user-content-battery\"><\/a><\/p>\n<h2><a id=\"user-content-battery--breaker\" class=\"anchor\" aria-hidden=\"true\" href=\"#battery--breaker\"><svg class=\"octicon octicon-link\" viewBox=\"0 0 16 16\" version=\"1.1\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z\"><\/path><\/svg><\/a>Battery &amp; Breaker<\/h2>\n<p><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://camo.githubusercontent.com/0b495433d0d9e651cb5396a8a9f3491c686d3d36/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f73637265656e73746570735f6c6976652f696d6167655f6173736574732f6173736574732f3030312f3138392f3936342f6d656469756d2f63643034623564382d643137312d343235392d383764362d6431386133626461326338612e6a7067\"><img src=\"https://camo.githubusercontent.com/0b495433d0d9e651cb5396a8a9f3491c686d3d36/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f73637265656e73746570735f6c6976652f696d6167655f6173736574732f6173736574732f3030312f3138392f3936342f6d656469756d2f63643034623564382d643137312d343235392d383764362d6431386133626461326338612e6a7067\" alt=\"Breaker image\" style=\"max-width:100%;\"><\/a><\/p>\n<ul>\n<li><strong>Negative<\/strong> lead goes to <a href=\"#pdp\">PDP<\/a><\/li>\n<li><strong>Positive<\/strong> lead goes to breaker\n<ul>\n<li>Attaches to side reading \"THERMAL CIRCUIT BREAKER\"<\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<p><a id=\"user-content-pdp\"><\/a><\/p>\n<h2><a id=\"user-content-power-distribution-panel-pdp\" class=\"anchor\" aria-hidden=\"true\" href=\"#power-distribution-panel-pdp\"><svg class=\"octicon octicon-link\" viewBox=\"0 0 16 16\" version=\"1.1\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z\"><\/path><\/svg><\/a>Power Distribution Panel (PDP)<\/h2>\n<p><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://camo.githubusercontent.com/830473ea9f270823bfd61f35b4557cb827954140/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f73637265656e73746570735f6c6976652f696d6167655f6173736574732f6173736574732f3030302f3238392f3930342f6f726967696e616c2f34373936383838382d626566312d343161622d623831652d3335653333626464373439632e706e67\"><img src=\"https://camo.githubusercontent.com/830473ea9f270823bfd61f35b4557cb827954140/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f73637265656e73746570735f6c6976652f696d6167655f6173736574732f6173736574732f3030302f3238392f3930342f6f726967696e616c2f34373936383838382d626566312d343161622d623831652d3335653333626464373439632e706e67\" alt=\"PDP image\" style=\"max-width:100%;\"><\/a><\/p>\n<p>(Down is the side with the power ports.)<\/p>\n<ul>\n<li><strong>Red<\/strong> 10 Amp breaker in top left\n<ul>\n<li><a href=\"#rio\">RoboRIO<\/a> goes in <strong>blue<\/strong> \"Vbat CONTROLLER POWER\"<\/li>\n<\/ul>\n<\/li>\n<li><strong>Yellow<\/strong> 20 Amp breaker in top right\n<ul>\n<li><a href=\"#vrm\">VRM<\/a> and <a href=\"#pcm\">PCM<\/a> goes in <strong>green<\/strong> \"Vbat VRM PCM PWR\"<\/li>\n<\/ul>\n<\/li>\n<li>ports (0, 1, 3, 4, 12, 13, 14, 15):\n<ul>\n<li>40 Amp breaker<\/li>\n<li><a href=\"#talon\">Talons<\/a> plug in here<\/li>\n<\/ul>\n<\/li>\n<li>ports (4, 5, 6, 7, 8, 9, 10, 11):\n<ul>\n<li>5, 20, or 30 Amp breakers<\/li>\n<li>Camera plugs in here<\/li>\n<\/ul>\n<\/li>\n<li><a href=\"#can\">CAN<\/a> Cable in CAN (bottom right):\nJumper switch must be in ON position<\/li>\n<\/ul>\n<p><a id=\"user-content-rio\"><\/a><\/p>\n<h2><a id=\"user-content-roborio\" class=\"anchor\" aria-hidden=\"true\" href=\"#roborio\"><svg class=\"octicon octicon-link\" viewBox=\"0 0 16 16\" version=\"1.1\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z\"><\/path><\/svg><\/a>RoboRIO<\/h2>\n<p><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://camo.githubusercontent.com/d9bde9dbed2c45394b65d95f4e130a4581ef81f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f73637265656e73746570735f6c6976652f696d6167655f6173736574732f6173736574732f3030302f3238392f3930332f6f726967696e616c2f62373061653839342d653063352d343964332d623865322d3032346537366264376336632e706e67\"><img src=\"https://camo.githubusercontent.com/d9bde9dbed2c45394b65d95f4e130a4581ef81f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f73637265656e73746570735f6c6976652f696d6167655f6173736574732f6173736574732f3030302f3238392f3930332f6f726967696e616c2f62373061653839342d653063352d343964332d623865322d3032346537366264376336632e706e67\" alt=\"RIO image\" style=\"max-width:100%;\"><\/a><\/p>\n<p>(Up is the the side with the USB ports.)<\/p>\n<ul>\n<li>22 guage Power Cable in INPUT (left of USB ports)\n<ul>\n<li><strong>Positive<\/strong> goes in V<\/li>\n<li><strong>Negative<\/strong> goes in C<\/li>\n<\/ul>\n<\/li>\n<li><a href=\"#can\">CAN<\/a> Cable in CAN (left of power cable)\n<ul>\n<li><strong>Yellow<\/strong> goes in H<\/li>\n<li><strong>Green<\/strong> goes in L<\/li>\n<\/ul>\n<\/li>\n<li><a href=\"#dio\">DIO<\/a> sensors in DIO (left side)\n<ul>\n<li>Boolean sensors go in DIO ports (Boolean sensors are sensors with only on and off states.)<\/li>\n<li>(e.g. Infrared sensors, limit switches)<\/li>\n<li>Begin plugging in sensors at 0 and count up (not required, good wiring practice)<\/li>\n<\/ul>\n<\/li>\n<li><a href=\"#pwm\">PWM<\/a> sensors in PWM (right side)\n<ul>\n<li>Analog sensors go in PWM ports (Analog sensors are sensors with a range of outputs)<\/li>\n<li>(e.g. ultrasonic sensors, potentiometers)<\/li>\n<li>Begin plugging in sensors at 0 and count up<\/li>\n<\/ul>\n<\/li>\n<li><a href=\"#rsl\">RSL<\/a> light in RSL (left-most bottom port)\n<ul>\n<li><strong>Positive<\/strong> goes in S<\/li>\n<li><strong>Negative<\/strong> goes in ground (the dashed lines)<\/li>\n<\/ul>\n<\/li>\n<li>NavX in MXP (center)\n<ul>\n<li>NavX gyroscope is mounted with majority of sensor closer to USB ports<\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<p><a id=\"user-content-vrm\"><\/a><\/p>\n<h2><a id=\"user-content-voltage-regulator-module-vrm\" class=\"anchor\" aria-hidden=\"true\" href=\"#voltage-regulator-module-vrm\"><svg class=\"octicon octicon-link\" viewBox=\"0 0 16 16\" version=\"1.1\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z\"><\/path><\/svg><\/a>Voltage Regulator Module (VRM)<\/h2>\n<p><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://camo.githubusercontent.com/cefd54640d976bda2b24c11119e1a0acef85805f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f73637265656e73746570735f6c6976652f696d6167655f6173736574732f6173736574732f3030302f3238392f3930362f6f726967696e616c2f62373762363261622d623963612d346530332d393431352d6664656533373839616634322e706e673f31343833353439323130\"><img src=\"https://camo.githubusercontent.com/cefd54640d976bda2b24c11119e1a0acef85805f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f73637265656e73746570735f6c6976652f696d6167655f6173736574732f6173736574732f3030302f3238392f3930362f6f726967696e616c2f62373762363261622d623963612d346530332d393431352d6664656533373839616634322e706e673f31343833353439323130\" alt=\"VRM image\" style=\"max-width:100%;\"><\/a><\/p>\n<p>(Down is the side with the 12V and 5V lights)<\/p>\n<ul>\n<li>Power Cables in 12V (top)<\/li>\n<li>12V/2A (upper left)\n<ul>\n<li><a href=\"#radio\">Radio<\/a> Power (circular plug)<\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<p><a id=\"user-content-pcm\"><\/a><\/p>\n<h2><a id=\"user-content-pneumatic-control-module-pcm\" class=\"anchor\" aria-hidden=\"true\" href=\"#pneumatic-control-module-pcm\"><svg class=\"octicon octicon-link\" viewBox=\"0 0 16 16\" version=\"1.1\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z\"><\/path><\/svg><\/a>Pneumatic Control Module (PCM)<\/h2>\n<p><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://camo.githubusercontent.com/233e3fb008c2e5af5def9a2148eaabbe69380d9e/687474703a2f2f736c696465706c617965722e636f6d2f736c6964652f373334363433342f32342f696d616765732f392f506e65756d617469632b436f6e74726f6c2b4d6f64756c652b2850434d292e6a7067\"><img src=\"https://camo.githubusercontent.com/233e3fb008c2e5af5def9a2148eaabbe69380d9e/687474703a2f2f736c696465706c617965722e636f6d2f736c6964652f373334363433342f32342f696d616765732f392f506e65756d617469632b436f6e74726f6c2b4d6f64756c652b2850434d292e6a7067\" alt=\"PCM image\" style=\"max-width:100%;\"><\/a><\/p>\n<p>(Left is the side with the Vin)<\/p>\n<ul>\n<li><a href=\"#pcm\">PCM<\/a> power in Vin (left)<\/li>\n<li><a href=\"#can\">CAN<\/a> Cable in CAN (top left)<\/li>\n<li>Pressure Meter Power in <strong>blue<\/strong> PRESSURE SW.<\/li>\n<li>Air compressor Power in <strong>green<\/strong> COMPRESSOR OUT<\/li>\n<li>ports (0, 1, 2, 3, 4, 5, 6, 7)\n<ul>\n<li>Solenoid Power goes here<\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<p><a id=\"user-content-radio\"><\/a><\/p>\n<h2><a id=\"user-content-radio-om5p-ac\" class=\"anchor\" aria-hidden=\"true\" href=\"#radio-om5p-ac\"><svg class=\"octicon octicon-link\" viewBox=\"0 0 16 16\" version=\"1.1\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z\"><\/path><\/svg><\/a>Radio (OM5P-AC)<\/h2>\n<p><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://camo.githubusercontent.com/03df5f5152b9223cab19e8c20c678cd58acadde3/68747470733a2f2f7777772e62726f616462616e6462757965722e636f6d2f696d616765732f70726f64756374732f6f70656e6d6573682f6f6d35702d61632d372e706e673f77696474683d343030\"><img src=\"https://camo.githubusercontent.com/03df5f5152b9223cab19e8c20c678cd58acadde3/68747470733a2f2f7777772e62726f616462616e6462757965722e636f6d2f696d616765732f70726f64756374732f6f70656e6d6573682f6f6d35702d61632d372e706e673f77696474683d343030\" alt=\"Radio image\" style=\"max-width:100%;\"><\/a><\/p>\n<ul>\n<li>Radio Power circular plug in left<\/li>\n<li>Camera ethernet in middle (not required)<\/li>\n<li><a href=\"#rio\">RoboRIO<\/a> ethernet in right<\/li>\n<\/ul>\n<p><a id=\"user-content-talon\"><\/a><\/p>\n<h2><a id=\"user-content-talon-srx--victor\" class=\"anchor\" aria-hidden=\"true\" href=\"#talon-srx--victor\"><svg class=\"octicon octicon-link\" viewBox=\"0 0 16 16\" version=\"1.1\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z\"><\/path><\/svg><\/a>Talon SRX &amp; Victor<\/h2>\n<p><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://camo.githubusercontent.com/440f1a79acac64e95bc5f25d42493260b2a4c763/68747470733a2f2f7777772e766578726f626f746963732e636f6d2f6d656469612f636174616c6f672f70726f647563742f63616368652f312f696d6167652f39646637386561623333353235643038643665356662386432373133366539352f322f312f3231372d343335382d6f6e2d74616c6f6e2e6a7067\"><img src=\"https://camo.githubusercontent.com/440f1a79acac64e95bc5f25d42493260b2a4c763/68747470733a2f2f7777772e766578726f626f746963732e636f6d2f6d656469612f636174616c6f672f70726f647563742f63616368652f312f696d6167652f39646637386561623333353235643038643665356662386432373133366539352f322f312f3231372d343335382d6f6e2d74616c6f6e2e6a7067\" alt=\"Talon image\" style=\"max-width:100%;\"><\/a><\/p>\n<ul>\n<li>Talon &amp; Victor power are red and black\n<ul>\n<li>plug in 40 Amp PDP port<\/li>\n<li><em><strong>DO NOT PLUG INTO MOTORS<\/strong><\/em><\/li>\n<\/ul>\n<\/li>\n<li>Motor Power is green and white<\/li>\n<li>Talon only: Encoder data cable on top, covered with hex screws &amp; plastic cover<\/li>\n<\/ul>\n<p><a id=\"user-content-rsl\"><\/a><\/p>\n<h2><a id=\"user-content-robot-signal-light-orange-rsl\" class=\"anchor\" aria-hidden=\"true\" href=\"#robot-signal-light-orange-rsl\"><svg class=\"octicon octicon-link\" viewBox=\"0 0 16 16\" version=\"1.1\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z\"><\/path><\/svg><\/a>Robot Signal Light (orange RSL)<\/h2>\n<p><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://camo.githubusercontent.com/7a5fef32a7def38ab32085348a5896fdeb144583/68747470733a2f2f6d696c696c616e69726f626f746963732e676974626f6f6b732e696f2f6672632d656c656374726963616c2d6269626c652f636f6e74656e742f726f626f52494f2f72736c2e6a7067\"><img src=\"https://camo.githubusercontent.com/7a5fef32a7def38ab32085348a5896fdeb144583/68747470733a2f2f6d696c696c616e69726f626f746963732e676974626f6f6b732e696f2f6672632d656c656374726963616c2d6269626c652f636f6e74656e742f726f626f52494f2f72736c2e6a7067\" alt=\"RSL image\" style=\"max-width:100%;\"><\/a><\/p>\n<ul>\n<li>Power cable from <a href=\"#rio\">RoboRIO<\/a>\n<ul>\n<li><strong>Positive<\/strong> in La and Lb<\/li>\n<li><strong>Negative<\/strong> in N<\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<p><a id=\"user-content-dio\"><\/a><\/p>\n<h2><a id=\"user-content-digital-input-and-output-dio\" class=\"anchor\" aria-hidden=\"true\" href=\"#digital-input-and-output-dio\"><svg class=\"octicon octicon-link\" viewBox=\"0 0 16 16\" version=\"1.1\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z\"><\/path><\/svg><\/a>Digital Input and Output (DIO)<\/h2>\n<p><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://camo.githubusercontent.com/1617d46df0af0ae219c0afa6e41646cc1c908b0a/68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f4f7a4a394b5a466c4e766d77674d2d4a31694e4376684f43496b4b59636c51494330306f56417a7979447a63547a4e59326d483535777036554c334b4a38666d41493441784c5542304d7a666861364453716c63665474666d6b6a6957746d6c7658586759346e2d6738435a6e5a6d57454c6c5f626e53364b694a455f56644e4f3930744855476f4b456f786f31737168364f5f68636b6975315652356b53774c4431576d504b42554c4d30416d45712d756b4c4839314332314a696b74655579755f6f767941527344784952494b6a4d516c666d65492d4f514b6b30746a474d724c62766a5972557952516c65364f5f726e7a2d425346767853515367706c4b52647a6938526e49733831632d6f385144316645766938344172566b734d7331645359613256695834687478467273473971346d486566435f69434b56535774373732763848546a6757473078624638447153336a314e335530326f767873516d326541595f536a696b6b435539506a325133356878377145656e39344c4f58486374674e457846332d706772797251597a5553637551634b492d6a735a70752d415573655a7a4b79767a5972542d3233696f69336d466375625564356135756e6d5251637352486e66546a6c3055344b304a78516d503339685157577a626e462d78346242435179776d66454b416b38692d575546456f6442364f4e6d485673565a495342714c71473937486454616947394b57494e32756f7635726b66786f4a6c577854776c34504c5852347a41513356764131426c64434e74734b6b4e717a713461314e48767a365130463130735a4132454363787a6a6e376b42306d446f7134634f453848335f43656730634d416e684e2d397134563076695f68584f444662474c677832507852437655454b755a4e55703530744953383347757a4262554b77785a786f5f6149484235514869565731584e35393054646555655773326666504d70673739504672507171773d773437302d683632362d6e6f\"><img src=\"https://camo.githubusercontent.com/1617d46df0af0ae219c0afa6e41646cc1c908b0a/68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f4f7a4a394b5a466c4e766d77674d2d4a31694e4376684f43496b4b59636c51494330306f56417a7979447a63547a4e59326d483535777036554c334b4a38666d41493441784c5542304d7a666861364453716c63665474666d6b6a6957746d6c7658586759346e2d6738435a6e5a6d57454c6c5f626e53364b694a455f56644e4f3930744855476f4b456f786f31737168364f5f68636b6975315652356b53774c4431576d504b42554c4d30416d45712d756b4c4839314332314a696b74655579755f6f767941527344784952494b6a4d516c666d65492d4f514b6b30746a474d724c62766a5972557952516c65364f5f726e7a2d425346767853515367706c4b52647a6938526e49733831632d6f385144316645766938344172566b734d7331645359613256695834687478467273473971346d486566435f69434b56535774373732763848546a6757473078624638447153336a314e335530326f767873516d326541595f536a696b6b435539506a325133356878377145656e39344c4f58486374674e457846332d706772797251597a5553637551634b492d6a735a70752d415573655a7a4b79767a5972542d3233696f69336d466375625564356135756e6d5251637352486e66546a6c3055344b304a78516d503339685157577a626e462d78346242435179776d66454b416b38692d575546456f6442364f4e6d485673565a495342714c71473937486454616947394b57494e32756f7635726b66786f4a6c577854776c34504c5852347a41513356764131426c64434e74734b6b4e717a713461314e48767a365130463130735a4132454363787a6a6e376b42306d446f7134634f453848335f43656730634d416e684e2d397134563076695f68584f444662474c677832507852437655454b755a4e55703530744953383347757a4262554b77785a786f5f6149484235514869565731584e35393054646555655773326666504d70673739504672507171773d773437302d683632362d6e6f\" alt=\"DIO image\" data-canonical-src=\"https://lh3.googleusercontent.com/OzJ9KZFlNvmwgM-J1iNCvhOCIkKYclQIC00oVAzyyDzcTzNY2mH55wp6UL3KJ8fmAI4AxLUB0Mzfha6DSqlcfTtfmkjiWtmlvXXgY4n-g8CZnZmWELl_bnS6KiJE_VdNO90tHUGoKEoxo1sqh6O_hckiu1VR5kSwLD1WmPKBULM0AmEq-ukLH91C21JikteUyu_ovyARsDxIRIKjMQlfmeI-OQKk0tjGMrLbvjYrUyRQle6O_rnz-BSFvxSQSgplKRdzi8RnIs81c-o8QD1fEvi84ArVksMs1dSYa2ViX4htxFrsG9q4mHefC_iCKVSWt772v8HTjgWG0xbF8DqS3j1N3U02ovxsQm2eAY_SjikkCU9Pj2Q35hx7qEen94LOXHctgNExF3-pgryrQYzUScuQcKI-jsZpu-AUseZzKyvzYrT-23ioi3mFcubUd5a5unmRQcsRHnfTjl0U4K0JxQmP39hQWWzbnF-x4bBCQywmfEKAk8i-WUFEodB6ONmHVsVZISBqLqG97HdTaiG9KWIN2uov5rkfxoJlWxTwl4PLXR4zAQ3VvA1BldCNtsKkNqzq4a1NHvz6Q0F10sZA2ECcxzjn7kB0mDoq4cOE8H3_Ceg0cMAnhN-9q4V0vi_hXODFbGLgx2PxRCvUEKuZNUp50tIS83GuzBbUKwxZxo_aIHB5QHiVW1XN590TdeUeWs2ffPMpg79PFrPqqw=w470-h626-no\" style=\"max-width:100%;\"><\/a><\/p>\n<ul>\n<li>Ports labled 0 through 9 on <a href=\"#rio\">RoboRIO<\/a><\/li>\n<li>All digital sensors go in DIO ports<\/li>\n<li>Begin plugging in sensors at 0 and count up (not required, good wiring practice)<\/li>\n<\/ul>\n<p><a id=\"user-content-encoder\"><\/a><\/p>\n<h3><a id=\"user-content-grayhill-encoder\" class=\"anchor\" aria-hidden=\"true\" href=\"#grayhill-encoder\"><svg class=\"octicon octicon-link\" viewBox=\"0 0 16 16\" version=\"1.1\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z\"><\/path><\/svg><\/a>Grayhill Encoder<\/h3>\n<p><a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://camo.githubusercontent.com/a8dec9588361bf20916746d06721f46e0056ecc3/68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f776b6f33656e395a384b4d3536306269714a5374345539454f50585958344f533934774669687937595f565974554c6e33624c6f4d4f473375566d554e624768525365737a395536647a4d327a714563786b49336c4b6b7745467832715a5141324859497855687a4345362d7575476a76505742326c57715f5a68476568636641575849536d5a69685f714843373834574c697650474349713358784e624f774a2d77475a6a46562d5a6f3331394f632d4e462d31565674566a393937597072365864646c36356d75667637774b48764a4d634e4448544347696c6b773866516864417654654c7a72785368337a4e6e724565434f397a33655f6b4e4e57713271673567316a723652654d6f663254436c5250444b3470752d6659365439514f4170714b776953674437634867674267476d4c35694b6e6275555038457a724e433359555a69646c643751695a6963564b4b586c7156304c7a6b70655744387470674b356761675a6471663963456c7131554435745f733266724b694e3045736f5f58514c71536c714264754e4c41384b41656f64336f2d7171323767735f6e63755056342d5057314c506d2d56576d7135637952446374703741756d59474868426b6b67554354562d47726462504235784a424e326c4e517461474451444d45436379766974573734516a6775412d4a357366596a6f58726238364a4d544564726e784b4f3674326a4250455350334841314f5a4c424a4b394c437942305972484b306353764c6c6f4574654954786f4b69375669733241503366566a5973326436454d474d51504d774a36495972537037765454485f55464358727138384e784b485938766c363470324f4a53635456794f6155307366725679544d6a4d5064434855434864694f55746e4f6b4f4e4468684b6a31443d773437302d683632362d6e6f\"><img src=\"https://camo.githubusercontent.com/a8dec9588361bf20916746d06721f46e0056ecc3/68747470733a2f2f6c68332e676f6f676c6575736572636f6e74656e742e636f6d2f776b6f33656e395a384b4d3536306269714a5374345539454f50585958344f533934774669687937595f565974554c6e33624c6f4d4f473375566d554e624768525365737a395536647a4d327a714563786b49336c4b6b7745467832715a5141324859497855687a4345362d7575476a76505742326c57715f5a68476568636641575849536d5a69685f714843373834574c697650474349713358784e624f774a2d77475a6a46562d5a6f3331394f632d4e462d31565674566a393937597072365864646c36356d75667637774b48764a4d634e4448544347696c6b773866516864417654654c7a72785368337a4e6e724565434f397a33655f6b4e4e57713271673567316a723652654d6f663254436c5250444b3470752d6659365439514f4170714b776953674437634867674267476d4c35694b6e6275555038457a724e433359555a69646c643751695a6963564b4b586c7156304c7a6b70655744387470674b356761675a6471663963456c7131554435745f733266724b694e3045736f5f58514c71536c714264754e4c41384b41656f64336f2d7171323767735f6e63755056342d5057314c506d2d56576d7135637952446374703741756d59474868426b6b67554354562d47726462504235784a424e326c4e517461474451444d45436379766974573734516a6775412d4a357366596a6f58726238364a4d544564726e784b4f3674326a4250455350334841314f5a4c424a4b394c437942305972484b306353764c6c6f4574654954786f4b69375669733241503366566a5973326436454d474d51504d774a36495972537037765454485f55464358727138384e784b485938766c363470324f4a53635456794f6155307366725679544d6a4d5064434855434864694f55746e4f6b4f4e4468684b6a31443d773437302d683632362d6e6f\" alt=\"Encoder image\" data-canonical-src=\"https://lh3.googleusercontent.com/wko3en9Z8KM560biqJSt4U9EOPXYX4OS94wFihy7Y_VYtULn3bLoMOG3uVmUNbGhRSesz9U6dzM2zqEcxkI3lKkwEFx2qZQA2HYIxUhzCE6-uuGjvPWB2lWq_ZhGehcfAWXISmZih_qHC784WLivPGCIq3XxNbOwJ-wGZjFV-Zo319Oc-NF-1VVtVj997Ypr6Xddl65mufv7wKHvJMcNDHTCGilkw8fQhdAvTeLzrxSh3zNnrEeCO9z3e_kNNWq2qg5g1jr6ReMof2TClRPDK4pu-fY6T9QOApqKwiSgD7cHggBgGmL5iKnbuUP8EzrNC3YUZidld7QiZicVKKXlqV0LzkpeWD8tpgK5gagZdqf9cElq1UD5t_s2frKiN0Eso_XQLqSlqBduNLA8KAeod3o-qq27gs_ncuPV4-PW1LPm-VWmq5cyRDctp7AumYGHhBkkgUCTV-GrdbPB5xJBN2lNQtaGDQDMECcyvitW74QjguA-J5sfYjoXrb86JMTEdrnxKO6t2jBPESP3HA1OZLBJK9LCyB0YrHK0cSvLloEteITxoKi7Vis2AP3fVjYs2d6EMGMQPMwJ6IYrSp7vTTH_UFCXrq88NxKHY8vl64p2OJScTVyOaU0sfrVyTMjMPdCHUCHdiOUtnOkONDhhKj1D=w470-h626-no\" style=\"max-width:100%;\"><\/a><\/p>\n<p>(Up is the direction so DIO and the numbers are upside up)<\/p>\n<ul>\n<li><em><strong>DO NOT RELY ON COLORS OF DIO CABLES<\/strong><\/em><\/li>\n<li>DO NOT BEND PINS<\/li>\n<li>Encoder has 5 pins labeled <code>B + A _ G<\/code> (_ is blank)<\/li>\n<li>On 5 pin cable, connect to encoder so the missing wire goes to the _<\/li>\n<li>On 3 pin cable, connect to <a href=\"#rio\">RIO<\/a> so G is on the ground (bottom pin) of an EVEN position (not required wiring practice)<\/li>\n<li>On 2 pin cable, connect to RIO so signal (A or B) is on S (top pin) of the NEXT position (not required, good wiring practice)<\/li>\n<li>(e.g. if 3 pin cable is in position 4, the 2 pin cable goes in position 5)<\/li>\n<li>There are 128 clicks in a rotation<\/li>\n<\/ul>\n<hr>\n<p><a id=\"user-content-can\"><\/a><\/p>\n<h3><a id=\"user-content-can-loop-instructions\" class=\"anchor\" aria-hidden=\"true\" href=\"#can-loop-instructions\"><svg class=\"octicon octicon-link\" viewBox=\"0 0 16 16\" version=\"1.1\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z\"><\/path><\/svg><\/a>CAN LOOP Instructions<\/h3>\n<ul>\n<li>Start CAN at <a href=\"#pdp\">PDP<\/a><\/li>\n<li>Connect through all <a href=\"#talon\">Talons<\/a>, Victors, and <a href=\"#pcm\">PCM<\/a><\/li>\n<li>End CAN at <a href=\"#rio\">RoboRIO<\/a><\/li>\n<\/ul>\n<p><a id=\"user-content-gauge\"><\/a><\/p>\n<h3><a id=\"user-content-wiring-gauge-guide\" class=\"anchor\" aria-hidden=\"true\" href=\"#wiring-gauge-guide\"><svg class=\"octicon octicon-link\" viewBox=\"0 0 16 16\" version=\"1.1\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z\"><\/path><\/svg><\/a>Wiring Gauge guide<\/h3>\n<ul>\n<li>22 gauge:\n<ul>\n<li><a href=\"#can\">CAN<\/a> Loop<\/li>\n<li><a href=\"#vrm\">VRM<\/a> Power<\/li>\n<li><a href=\"#pcm\">PCM<\/a> Power<\/li>\n<li><a href=\"#radio\">Radio<\/a> Power<\/li>\n<li><a href=\"#rio\">RoboRIO<\/a> Power<\/li>\n<li><a href=\"#rsl\">RSL<\/a> Power<\/li>\n<\/ul>\n<\/li>\n<li>16 gauge:\n<ul>\n<li><a href=\"#talon\">Talon<\/a> Power<\/li>\n<li>Victor Power<\/li>\n<li>Motor Power<\/li>\n<\/ul>\n<\/li>\n<li>6 gauge:\n<ul>\n<li><a href=\"#battery\">Battery<\/a> Power<\/li>\n<li>Breaker Power<\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<\/article>\n  <\/div>\n\n  <\/div>\n<\/div>\n\n      <\/div>\n      <div class=\"gist-meta\">\n        <a href=\"https://gist.github.com/breathlessblizzard/f21a85e4d6ca8ef481aee4083c7e8248/raw/76471c0cb48bf62d437c1c856b897c3c6970486d/wiringguidedraft.md\" style=\"float:right\">view raw<\/a>\n        <a href=\"https://gist.github.com/breathlessblizzard/f21a85e4d6ca8ef481aee4083c7e8248#file-wiringguidedraft-md\">wiringguidedraft.md<\/a>\n        hosted with &#10084; by <a href=\"https://github.com\">GitHub<\/a>\n      <\/div>\n    <\/div>\n<\/div>\n')</script>
-    </body>
-</html>
+<!-- Date: 2019/01/23 -->
+
+<!-- Revised: 2019/01/23 -->
+
+
+<p><img src="https://www.chiefdelphi.com/uploads/default/optimized/3X/5/c/5c9037bbfb8bf6c847796320417f68c02262fb1a_2_690x500.jpeg" title="3128 Aluminum Narwals&#39; scematic" alt="Narwals scematic" /></p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#battery">Battery &amp; Breaker</a><br /></li>
+<li><a href="#pdp">PDP</a><br /></li>
+<li><a href="#rio">RoboRIO</a><br /></li>
+<li><a href="#vrm">VRM</a><br /></li>
+<li><a href="#pcm">PCM</a><br /></li>
+<li><a href="#radio">Radio</a><br /></li>
+<li><a href="#talon">Talon</a><br /></li>
+<li><a href="#rls">RSL</a><br /></li>
+<li><a href="#dio">DIO</a><br /></li>
+<li><a href="#encoder">Encoder</a><br /></li>
+<li><a href="#can">CAN Wiring</a><br /></li>
+<li><a href="#gauge">Wire Gauge</a></li>
+</ul>
+<p><a id="battery"></a></p>
+<h2 id="battery-breaker">Battery &amp; Breaker</h2>
+<p><img src="https://camo.githubusercontent.com/0b495433d0d9e651cb5396a8a9f3491c686d3d36/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f73637265656e73746570735f6c6976652f696d6167655f6173736574732f6173736574732f3030312f3138392f3936342f6d656469756d2f63643034623564382d643137312d343235392d383764362d6431386133626461326338612e6a7067" alt="Breaker image" /></p>
+<ul>
+<li><strong>Negative</strong> lead goes to <a href="#pdp">PDP</a><br /></li>
+<li><p><strong>Positive</strong> lead goes to breaker</p>
+<ul>
+<li>Attaches to side reading &quot;THERMAL CIRCUIT BREAKER&quot;</li>
+</ul></li>
+</ul>
+<p><a id="pdp"></a></p>
+<h2 id="power-distribution-panel-pdp">Power Distribution Panel (PDP)</h2>
+<p><img src="https://camo.githubusercontent.com/830473ea9f270823bfd61f35b4557cb827954140/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f73637265656e73746570735f6c6976652f696d6167655f6173736574732f6173736574732f3030302f3238392f3930342f6f726967696e616c2f34373936383838382d626566312d343161622d623831652d3335653333626464373439632e706e67" alt="PDP image" /></p>
+<p>(Down is the side with the power ports.)</p>
+<ul>
+<li><p><strong>Red</strong> 10 Amp breaker in top left</p>
+<ul>
+<li><a href="#rio">RoboRIO</a> goes in <strong>blue</strong> &quot;Vbat CONTROLLER POWER&quot;<br /></li>
+</ul></li>
+<li><p><strong>Yellow</strong> 20 Amp breaker in top right</p>
+<ul>
+<li><a href="#vrm">VRM</a> and <a href="#pcm">PCM</a> goes in <strong>green</strong> &quot;Vbat VRM PCM PWR&quot;<br /></li>
+</ul></li>
+<li><p>ports (0, 1, 3, 4, 12, 13, 14, 15):</p>
+<ul>
+<li>40 Amp breaker<br /></li>
+<li><a href="#talon">Talons</a> plug in here<br /></li>
+</ul></li>
+<li><p>ports (4, 5, 6, 7, 8, 9, 10, 11):</p>
+<ul>
+<li>5, 20, or 30 Amp breakers<br /></li>
+<li>Camera plugs in here<br /></li>
+</ul></li>
+<li><p><a href="#can">CAN</a> Cable in CAN (bottom right):<br /> Jumper switch must be in ON position</p></li>
+</ul>
+<p><a id="rio"></a></p>
+<h2 id="roborio">RoboRIO</h2>
+<p><img src="https://camo.githubusercontent.com/d9bde9dbed2c45394b65d95f4e130a4581ef81f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f73637265656e73746570735f6c6976652f696d6167655f6173736574732f6173736574732f3030302f3238392f3930332f6f726967696e616c2f62373061653839342d653063352d343964332d623865322d3032346537366264376336632e706e67" alt="RIO image" /></p>
+<p>(Up is the the side with the USB ports.)</p>
+<ul>
+<li><p>22 guage Power Cable in INPUT (left of USB ports)</p>
+<ul>
+<li><strong>Positive</strong> goes in V<br /></li>
+<li><strong>Negative</strong> goes in C<br /></li>
+</ul></li>
+<li><p><a href="#can">CAN</a> Cable in CAN (left of power cable)</p>
+<ul>
+<li><strong>Yellow</strong> goes in H<br /></li>
+<li><strong>Green</strong> goes in L<br /></li>
+</ul></li>
+<li><p><a href="#dio">DIO</a> sensors in DIO (left side)</p>
+<ul>
+<li>Boolean sensors go in DIO ports (Boolean sensors are sensors with only on and off states.)<br /></li>
+<li>(e.g. Infrared sensors, limit switches)<br /></li>
+<li>Begin plugging in sensors at 0 and count up (not required, good wiring practice)<br /></li>
+</ul></li>
+<li><p><a href="#pwm">PWM</a> sensors in PWM (right side)</p>
+<ul>
+<li>Analog sensors go in PWM ports (Analog sensors are sensors with a range of outputs)<br /></li>
+<li>(e.g. ultrasonic sensors, potentiometers)<br /></li>
+<li>Begin plugging in sensors at 0 and count up<br /></li>
+</ul></li>
+<li><p><a href="#rsl">RSL</a> light in RSL (left-most bottom port)</p>
+<ul>
+<li><strong>Positive</strong> goes in S<br /></li>
+<li><strong>Negative</strong> goes in ground (the dashed lines)<br /></li>
+</ul></li>
+<li><p>NavX in MXP (center)</p>
+<ul>
+<li>NavX gyroscope is mounted with majority of sensor closer to USB ports</li>
+</ul></li>
+</ul>
+<p><a id="vrm"></a></p>
+<h2 id="voltage-regulator-module-vrm">Voltage Regulator Module (VRM)</h2>
+<p><img src="https://camo.githubusercontent.com/cefd54640d976bda2b24c11119e1a0acef85805f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f73637265656e73746570735f6c6976652f696d6167655f6173736574732f6173736574732f3030302f3238392f3930362f6f726967696e616c2f62373762363261622d623963612d346530332d393431352d6664656533373839616634322e706e673f31343833353439323130" alt="VRM image" /></p>
+<p>(Down is the side with the 12V and 5V lights)</p>
+<ul>
+<li>Power Cables in 12V (top)<br /></li>
+<li><p>12V/2A (upper left)</p>
+<ul>
+<li><a href="#radio">Radio</a> Power (circular plug)</li>
+</ul></li>
+</ul>
+<p><a id="pcm"></a></p>
+<h2 id="pneumatic-control-module-pcm">Pneumatic Control Module (PCM)</h2>
+<p><img src="https://camo.githubusercontent.com/233e3fb008c2e5af5def9a2148eaabbe69380d9e/687474703a2f2f736c696465706c617965722e636f6d2f736c6964652f373334363433342f32342f696d616765732f392f506e65756d617469632b436f6e74726f6c2b4d6f64756c652b2850434d292e6a7067" alt="PCM image" /></p>
+<p>(Left is the side with the Vin)</p>
+<ul>
+<li><a href="#pcm">PCM</a> power in Vin (left)<br /></li>
+<li><a href="#can">CAN</a> Cable in CAN (top left)<br /></li>
+<li>Pressure Meter Power in <strong>blue</strong> PRESSURE SW.<br /></li>
+<li>Air compressor Power in <strong>green</strong> COMPRESSOR OUT<br /></li>
+<li><p>ports (0, 1, 2, 3, 4, 5, 6, 7)</p>
+<ul>
+<li>Solenoid Power goes here</li>
+</ul></li>
+</ul>
+<p><a id="radio"></a></p>
+<h2 id="radio-om5p-ac">Radio (OM5P-AC)</h2>
+<p><img src="https://camo.githubusercontent.com/03df5f5152b9223cab19e8c20c678cd58acadde3/68747470733a2f2f7777772e62726f616462616e6462757965722e636f6d2f696d616765732f70726f64756374732f6f70656e6d6573682f6f6d35702d61632d372e706e673f77696474683d343030" alt="Radio image" /></p>
+<ul>
+<li>Radio Power circular plug in left<br /></li>
+<li>Camera ethernet in middle (not required)<br /></li>
+<li><a href="#rio">RoboRIO</a> ethernet in right</li>
+</ul>
+<p><a id="talon"></a></p>
+<h2 id="talon-srx-victor">Talon SRX &amp; Victor</h2>
+<p><img src="https://camo.githubusercontent.com/440f1a79acac64e95bc5f25d42493260b2a4c763/68747470733a2f2f7777772e766578726f626f746963732e636f6d2f6d656469612f636174616c6f672f70726f647563742f63616368652f312f696d6167652f39646637386561623333353235643038643665356662386432373133366539352f322f312f3231372d343335382d6f6e2d74616c6f6e2e6a7067" alt="Talon image" /></p>
+<ul>
+<li><p>Talon &amp; Victor power are red and black</p>
+<ul>
+<li>plug in 40 Amp PDP port<br /></li>
+<li><strong><em>DO NOT PLUG INTO MOTORS</em></strong><br /></li>
+</ul></li>
+<li>Motor Power is green and white<br /></li>
+<li><p>Talon only: Encoder data cable on top, covered with hex screws &amp; plastic cover</p></li>
+</ul>
+<p><a id="rsl"></a></p>
+<h2 id="robot-signal-light-orange-rsl">Robot Signal Light (orange RSL)</h2>
+<p><img src="https://camo.githubusercontent.com/7a5fef32a7def38ab32085348a5896fdeb144583/68747470733a2f2f6d696c696c616e69726f626f746963732e676974626f6f6b732e696f2f6672632d656c656374726963616c2d6269626c652f636f6e74656e742f726f626f52494f2f72736c2e6a7067" alt="RSL image" /></p>
+<ul>
+<li><p>Power cable from <a href="#rio">RoboRIO</a></p>
+<ul>
+<li><strong>Positive</strong> in La and Lb<br /></li>
+<li><strong>Negative</strong> in N</li>
+</ul></li>
+</ul>
+<p><a id="dio"></a></p>
+<h2 id="digital-input-and-output-dio">Digital Input and Output (DIO)</h2>
+<p><img src="https://lh3.googleusercontent.com/OzJ9KZFlNvmwgM-J1iNCvhOCIkKYclQIC00oVAzyyDzcTzNY2mH55wp6UL3KJ8fmAI4AxLUB0Mzfha6DSqlcfTtfmkjiWtmlvXXgY4n-g8CZnZmWELl_bnS6KiJE_VdNO90tHUGoKEoxo1sqh6O_hckiu1VR5kSwLD1WmPKBULM0AmEq-ukLH91C21JikteUyu_ovyARsDxIRIKjMQlfmeI-OQKk0tjGMrLbvjYrUyRQle6O_rnz-BSFvxSQSgplKRdzi8RnIs81c-o8QD1fEvi84ArVksMs1dSYa2ViX4htxFrsG9q4mHefC_iCKVSWt772v8HTjgWG0xbF8DqS3j1N3U02ovxsQm2eAY_SjikkCU9Pj2Q35hx7qEen94LOXHctgNExF3-pgryrQYzUScuQcKI-jsZpu-AUseZzKyvzYrT-23ioi3mFcubUd5a5unmRQcsRHnfTjl0U4K0JxQmP39hQWWzbnF-x4bBCQywmfEKAk8i-WUFEodB6ONmHVsVZISBqLqG97HdTaiG9KWIN2uov5rkfxoJlWxTwl4PLXR4zAQ3VvA1BldCNtsKkNqzq4a1NHvz6Q0F10sZA2ECcxzjn7kB0mDoq4cOE8H3_Ceg0cMAnhN-9q4V0vi_hXODFbGLgx2PxRCvUEKuZNUp50tIS83GuzBbUKwxZxo_aIHB5QHiVW1XN590TdeUeWs2ffPMpg79PFrPqqw=w470-h626-no" alt="DIO image" /></p>
+<ul>
+<li>Ports labled 0 through 9 on <a href="#rio">RoboRIO</a><br /></li>
+<li>All digital sensors go in DIO ports<br /></li>
+<li>Begin plugging in sensors at 0 and count up (not required, good wiring practice)</li>
+</ul>
+<p><a id="encoder"></a></p>
+<h3 id="grayhill-encoder">Grayhill Encoder</h3>
+<p><img src="https://lh3.googleusercontent.com/wko3en9Z8KM560biqJSt4U9EOPXYX4OS94wFihy7Y_VYtULn3bLoMOG3uVmUNbGhRSesz9U6dzM2zqEcxkI3lKkwEFx2qZQA2HYIxUhzCE6-uuGjvPWB2lWq_ZhGehcfAWXISmZih_qHC784WLivPGCIq3XxNbOwJ-wGZjFV-Zo319Oc-NF-1VVtVj997Ypr6Xddl65mufv7wKHvJMcNDHTCGilkw8fQhdAvTeLzrxSh3zNnrEeCO9z3e_kNNWq2qg5g1jr6ReMof2TClRPDK4pu-fY6T9QOApqKwiSgD7cHggBgGmL5iKnbuUP8EzrNC3YUZidld7QiZicVKKXlqV0LzkpeWD8tpgK5gagZdqf9cElq1UD5t_s2frKiN0Eso_XQLqSlqBduNLA8KAeod3o-qq27gs_ncuPV4-PW1LPm-VWmq5cyRDctp7AumYGHhBkkgUCTV-GrdbPB5xJBN2lNQtaGDQDMECcyvitW74QjguA-J5sfYjoXrb86JMTEdrnxKO6t2jBPESP3HA1OZLBJK9LCyB0YrHK0cSvLloEteITxoKi7Vis2AP3fVjYs2d6EMGMQPMwJ6IYrSp7vTTH_UFCXrq88NxKHY8vl64p2OJScTVyOaU0sfrVyTMjMPdCHUCHdiOUtnOkONDhhKj1D=w470-h626-no" alt="Encoder image" /></p>
+<p>(Up is the direction so DIO and the numbers are upside up)</p>
+<ul>
+<li><strong><em>DO NOT RELY ON COLORS OF DIO CABLES</em></strong><br /></li>
+<li>DO NOT BEND PINS<br /></li>
+<li>Encoder has 5 pins labeled <code>B + A _ G</code> (_ is blank)<br /></li>
+<li>On 5 pin cable, connect to encoder so the missing wire goes to the _<br /></li>
+<li>On 3 pin cable, connect to <a href="#rio">RIO</a> so G is on the ground (bottom pin) of an EVEN position (not required wiring practice)<br /></li>
+<li>On 2 pin cable, connect to RIO so signal (A or B) is on S (top pin) of the NEXT position (not required, good wiring practice)<br /></li>
+<li>(e.g. if 3 pin cable is in position 4, the 2 pin cable goes in position 5)<br /></li>
+<li>There are 128 clicks in a rotation</li>
+</ul>
+<p><a id="ir"></a></p>
+<h3 id="ir-sensor">IR sensor</h3>
+<p><img src="" alt="IR Sensor image" /></p>
+<p>(Up is the direction so DIO and the numbers are upside up)</p>
+<ul>
+<li>DO NOT BEND PINS<br /></li>
+<li><strong>Blue</strong> or <strong>Green</strong> cable from sensor goes in ground (bottom pin)<br /></li>
+<li><strong>Brown</strong> or <strong>Red</strong> cable from sensor goes in positive (middle pin)<br /></li>
+<li><strong>Black</strong> or <strong>Yellow</strong> cable from sensor goes in signal (top pin)</li>
+</ul>
+<hr />
+<p><a id="can"></a></p>
+<h3 id="can-loop-instructions">CAN LOOP Instructions</h3>
+<ul>
+<li>Start CAN at <a href="#pdp">PDP</a><br /></li>
+<li>Connect through all <a href="#talon">Talons</a>, Victors, and <a href="#pcm">PCM</a><br /></li>
+<li>End CAN at <a href="#rio">RoboRIO</a></li>
+</ul>
+<p><a id="gauge"></a></p>
+<h3 id="wiring-gauge-guide">Wiring Gauge guide</h3>
+<ul>
+<li><p>22 gauge:</p>
+<ul>
+<li><a href="#can">CAN</a> Loop<br /></li>
+<li><a href="#vrm">VRM</a> Power<br /></li>
+<li><a href="#pcm">PCM</a> Power<br /></li>
+<li><a href="#radio">Radio</a> Power<br /></li>
+<li><a href="#rio">RoboRIO</a> Power<br /></li>
+<li><a href="#rsl">RSL</a> Power<br /></li>
+</ul></li>
+<li><p>16 gauge:</p>
+<ul>
+<li><a href="#talon">Talon</a> Power<br /></li>
+<li>Victor Power<br /></li>
+<li>Motor Power<br /></li>
+</ul></li>
+<li><p>6 gauge:</p>
+<ul>
+<li><a href="#battery">Battery</a> Power<br /></li>
+<li>Breaker Power</li>
+</ul></li>
+</ul>

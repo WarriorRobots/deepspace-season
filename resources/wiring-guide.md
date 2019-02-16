@@ -153,9 +153,9 @@
 (Up is the direction so DIO and the numbers are upside up)
 
 * DO NOT BEND PINS
-* Blue cable from sensor goes in ground (bottom pin)
-* Brown cable from sensor goes in positive (middle pin)
-* Black cable from sensor goes in signal (top pin)
+* **Blue** or **Green** cable from sensor goes in ground (bottom pin)
+* **Brown** or **Red** cable from sensor goes in positive (middle pin)
+* **Black** or **Yellow** cable from sensor goes in signal (top pin)
 
 ---
 
