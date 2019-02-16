@@ -36,7 +36,7 @@ public class PneumaticBaseSubsystem extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
-        // TODO
+        // TODO current limiting?
     }
 
 }
