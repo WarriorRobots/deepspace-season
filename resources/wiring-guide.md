@@ -146,6 +146,17 @@
 * (e.g. if 3 pin cable is in position 4, the 2 pin cable goes in position 5)
 * There are 128 clicks in a rotation
 
+<a id="ir"></a>
+### IR sensor
+![IR Sensor image]()
+
+(Up is the direction so DIO and the numbers are upside up)
+
+* DO NOT BEND PINS
+* Blue cable from sensor goes in ground (bottom pin)
+* Brown cable from sensor goes in positive (middle pin)
+* Black cable from sensor goes in signal (top pin)
+
 ---
 
 <a id="can"></a>
