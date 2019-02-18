@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  * Add your docs here.
  */
+@Deprecated //TODO incomplete
 public class ClimbSubsystem extends Subsystem {
 
   public ClimbSubsystem() {
