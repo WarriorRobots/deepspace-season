@@ -5,28 +5,31 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class TeleopTankDrive extends Command {
-  public TeleopTankDrive() {
-    requires(Robot.drivetrain);
+/**
+ * Add your docs here.
+ */
+public class ClimbSubsystem extends Subsystem {
+
+  public ClimbSubsystem() {
   }
 
-  @Override
-  protected void execute() {
-    Robot.drivetrain.tankDriveTeleop(Robot.input.getLeftY(), Robot.input.getRightY());
+  public void extend_climb() {
   }
 
-  @Override
-  protected boolean isFinished() {
+  public void retract_climb() {
+  }
+
+  public boolean get_state() {
     return false;
   }
 
   @Override
-  protected void end() {
-    Robot.drivetrain.stopDrive();
+  public void initDefaultCommand() {
+    // Set the default command for a subsystem here.
+    // setDefaultCommand(new MySpecialCommand());
   }
 }

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
-import frc.robot.commands.TeleopTankDrive;
+import frc.robot.commands.drive.TeleopTankDrive;
 
 /**
  * Contains the drivetrain, the encoders for the left and right wheels, and the
@@ -25,7 +25,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	private static final int RIGHT_FRONT = 4;
 	private static final int RIGHT_MIDDLE = 5;
 	private static final int RIGHT_BACK = 6;
-	
+
 	private static final int LEFT_ENCODER_PORTA = 0;
 	private static final int LEFT_ENCODER_PORTB = 1;
 	private static final int RIGHT_ENCODER_PORTA = 2;
@@ -33,14 +33,20 @@ public class DrivetrainSubsystem extends Subsystem {
 
 	private static final double RAMPRATE_SECONDS = 0.25;
 	private static final int TIMEOUT_MS = 10;
-	
-	private WPI_TalonSRX leftFront, leftMiddle, leftBack,  rightFront, rightMiddle, rightBack;
+
+	private WPI_TalonSRX leftFront, leftMiddle, leftBack, rightFront, rightMiddle, rightBack;
 	private SpeedControllerGroup leftGroup, rightGroup;
 	private DifferentialDrive differentialDrive;
 
 	private Encoder leftEnc, rightEnc;
 	private AHRS navx;
 
+	/**
+	 * Instantiates new subsystem; make ONLY ONE.
+	 * <p>
+	 * <code> public static final DrivetrainSubsystem drivetrain = new
+	 * DrivetrainSubsystem();
+	 */
 	public DrivetrainSubsystem() {
 		leftFront = new WPI_TalonSRX(LEFT_FRONT);
 		leftMiddle = new WPI_TalonSRX(LEFT_MIDDLE);
@@ -48,7 +54,7 @@ public class DrivetrainSubsystem extends Subsystem {
 		leftFront.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
 		leftMiddle.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
 		leftBack.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
-		
+
 		rightFront = new WPI_TalonSRX(RIGHT_FRONT);
 		rightMiddle = new WPI_TalonSRX(RIGHT_MIDDLE);
 		rightBack = new WPI_TalonSRX(RIGHT_BACK);
@@ -79,8 +85,9 @@ public class DrivetrainSubsystem extends Subsystem {
 	}
 
 	/**
-	 * Drives the left and right sides of the robot independently. DO NOT USE WITH
-	 * PID.
+	 * Drives the left and right sides of the robot independently.
+	 * <p>
+	 * <b>DO NOT USE WITH PID.</b>
 	 * <p>
 	 * The arguments provided are squared to create a more intuitive control
 	 * sensitivity.
@@ -93,8 +100,9 @@ public class DrivetrainSubsystem extends Subsystem {
 	}
 
 	/**
-	 * Drives the left and right sides of the robot independently. USE WITH PID
-	 * ONLY.
+	 * Drives the left and right sides of the robot independently.
+	 * <p>
+	 * <b>USE WITH PID ONLY.</b>
 	 * <p>
 	 * The arguments provided are not squared to prevent PID overcompensation.
 	 * 
@@ -106,8 +114,9 @@ public class DrivetrainSubsystem extends Subsystem {
 	}
 
 	/**
-	 * Sets the forward and turning speeds of the robot independently. DO NOT USE
-	 * WITH PID.
+	 * Sets the forward and turning speeds of the robot independently.
+	 * <p>
+	 * <b>DO NOT USE WITH PID.</b>
 	 * <p>
 	 * The arguments provided are squared to create a more intuitive control
 	 * sensitivity.
@@ -123,8 +132,9 @@ public class DrivetrainSubsystem extends Subsystem {
 	}
 
 	/**
-	 * Sets the forward and turning speeds of the robot independently. USE WITH PID
-	 * ONLY.
+	 * Sets the forward and turning speeds of the robot independently.
+	 * <p>
+	 * <b>USE WITH PID ONLY.</b>
 	 * <p>
 	 * The arguments provided are not squared to prevent PID overcompensation.
 	 * 
@@ -139,7 +149,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	}
 
 	/**
-	 * Safely shuts off all drive motors.
+	 * Shuts off all drive motors.
 	 */
 	public void stopDrive() {
 		differentialDrive.stopMotor();
@@ -184,6 +194,7 @@ public class DrivetrainSubsystem extends Subsystem {
 		resetRightEncoder();
 	}
 
+	//TODO write constants static conversion method
 	/**
 	 * Gets current angle (yaw) that the robot is facing.
 	 * 
@@ -206,8 +217,8 @@ public class DrivetrainSubsystem extends Subsystem {
 	}
 
 	/**
-	 * Return compass reading in degrees, where 0 is magnetic north.
-	 * Susceptible to magnetic interference.
+	 * Return compass reading in degrees, where 0 is magnetic north. Susceptible to
+	 * magnetic interference.
 	 */
 	public double getCompassHeading() {
 		return navx.getCompassHeading();
@@ -217,8 +228,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	public void initSendable(SendableBuilder builder) {
 		builder.setSmartDashboardType("subsystem-drivetrain");
 		builder.addStringProperty("encoder-ticks", () -> {
-			return (Integer.toString(getLeftEncoderClicks()) + " "
-					+ Integer.toString(getRightEncoderClicks()));
+			return (Integer.toString(getLeftEncoderClicks()) + " " + Integer.toString(getRightEncoderClicks()));
 		}, null);
 		builder.addDoubleProperty("angle", () -> getAngleDegrees(), null);
 	}

@@ -11,12 +11,10 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.drive.ArcadeDrive;
 import frc.robot.util.triggers.DpadTrigger;
 import frc.robot.util.triggers.ThresholdTrigger;
 import frc.robot.commands.AutoDrive;
-import frc.robot.commands.SolenoidIn;
-import frc.robot.commands.SolenoidOut;
 
 /**
  * Contains methods for receiving data from Joysticks and the Xbox controller.
@@ -24,9 +22,9 @@ import frc.robot.commands.SolenoidOut;
 @SuppressWarnings("unused")
 public final class ControlHandler {
 
-	public static final int LEFT_JOY = 1;
-	public static final int RIGHT_JOY = 0;
-	public static final int XBOX = 2;
+	private static final int LEFT_JOY = 1;
+	private static final int RIGHT_JOY = 0;
+	private static final int XBOX = 2;
 	
 	private Joystick leftJoy, rightJoy;
 	private XboxController xbox;
@@ -70,8 +68,6 @@ public final class ControlHandler {
 		xboxSTART = new JoystickButton(xbox, 8);
 		xboxBACK = new JoystickButton(xbox, 7);
 
-		rightXboxBumper.whenPressed(new SolenoidOut(4));
-		rightXboxTrigger.whenPressed(new SolenoidIn(4));
 		xboxA.whileHeld(new AutoDrive());
 		rightJoyThumbButton.whileHeld(new ArcadeDrive()); 
 	}
