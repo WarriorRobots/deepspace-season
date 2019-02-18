@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.HatchPickupSubsystem;
+import frc.robot.subsystems.HatchPlacerSubsystem;
 
 /**
  * Main class of the Robot.
@@ -20,6 +21,7 @@ public class Robot extends TimedRobot {
 	
 	public static final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
 	public static final HatchPickupSubsystem hatchpickup = new HatchPickupSubsystem();
+	public static final HatchPlacerSubsystem hatchplacer = new HatchPlacerSubsystem();
 	
 	public static ControlHandler input;
 

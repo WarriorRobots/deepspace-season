@@ -7,36 +7,21 @@
 
 package frc.robot.commands.control;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-/** Make the hatch pickup move from being vertical to being on the ground */
-public class HatchOut extends Command {
-  public HatchOut() {
-    requires(Robot.hatchpickup);
-    //requires(Robot.hatchplacer);
+/** Launch a hatch off of the hatch placer */
+public class HatchLaunch extends InstantCommand {
+  
+  public HatchLaunch() {
+    super();
+    requires(Robot.hatchplacer);
   }
 
   @Override
   protected void initialize() {
+    Robot.hatchplacer.releaseHatch();
+    Robot.hatchplacer.extendLauncher();
   }
 
-  @Override
-  protected void execute() {
-    //TODO make sure the scisors are released before bringing the pickup down
-    Robot.hatchpickup.extendPickup();
-  }
-
-  @Override
-  protected boolean isFinished() {
-    return true;
-  }
-
-  @Override
-  protected void end() {
-  }
-
-  @Override
-  protected void interrupted() {
-  }
 }
