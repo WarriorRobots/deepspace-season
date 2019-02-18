@@ -23,7 +23,7 @@ public class HatchOut extends Command {
   @Override
   protected void execute() {
     //TODO make sure the scisors are released before bringing the pickup down
-    Robot.hatchplacer.bringDown();
+    Robot.hatchpickup.extendPickup();
   }
 
   @Override

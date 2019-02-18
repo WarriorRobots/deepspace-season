@@ -31,7 +31,7 @@ public class HatchIn extends Command {
     //TODO Bring elevator down before doing pickup
     //TODO Flip ball pickup backwards (so it is out of the way of the hatch placer)
     //TODO Release scissors so the hatch can be placed on it
-    Robot.hatchpickup.bringUp();
+    Robot.hatchpickup.retractPickup();
   }
 
   @Override
