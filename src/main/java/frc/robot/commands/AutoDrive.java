@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.util.PathfinderTest;
 
+@Deprecated
 public class AutoDrive extends Command {
   
   PathfinderTest p;

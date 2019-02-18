@@ -6,6 +6,7 @@ import frc.robot.Robot;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.followers.EncoderFollower;
 
+@Deprecated
 public class PathfinderTest {
     
     final double maxVel = 5.9;

@@ -75,7 +75,6 @@ public class LineFollowerSubsystem extends Subsystem {
         return getLeftLineFollower();
     }
 
-    // TODO determine if this needs a command
     @Override
     protected void initDefaultCommand() {
     }

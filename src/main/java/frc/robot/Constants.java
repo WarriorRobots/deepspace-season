@@ -27,6 +27,22 @@ public final class Constants {
 	 */
 	public static final int EXTRA_PCM_ID = 2;
 
+	/**
+	 * Profile number for any PID loop running on a Talon SRX.
+	 * <p>
+	 * Use in methods such as
+	 * <code>configSelectedFeedbackSensor(FeedbackSensor.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS)</code>
+	 */
+	public static final int PID_ID = 0;
+
+	/**
+	 * How long a Talon PID loop waits for signals before terminating for safety.
+	 * <p>
+	 * Use in methods such as
+	 * <code>configSelectedFeedbackSensor(FeedbackSensor.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS)</code>
+	 */
+	public static final int TIMEOUT_MS = 10;
+
 	public static final double WHEEL_DIAMETER = 6;
 	public static final int CLICKS_PER_REVOLUTION = 128;
 	/** {@value} */

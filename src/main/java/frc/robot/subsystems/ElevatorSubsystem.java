@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Constants;
 
 /**
  * Contains the winch motor used to raise the elevator, and the limit switch
@@ -22,9 +23,6 @@ public class ElevatorSubsystem extends Subsystem {
 
   private static final int WINCH_PORT = 7;
   private static final int LIMIT_SWITCH_PORT = 4;
-  // TODO move this to constants (and in CargoSubsystem)
-  private static final int PID_ID = 0; // ID number of the PID profile
-  private static final int TIMEOUT_MS = 10; // How long a Talon waits for signals before cancelling commands.
 
   private WPI_TalonSRX winch;
   private DigitalInput limitSwitch;
@@ -39,10 +37,10 @@ public class ElevatorSubsystem extends Subsystem {
     winch = new WPI_TalonSRX(WINCH_PORT);
     limitSwitch = new DigitalInput(LIMIT_SWITCH_PORT);
 
-    winch.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-    winch.config_kP(PID_ID, 0, TIMEOUT_MS);
-    winch.config_kI(PID_ID, 0, TIMEOUT_MS);
-    winch.config_kD(PID_ID, 0, TIMEOUT_MS);
+    winch.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
+    winch.config_kP(Constants.PID_ID, 0, Constants.TIMEOUT_MS);
+    winch.config_kI(Constants.PID_ID, 0, Constants.TIMEOUT_MS);
+    winch.config_kD(Constants.PID_ID, 0, Constants.TIMEOUT_MS);
   }
 
   /**

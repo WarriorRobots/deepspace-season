@@ -14,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Constants;
 
 /**
  * Contains the motors used to pickup cargo, and to rotate the mechanism in and
@@ -23,8 +24,6 @@ public class CargoSubsystem extends Subsystem {
 
   private static final int PICKUP_PORT = 1;
   private static final int ROTATOR_PORT = 8;
-  private static final int PID_ID = 0; // ID number of the PID profile
-  private static final int TIMEOUT_MS = 10; // How long a Talon waits for signals before cancelling commands.
 
   private WPI_VictorSPX pickup;
   private WPI_TalonSRX rotator;
@@ -41,10 +40,10 @@ public class CargoSubsystem extends Subsystem {
     rotator = new WPI_TalonSRX(ROTATOR_PORT);
     rotator.setNeutralMode(NeutralMode.Brake);
 
-    rotator.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder);
-    rotator.config_kP(PID_ID, 0, TIMEOUT_MS);
-    rotator.config_kI(PID_ID, 0, TIMEOUT_MS);
-    rotator.config_kD(PID_ID, 0, TIMEOUT_MS);
+    rotator.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
+    rotator.config_kP(Constants.PID_ID, 0, Constants.TIMEOUT_MS);
+    rotator.config_kI(Constants.PID_ID, 0, Constants.TIMEOUT_MS);
+    rotator.config_kD(Constants.PID_ID, 0, Constants.TIMEOUT_MS);
   }
 
   /**
