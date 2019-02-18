@@ -67,6 +67,8 @@ public final class ControlHandler {
 		xboxSTART = new JoystickButton(xbox, 8);
 		xboxBACK = new JoystickButton(xbox, 7);
 
+		// TODO hatch in and hatch out
+
 		rightJoyThumbButton.whileHeld(new ArcadeDrive()); 
 	}
 
