@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -35,10 +34,7 @@ public class CargoSubsystem extends Subsystem {
    */
   public CargoSubsystem() {
     pickup = new WPI_VictorSPX(PICKUP_PORT);
-    pickup.setNeutralMode(NeutralMode.Brake); // TODO do this for all talons
-
     rotator = new WPI_TalonSRX(ROTATOR_PORT);
-    rotator.setNeutralMode(NeutralMode.Brake);
 
     rotator.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
     rotator.config_kP(Constants.PID_ID, 0, Constants.TIMEOUT_MS);

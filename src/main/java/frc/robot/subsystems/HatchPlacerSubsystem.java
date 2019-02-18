@@ -10,12 +10,12 @@ import frc.robot.Constants;
  */
 public class HatchPlacerSubsystem extends Subsystem {
 
-    private static final int SCISSOR_IN = 1;
-    private static final int SCISSOR_OUT = 6;
-    private static final int L_LAUNCH_IN = 2;
-    private static final int L_LAUNCH_OUT = 5;
-    private static final int R_LAUNCH_IN = 3;
-    private static final int R_LAUNCH_OUT = 4;
+    private static final int SCISSOR_FORWARD = 1;
+    private static final int SCISSOR_REVERSE = 6;
+    private static final int L_LAUNCH_FORWARD = 2;
+    private static final int L_LAUNCH_REVERSE = 5;
+    private static final int R_LAUNCH_FORWARD = 3;
+    private static final int R_LAUNCH_REVERSE = 4;
 
     private DoubleSolenoid scissorHolder, leftLauncher, rightLauncher;
 
@@ -26,9 +26,9 @@ public class HatchPlacerSubsystem extends Subsystem {
      * HatchPlacerSubsystem();
      */
     public HatchPlacerSubsystem() {
-        scissorHolder = new DoubleSolenoid(Constants.EXTRA_PCM_ID, SCISSOR_IN, SCISSOR_OUT);
-        leftLauncher = new DoubleSolenoid(Constants.EXTRA_PCM_ID, L_LAUNCH_IN, L_LAUNCH_OUT);
-        rightLauncher = new DoubleSolenoid(Constants.EXTRA_PCM_ID, R_LAUNCH_IN, R_LAUNCH_OUT);
+        scissorHolder = new DoubleSolenoid(Constants.PCM_2, SCISSOR_FORWARD, SCISSOR_REVERSE);
+        leftLauncher = new DoubleSolenoid(Constants.PCM_2, L_LAUNCH_FORWARD, L_LAUNCH_REVERSE);
+        rightLauncher = new DoubleSolenoid(Constants.PCM_2, R_LAUNCH_FORWARD, R_LAUNCH_REVERSE);
     }
 
     /**
