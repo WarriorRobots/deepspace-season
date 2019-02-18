@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.drive.ArcadeDrive;
 import frc.robot.util.triggers.DpadTrigger;
 import frc.robot.util.triggers.ThresholdTrigger;
-import frc.robot.commands.AutoDrive;
 
 /**
  * Contains methods for receiving data from Joysticks and the Xbox controller.
@@ -68,7 +67,6 @@ public final class ControlHandler {
 		xboxSTART = new JoystickButton(xbox, 8);
 		xboxBACK = new JoystickButton(xbox, 7);
 
-		xboxA.whileHeld(new AutoDrive());
 		rightJoyThumbButton.whileHeld(new ArcadeDrive()); 
 	}
 
