@@ -21,11 +21,11 @@ public final class Constants {
 	 * ID number ({@value}) of the main PCM, which has the compressor and pressure
 	 * switch plugged in.
 	 */
-	public static final int MAIN_PCM_ID = 1;
+	public static final int PCM_1 = 1;
 	/**
 	 * ID number ({@value}) of the extra PCM, used only for extra solenoid ports.
 	 */
-	public static final int EXTRA_PCM_ID = 2;
+	public static final int PCM_2 = 2;
 
 	/**
 	 * Profile number for any PID loop running on a Talon SRX.
