@@ -50,6 +50,13 @@ public class HatchPickupSubsystem extends Subsystem {
     }
 
     /**
+     * Shuts off the pneumatics. TODO
+     */
+    public void neutralizePneumatics() {
+        rotatorSol.set(Value.kOff);
+    }
+
+    /**
      * Run the intake motors to pull a hatch into the mechanism.
      * 
      * @param speed Speed of motor, from -1 (out) to 1 (in).
