@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.drive.ArcadeDrive;
+import frc.robot.commands.drive.TurnLockDrive;
 import frc.robot.util.triggers.DpadTrigger;
 import frc.robot.util.triggers.ThresholdTrigger;
 
@@ -67,9 +68,19 @@ public final class ControlHandler {
 		xboxSTART = new JoystickButton(xbox, 8);
 		xboxBACK = new JoystickButton(xbox, 7);
 
-		// TODO hatch in and hatch out
+		// TODO
+		// hatch in and hatch out
+		// hatch piston down, up
+		// hatch in, reverse
+		// elevator reset, low, middle, high
+		// scissors secured, loose
+		// launchers out, in
+		// ball rotate flat, vertical, diagonal
+		// ball in, out
+		// base PneumaticCommand
 
-		rightJoyThumbButton.whileHeld(new ArcadeDrive()); 
+		rightJoyThumbButton.whileHeld(new ArcadeDrive());
+		rightJoyTriggerButton.whileHeld(new TurnLockDrive());
 	}
 
 	/**
