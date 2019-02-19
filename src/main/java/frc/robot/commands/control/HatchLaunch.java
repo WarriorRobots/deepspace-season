@@ -52,9 +52,10 @@ public class HatchLaunch extends Command {
     // 5 is the approximate number of loops a pneumatic takes to fire
   }
 
-  @Override
-  protected void interrupted() {
-    //XXX Alex: set to neutral
+  @Override void end() {
+    // set solonoid to neutral to increase lifespan
+    Robot.hatchPlacer.neutralHatch();
+    Robot.hatchPlacer.neutralLauncher();
   }
 
 }
