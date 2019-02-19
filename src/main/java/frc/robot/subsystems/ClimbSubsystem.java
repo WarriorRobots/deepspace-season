@@ -12,25 +12,25 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  * Add your docs here.
  */
-@Deprecated //TODO incomplete
+@Deprecated // TODO incomplete
 public class ClimbSubsystem extends Subsystem {
 
-  public ClimbSubsystem() {
-  }
+    public ClimbSubsystem() {
+    }
 
-  public void extend_climb() {
-  }
+    public void extend_climb() {
+    }
 
-  public void retract_climb() {
-  }
+    public void retract_climb() {
+    }
 
-  public boolean get_state() {
-    return false;
-  }
+    public boolean get_state() {
+        return false;
+    }
 
-  @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-  }
+    @Override
+    public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        // setDefaultCommand(new MySpecialCommand());
+    }
 }
