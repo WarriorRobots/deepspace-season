@@ -60,7 +60,21 @@ public class HatchPlacerSubsystem extends Subsystem {
      * Sets solenoids to off.
      */
     public void neutralizePneumatics() {
+        neutralizeScissors();
+        neutralizeLauncher();
+    }
+
+    /** 
+     * Set scissors solenoid to off.
+     */
+    public void neutralizeScissors() {
         scissorHolder.set(Value.kOff);
+    }
+
+    /**
+     * Set both launcher solenoids to off.
+     */
+    public void neutralizeLauncher() {
         leftLauncher.set(Value.kOff);
         rightLauncher.set(Value.kOff);
     }
