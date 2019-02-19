@@ -15,13 +15,13 @@ public class HatchNeutral extends InstantCommand {
   
   public HatchNeutral() {
     super();
-    requires(Robot.hatchplacer);
+    requires(Robot.hatchPlacer);
   }
 
   @Override
   protected void initialize() {
-    Robot.hatchplacer.secureHatch();
-    Robot.hatchplacer.retractLauncher();
+    Robot.hatchPlacer.secureHatch();
+    Robot.hatchPlacer.retractLauncher();
   }
 
 }

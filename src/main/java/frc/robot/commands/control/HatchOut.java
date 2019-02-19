@@ -13,7 +13,7 @@ import frc.robot.Robot;
 /** Make the hatch pickup move from being vertical to being on the ground */
 public class HatchOut extends Command {
   public HatchOut() {
-    requires(Robot.hatchpickup);
+    requires(Robot.hatchPickup);
     //requires(Robot.hatchplacer);
   }
 
@@ -24,7 +24,7 @@ public class HatchOut extends Command {
   @Override
   protected void execute() {
     //TODO make sure the scisors are released before bringing the pickup down
-    Robot.hatchpickup.extendPickup();
+    Robot.hatchPickup.extendPickup();
   }
 
   @Override

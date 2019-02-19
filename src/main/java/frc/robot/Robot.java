@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.HatchPickupSubsystem;
 import frc.robot.subsystems.HatchPlacerSubsystem;
 
@@ -20,8 +21,9 @@ import frc.robot.subsystems.HatchPlacerSubsystem;
 public class Robot extends TimedRobot {
 	
 	public static final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
-	public static final HatchPickupSubsystem hatchpickup = new HatchPickupSubsystem();
-	public static final HatchPlacerSubsystem hatchplacer = new HatchPlacerSubsystem();
+	public static final HatchPickupSubsystem hatchPickup = new HatchPickupSubsystem();
+	public static final HatchPlacerSubsystem hatchPlacer = new HatchPlacerSubsystem();
+	public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
 	
 	public static ControlHandler input;
 
@@ -29,6 +31,11 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		input = new ControlHandler();
 		SmartDashboard.putData(drivetrain);
+	}
+
+	@Override
+	public void robotPeriodic() {
+		elevator.loop();
 	}
 
 	@Override

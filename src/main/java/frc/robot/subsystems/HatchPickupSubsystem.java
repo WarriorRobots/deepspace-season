@@ -75,7 +75,6 @@ public class HatchPickupSubsystem extends Subsystem {
     }
 
     @Override
-    protected void initDefaultCommand() {// TODO
-    }
+    protected void initDefaultCommand() {}
 
 }

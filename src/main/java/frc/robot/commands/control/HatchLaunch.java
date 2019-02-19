@@ -15,13 +15,13 @@ public class HatchLaunch extends InstantCommand {
   
   public HatchLaunch() {
     super();
-    requires(Robot.hatchplacer);
+    requires(Robot.hatchPlacer);
   }
 
   @Override
   protected void initialize() {
-    Robot.hatchplacer.releaseHatch();
-    Robot.hatchplacer.extendLauncher();
+    Robot.hatchPlacer.releaseHatch();
+    Robot.hatchPlacer.extendLauncher();
   }
 
 }

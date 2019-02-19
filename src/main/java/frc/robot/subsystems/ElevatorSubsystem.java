@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
 
@@ -44,7 +45,24 @@ public class ElevatorSubsystem extends Subsystem {
   }
 
   /**
-   * Moves the elevator to the position specified
+   * Runs in Robot.java every tick, checking the Hall effect sensor and resetting
+   * the encoder when it is triggered.
+   */
+  public void loop() {
+    // TODO what if the hall effect breaks? it returns true permanently, velocity limiter
+    if (getElevatorPosition() < 0) {
+      DriverStation.reportWarning("The elevator is at a negative position?" +
+      "Check encoder and Hall effect sensor.", false);
+    }
+
+    // resets the encoder when hall effect switch is triggered
+    if (isElevatorFloored()) {
+      resetEncoder();
+    }
+  }
+
+  /**
+   * Moves the elevator to the position specified.
    * 
    * @param position Intended position of the elevator, in (units)TODO
    */
@@ -53,7 +71,7 @@ public class ElevatorSubsystem extends Subsystem {
   }
 
   /**
-   * Shuts off elevator winch motor.
+   * Shuts off the elevator winch motor.
    */
   public void stopElevator() {
     winch.stopMotor();
@@ -67,10 +85,18 @@ public class ElevatorSubsystem extends Subsystem {
   }
 
   /**
+   * Zeroes out the elevator encoder.
+   */
+  private void resetEncoder() {
+    winch.setSelectedSensorPosition(0);
+  }
+
+  /**
    * Returns if the limit switch at the bottom of the elevator is being triggered.
    */
   public boolean isElevatorFloored() {
-    return limitSwitch.get();
+    // NOTE digital sensors are inverted; all ports read true by default
+    return !limitSwitch.get();
   }
 
   @Override
