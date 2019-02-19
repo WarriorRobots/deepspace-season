@@ -5,21 +5,17 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.control;
+package frc.robot.commands.hatch;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/** Make the hatch pickup move from being on the ground to being up */
-public class HatchIn extends Command {
-
-  public HatchIn() {
+/** Make the hatch pickup move from being vertical to being on the ground */
+public class HatchOut extends Command {
+  public HatchOut() {
     requires(Robot.hatchPickup);
     //requires(Robot.hatchplacer);
-    //requires(Robot.elevator);
-    //requires(Robot.ballpickup);
   }
-
 
   @Override
   protected void initialize() {
@@ -27,16 +23,12 @@ public class HatchIn extends Command {
 
   @Override
   protected void execute() {
-    //TODO Flip ball pickup forward (so it doesn't collide with elevator )
-    //TODO Bring elevator down before doing pickup
-    //TODO Flip ball pickup backwards (so it is out of the way of the hatch placer)
-    //TODO Release scissors so the hatch can be placed on it
-    Robot.hatchPickup.retractPickup();
+    //TODO make sure the scisors are released before bringing the pickup down
+    Robot.hatchPickup.extendPickup();
   }
 
   @Override
   protected boolean isFinished() {
-    //TODO make sure the sequence of the events in execute is completed
     return true;
   }
 
