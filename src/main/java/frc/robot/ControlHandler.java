@@ -13,6 +13,11 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.drive.ArcadeDrive;
 import frc.robot.commands.drive.TurnLockDrive;
+import frc.robot.commands.hatch.RetractPickup;
+import frc.robot.commands.hatch.ExtendPickup;
+import frc.robot.commands.hatch.PlaceHatchGroup;
+import frc.robot.commands.hatch.PullHatchIn;
+import frc.robot.commands.hatch.LetHatchOut;
 import frc.robot.util.triggers.DpadTrigger;
 import frc.robot.util.triggers.ThresholdTrigger;
 
@@ -70,17 +75,19 @@ public final class ControlHandler {
 
 		// TODO
 		// hatch in and hatch out
-		// hatch piston down, up
 		// hatch in, reverse
 		// elevator reset, low, middle, high
-		// scissors secured, loose
-		// launchers out, in
 		// ball rotate flat, vertical, diagonal
 		// ball in, out
 		// base PneumaticCommand
 
 		rightJoyThumbButton.whileHeld(new ArcadeDrive());
 		rightJoyTriggerButton.whileHeld(new TurnLockDrive());
+		xboxA.whenPressed(new ExtendPickup());
+		xboxB.whenPressed(new RetractPickup());
+		xboxX.whenPressed(new PlaceHatchGroup());
+		rightXboxTrigger.whileHeld(new PullHatchIn());
+		rightXboxBumper.whileHeld(new LetHatchOut());
 	}
 
 	/**
