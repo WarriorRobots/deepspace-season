@@ -15,6 +15,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
+import frc.robot.commands.cargo.StabilizePickup;
 
 /**
  * Contains the motors used to pickup cargo, and to rotate the mechanism in and
@@ -89,6 +90,7 @@ public class CargoPickupSubsystem extends Subsystem {
     @Override
     public void initDefaultCommand() {
         // TODO run pickup command? possibly joystick, or leave blank
+        setDefaultCommand(new StabilizePickup());
     }
 
     @Override
