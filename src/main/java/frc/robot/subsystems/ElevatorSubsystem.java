@@ -28,6 +28,7 @@ public class ElevatorSubsystem extends Subsystem {
 	private static final int LIMIT_SWITCH_PORT = 4;
 
 	private WPI_TalonSRX winch;
+	/** Hall effect sensor */
 	private DigitalInput limitSwitch;
 
 	/**

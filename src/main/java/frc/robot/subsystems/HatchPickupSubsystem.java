@@ -27,7 +27,7 @@ public class HatchPickupSubsystem extends Subsystem {
      * <code> public static final HatchPickupSubystem hatchPickup = new
      * HatchPickupSubsystem();
      */
-    public HatchPickupSubsystem() { // TODO fix ids
+    public HatchPickupSubsystem() { //XXX fix ids
         intakeMotor = new WPI_VictorSPX(INTAKE_MOTOR_PORT);
         intakeMotor.setInverted(false); // TODO constants and figure out which one
         // TODO inversions on ALL MOTORS
@@ -51,7 +51,7 @@ public class HatchPickupSubsystem extends Subsystem {
     }
 
     /**
-     * Shuts off the pneumatics. TODO
+     * Shuts off the pneumatics. TODO fix documentation
      */
     public void neutralizePneumatics() {
         rotatorSol.set(Value.kOff);

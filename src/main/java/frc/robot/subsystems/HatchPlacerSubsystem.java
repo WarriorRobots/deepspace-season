@@ -66,14 +66,14 @@ public class HatchPlacerSubsystem extends Subsystem {
     }
 
     /** 
-     * Set scissors solenoid to off.
+     * Set scissors solenoid to off. TODO fix documentation
      */
     public void neutralizeScissors() {
         scissorHolder.set(Value.kOff);
     }
 
     /**
-     * Set both launcher solenoids to off.
+     * Set both launcher solenoids to off. TODO fix documentation
      */
     public void neutralizeLauncher() {
         leftLauncher.set(Value.kOff);
