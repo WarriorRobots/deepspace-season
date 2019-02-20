@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /** Make the hatch pickup move from being on the ground to being up */
-public class HatchIn extends Command {
+public class RetractPickup extends Command {
 
-  public HatchIn() {
+  public RetractPickup() {
     requires(Robot.hatchPickup);
     //requires(Robot.hatchplacer);
     //requires(Robot.elevator);

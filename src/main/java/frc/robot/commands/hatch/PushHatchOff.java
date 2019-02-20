@@ -7,20 +7,20 @@
 
 package frc.robot.commands.hatch;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/** Set hatch placer back into a neutral position, used after launching */
-public class HatchNeutral extends InstantCommand {
+/** Push a hatch off of the hatch placer */
+public class PushHatchOff extends Command {
 
   /** Count variable for the loop of pneumatic */
   private int i;
 
-  public HatchNeutral() {
+  public PushHatchOff() {
     super();
     requires(Robot.hatchPlacer);
   }
-  
+
   @Override
   protected void initialize() {
     // Initialization of for loop
@@ -30,13 +30,12 @@ public class HatchNeutral extends InstantCommand {
 
   @Override
   protected void execute() {
-    // The purpose of running the pneumatic in a loop format is to garantee the pneumatic fires
+    // The purpose of running the pneumatic in a loop format is to garantee the
+    // pneumatic fires
     // (1 loop is not enough time for the pneumatic to fire)
-
     // Execute of for loop
     // for (---, ---, ---) {Exec};
-    Robot.hatchPlacer.secureHatch();
-    Robot.hatchPlacer.retractLauncher();
+    Robot.hatchPlacer.extendLauncher();
 
     // Increment of for loop
     // for (---, ---, Inc) {---};
@@ -48,7 +47,6 @@ public class HatchNeutral extends InstantCommand {
     // Condition of for loop
     // for (---, Cond, ---) {---};
     return (i > 5);
-    // 5 is the approximate number of loops a pneumatic takes to fire
   }
 
   @Override

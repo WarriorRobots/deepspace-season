@@ -66,6 +66,10 @@ public class HatchPickupSubsystem extends Subsystem {
         intakeMotor.set(speed);
     }
 
+    public void stopIntakeMotor() {
+        intakeMotor.stopMotor();
+    }
+
     /**
      * Set the intake motor to brake mode, making it more difficult for hatches to
      * fall out of the mechanism.
