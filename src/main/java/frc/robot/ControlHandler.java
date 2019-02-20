@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.cargo.BallIn;
+import frc.robot.commands.cargo.BallOut;
 import frc.robot.commands.drive.ArcadeDrive;
 import frc.robot.commands.drive.TurnLockDrive;
 import frc.robot.commands.hatch.RetractPickup;
@@ -76,12 +78,8 @@ public final class ControlHandler {
 		xboxBACK = new JoystickButton(xbox, 7);
 
 		// TODO
-		// hatch in and hatch out
-		// hatch in, reverse
 		// elevator reset, low, middle, high
 		// ball rotate flat, vertical, diagonal
-		// ball in, out
-		// base PneumaticCommand
 
 		rightJoyThumbButton.whileHeld(new ArcadeDrive());
 		rightJoyTriggerButton.whileHeld(new TurnLockDrive());
@@ -90,6 +88,9 @@ public final class ControlHandler {
 		xboxX.whenPressed(new PlaceHatchGroup());
 		rightXboxTrigger.whileHeld(new PullHatchIn());
 		rightXboxBumper.whileHeld(new LetHatchOut());
+
+		leftXboxTrigger.whileHeld(new BallIn());
+		leftXboxBumper.whileHeld(new BallOut());
 
 		//debug
 		xboxBACK.whenPressed(new DisableCompressor());
