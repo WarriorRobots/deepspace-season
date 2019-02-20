@@ -14,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
 import frc.robot.commands.elevator.StabilizeElevator;
 
@@ -109,5 +110,12 @@ public class ElevatorSubsystem extends Subsystem {
 	@Override
 	public void initDefaultCommand() {
 		setDefaultCommand(new StabilizeElevator());
+	}
+
+	@Override
+	public void initSendable(SendableBuilder builder) {
+		builder.setSmartDashboardType("elevator-subsystem");
+		builder.addDoubleProperty("elevator position in ticks", () -> getElevatorPosition(), null);
+		builder.addDoubleProperty("winch speed", () -> winch.get(), null);
 	}
 }

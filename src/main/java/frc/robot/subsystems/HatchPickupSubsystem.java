@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
 
 /**
@@ -83,5 +84,12 @@ public class HatchPickupSubsystem extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {}
+
+    @Override
+    public void initSendable(SendableBuilder builder) {
+        builder.setSmartDashboardType("hatchpickup-subsystem");
+        builder.addDoubleProperty("intake motor speed", () -> intakeMotor.get(), null);
+        builder.addStringProperty("solenoid state", () -> rotatorSol.get().toString(), null);
+    }
 
 }

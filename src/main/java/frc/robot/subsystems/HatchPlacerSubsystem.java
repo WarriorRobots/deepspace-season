@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
 
 /**
@@ -89,6 +90,17 @@ public class HatchPlacerSubsystem extends Subsystem {
 
     @Override // TODO default command
     protected void initDefaultCommand() {
+    }
+
+    @Override
+    public void initSendable(SendableBuilder builder) {
+        builder.setSmartDashboardType("hatchplacer-subsystem");
+        builder.addStringProperty("scissor state", () -> scissorHolder.get().toString(), null);
+        builder.addStringProperty("launcher state", () -> {
+            String left = leftLauncher.get().toString();
+            String right = rightLauncher.get().toString();
+            return "left:" + left + " " + "right:" + right;
+        }, null);
     }
 
 }

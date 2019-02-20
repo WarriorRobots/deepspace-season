@@ -13,13 +13,14 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
 
 /**
  * Contains the motors used to pickup cargo, and to rotate the mechanism in and
  * out.
  */
-public class CargoSubsystem extends Subsystem {
+public class CargoPickupSubsystem extends Subsystem {
 
     private static final int PICKUP_PORT = 1;
     private static final int ROTATOR_PORT = 8;
@@ -32,7 +33,7 @@ public class CargoSubsystem extends Subsystem {
      * <p>
      * <code> public static final CargoSubsystem cargo = new CargoSubsystem();
      */
-    public CargoSubsystem() {
+    public CargoPickupSubsystem() {
         pickup = new WPI_VictorSPX(PICKUP_PORT);
         rotator = new WPI_TalonSRX(ROTATOR_PORT);
 
@@ -88,6 +89,14 @@ public class CargoSubsystem extends Subsystem {
     @Override
     public void initDefaultCommand() {
         // TODO run pickup command? possibly joystick, or leave blank
+    }
+
+    @Override
+    public void initSendable(SendableBuilder builder) {
+        builder.setSmartDashboardType("cargo-subsystem");
+        // XXX convert below lambda to degrees
+        builder.addDoubleProperty("Rotator motor angle", () -> getPickupPosition(), null);
+        builder.addDoubleProperty("Rotator motor speed", () -> rotator.get(), null);
     }
 
 }
