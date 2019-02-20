@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.drive.ArcadeDrive;
 import frc.robot.commands.drive.TurnLockDrive;
 import frc.robot.commands.hatch.RetractPickup;
+import frc.robot.commands.hatch.DisableCompressor;
+import frc.robot.commands.hatch.EnableCompressor;
 import frc.robot.commands.hatch.ExtendPickup;
 import frc.robot.commands.hatch.PlaceHatchGroup;
 import frc.robot.commands.hatch.PullHatchIn;
@@ -88,6 +90,10 @@ public final class ControlHandler {
 		xboxX.whenPressed(new PlaceHatchGroup());
 		rightXboxTrigger.whileHeld(new PullHatchIn());
 		rightXboxBumper.whileHeld(new LetHatchOut());
+
+		//debug
+		xboxBACK.whenPressed(new DisableCompressor());
+		xboxSTART.whenPressed(new EnableCompressor());
 	}
 
 	/**
