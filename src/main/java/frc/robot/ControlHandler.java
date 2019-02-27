@@ -15,12 +15,15 @@ import frc.robot.commands.cargo.BallIn;
 import frc.robot.commands.cargo.BallOut;
 import frc.robot.commands.drive.ArcadeDrive;
 import frc.robot.commands.drive.TurnLockDrive;
+import frc.robot.commands.elevator.MoveElevatorTo;
 import frc.robot.commands.hatch.RetractPickup;
+import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.commands.hatch.DisableCompressor;
 import frc.robot.commands.hatch.EnableCompressor;
 import frc.robot.commands.hatch.ExtendPickup;
 import frc.robot.commands.hatch.PlaceHatchGroup;
 import frc.robot.commands.hatch.PullHatchIn;
+import frc.robot.commands.hatch.ResetLauncher;
 import frc.robot.commands.hatch.LetHatchOut;
 import frc.robot.util.triggers.DpadTrigger;
 import frc.robot.util.triggers.ThresholdTrigger;
@@ -83,18 +86,17 @@ public final class ControlHandler {
 
 		rightJoyThumbButton.whileHeld(new ArcadeDrive());
 		rightJoyTriggerButton.whileHeld(new TurnLockDrive());
-		xboxA.whenPressed(new ExtendPickup());
-		xboxB.whenPressed(new RetractPickup());
-		xboxX.whenPressed(new PlaceHatchGroup());
-		rightXboxTrigger.whileHeld(new PullHatchIn());
-		rightXboxBumper.whileHeld(new LetHatchOut());
 
-		leftXboxTrigger.whileHeld(new BallIn());
-		leftXboxBumper.whileHeld(new BallOut());
+		// hatch
+		xboxA.whenPressed(new MoveElevatorTo(5000)); // low
+		xboxB.whenPressed(new MoveElevatorTo(13000)); // mid
+		xboxY.whenPressed(new MoveElevatorTo(23000)); // high
+		rightXboxTrigger.whileHeld(new ResetLauncher()); // hold
 
-		//debug
-		xboxBACK.whenPressed(new DisableCompressor());
-		xboxSTART.whenPressed(new EnableCompressor());
+		// ball
+		// low 5000
+		xboxX.whenPressed(new MoveElevatorTo(15000)); // mid
+		xboxSTART.whenPressed(new MoveElevatorTo(25000)); // high
 	}
 
 	/**
