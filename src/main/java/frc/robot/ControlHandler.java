@@ -86,6 +86,15 @@ public final class ControlHandler {
 
 		rightJoyThumbButton.whileHeld(new ArcadeDrive());
 		rightJoyTriggerButton.whileHeld(new TurnLockDrive());
+		//leftJoyTriggerButton.whileHeld(new ApproachCurve());
+
+		// right joystick
+		rightJoyButton3.whenPressed(new MoveElevatorTo(5000)); // ball low
+		rightJoyButton4.whenPressed(new BallOut());
+
+		// left joystick
+		leftJoyButton3.whenPressed(new ExtendPickup());
+		leftJoyButton4.whenPressed(new PlaceHatchGroup());
 
 		// hatch
 		xboxA.whenPressed(new MoveElevatorTo(5000)); // low
