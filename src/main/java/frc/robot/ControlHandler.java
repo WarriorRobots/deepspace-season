@@ -26,6 +26,7 @@ import frc.robot.commands.hatch.PullHatchIn;
 import frc.robot.commands.hatch.ResetLauncher;
 import frc.robot.commands.hatch.LetHatchOut;
 import frc.robot.util.triggers.DpadTrigger;
+import frc.robot.util.triggers.ThresholdJoystick;
 import frc.robot.util.triggers.ThresholdTrigger;
 
 /**
@@ -48,6 +49,7 @@ public final class ControlHandler {
 	private JoystickButton leftXboxBumper, rightXboxBumper;
 	private JoystickButton xboxX, xboxY, xboxB, xboxA, xboxSTART, xboxBACK;
 	private DpadTrigger xboxUp, xboxDown, xboxLeft, xboxRight;
+	private ThresholdJoystick xboxLeftJoyUp, xboxLeftJoyDown, xboxRightJoyUp, xboxRightJoyDown;
 	
 	public ControlHandler() {
 		leftJoy = new Joystick(LEFT_JOY);
@@ -79,6 +81,10 @@ public final class ControlHandler {
 		xboxY = new JoystickButton(xbox, 4);
 		xboxSTART = new JoystickButton(xbox, 8);
 		xboxBACK = new JoystickButton(xbox, 7);
+		xboxLeftJoyUp = new ThresholdJoystick( () -> xbox.getY(Hand.kLeft), 0.75, ThresholdJoystick.UP);
+		xboxLeftJoyDown = new ThresholdJoystick( () -> xbox.getY(Hand.kLeft), -0.75, ThresholdJoystick.DOWN);
+		xboxRightJoyUp = new ThresholdJoystick( () -> xbox.getY(Hand.kRight), 0.75, ThresholdJoystick.UP);
+		xboxRightJoyDown = new ThresholdJoystick( () -> xbox.getY(Hand.kLeft), -0.75, ThresholdJoystick.DOWN);
 
 		// TODO
 		// elevator reset, low, middle, high
@@ -101,11 +107,15 @@ public final class ControlHandler {
 		xboxB.whenPressed(new MoveElevatorTo(13000)); // mid
 		xboxY.whenPressed(new MoveElevatorTo(23000)); // high
 		rightXboxTrigger.whileHeld(new ResetLauncher()); // hold
+		xboxRightJoyUp.whileHeld(new ExtendPickup());
+		xboxRightJoyDown.whileHeld(new RetractPickup());
 
 		// ball
 		// low 5000
 		xboxX.whenPressed(new MoveElevatorTo(15000)); // mid
 		xboxSTART.whenPressed(new MoveElevatorTo(25000)); // high
+		xboxLeftJoyUp(new cargoLevel());
+		xboxLeftJoyDown(new cargoUp());
 	}
 
 	/**
