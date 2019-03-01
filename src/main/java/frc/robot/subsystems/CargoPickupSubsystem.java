@@ -23,6 +23,10 @@ import frc.robot.commands.cargo.StabilizePickup;
  */
 public class CargoPickupSubsystem extends Subsystem {
 
+    private static final double ARM_P = 1;
+    private static final double ARM_I = 0;
+    private static final double ARM_D = 0;
+
     private static final int PICKUP_PORT = 1;
     private static final int ROTATOR_PORT = 8;
 
@@ -39,9 +43,9 @@ public class CargoPickupSubsystem extends Subsystem {
         rotator = new WPI_TalonSRX(ROTATOR_PORT);
 
         rotator.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
-        rotator.config_kP(Constants.PID_ID, 0, Constants.TIMEOUT_MS);
-        rotator.config_kI(Constants.PID_ID, 0, Constants.TIMEOUT_MS);
-        rotator.config_kD(Constants.PID_ID, 0, Constants.TIMEOUT_MS);
+        rotator.config_kP(Constants.PID_ID, ARM_P, Constants.TIMEOUT_MS);
+        rotator.config_kI(Constants.PID_ID, ARM_I, Constants.TIMEOUT_MS);
+        rotator.config_kD(Constants.PID_ID, ARM_D, Constants.TIMEOUT_MS);
     }
 
     /**
@@ -58,7 +62,7 @@ public class CargoPickupSubsystem extends Subsystem {
      * 
      * @param positionDegrees Intended position in degrees (TODO specify range).
      */
-    public void rotatePickupDegrees(double positionDegrees) {
+    public void rotatePickupDegrees(double positionDegrees) { // TODO pick a more logical name for the command
         rotator.set(ControlMode.Position, positionDegrees); // TODO degrees and ticks
     }
 
@@ -67,6 +71,13 @@ public class CargoPickupSubsystem extends Subsystem {
      */
     public int getPickupPosition() {
         return rotator.getSelectedSensorPosition(); // TODO degrees conversion
+    }
+
+    /**
+     * Set the position of the Arm back to 0.
+     */
+    public void resetPickupPosition() {
+        rotator.setSelectedSensorPosition(0);
     }
 
     /**

@@ -27,7 +27,7 @@ public class StabilizePickup extends Command {
 
   @Override
   protected void execute() {
-    Robot.cargoPickup.setPickupPosition(initial);
+    Robot.cargoPickup.rotatePickupDegrees(initial);
   }
 
   @Override
