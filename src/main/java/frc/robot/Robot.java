@@ -22,7 +22,7 @@ import frc.robot.subsystems.PneumaticBaseSubsystem;
  * Main class of the Robot.
  */
 public class Robot extends TimedRobot {
-	
+
 	public static final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
 	public static final HatchPickupSubsystem hatchPickup = new HatchPickupSubsystem();
 	public static final HatchPlacerSubsystem hatchPlacer = new HatchPlacerSubsystem();
@@ -31,6 +31,7 @@ public class Robot extends TimedRobot {
 	public static final CargoPickupSubsystem cargoPickup = new CargoPickupSubsystem();
 	public static final PneumaticBaseSubsystem pneumaticBase = new PneumaticBaseSubsystem();
 
+	/** Reference this to get input from our joysticks. */
 	public static ControlHandler input;
 
 	@Override
@@ -46,15 +47,10 @@ public class Robot extends TimedRobot {
 	}
 
 	@Override
-	public void robotPeriodic() {
-		elevator.loop();
-	}
-
-	@Override
 	public void disabledInit() {
 		Scheduler.getInstance().removeAll();
 	}
-	
+
 	@Override
 	public void autonomousInit() {
 		Scheduler.getInstance().removeAll();

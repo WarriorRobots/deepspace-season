@@ -8,7 +8,7 @@ import frc.robot.Robot;
  * changes in joystick position. Allows drivers to drive in straight lines
  * without perfect control of joysticks.
  */
-public class TurnLockDrive extends Command {
+public class LowTurnSensitivityDrive extends Command {
 
     /**
      * How far apart the joystick values have to be (in decimal percentage) before
@@ -16,7 +16,7 @@ public class TurnLockDrive extends Command {
      */
     private static final double TURNLOCK_THRESHOLD = 0.2;
 
-    public TurnLockDrive() {
+    public LowTurnSensitivityDrive() {
         requires(Robot.drivetrain);
     }
 
