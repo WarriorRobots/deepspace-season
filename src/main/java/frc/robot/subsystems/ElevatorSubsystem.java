@@ -24,6 +24,10 @@ import frc.robot.commands.elevator.StabilizeElevator;
  */
 public class ElevatorSubsystem extends Subsystem {
 
+	private static final double ELEVATOR_P = 0.4;
+	private static final double ELEVATOR_I = 0;
+	private static final double ELEVATOR_D = 0;
+
 	private static final int WINCH_PORT = 7;
 	private static final int LIMIT_SWITCH_PORT = 4;
 
@@ -42,9 +46,9 @@ public class ElevatorSubsystem extends Subsystem {
 		limitSwitch = new DigitalInput(LIMIT_SWITCH_PORT);
 
 		winch.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
-		winch.config_kP(Constants.PID_ID, 0, Constants.TIMEOUT_MS);
-		winch.config_kI(Constants.PID_ID, 0, Constants.TIMEOUT_MS);
-		winch.config_kD(Constants.PID_ID, 0, Constants.TIMEOUT_MS);
+		winch.config_kP(Constants.PID_ID, ELEVATOR_P, Constants.TIMEOUT_MS);
+		winch.config_kI(Constants.PID_ID, ELEVATOR_I, Constants.TIMEOUT_MS);
+		winch.config_kD(Constants.PID_ID, ELEVATOR_D, Constants.TIMEOUT_MS);
 	}
 
 	/**
@@ -117,6 +121,8 @@ public class ElevatorSubsystem extends Subsystem {
 	public void initSendable(SendableBuilder builder) {
 		builder.setSmartDashboardType("elevator-subsystem");
 		builder.addDoubleProperty("elevator position in ticks", () -> getElevatorPosition(), null);
+		builder.addDoubleProperty("elevator RPM, ticks per 100ms", () -> winch.getSelectedSensorVelocity(), null);
+		builder.addBooleanProperty("floored?", () -> isElevatorFloored(), null);
 		builder.addDoubleProperty("winch speed", () -> winch.get(), null);
 	}
 }
