@@ -19,20 +19,24 @@ import frc.robot.commands.drive.DoubleJoystickDrive;
  */
 public class DrivetrainSubsystem extends Subsystem {
 
-	private static final int LEFT_FRONT = 1;
-	private static final int LEFT_MIDDLE = 2;
-	private static final int LEFT_BACK = 3;
-	private static final int RIGHT_FRONT = 4;
-	private static final int RIGHT_MIDDLE = 5;
-	private static final int RIGHT_BACK = 6;
+	private static final int LEFT_FRONT_ID = 1;
+	private static final int LEFT_MIDDLE_ID = 2;
+	private static final int LEFT_BACK_ID = 3;
+	private static final int RIGHT_FRONT_ID = 4;
+	private static final int RIGHT_MIDDLE_ID = 5;
+	private static final int RIGHT_BACK_ID = 6;
 
 	private static final int LEFT_ENCODER_PORTA = 0;
 	private static final int LEFT_ENCODER_PORTB = 1;
 	private static final int RIGHT_ENCODER_PORTA = 2;
 	private static final int RIGHT_ENCODER_PORTB = 3;
 
+	public static final boolean LEFT_ENCODER_REVERSED = true;
+	public static final boolean RIGHT_ENCODER_REVERSED = false;
+	public static final boolean LEFT_DRIVE_REVERSED = true;
+	public static final boolean RIGHT_DRIVE_REVERSED = true;
+
 	private static final double RAMPRATE_SECONDS = 0.25;
-	private static final int TIMEOUT_MS = 10;
 
 	private WPI_TalonSRX leftFront, leftMiddle, leftBack, rightFront, rightMiddle, rightBack;
 	private SpeedControllerGroup leftGroup, rightGroup;
@@ -41,6 +45,19 @@ public class DrivetrainSubsystem extends Subsystem {
 	private Encoder leftEnc, rightEnc;
 	private AHRS navx;
 
+	/** The robot wheel is {@value} inches in diameter. */
+	public static final double WHEEL_DIAMETER = 6.0;
+	/** Number of encoder clicks of a Grayhill encoder per revolution */
+	public static final int GRAYHILL_PER_REV = 128;
+	/**
+	 * How far the robot travels, in inches, per Grayhill click.
+	 * <p>
+	 * Equates to {@value}.
+	 */
+	// Diameter * PI = circumference, circumference divided by clicks = distance per
+	// click.
+	public static final double INCHES_DRIVEN_PER_CLICK = (WHEEL_DIAMETER * Math.PI) / GRAYHILL_PER_REV;
+
 	/**
 	 * Instantiates new subsystem; make ONLY ONE.
 	 * <p>
@@ -48,24 +65,24 @@ public class DrivetrainSubsystem extends Subsystem {
 	 * DrivetrainSubsystem();
 	 */
 	public DrivetrainSubsystem() {
-		leftFront = new WPI_TalonSRX(LEFT_FRONT);
-		leftMiddle = new WPI_TalonSRX(LEFT_MIDDLE);
-		leftBack = new WPI_TalonSRX(LEFT_BACK);
-		leftFront.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
-		leftMiddle.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
-		leftBack.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
+		leftFront = new WPI_TalonSRX(LEFT_FRONT_ID);
+		leftMiddle = new WPI_TalonSRX(LEFT_MIDDLE_ID);
+		leftBack = new WPI_TalonSRX(LEFT_BACK_ID);
+		leftFront.configOpenloopRamp(RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
+		leftMiddle.configOpenloopRamp(RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
+		leftBack.configOpenloopRamp(RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
 
-		rightFront = new WPI_TalonSRX(RIGHT_FRONT);
-		rightMiddle = new WPI_TalonSRX(RIGHT_MIDDLE);
-		rightBack = new WPI_TalonSRX(RIGHT_BACK);
-		rightFront.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
-		rightMiddle.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
-		rightBack.configOpenloopRamp(RAMPRATE_SECONDS, TIMEOUT_MS);
+		rightFront = new WPI_TalonSRX(RIGHT_FRONT_ID);
+		rightMiddle = new WPI_TalonSRX(RIGHT_MIDDLE_ID);
+		rightBack = new WPI_TalonSRX(RIGHT_BACK_ID);
+		rightFront.configOpenloopRamp(RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
+		rightMiddle.configOpenloopRamp(RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
+		rightBack.configOpenloopRamp(RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
 
 		leftGroup = new SpeedControllerGroup(leftFront, leftMiddle, leftBack);
 		rightGroup = new SpeedControllerGroup(rightFront, rightMiddle, rightBack);
-		leftGroup.setInverted(Constants.Inversions.LEFT_DRIVE_REVERSED);
-		rightGroup.setInverted(Constants.Inversions.RIGHT_DRIVE_REVERSED);
+		leftGroup.setInverted(LEFT_DRIVE_REVERSED);
+		rightGroup.setInverted(RIGHT_DRIVE_REVERSED);
 
 		differentialDrive = new DifferentialDrive(leftGroup, rightGroup);
 		differentialDrive.setSafetyEnabled(false);
@@ -80,8 +97,8 @@ public class DrivetrainSubsystem extends Subsystem {
 		leftEnc = new Encoder(LEFT_ENCODER_PORTA, LEFT_ENCODER_PORTB);
 		rightEnc = new Encoder(RIGHT_ENCODER_PORTA, RIGHT_ENCODER_PORTB);
 
-		leftEnc.setReverseDirection(Constants.Inversions.LEFT_ENCODER_REVERSED);
-		rightEnc.setReverseDirection(Constants.Inversions.RIGHT_ENCODER_REVERSED);
+		leftEnc.setReverseDirection(LEFT_ENCODER_REVERSED);
+		rightEnc.setReverseDirection(RIGHT_ENCODER_REVERSED);
 	}
 
 	/**
@@ -194,34 +211,39 @@ public class DrivetrainSubsystem extends Subsystem {
 		resetRightEncoder();
 	}
 
-	//TODO write constants static conversion method
 	/**
-	 * Gets current angle (yaw) that the robot is facing.
-	 * 
-	 * @return Double value representing angle in degrees, can fall outside the set
-	 *         [0,360].
+	 * Gets current angle (yaw) that the robot is facing in degrees.
 	 */
 	public double getAngleDegrees() {
 		return navx.getAngle();
 	}
 
+	/**
+	 * Gets current angle (yaw) that the robot is facing in radians.
+	 */
 	public double getAngleRadians() {
 		return navx.getAngle() * (Math.PI / 180.0);
 	}
 
 	/**
-	 * Sets current robot angle to 0 degrees.
+	 * Sets current robot angle (yaw) as the zero point.
 	 */
 	public void resetAngle() {
 		navx.zeroYaw();
 	}
 
 	/**
-	 * Return compass reading in degrees, where 0 is magnetic north. Susceptible to
-	 * magnetic interference.
+	 * Converts drive encoder clicks to inches.
 	 */
-	public double getCompassHeading() {
-		return navx.getCompassHeading();
+	public static final double clicksToInches(int clicks) {
+		return clicks * INCHES_DRIVEN_PER_CLICK;
+	}
+
+	/**
+	 * Converts inches driven to encoder clicks.
+	 */
+	public static final int inchesToClicks(double inches) {
+		return (int) Math.round(inches / INCHES_DRIVEN_PER_CLICK);
 	}
 
 	@Override
