@@ -36,7 +36,7 @@ public class HatchPickupSubsystem extends Subsystem {
     /**
      * Extends the solenoid that puts the pickup mechanism on the ground.
      */
-    public void extendPickup() {
+    public void extendIntake() {
         rotatorSol.set(Value.kForward);
     }
 
@@ -45,7 +45,7 @@ public class HatchPickupSubsystem extends Subsystem {
      * <p>
      * <b>Make sure the scissors are in place!
      */
-    public void retractPickup() {
+    public void retractIntake() {
         rotatorSol.set(Value.kReverse);
     }
 
@@ -61,11 +61,11 @@ public class HatchPickupSubsystem extends Subsystem {
      * 
      * @param speed Speed of motor, from -1 (out) to 1 (in).
      */
-    public void runIntakeMotor(double speed) {
+    public void runIntake(double speed) {
         intakeMotor.set(speed);
     }
 
-    public void stopIntakeMotor() {
+    public void stopIntake() {
         intakeMotor.stopMotor();
     }
 

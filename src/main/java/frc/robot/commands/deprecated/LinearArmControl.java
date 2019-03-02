@@ -5,11 +5,11 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LinearCargoPickupControl extends Command {
+public class LinearArmControl extends Command {
     
     private DoubleSupplier input;
 
-    public LinearCargoPickupControl(DoubleSupplier input) {
+    public LinearArmControl(DoubleSupplier input) {
         requires(Robot.arm);
         requires(Robot.drivetrain);//XXX remove this
         this.input = input;
@@ -17,7 +17,7 @@ public class LinearCargoPickupControl extends Command {
 
     @Override
     protected void execute() {
-        Robot.arm.rotatePickupLinear(input.getAsDouble());
+        Robot.arm.rotateArmLinear(input.getAsDouble());
     }
 
     @Override
@@ -27,7 +27,7 @@ public class LinearCargoPickupControl extends Command {
 
     @Override
     protected void end() {
-        Robot.arm.stopArmRotator();
+        Robot.arm.stopArm();
     }
 
 }

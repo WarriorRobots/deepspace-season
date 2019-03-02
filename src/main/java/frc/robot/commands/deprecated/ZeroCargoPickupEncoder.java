@@ -11,7 +11,7 @@ public class ZeroCargoPickupEncoder extends InstantCommand {
 
     @Override
     protected void execute() {
-        Robot.arm.resetPickupPosition();
+        Robot.arm.resetArmAngle();
     }
 
 }

@@ -14,7 +14,7 @@ public class DropElevator extends Command {
     @Override
     protected void execute() {
         if (Robot.elevator.getElevatorPosition() > THRESHOLD_INCHES) {
-            Robot.elevator.adjustElevatorLinear(-0.7);
+            Robot.elevator.adjustElevatorLinear(-0.8);
         } else {
             Robot.elevator.adjustElevatorLinear(-0.05);
         }

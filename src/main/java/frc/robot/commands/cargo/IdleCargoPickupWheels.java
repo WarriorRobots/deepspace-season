@@ -3,15 +3,15 @@ package frc.robot.commands.cargo;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class RunCargoPickupWheels extends Command {
+public class IdleCargoPickupWheels extends Command {
 
-    public RunCargoPickupWheels() {
+    public IdleCargoPickupWheels() {
         requires(Robot.cargoIntake);
     }
 
     @Override
     protected void execute() {
-        Robot.cargoIntake.runIntake(1);
+        Robot.cargoIntake.runIntake(0.1);
     }
 
     @Override

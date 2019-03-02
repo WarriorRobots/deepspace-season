@@ -27,7 +27,7 @@ public class ExtendHatchPickup extends Command {
   @Override
   protected void execute() {
     counter++;
-    Robot.hatchPickup.extendPickup();
+    Robot.hatchPickup.extendIntake();
   }
 
   @Override

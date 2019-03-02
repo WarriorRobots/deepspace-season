@@ -15,6 +15,7 @@ import frc.robot.Robot;
  * joystick vertically to drive the right wheels.
  */
 public class DoubleJoystickDrive extends Command {
+  
   public DoubleJoystickDrive() {
     requires(Robot.drivetrain);
   }

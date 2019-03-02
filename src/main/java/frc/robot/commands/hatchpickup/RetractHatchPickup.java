@@ -28,7 +28,7 @@ public class RetractHatchPickup extends Command {
   protected void execute() {
     counter++;
     Robot.hatchPlacer.loosenScissors();
-    Robot.hatchPickup.retractPickup();
+    Robot.hatchPickup.retractIntake();
   }
 
   @Override
