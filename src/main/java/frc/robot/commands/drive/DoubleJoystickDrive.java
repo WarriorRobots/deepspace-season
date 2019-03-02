@@ -10,6 +10,10 @@ package frc.robot.commands.drive;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+/**
+ * Push the left joystick vertically to drive the left wheels. Push the right
+ * joystick vertically to drive the right wheels.
+ */
 public class DoubleJoystickDrive extends Command {
   public DoubleJoystickDrive() {
     requires(Robot.drivetrain);

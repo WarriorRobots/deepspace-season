@@ -33,7 +33,7 @@ public class HatchPlacerSubsystem extends Subsystem {
      * Secures the hatch in place by opening the scissors.
      */
     public void lockScissors() {
-        scissorHolder.set(Value.kForward);
+        scissorHolder.set(Value.kReverse);
     }
 
     /**
@@ -41,7 +41,7 @@ public class HatchPlacerSubsystem extends Subsystem {
      * knocked off.
      */
     public void loosenScissors() {
-        scissorHolder.set(Value.kReverse);
+        scissorHolder.set(Value.kForward);
     }
 
     /**

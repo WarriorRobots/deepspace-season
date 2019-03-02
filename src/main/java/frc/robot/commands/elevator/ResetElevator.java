@@ -17,7 +17,7 @@ public class ResetElevator extends Command {
         if (position > THRESHOLD) {
             Robot.elevator.moveElevatorTo(THRESHOLD);
         } else if (position < 0) {
-            Robot.elevator.moveElevator(-0.1);
+            Robot.elevator.adjustElevatorLinear(-0.1);
         } else {
             Robot.elevator.stopElevator();
         }

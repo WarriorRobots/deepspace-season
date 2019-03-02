@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
+import frc.robot.Constants;
 
 /**
  * Contains the base pneumatic components (only the compressor, for now).
@@ -18,7 +19,7 @@ public class PneumaticBaseSubsystem extends Subsystem {
      * PneumaticSubsystem();
      */
     public PneumaticBaseSubsystem() {
-        compressor = new Compressor();
+        compressor = new Compressor(Constants.PCM_1);
         compressor.start();
     }
 

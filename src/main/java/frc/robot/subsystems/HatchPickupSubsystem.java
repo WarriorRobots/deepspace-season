@@ -30,7 +30,6 @@ public class HatchPickupSubsystem extends Subsystem {
     public HatchPickupSubsystem() { //XXX fix ids
         intakeMotor = new WPI_VictorSPX(INTAKE_MOTOR_PORT);
         intakeMotor.setInverted(false); // TODO constants and figure out which one
-        // TODO inversions on ALL MOTORS
         rotatorSol = new DoubleSolenoid(Constants.PCM_1, ROTATOR_SOL_FORWARD, ROTATOR_SOL_REVERSE);
     }
 

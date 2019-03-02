@@ -39,9 +39,13 @@ public class CargoPickupSubsystem extends Subsystem {
     public CargoPickupSubsystem() {
         intakeWheels = new WPI_VictorSPX(PICKUP_PORT);
         armRotator = new WPI_TalonSRX(ROTATOR_PORT);
+        armRotator.setInverted(true);
 
         armRotator.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
+        armRotator.setSensorPhase(false);
         armRotator.config_kP(Constants.PID_ID, ARM_P, Constants.TIMEOUT_MS);
+
+        // armRotator.configClosedLoopPeakOutput(Constants.PID_ID, 0.3);
     }
 
     /**
@@ -60,6 +64,11 @@ public class CargoPickupSubsystem extends Subsystem {
      */
     public void rotatePickupTo(double degrees) {
         armRotator.set(ControlMode.Position, degrees); // TODO degrees and ticks
+    }
+
+    @Deprecated
+    public void rotatePickupLinear(double speed) {
+        armRotator.set(speed); // XXX write safety constraints
     }
 
     /**
@@ -89,14 +98,12 @@ public class CargoPickupSubsystem extends Subsystem {
      * <i>Warning:</i> Leaving the pickup in a half-rotated position could cause
      * damage.
      */
-    @Deprecated
-    public void stopRotator() {
+    public void stopArmRotator() {
         armRotator.stopMotor();
     }
 
     @Override
     public void initDefaultCommand() {
-        // TODO run pickup command? possibly joystick, or leave blank
         setDefaultCommand(new StabilizeCargoPickup());
     }
 

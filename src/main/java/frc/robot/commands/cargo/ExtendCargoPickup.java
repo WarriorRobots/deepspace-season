@@ -13,7 +13,7 @@ import frc.robot.Robot;
 /** Put the cargo pickup into the Horizontal position */
 public class ExtendCargoPickup extends Command {
 
-  private static final double TARGET_ANGLE = 0;
+  private static final double TARGET_ANGLE = 3000;
 
   public ExtendCargoPickup() {
     requires(Robot.cargoPickup);
@@ -31,7 +31,7 @@ public class ExtendCargoPickup extends Command {
 
   @Override
   protected void end() {
-    Robot.cargoPickup.stopRotator();
+    Robot.cargoPickup.stopArmRotator();
   }
 
 }

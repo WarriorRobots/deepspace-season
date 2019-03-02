@@ -13,15 +13,13 @@ import frc.robot.Robot;
 /** Put the cargo pickup into the Up position */
 public class RetractCargoPickup extends Command {
 
-  private static final double TARGET_ANGLE = 90;
-
   public RetractCargoPickup() {
     requires(Robot.cargoPickup);
   }
 
   @Override
   protected void execute() {
-    Robot.cargoPickup.rotatePickupTo(TARGET_ANGLE);
+    Robot.cargoPickup.rotatePickupTo(0);
   }
 
   @Override
@@ -31,7 +29,7 @@ public class RetractCargoPickup extends Command {
 
   @Override
   protected void end() {
-    Robot.cargoPickup.stopRotator();
+    Robot.cargoPickup.stopArmRotator();
   }
 
 }

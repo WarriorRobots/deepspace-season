@@ -46,6 +46,7 @@ public class ElevatorSubsystem extends Subsystem {
 		limitSwitch = new DigitalInput(LIMIT_SWITCH_PORT);
 
 		winch.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
+		winch.setSensorPhase(true);
 		winch.config_kP(Constants.PID_ID, ELEVATOR_P, Constants.TIMEOUT_MS);
 		winch.config_kI(Constants.PID_ID, ELEVATOR_I, Constants.TIMEOUT_MS);
 		winch.config_kD(Constants.PID_ID, ELEVATOR_D, Constants.TIMEOUT_MS);
@@ -56,10 +57,9 @@ public class ElevatorSubsystem extends Subsystem {
 	 * the encoder when it is triggered.
 	 */
 	public void loop() {
-		// TODO what if the hall effect breaks? it returns true permanently, velocity
 		// limiter
-		if (getElevatorPosition() < 0) {
-			DriverStation.reportWarning("The elevator is at a negative position?" + "Check encoder and Hall effect sensor.",
+		if (getElevatorPosition() < -100) {
+			DriverStation.reportError("The elevator is at a negative position?" + "Check encoder and Hall effect sensor.",
 					false);
 		}
 
@@ -107,8 +107,9 @@ public class ElevatorSubsystem extends Subsystem {
 		return !limitSwitch.get();
 	}
 
-	public void moveElevator(double speed) {
-		winch.set(speed);
+	@Deprecated //TODO documentation here and other
+	public void adjustElevatorLinear(double speed) {
+		winch.set(speed); //TODO set constraints
 	}
 
 	@Override

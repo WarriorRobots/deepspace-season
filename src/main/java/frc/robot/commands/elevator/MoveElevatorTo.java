@@ -12,7 +12,7 @@ public class MoveElevatorTo extends Command {
 
     public MoveElevatorTo(int positionClicks) { //TODO make into real life units
         requires(Robot.elevator);
-        if (position == 0) {
+        if (positionClicks == 0) {
             DriverStation.reportError("Use ResetElevator instead of MoveElevatorTo(0)", false);
         } else if (positionClicks < MINIMUM_POSITION || positionClicks > MAXIMUM_POSITION) { // TODO find max
             DriverStation.reportError("FIND PROGRAMMER IMMEDIATELY: Elevator attempted to move to unsafe position: " + positionClicks, false);

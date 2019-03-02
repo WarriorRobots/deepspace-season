@@ -16,7 +16,7 @@ public class AutonomoSelector {
 	 */
 	private static Command autoCommand = null;
 
-	@Deprecated
+	// DO NOT USE THIS
 	private AutonomoSelector() throws Exception {
 		throw new Exception("Do not create an AutonomoSelector object, call it statically");
 	}

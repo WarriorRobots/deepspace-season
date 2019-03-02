@@ -6,7 +6,7 @@ import frc.robot.Robot;
 public class ReverseCargoPickupWheels extends Command {
 
     public ReverseCargoPickupWheels() {
-        requires(Robot.cargoPickup);
+        // requires(Robot.cargoPickup);
     }
 
     @Override
