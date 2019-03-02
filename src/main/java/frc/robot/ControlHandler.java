@@ -22,6 +22,7 @@ import frc.robot.commands.hatchpickup.RetractHatchPickup;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.commands.hatchpickup.ExtendHatchPickup;
 import frc.robot.commands.hatchpickup.RunHatchPickupWheels;
+import frc.robot.commands.hatchplacer.LockScissors;
 import frc.robot.commands.hatchplacer.PlaceHatchOnVelcro;
 import frc.robot.commands.hatchplacer.RetractLaunchers;
 import frc.robot.commands.hatchpickup.ReverseHatchPickupWheels;
@@ -89,7 +90,6 @@ public final class ControlHandler {
 
 		rightJoyThumbButton.whileHeld(new SingleJoystickDrive());
 		rightJoyTriggerButton.whileHeld(new LowTurnSensitivityDrive());
-		// leftJoyTriggerButton.whileHeld(new ApproachCurve());
 
 		// right joystick
 		rightJoyButton3.whenPressed(new MoveElevatorTo(5000)); // ball low
@@ -101,18 +101,20 @@ public final class ControlHandler {
 
 		// hatch
 		xboxA.whenPressed(new MoveElevatorTo(5000)); // low
-		xboxB.whenPressed(new MoveElevatorTo(13000)); // mid
-		xboxY.whenPressed(new MoveElevatorTo(23000)); // high
-		rightXboxTrigger.whileHeld(new RetractLaunchers()); // hold
-		xboxRightJoyUp.whileHeld(new ExtendHatchPickup());
-		xboxRightJoyDown.whileHeld(new RetractHatchPickup());
+		xboxB.whenPressed(new MoveElevatorTo(10000)); // mid TODO set back to 13000
+		xboxY.whenPressed(new MoveElevatorTo(16000)); // high TODO set back to 23000
+		rightXboxTrigger.whenPressed(new LockScissors()); // hold
+		xboxRightJoyUp.whenPressed(new ReverseHatchPickupWheels());
+		xboxRightJoyDown.whenPressed(new RunHatchPickupWheels());
 
 		// ball
 		// low is xboxA, same as hatch (5000)
 		xboxX.whenPressed(new MoveElevatorTo(15000)); // mid
-		xboxSTART.whenPressed(new MoveElevatorTo(25000)); // high
-		xboxLeftJoyUp.whenPressed(new ExtendCargoPickup());
-		xboxLeftJoyDown.whenPressed(new RetractCargoPickup());
+		xboxSTART.whenPressed(new MoveElevatorTo(17000)); // high TODO set back to 25000
+		xboxLeftJoyUp.whenPressed(new ReverseCargoPickupWheels());
+		xboxLeftJoyDown.whenPressed(new RunCargoPickupWheels());
+
+		leftXboxBumper.whenPressed(new RetractCargoPickup());
 	}
 
 	// -----------------------------------------------------------------//

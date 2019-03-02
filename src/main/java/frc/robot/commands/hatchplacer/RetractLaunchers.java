@@ -34,7 +34,6 @@ public class RetractLaunchers extends InstantCommand {
 
     // Execute of for loop
     // for (---, ---, ---) {Exec};
-    Robot.hatchPlacer.lockScissors();
     Robot.hatchPlacer.retractLauncher();
 
     // Increment of for loop
