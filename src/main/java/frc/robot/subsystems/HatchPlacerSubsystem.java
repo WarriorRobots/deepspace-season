@@ -11,10 +11,10 @@ import frc.robot.Constants;
  */
 public class HatchPlacerSubsystem extends Subsystem {
 
-    private static final int SCISSOR_FORWARD = 1; // XXX fix ids
-    private static final int SCISSOR_REVERSE = 6;
-    private static final int LAUNCH_FORWARD = 2;
-    private static final int LAUNCH_REVERSE = 5;
+    private static final int SCISSOR_FORWARD = 5; // XXX fix ids
+    private static final int SCISSOR_REVERSE = 2;
+    private static final int LAUNCH_FORWARD = 4;
+    private static final int LAUNCH_REVERSE = 3;
 
     private DoubleSolenoid scissorHolder, launcher;
 
