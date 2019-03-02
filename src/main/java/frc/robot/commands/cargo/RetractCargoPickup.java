@@ -14,12 +14,13 @@ import frc.robot.Robot;
 public class RetractCargoPickup extends Command {
 
   public RetractCargoPickup() {
-    requires(Robot.cargoPickup);
+    requires(Robot.arm);
   }
 
   @Override
   protected void execute() {
-    Robot.cargoPickup.rotatePickupTo(0);
+    Robot.arm.rotatePickupTo(0);
+    Robot.arm.runPickupMotor(0.1);
   }
 
   @Override
@@ -29,7 +30,7 @@ public class RetractCargoPickup extends Command {
 
   @Override
   protected void end() {
-    Robot.cargoPickup.stopArmRotator();
+    Robot.arm.stopPickup();
   }
 
 }

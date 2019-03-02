@@ -24,6 +24,8 @@ import frc.robot.commands.elevator.StabilizeElevator;
  */
 public class ElevatorSubsystem extends Subsystem {
 
+	public static final double CLICKS_PER_INCH = 1024;
+
 	private static final double ELEVATOR_P = 0.4;
 	private static final double ELEVATOR_I = 0;
 	private static final double ELEVATOR_D = 0;
@@ -59,8 +61,8 @@ public class ElevatorSubsystem extends Subsystem {
 	public void loop() {
 		// limiter
 		if (getElevatorPosition() < -100) {
-			DriverStation.reportError("The elevator is at a negative position?" + "Check encoder and Hall effect sensor.",
-					false);
+			DriverStation.reportError(
+					"The elevator is at a negative position?" + "Check encoder and Hall effect sensor.", false);
 		}
 
 		// resets the encoder when hall effect switch is triggered
@@ -72,10 +74,10 @@ public class ElevatorSubsystem extends Subsystem {
 	/**
 	 * Moves the elevator to the position specified.
 	 * 
-	 * @param position Intended position of the elevator, in (units)TODO
+	 * @param position Intended position of the elevator, in inches
 	 */
-	public void moveElevatorTo(double position) {
-		winch.set(ControlMode.Position, position);
+	public void moveElevatorTo(double inches) {
+		winch.set(ControlMode.Position, toClicks(inches));
 	}
 
 	/**
@@ -86,10 +88,10 @@ public class ElevatorSubsystem extends Subsystem {
 	}
 
 	/**
-	 * Returns the position of the elevator in (ticks)TODO
+	 * Returns the position of the elevator in inches
 	 */
-	public int getElevatorPosition() { //TODO int or double
-		return winch.getSelectedSensorPosition();
+	public double getElevatorPosition() {
+		return toInches(winch.getSelectedSensorPosition());
 	}
 
 	/**
@@ -107,9 +109,9 @@ public class ElevatorSubsystem extends Subsystem {
 		return !limitSwitch.get();
 	}
 
-	@Deprecated //TODO documentation here and other
+	// TODO documentation here and other
 	public void adjustElevatorLinear(double speed) {
-		winch.set(speed); //TODO set constraints
+		winch.set(speed); // TODO set constraints
 	}
 
 	@Override
@@ -117,11 +119,19 @@ public class ElevatorSubsystem extends Subsystem {
 		setDefaultCommand(new StabilizeElevator());
 	}
 
+	public double toInches(int clicks) {
+		return clicks / CLICKS_PER_INCH;
+	}
+
+	public int toClicks(double inches) {
+		return (int) Math.round(inches * CLICKS_PER_INCH);
+	}
+
 	@Override
 	public void initSendable(SendableBuilder builder) {
 		builder.setSmartDashboardType("elevator-subsystem");
-		builder.addDoubleProperty("elevator position in ticks", () -> getElevatorPosition(), null);
-		builder.addDoubleProperty("elevator RPM, ticks per 100ms", () -> winch.getSelectedSensorVelocity(), null);
+		builder.addDoubleProperty("elevator position inches", () -> getElevatorPosition(), null);
+		builder.addDoubleProperty("elevator position clicks", () -> winch.getSelectedSensorPosition(), null);
 		builder.addBooleanProperty("floored?", () -> isElevatorFloored(), null);
 		builder.addDoubleProperty("winch speed", () -> winch.get(), null);
 	}

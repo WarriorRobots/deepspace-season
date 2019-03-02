@@ -5,7 +5,7 @@ import frc.robot.Robot;
 
 public class StabilizeElevator extends Command {
 
-    private int initialPosition;
+    private double initialPosition;
 
     public StabilizeElevator() {
         requires(Robot.elevator);

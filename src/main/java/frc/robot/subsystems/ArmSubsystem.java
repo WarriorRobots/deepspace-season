@@ -21,9 +21,10 @@ import frc.robot.commands.cargo.StabilizeCargoPickup;
  * Contains the motors used to pickup cargo, and to rotate the mechanism in and
  * out.
  */
-public class CargoPickupSubsystem extends Subsystem {
+public class ArmSubsystem extends Subsystem {
 
     private static final double ARM_P = 1; // TODO refine this
+    public static final double CLICKS_PER_DEGREE = 12288/360; // 8.533
 
     private static final int PICKUP_PORT = 1;
     private static final int ROTATOR_PORT = 8;
@@ -36,8 +37,9 @@ public class CargoPickupSubsystem extends Subsystem {
      * <p>
      * <code> public static final CargoSubsystem cargo = new CargoSubsystem();
      */
-    public CargoPickupSubsystem() {
+    public ArmSubsystem() {
         intakeWheels = new WPI_VictorSPX(PICKUP_PORT);
+        intakeWheels.setInverted(true);
         armRotator = new WPI_TalonSRX(ROTATOR_PORT);
         armRotator.setInverted(true);
 
@@ -45,7 +47,7 @@ public class CargoPickupSubsystem extends Subsystem {
         armRotator.setSensorPhase(false);
         armRotator.config_kP(Constants.PID_ID, ARM_P, Constants.TIMEOUT_MS);
 
-        // armRotator.configClosedLoopPeakOutput(Constants.PID_ID, 0.3);
+        armRotator.configClosedLoopPeakOutput(Constants.PID_ID, 1);
     }
 
     /**
@@ -63,19 +65,18 @@ public class CargoPickupSubsystem extends Subsystem {
      * @param degrees Intended position in degrees (TODO specify range).
      */
     public void rotatePickupTo(double degrees) {
-        armRotator.set(ControlMode.Position, degrees); // TODO degrees and ticks
+        armRotator.set(ControlMode.Position, toClicks(degrees)); // TODO degrees and ticks
     }
 
-    @Deprecated
     public void rotatePickupLinear(double speed) {
         armRotator.set(speed); // XXX write safety constraints
     }
 
     /**
-     * Returns the angular position, in [degrees or ticks], of the pickup assembly.
+     * Returns the angular position, in degrees, of the pickup assembly.
      */
-    public int getPickupPosition() {
-        return armRotator.getSelectedSensorPosition(); // TODO degrees conversion
+    public double getPickupPosition() {
+        return toDegrees(armRotator.getSelectedSensorPosition()); // TODO degrees conversion
     }
 
     /**
@@ -102,6 +103,14 @@ public class CargoPickupSubsystem extends Subsystem {
         armRotator.stopMotor();
     }
 
+    public double toDegrees(int clicks) {
+        return clicks / CLICKS_PER_DEGREE;
+    }
+
+    public int toClicks(double degrees) {
+        return (int) Math.round(degrees * CLICKS_PER_DEGREE);
+    }
+
     @Override
     public void initDefaultCommand() {
         setDefaultCommand(new StabilizeCargoPickup());
@@ -110,9 +119,7 @@ public class CargoPickupSubsystem extends Subsystem {
     @Override
     public void initSendable(SendableBuilder builder) {
         builder.setSmartDashboardType("cargo-subsystem");
-        // XXX convert below lambda to degrees
         builder.addDoubleProperty("Rotator motor angle", () -> getPickupPosition(), null);
-        builder.addDoubleProperty("Rotator motor speed", () -> armRotator.get(), null);
     }
 
 }

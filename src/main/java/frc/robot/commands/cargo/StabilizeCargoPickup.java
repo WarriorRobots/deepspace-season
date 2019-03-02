@@ -16,17 +16,18 @@ public class StabilizeCargoPickup extends Command {
   private double initialPosition;
 
   public StabilizeCargoPickup() {
-    requires(Robot.cargoPickup);
+    requires(Robot.arm);
   }
 
   @Override
   protected void initialize() {
-    initialPosition = Robot.cargoPickup.getPickupPosition();
+    initialPosition = Robot.arm.getPickupPosition();
   }
 
   @Override
   protected void execute() {
-    Robot.cargoPickup.rotatePickupTo(initialPosition);
+    Robot.arm.rotatePickupTo(initialPosition);
+    Robot.arm.runPickupMotor(0.1);
   }
 
   @Override
@@ -36,6 +37,6 @@ public class StabilizeCargoPickup extends Command {
   
   @Override
   protected void end() {
-    Robot.cargoPickup.stopArmRotator();
+    Robot.arm.stopPickup();
   }
 }

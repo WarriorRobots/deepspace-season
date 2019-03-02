@@ -49,7 +49,7 @@ public class HatchPlacerSubsystem extends Subsystem {
      * <p>
      * <b>Warning:</b> only use if the hatch is loose (scissors are closed)!
      */
-    public void extendLauncher() {
+    public void extendLaunchers() {
         launcher.set(Value.kForward);
     }
 
@@ -58,7 +58,7 @@ public class HatchPlacerSubsystem extends Subsystem {
      */
     public void neutralizePneumatics() {
         neutralizeScissors();
-        neutralizeLauncher();
+        neutralizeLaunchers();
     }
 
     /** 
@@ -71,14 +71,14 @@ public class HatchPlacerSubsystem extends Subsystem {
     /**
      * Set both launcher solenoids to off. TODO fix documentation
      */
-    public void neutralizeLauncher() {
+    public void neutralizeLaunchers() {
         launcher.set(Value.kOff);
     }
 
     /**
      * Retract the pistons that push the hatch off the scissors.
      */
-    public void retractLauncher() {
+    public void retractLaunchers() {
         launcher.set(Value.kReverse);
     }
 

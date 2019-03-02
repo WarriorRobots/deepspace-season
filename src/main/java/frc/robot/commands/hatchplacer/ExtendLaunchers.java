@@ -15,10 +15,11 @@ public class ExtendLaunchers extends Command {
 
   /** Count variable for the loop of pneumatic */
   private int i;
+  private boolean safemode; //TODO documentation
 
-  public ExtendLaunchers() {
-    super();
+  public ExtendLaunchers(boolean safemode) {
     requires(Robot.hatchPlacer);
+    this.safemode = safemode;
   }
 
   @Override
@@ -35,7 +36,13 @@ public class ExtendLaunchers extends Command {
     // (1 loop is not enough time for the pneumatic to fire)
     // Execute of for loop
     // for (---, ---, ---) {Exec};
-    Robot.hatchPlacer.extendLauncher();
+    if (safemode) {
+      if (Robot.lineFollowers.getMiddleLineFollower()) {
+        Robot.hatchPlacer.extendLaunchers();
+      } //else do nothing
+    } else {
+      Robot.hatchPlacer.extendLaunchers();
+    }
 
     // Increment of for loop
     // for (---, ---, Inc) {---};

@@ -6,19 +6,18 @@ import frc.robot.Robot;
 
 public class MoveElevatorTo extends Command {
 
-    private int position;
-    private static final int MINIMUM_POSITION = 3000; // a bit above 0
-    private static final int MAXIMUM_POSITION = 30000;
+    private double position;
+    private static final int MINIMUM_POSITION = 4; // a bit above 0
 
-    public MoveElevatorTo(int positionClicks) { //TODO make into real life units
+    public MoveElevatorTo(double positionInches) {
         requires(Robot.elevator);
-        if (positionClicks == 0) {
+        if (positionInches == 0) {
             DriverStation.reportError("Use ResetElevator instead of MoveElevatorTo(0)", false);
-        } else if (positionClicks < MINIMUM_POSITION || positionClicks > MAXIMUM_POSITION) { // TODO find max
-            DriverStation.reportError("FIND PROGRAMMER IMMEDIATELY: Elevator attempted to move to unsafe position: " + positionClicks, false);
+        } else if (positionInches < MINIMUM_POSITION) { // TODO find max
+            DriverStation.reportError("FIND PROGRAMMER IMMEDIATELY: Elevator attempted to move to unsafe position: " + positionInches, false);
             this.position = MINIMUM_POSITION;
         } else {
-            this.position = positionClicks;
+            this.position = positionInches;
         }
     }
 

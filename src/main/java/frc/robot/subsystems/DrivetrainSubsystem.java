@@ -31,10 +31,10 @@ public class DrivetrainSubsystem extends Subsystem {
 	private static final int RIGHT_ENCODER_PORTA = 2;
 	private static final int RIGHT_ENCODER_PORTB = 3;
 
-	public static final boolean LEFT_ENCODER_REVERSED = true;
-	public static final boolean RIGHT_ENCODER_REVERSED = false;
-	public static final boolean LEFT_DRIVE_REVERSED = true;
-	public static final boolean RIGHT_DRIVE_REVERSED = true;
+	public static final boolean LEFT_ENCODER_REVERSED = false;
+	public static final boolean RIGHT_ENCODER_REVERSED = true;
+	public static final boolean LEFT_DRIVE_REVERSED = false;
+	public static final boolean RIGHT_DRIVE_REVERSED = false;
 
 	private static final double RAMPRATE_SECONDS = 0.25;
 

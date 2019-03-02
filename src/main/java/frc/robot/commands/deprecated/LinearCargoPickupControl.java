@@ -10,13 +10,14 @@ public class LinearCargoPickupControl extends Command {
     private DoubleSupplier input;
 
     public LinearCargoPickupControl(DoubleSupplier input) {
-        requires(Robot.cargoPickup);
+        requires(Robot.arm);
+        requires(Robot.drivetrain);//XXX remove this
         this.input = input;
     }
 
     @Override
     protected void execute() {
-        Robot.cargoPickup.rotatePickupLinear(input.getAsDouble());
+        Robot.arm.rotatePickupLinear(input.getAsDouble());
     }
 
     @Override
@@ -26,7 +27,7 @@ public class LinearCargoPickupControl extends Command {
 
     @Override
     protected void end() {
-        Robot.cargoPickup.stopArmRotator();
+        Robot.arm.stopArmRotator();
     }
 
 }

@@ -5,13 +5,21 @@ import frc.robot.Robot;
 
 public class RunCargoPickupWheels extends Command {
 
+    private double initialPosition;
+
     public RunCargoPickupWheels() {
-        // requires(Robot.cargoPickup);
+        requires(Robot.arm);
+    }
+
+    @Override
+    protected void initialize() {
+        initialPosition = Robot.arm.getPickupPosition();
     }
 
     @Override
     protected void execute() {
-        Robot.cargoPickup.runPickupMotor(1);
+        Robot.arm.runPickupMotor(1);
+        Robot.arm.rotatePickupTo(initialPosition);
     }
 
     @Override
@@ -21,7 +29,7 @@ public class RunCargoPickupWheels extends Command {
 
     @Override
     protected void end() {
-        Robot.cargoPickup.stopPickup();
+        Robot.arm.stopPickup();
     }
 
 }

@@ -17,7 +17,6 @@ public class LockScissors extends Command {
   private int i;
 
   public LockScissors() {
-    super();
     requires(Robot.hatchPlacer);
   }
 

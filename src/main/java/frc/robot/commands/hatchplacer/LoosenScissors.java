@@ -17,7 +17,6 @@ public class LoosenScissors extends Command {
   private int i;
 
   public LoosenScissors() {
-    super();
     requires(Robot.hatchPlacer);
   }
 

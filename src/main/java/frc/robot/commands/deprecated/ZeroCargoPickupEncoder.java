@@ -3,15 +3,15 @@ package frc.robot.commands.deprecated;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class ResetArmEncoder extends InstantCommand {
+public class ZeroCargoPickupEncoder extends InstantCommand {
 
-    public ResetArmEncoder() {
-        requires(Robot.cargoPickup);
+    public ZeroCargoPickupEncoder() {
+        requires(Robot.arm);
     }
 
     @Override
     protected void execute() {
-        Robot.cargoPickup.resetPickupPosition();
+        Robot.arm.resetPickupPosition();
     }
 
 }

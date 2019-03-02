@@ -11,7 +11,7 @@ public class ResetAll extends InstantCommand {
         requires(Robot.elevator);
         requires(Robot.hatchPickup);
         requires(Robot.hatchPlacer);
-        requires(Robot.cargoPickup);
+        requires(Robot.arm);
         requires(Robot.pneumaticBase);
         requires(Robot.lineFollowers);
     }
@@ -26,8 +26,8 @@ public class ResetAll extends InstantCommand {
         Robot.hatchPickup.stopIntakeMotor();
         Robot.hatchPickup.neutralizePneumatics();
         Robot.hatchPlacer.neutralizePneumatics();
-        Robot.cargoPickup.stopArmRotator();
-        Robot.cargoPickup.stopPickup();
+        Robot.arm.stopArmRotator();
+        Robot.arm.stopPickup();
         Robot.pneumaticBase.disableCompressor();
     }
 

@@ -19,7 +19,7 @@ public class RetractLaunchers extends InstantCommand {
   public RetractLaunchers() {
     requires(Robot.hatchPlacer);
   }
-  
+
   @Override
   protected void initialize() {
     // Initialization of for loop
@@ -29,12 +29,13 @@ public class RetractLaunchers extends InstantCommand {
 
   @Override
   protected void execute() {
-    // The purpose of running the pneumatic in a loop format is to garantee the pneumatic fires
+    // The purpose of running the pneumatic in a loop format is to garantee the
+    // pneumatic fires
     // (1 loop is not enough time for the pneumatic to fire)
 
     // Execute of for loop
     // for (---, ---, ---) {Exec};
-    Robot.hatchPlacer.retractLauncher();
+    Robot.hatchPlacer.retractLaunchers();
 
     // Increment of for loop
     // for (---, ---, Inc) {---};

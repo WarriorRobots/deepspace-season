@@ -5,9 +5,10 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class PlaceHatchOnVelcro extends CommandGroup {
 
-    public PlaceHatchOnVelcro() {
+    public PlaceHatchOnVelcro(boolean safemode) {
+        addParallel(new ExtendLaunchers(safemode));
+        addSequential(new WaitCommand(0.2));
         addParallel(new LoosenScissors());
-        addParallel(new ExtendLaunchers());
         addSequential(new WaitCommand(0.3));
         addSequential(new RetractLaunchers());
     }

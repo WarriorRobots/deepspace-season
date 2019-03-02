@@ -11,12 +11,21 @@ public class LinearElevatorControl extends Command {
 
     public LinearElevatorControl(DoubleSupplier input) {
         requires(Robot.elevator);
+        requires(Robot.drivetrain);//XXX remove this
         this.input = input;
     }
 
     @Override
     protected void execute() {
-        Robot.elevator.adjustElevatorLinear(input.getAsDouble());
+        if (!Robot.elevator.isElevatorFloored()) {
+            Robot.elevator.adjustElevatorLinear(input.getAsDouble());
+        } else {
+            if (input.getAsDouble() < 0) {
+                Robot.elevator.stopElevator();
+            } else {
+                Robot.elevator.adjustElevatorLinear(input.getAsDouble());
+            }
+        }
     }
 
     @Override

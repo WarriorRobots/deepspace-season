@@ -45,7 +45,7 @@ public class PneumaticBaseSubsystem extends Subsystem {
     @Override
     public void initSendable(SendableBuilder builder) {
         builder.setSmartDashboardType("compressor-data");
-        builder.addBooleanProperty("low pressure?", () -> compressor.getPressureSwitchValue(), null);
+        builder.addBooleanProperty("low pressure?", () -> !compressor.getPressureSwitchValue(), null);
         builder.addBooleanProperty("compressor running?", () -> compressor.enabled(), null);
     }
 
