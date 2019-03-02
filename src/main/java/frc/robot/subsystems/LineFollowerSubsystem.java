@@ -36,44 +36,22 @@ public class LineFollowerSubsystem extends Subsystem {
     /**
      * Returns true if left follower sees a white line, false otherwise.
      */
-    private boolean getLeftLineFollower() {
-        return leftFollower.get();
+    public boolean getLeftLineFollower() {
+        return !leftFollower.get();
     }
 
     /**
      * Returns true if middle follower sees a white line, false otherwise.
      */
-    private boolean getMiddleLineFollower() {
-        return middleFollower.get();
+    public boolean getMiddleLineFollower() {
+        return !middleFollower.get();
     }
 
     /**
      * Returns true if right follower sees a white line, false otherwise.
      */
-    private boolean getRightLineFollower() {
-        return rightFollower.get();
-    }
-
-    /**
-     * Returns true if left and right followers don't see line, and middle follower
-     * does; false otherwise;
-     */
-    public boolean onLine() {
-        return (!getLeftLineFollower() && !getRightLineFollower()) && getMiddleLineFollower();
-    }
-
-    /**
-     * Returns true if robot is too far right of the line.
-     */
-    public boolean onLeftOfLine() {
-        return getRightLineFollower();
-    }
-
-    /**
-     * Returns true if robot is too far left of the line.
-     */
-    public boolean onRightOfLine() {
-        return getLeftLineFollower();
+    public boolean getRightLineFollower() {
+        return !rightFollower.get();
     }
 
     @Override
@@ -82,10 +60,9 @@ public class LineFollowerSubsystem extends Subsystem {
     @Override
     public void initSendable(SendableBuilder builder) {
         builder.setSmartDashboardType("line-follow-subsystem");
-        // TODO change the booleans from being NOTed here to being changed above
-        builder.addBooleanProperty("left", () -> !leftFollower.get(), null);
-        builder.addBooleanProperty("middle", () -> !middleFollower.get(), null);
-        builder.addBooleanProperty("right", () -> !rightFollower.get(), null);
+        builder.addBooleanProperty("left", () -> getLeftLineFollower(), null);
+        builder.addBooleanProperty("middle", () -> getMiddleLineFollower(), null);
+        builder.addBooleanProperty("right", () -> getRightLineFollower(), null);
     }
 
 }

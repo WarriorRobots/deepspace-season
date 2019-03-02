@@ -82,7 +82,7 @@ public class HatchPlacerSubsystem extends Subsystem {
         launcher.set(Value.kReverse);
     }
 
-    @Override // TODO default command
+    @Override
     protected void initDefaultCommand() {
     }
 

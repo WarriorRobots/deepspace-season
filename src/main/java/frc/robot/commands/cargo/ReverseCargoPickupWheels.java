@@ -19,4 +19,9 @@ public class ReverseCargoPickupWheels extends Command {
         return false;
     }
 
+    @Override
+    protected void end() {
+        Robot.cargoPickup.stopPickup();
+    }
+
 }

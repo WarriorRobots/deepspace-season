@@ -26,4 +26,9 @@ public class StabilizeElevator extends Command {
         return false;
     }
 
+    @Override
+    protected void end() {
+        Robot.elevator.stopElevator();
+    }
+
 }

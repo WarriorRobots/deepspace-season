@@ -19,6 +19,7 @@ public class PneumaticBaseSubsystem extends Subsystem {
      */
     public PneumaticBaseSubsystem() {
         compressor = new Compressor();
+        compressor.start();
     }
 
     /**

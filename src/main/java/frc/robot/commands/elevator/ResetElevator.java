@@ -28,4 +28,9 @@ public class ResetElevator extends Command {
         return Robot.elevator.isElevatorFloored();
     }
 
+    @Override
+    protected void end() {
+        Robot.elevator.stopElevator();
+    }
+
 }

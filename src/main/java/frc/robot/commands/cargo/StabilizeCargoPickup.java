@@ -34,4 +34,8 @@ public class StabilizeCargoPickup extends Command {
     return false;
   }
   
+  @Override
+  protected void end() {
+    Robot.cargoPickup.stopRotator();
+  }
 }
