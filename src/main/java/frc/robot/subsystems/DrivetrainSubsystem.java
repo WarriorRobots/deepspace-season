@@ -47,16 +47,16 @@ public class DrivetrainSubsystem extends Subsystem {
 
 	/** The robot wheel is {@value} inches in diameter. */
 	public static final double WHEEL_DIAMETER = 6.0;
-	/** Number of encoder clicks of a Grayhill encoder per revolution */
-	public static final int GRAYHILL_PER_REV = 128;
+	
+	/** A Grayhill encoder has {@value} clicks per revolution. */
+	public static final int CLICKS_PER_REV = 128;
+	
 	/**
-	 * How far the robot travels, in inches, per Grayhill click.
-	 * <p>
-	 * Equates to {@value}.
+	 * The robot travels {@value} inches per encoder click.
 	 */
-	// Diameter * PI = circumference, circumference divided by clicks = distance per
-	// click.
-	public static final double INCHES_DRIVEN_PER_CLICK = (WHEEL_DIAMETER * Math.PI) / GRAYHILL_PER_REV;
+	// Diameter * PI = circumference
+	// circumference divided by clicks = distance per click.
+	public static final double INCHES_DRIVEN_PER_CLICK = (WHEEL_DIAMETER * Math.PI) / CLICKS_PER_REV;
 
 	/**
 	 * Instantiates new subsystem; make ONLY ONE.

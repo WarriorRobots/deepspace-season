@@ -1,17 +1,17 @@
-package frc.robot.commands.elevator;
+package frc.robot.commands.cargo;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class RaiseElevator extends Command {
+public class RunCargoPickupWheels extends Command {
 
-    public RaiseElevator() {
-        requires(Robot.elevator);
+    public RunCargoPickupWheels() {
+        requires(Robot.cargoPickup);
     }
 
     @Override
     protected void execute() {
-        Robot.elevator.moveElevator(0.2);
+        Robot.cargoPickup.runPickupMotor(1);
     }
 
     @Override

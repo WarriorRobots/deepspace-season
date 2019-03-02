@@ -15,7 +15,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
-import frc.robot.commands.cargo.StabilizePickup;
+import frc.robot.commands.cargo.StabilizeCargoPickup;
 
 /**
  * Contains the motors used to pickup cargo, and to rotate the mechanism in and
@@ -23,15 +23,13 @@ import frc.robot.commands.cargo.StabilizePickup;
  */
 public class CargoPickupSubsystem extends Subsystem {
 
-    private static final double ARM_P = 1;
-    private static final double ARM_I = 0;
-    private static final double ARM_D = 0;
+    private static final double ARM_P = 1; // TODO refine this
 
     private static final int PICKUP_PORT = 1;
     private static final int ROTATOR_PORT = 8;
 
-    private WPI_VictorSPX pickup;
-    private WPI_TalonSRX rotator;
+    private WPI_VictorSPX intakeWheels;
+    private WPI_TalonSRX armRotator;
 
     /**
      * Instantiates new subsystem; make ONLY ONE.
@@ -39,13 +37,11 @@ public class CargoPickupSubsystem extends Subsystem {
      * <code> public static final CargoSubsystem cargo = new CargoSubsystem();
      */
     public CargoPickupSubsystem() {
-        pickup = new WPI_VictorSPX(PICKUP_PORT);
-        rotator = new WPI_TalonSRX(ROTATOR_PORT);
+        intakeWheels = new WPI_VictorSPX(PICKUP_PORT);
+        armRotator = new WPI_TalonSRX(ROTATOR_PORT);
 
-        rotator.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
-        rotator.config_kP(Constants.PID_ID, ARM_P, Constants.TIMEOUT_MS);
-        rotator.config_kI(Constants.PID_ID, ARM_I, Constants.TIMEOUT_MS);
-        rotator.config_kD(Constants.PID_ID, ARM_D, Constants.TIMEOUT_MS);
+        armRotator.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
+        armRotator.config_kP(Constants.PID_ID, ARM_P, Constants.TIMEOUT_MS);
     }
 
     /**
@@ -54,37 +50,37 @@ public class CargoPickupSubsystem extends Subsystem {
      * @param speed Decimal value from -1 to 1.
      */
     public void runPickupMotor(double speed) {
-        pickup.set(speed);
+        intakeWheels.set(speed);
     }
 
     /**
      * Rotate the pickup assembly to the specified angle in degrees.
      * 
-     * @param positionDegrees Intended position in degrees (TODO specify range).
+     * @param degrees Intended position in degrees (TODO specify range).
      */
-    public void rotatePickupDegrees(double positionDegrees) { // TODO pick a more logical name for the command
-        rotator.set(ControlMode.Position, positionDegrees); // TODO degrees and ticks
+    public void rotatePickupTo(double degrees) {
+        armRotator.set(ControlMode.Position, degrees); // TODO degrees and ticks
     }
 
     /**
      * Returns the angular position, in [degrees or ticks], of the pickup assembly.
      */
     public int getPickupPosition() {
-        return rotator.getSelectedSensorPosition(); // TODO degrees conversion
+        return armRotator.getSelectedSensorPosition(); // TODO degrees conversion
     }
 
     /**
      * Set the position of the Arm back to 0.
      */
     public void resetPickupPosition() {
-        rotator.setSelectedSensorPosition(0);
+        armRotator.setSelectedSensorPosition(0);
     }
 
     /**
      * Shuts off the pickup motor.
      */
     public void stopPickup() {
-        pickup.stopMotor();
+        intakeWheels.stopMotor();
     }
 
     /**
@@ -95,13 +91,13 @@ public class CargoPickupSubsystem extends Subsystem {
      */
     @Deprecated
     public void stopRotator() {
-        rotator.stopMotor();
+        armRotator.stopMotor();
     }
 
     @Override
     public void initDefaultCommand() {
         // TODO run pickup command? possibly joystick, or leave blank
-        setDefaultCommand(new StabilizePickup());
+        setDefaultCommand(new StabilizeCargoPickup());
     }
 
     @Override
@@ -109,7 +105,7 @@ public class CargoPickupSubsystem extends Subsystem {
         builder.setSmartDashboardType("cargo-subsystem");
         // XXX convert below lambda to degrees
         builder.addDoubleProperty("Rotator motor angle", () -> getPickupPosition(), null);
-        builder.addDoubleProperty("Rotator motor speed", () -> rotator.get(), null);
+        builder.addDoubleProperty("Rotator motor speed", () -> armRotator.get(), null);
     }
 
 }

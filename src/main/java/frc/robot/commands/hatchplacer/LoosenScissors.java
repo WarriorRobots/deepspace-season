@@ -5,18 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.hatch;
+package frc.robot.commands.hatchplacer;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /** Loosen a hatch off of the hatch placer */
-public class ReleaseHatch extends Command {
+public class LoosenScissors extends Command {
 
   /** Count variable for the loop of pneumatic */
   private int i;
 
-  public ReleaseHatch() {
+  public LoosenScissors() {
     super();
     requires(Robot.hatchPlacer);
   }
@@ -35,7 +35,7 @@ public class ReleaseHatch extends Command {
     // (1 loop is not enough time for the pneumatic to fire)
     // Execute of for loop
     // for (---, ---, ---) {Exec};
-    Robot.hatchPlacer.releaseHatch();
+    Robot.hatchPlacer.loosenScissors();
 
     // Increment of for loop
     // for (---, ---, Inc) {---};

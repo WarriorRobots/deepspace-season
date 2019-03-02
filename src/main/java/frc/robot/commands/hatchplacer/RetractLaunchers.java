@@ -5,19 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.hatch;
+package frc.robot.commands.hatchplacer;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
 /** Set hatch placer back into a neutral position, used after launching */
-public class ResetLauncher extends InstantCommand {
+public class RetractLaunchers extends InstantCommand {
 
   /** Count variable for the loop of pneumatic */
-  private int i;
+  private int counter;
 
-  public ResetLauncher() {
-    super();
+  public RetractLaunchers() {
     requires(Robot.hatchPlacer);
   }
   
@@ -25,7 +24,7 @@ public class ResetLauncher extends InstantCommand {
   protected void initialize() {
     // Initialization of for loop
     // for (Init, ---, ---) {---};
-    i = 0;
+    counter = 0;
   }
 
   @Override
@@ -35,19 +34,19 @@ public class ResetLauncher extends InstantCommand {
 
     // Execute of for loop
     // for (---, ---, ---) {Exec};
-    Robot.hatchPlacer.secureHatch();
+    Robot.hatchPlacer.lockScissors();
     Robot.hatchPlacer.retractLauncher();
 
     // Increment of for loop
     // for (---, ---, Inc) {---};
-    i++;
+    counter++;
   }
 
   @Override
   protected boolean isFinished() {
     // Condition of for loop
     // for (---, Cond, ---) {---};
-    return (i > 5);
+    return (counter > 5);
     // 5 is the approximate number of loops a pneumatic takes to fire
   }
 

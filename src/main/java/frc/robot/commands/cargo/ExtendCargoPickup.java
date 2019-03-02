@@ -5,31 +5,28 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.hatch;
+package frc.robot.commands.cargo;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LetHatchOut extends Command {
-  public LetHatchOut() {
-    requires(Robot.hatchPickup);
+/** Put the cargo pickup into the Horizontal position */
+public class ExtendCargoPickup extends Command {
+
+  private static final double TARGET_ANGLE = 0;
+
+  public ExtendCargoPickup() {
+    requires(Robot.cargoPickup);
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatchPickup.runIntakeMotor(-0.5);
+    Robot.cargoPickup.rotatePickupTo(TARGET_ANGLE);
   }
 
-  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     return false;
-  }
-
-  @Override
-  protected void end() {
-    Robot.hatchPickup.stopIntakeMotor();
   }
 
 }

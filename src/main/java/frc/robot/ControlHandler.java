@@ -11,22 +11,20 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.cargo.BallIn;
-import frc.robot.commands.cargo.BallOut;
-import frc.robot.commands.cargo.cargoLevel;
-import frc.robot.commands.cargo.cargoUp;
+import frc.robot.commands.cargo.RunCargoPickupWheels;
+import frc.robot.commands.cargo.ReverseCargoPickupWheels;
+import frc.robot.commands.cargo.ExtendCargoPickup;
+import frc.robot.commands.cargo.RetractCargoPickup;
 import frc.robot.commands.drive.SingleJoystickDrive;
 import frc.robot.commands.drive.LowTurnSensitivityDrive;
 import frc.robot.commands.elevator.MoveElevatorTo;
-import frc.robot.commands.hatch.RetractPickup;
+import frc.robot.commands.hatchpickup.RetractHatchPickup;
 import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.commands.hatch.DisableCompressor;
-import frc.robot.commands.hatch.EnableCompressor;
-import frc.robot.commands.hatch.ExtendPickup;
-import frc.robot.commands.hatch.PlaceHatchGroup;
-import frc.robot.commands.hatch.PullHatchIn;
-import frc.robot.commands.hatch.ResetLauncher;
-import frc.robot.commands.hatch.LetHatchOut;
+import frc.robot.commands.hatchpickup.ExtendHatchPickup;
+import frc.robot.commands.hatchpickup.RunHatchPickupWheels;
+import frc.robot.commands.hatchplacer.PlaceHatchOnVelcro;
+import frc.robot.commands.hatchplacer.RetractLaunchers;
+import frc.robot.commands.hatchpickup.ReverseHatchPickupWheels;
 import frc.robot.util.triggers.DpadTrigger;
 import frc.robot.util.triggers.ThresholdJoystick;
 import frc.robot.util.triggers.ThresholdTrigger;
@@ -95,26 +93,26 @@ public final class ControlHandler {
 
 		// right joystick
 		rightJoyButton3.whenPressed(new MoveElevatorTo(5000)); // ball low
-		rightJoyButton4.whenPressed(new BallOut());
+		rightJoyButton4.whenPressed(new ReverseCargoPickupWheels());
 
 		// left joystick
-		leftJoyButton3.whenPressed(new ExtendPickup());
-		leftJoyButton4.whenPressed(new PlaceHatchGroup());
+		leftJoyButton3.whenPressed(new ExtendHatchPickup());
+		leftJoyButton4.whenPressed(new PlaceHatchOnVelcro());
 
 		// hatch
 		xboxA.whenPressed(new MoveElevatorTo(5000)); // low
 		xboxB.whenPressed(new MoveElevatorTo(13000)); // mid
 		xboxY.whenPressed(new MoveElevatorTo(23000)); // high
-		rightXboxTrigger.whileHeld(new ResetLauncher()); // hold
-		xboxRightJoyUp.whileHeld(new ExtendPickup());
-		xboxRightJoyDown.whileHeld(new RetractPickup());
+		rightXboxTrigger.whileHeld(new RetractLaunchers()); // hold
+		xboxRightJoyUp.whileHeld(new ExtendHatchPickup());
+		xboxRightJoyDown.whileHeld(new RetractHatchPickup());
 
 		// ball
 		// low is xboxA, same as hatch (5000)
 		xboxX.whenPressed(new MoveElevatorTo(15000)); // mid
 		xboxSTART.whenPressed(new MoveElevatorTo(25000)); // high
-		xboxLeftJoyUp.whenPressed(new cargoLevel());
-		xboxLeftJoyDown.whenPressed(new cargoUp());
+		xboxLeftJoyUp.whenPressed(new ExtendCargoPickup());
+		xboxLeftJoyDown.whenPressed(new RetractCargoPickup());
 	}
 
 	// -----------------------------------------------------------------//

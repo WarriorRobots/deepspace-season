@@ -5,38 +5,31 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.hatch;
+package frc.robot.commands.hatchpickup;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/** Make the hatch pickup move from being vertical to being on the ground */
-public class ExtendPickup extends Command {
-  public ExtendPickup() {
+public class ReverseHatchPickupWheels extends Command {
+  public ReverseHatchPickupWheels() {
     requires(Robot.hatchPickup);
-    //requires(Robot.hatchplacer);
   }
 
-  @Override
-  protected void initialize() {
-  }
-
+  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    //TODO make sure the scisors are released before bringing the pickup down
-    Robot.hatchPickup.extendPickup();
+    Robot.hatchPickup.runIntakeMotor(-0.5);
   }
 
+  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   @Override
   protected void end() {
+    Robot.hatchPickup.stopIntakeMotor();
   }
 
-  @Override
-  protected void interrupted() {
-  }
 }

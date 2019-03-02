@@ -107,7 +107,6 @@ public class ElevatorSubsystem extends Subsystem {
 		return !limitSwitch.get();
 	}
 
-	@Deprecated
 	public void moveElevator(double speed) {
 		winch.set(speed);
 	}

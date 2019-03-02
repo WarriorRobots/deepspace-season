@@ -5,13 +5,22 @@ import frc.robot.Robot;
 
 public class ResetElevator extends Command {
 
+    private static final int THRESHOLD = 1000;
+
     public ResetElevator() {
         requires(Robot.elevator);
     }
 
     @Override
     protected void execute() {
-        Robot.elevator.moveElevatorTo(0);
+        int position = Robot.elevator.getElevatorPosition();
+        if (position > THRESHOLD) {
+            Robot.elevator.moveElevatorTo(THRESHOLD);
+        } else if (position < 0) {
+            Robot.elevator.moveElevator(-0.1);
+        } else {
+            Robot.elevator.stopElevator();
+        }
     }
 
     @Override

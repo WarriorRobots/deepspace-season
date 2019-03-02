@@ -9,22 +9,19 @@ package frc.robot.commands.cargo;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.CargoPickupSubsystem;
-import frc.robot.util.annotations.Incomplete;
 
 /** Put the cargo pickup into the Up position */
-public class cargoUp extends Command {
+public class RetractCargoPickup extends Command {
 
-  /** Angle of the cargo pick */
-  //private double position;
+  private static final double TARGET_ANGLE = 90;
 
-  public cargoUp() {
+  public RetractCargoPickup() {
     requires(Robot.cargoPickup);
   }
 
   @Override
   protected void execute() {
-    Robot.cargoPickup.setPickupPosition(CargoPickupSubsystem.positionUp);
+    Robot.cargoPickup.rotatePickupTo(TARGET_ANGLE);
   }
 
   @Override
@@ -32,8 +29,4 @@ public class cargoUp extends Command {
     return false;
   }
 
-  @Override
-  protected void end() {
-    Robot.cargoPickup.setPickupPosition(Robot.cargoPickup.getPickupPosition());
-  }
 }

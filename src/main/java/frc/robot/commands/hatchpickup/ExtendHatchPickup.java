@@ -5,31 +5,39 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.hatch;
+package frc.robot.commands.hatchpickup;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class PullHatchIn extends Command {
-  public PullHatchIn() {
+/** Make the hatch pickup move from being vertical to being on the ground */
+public class ExtendHatchPickup extends Command {
+  
+  private int counter;
+
+  public ExtendHatchPickup() {
     requires(Robot.hatchPickup);
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-    Robot.hatchPickup.runIntakeMotor(0.5);
+  protected void initialize() {
+    counter = 0;
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+  @Override
+  protected void execute() {
+    counter++;
+    Robot.hatchPickup.extendPickup();
+  }
+
   @Override
   protected boolean isFinished() {
-    return false;
+    return counter > 5;
   }
 
   @Override
   protected void end() {
-    Robot.hatchPickup.stopIntakeMotor();
+    Robot.hatchPickup.neutralizePneumatics();
   }
 
 }

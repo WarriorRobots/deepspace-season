@@ -3,15 +3,15 @@ package frc.robot.commands.cargo;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class BallIn extends Command {
+public class ReverseCargoPickupWheels extends Command {
 
-    public BallIn() {
+    public ReverseCargoPickupWheels() {
         requires(Robot.cargoPickup);
     }
 
     @Override
     protected void execute() {
-        Robot.cargoPickup.runPickupMotor(0.9);
+        Robot.cargoPickup.runPickupMotor(-1);
     }
 
     @Override

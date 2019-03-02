@@ -5,28 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.cargo;
+package frc.robot.commands.hatchpickup;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.CargoPickupSubsystem;
-import frc.robot.util.annotations.Incomplete;
 
-/** Put the cargo pickup into the Horizontal position */
-public class cargoLevel extends Command {
-
-  /** Angle of the cargo pick */
-  //private double position;
-
-  public cargoLevel() {
-    requires(Robot.cargoPickup);
+public class RunHatchPickupWheels extends Command {
+  public RunHatchPickupWheels() {
+    requires(Robot.hatchPickup);
   }
 
+  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.cargoPickup.setPickupPosition(CargoPickupSubsystem.positionLevel);
+    Robot.hatchPickup.runIntakeMotor(0.5);
   }
 
+  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     return false;
@@ -34,6 +29,7 @@ public class cargoLevel extends Command {
 
   @Override
   protected void end() {
-    Robot.cargoPickup.setPickupPosition(Robot.cargoPickup.getPickupPosition());
+    Robot.hatchPickup.stopIntakeMotor();
   }
+
 }
