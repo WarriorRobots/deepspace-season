@@ -11,23 +11,22 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /** Sabilize the cargo pickup */
-public class StabilizeCargoPickup extends Command {
+public class StabilizeArm extends Command {
 
   private double initialPosition;
 
-  public StabilizeCargoPickup() {
+  public StabilizeArm() {
     requires(Robot.arm);
   }
 
   @Override
   protected void initialize() {
-    initialPosition = Robot.arm.getPickupPosition();
+    initialPosition = Robot.arm.getArmAngle();
   }
 
   @Override
   protected void execute() {
-    Robot.arm.rotatePickupTo(initialPosition);
-    Robot.arm.runPickupMotor(0.1);
+    Robot.arm.rotateArmTo(initialPosition);
   }
 
   @Override
@@ -37,6 +36,6 @@ public class StabilizeCargoPickup extends Command {
   
   @Override
   protected void end() {
-    Robot.arm.stopPickup();
+    Robot.arm.stopArm();
   }
 }

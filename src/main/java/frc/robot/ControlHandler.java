@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.cargo.RunCargoPickupWheels;
-import frc.robot.commands.deprecated.LinearCargoPickupControl;
+import frc.robot.commands.deprecated.LinearArmControl;
 import frc.robot.commands.deprecated.LinearElevatorControl;
 import frc.robot.commands.deprecated.ZeroCargoPickupEncoder;
 import frc.robot.commands.cargo.ReverseCargoPickupWheels;
@@ -116,7 +116,7 @@ public final class ControlHandler {
 		xboxB.whenPressed(new MoveElevatorTo((47-13)/2));
 		xboxY.whenPressed(new MoveElevatorTo((76-13)/2));
 
-		xboxR3.whileHeld(new LinearCargoPickupControl(() -> {
+		xboxR3.whileHeld(new LinearArmControl(() -> {
 			double speed = -xbox.getY(Hand.kRight);
 			if (speed > 0) {
 				return speed*0.4;
@@ -130,7 +130,7 @@ public final class ControlHandler {
 		xboxRight.whileHeld(new RunCargoPickupWheels());
 		xboxLeft.whileHeld(new ReverseCargoPickupWheels());
 
-		xboxBACK.whenPressed(new PlaceHatchOnVelcro(true));
+		xboxBACK.whenPressed(new PlaceHatchOnVelcro(false));
 		rightXboxBumper.whenPressed(new LoosenScissors());
 		rightXboxTrigger.whenPressed(new LockScissors());
 

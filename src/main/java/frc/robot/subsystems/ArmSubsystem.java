@@ -15,7 +15,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
-import frc.robot.commands.cargo.StabilizeCargoPickup;
+import frc.robot.commands.cargo.StabilizeArm;
 
 /**
  * Contains the motors used to pickup cargo, and to rotate the mechanism in and
@@ -26,10 +26,8 @@ public class ArmSubsystem extends Subsystem {
     private static final double ARM_P = 1; // TODO refine this
     public static final double CLICKS_PER_DEGREE = 12288/360; // 8.533
 
-    private static final int PICKUP_PORT = 1;
     private static final int ROTATOR_PORT = 8;
 
-    private WPI_VictorSPX intakeWheels;
     private WPI_TalonSRX armRotator;
 
     /**
@@ -38,8 +36,6 @@ public class ArmSubsystem extends Subsystem {
      * <code> public static final CargoSubsystem cargo = new CargoSubsystem();
      */
     public ArmSubsystem() {
-        intakeWheels = new WPI_VictorSPX(PICKUP_PORT);
-        intakeWheels.setInverted(true);
         armRotator = new WPI_TalonSRX(ROTATOR_PORT);
         armRotator.setInverted(true);
 
@@ -51,46 +47,30 @@ public class ArmSubsystem extends Subsystem {
     }
 
     /**
-     * Run the motor that holds cargo balls.
-     * 
-     * @param speed Decimal value from -1 to 1.
-     */
-    public void runPickupMotor(double speed) {
-        intakeWheels.set(speed);
-    }
-
-    /**
      * Rotate the pickup assembly to the specified angle in degrees.
      * 
      * @param degrees Intended position in degrees (TODO specify range).
      */
-    public void rotatePickupTo(double degrees) {
+    public void rotateArmTo(double degrees) {
         armRotator.set(ControlMode.Position, toClicks(degrees)); // TODO degrees and ticks
     }
 
-    public void rotatePickupLinear(double speed) {
+    public void rotateArmLinear(double speed) {
         armRotator.set(speed); // XXX write safety constraints
     }
 
     /**
      * Returns the angular position, in degrees, of the pickup assembly.
      */
-    public double getPickupPosition() {
+    public double getArmAngle() {
         return toDegrees(armRotator.getSelectedSensorPosition()); // TODO degrees conversion
     }
 
     /**
      * Set the position of the Arm back to 0.
      */
-    public void resetPickupPosition() {
+    public void resetArmAngle() {
         armRotator.setSelectedSensorPosition(0);
-    }
-
-    /**
-     * Shuts off the pickup motor.
-     */
-    public void stopPickup() {
-        intakeWheels.stopMotor();
     }
 
     /**
@@ -99,7 +79,7 @@ public class ArmSubsystem extends Subsystem {
      * <i>Warning:</i> Leaving the pickup in a half-rotated position could cause
      * damage.
      */
-    public void stopArmRotator() {
+    public void stopArm() {
         armRotator.stopMotor();
     }
 
@@ -113,13 +93,13 @@ public class ArmSubsystem extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
-        setDefaultCommand(new StabilizeCargoPickup());
+        setDefaultCommand(new StabilizeArm());
     }
 
     @Override
     public void initSendable(SendableBuilder builder) {
-        builder.setSmartDashboardType("cargo-subsystem");
-        builder.addDoubleProperty("Rotator motor angle", () -> getPickupPosition(), null);
+        builder.setSmartDashboardType("arm-subsystem");
+        builder.addDoubleProperty("Rotator motor angle", () -> getArmAngle(), null);
     }
 
 }

@@ -19,8 +19,7 @@ public class RetractCargoPickup extends Command {
 
   @Override
   protected void execute() {
-    Robot.arm.rotatePickupTo(0);
-    Robot.arm.runPickupMotor(0.1);
+    Robot.arm.rotateArmTo(0);
   }
 
   @Override
@@ -30,7 +29,7 @@ public class RetractCargoPickup extends Command {
 
   @Override
   protected void end() {
-    Robot.arm.stopPickup();
+    Robot.arm.stopArm();
   }
 
 }

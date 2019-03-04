@@ -21,8 +21,7 @@ public class ExtendCargoPickup extends Command {
 
   @Override
   protected void execute() {
-    Robot.arm.rotatePickupTo(TARGET_ANGLE);
-    Robot.arm.runPickupMotor(0.1);
+    Robot.arm.rotateArmTo(TARGET_ANGLE);
   }
 
   @Override
@@ -32,7 +31,7 @@ public class ExtendCargoPickup extends Command {
 
   @Override
   protected void end() {
-    Robot.arm.stopPickup();
+    Robot.arm.stopArm();
   }
 
 }

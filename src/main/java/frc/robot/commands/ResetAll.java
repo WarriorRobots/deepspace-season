@@ -23,11 +23,11 @@ public class ResetAll extends InstantCommand {
         Robot.drivetrain.resetEncoders();
         Robot.drivetrain.resetAngle();
         Robot.elevator.stopElevator();
-        Robot.hatchPickup.stopIntakeMotor();
+        Robot.hatchPickup.stopIntake();
         Robot.hatchPickup.neutralizePneumatics();
         Robot.hatchPlacer.neutralizePneumatics();
-        Robot.arm.stopArmRotator();
-        Robot.arm.stopPickup();
+        Robot.arm.stopArm();
+        Robot.cargoIntake.stopIntake();
         Robot.pneumaticBase.disableCompressor();
     }
 
