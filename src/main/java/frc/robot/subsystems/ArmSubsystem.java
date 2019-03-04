@@ -52,7 +52,7 @@ public class ArmSubsystem extends Subsystem {
      * @param degrees Intended position in degrees (TODO specify range).
      */
     public void rotateArmTo(double degrees) {
-        armRotator.set(ControlMode.Position, toClicks(degrees)); // TODO degrees and ticks
+        armRotator.set(ControlMode.Position, toClicks(degrees));
     }
 
     public void rotateArmLinear(double speed) {

@@ -201,10 +201,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	}
 
 	/**
-	 * Resets all drive encoders to 0 ticks.
-	 * <p>
-	 * Shorthand for {@code resetEncoderTicks(Side.LEFT)} and
-	 * {@code resetEncoderTicks(Side.RIGHT)}.
+	 * Resets all drive encoders to 0 clicks.
 	 */
 	public void resetEncoders() {
 		resetLeftEncoder();
@@ -249,7 +246,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	@Override
 	public void initSendable(SendableBuilder builder) {
 		builder.setSmartDashboardType("subsystem-drivetrain");
-		builder.addStringProperty("encoder-ticks", () -> {
+		builder.addStringProperty("encoder-clicks", () -> {
 			return (Integer.toString(getLeftEncoderClicks()) + " " + Integer.toString(getRightEncoderClicks()));
 		}, null);
 		builder.addDoubleProperty("angle", () -> getAngleDegrees(), null);
