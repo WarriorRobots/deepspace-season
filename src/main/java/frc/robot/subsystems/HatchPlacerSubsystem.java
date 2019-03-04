@@ -11,7 +11,7 @@ import frc.robot.Constants;
  */
 public class HatchPlacerSubsystem extends Subsystem {
 
-    private static final int SCISSOR_FORWARD = 5; // XXX fix ids
+    private static final int SCISSOR_FORWARD = 5; // XXX fix ids by checking if kForward = forward
     private static final int SCISSOR_REVERSE = 2;
     private static final int LAUNCH_FORWARD = 4;
     private static final int LAUNCH_REVERSE = 3;
@@ -54,36 +54,40 @@ public class HatchPlacerSubsystem extends Subsystem {
     }
 
     /**
-     * Sets solenoids to off.
-     */
-    public void neutralizePneumatics() {
-        neutralizeScissors();
-        neutralizeLaunchers();
-    }
-
-    /** 
-     * Set scissors solenoid to off. TODO fix documentation
-     */
-    public void neutralizeScissors() {
-        scissorHolder.set(Value.kOff);
-    }
-
-    /**
-     * Set both launcher solenoids to off. TODO fix documentation
-     */
-    public void neutralizeLaunchers() {
-        launcher.set(Value.kOff);
-    }
-
-    /**
      * Retract the pistons that push the hatch off the scissors.
      */
     public void retractLaunchers() {
         launcher.set(Value.kReverse);
     }
 
+    /**
+     * Shuts off power to the scissors solenoid. Use after extending or retracting;
+     * this will not move the piston.
+     */
+    public void neutralizeScissors() {
+        scissorHolder.set(Value.kOff);
+    }
+
+    /**
+     * Shuts off power to the launcher solenoid(s). Use after extending or
+     * retracting; this will not move the piston.
+     */
+    public void neutralizeLaunchers() {
+        launcher.set(Value.kOff);
+    }
+
+    /**
+     * Shuts off power to both solenoids. Use after extending or retracting; this
+     * will not move the piston.
+     */
+    public void neutralizePneumatics() {
+        neutralizeScissors();
+        neutralizeLaunchers();
+    }
+
     @Override
     protected void initDefaultCommand() {
+        // none
     }
 
     @Override

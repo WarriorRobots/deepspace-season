@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
-import frc.robot.commands.elevator.StabilizeElevator;
+import frc.robot.commands.elevator.DefaultStabilizeElevator;
 
 /**
  * Contains the winch motor used to raise the elevator, and the limit switch
@@ -109,14 +109,19 @@ public class ElevatorSubsystem extends Subsystem {
 		return !limitSwitch.get();
 	}
 
-	// TODO documentation here and other
+	/**
+	 * Drives the winch motor at a constant speed. This has no safeties & can damage
+	 * the robot, so be careful!
+	 * 
+	 * @param speed Percentage speed of the winch, from -1 (down) to 1 (up).
+	 */
 	public void adjustElevatorLinear(double speed) {
-		winch.set(speed); // TODO set constraints
+		winch.set(speed);
 	}
 
 	@Override
 	public void initDefaultCommand() {
-		setDefaultCommand(new StabilizeElevator());
+		setDefaultCommand(new DefaultStabilizeElevator());
 	}
 
 	public double toInches(int clicks) {

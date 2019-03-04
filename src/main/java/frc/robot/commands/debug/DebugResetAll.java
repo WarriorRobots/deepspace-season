@@ -1,12 +1,12 @@
-package frc.robot.commands;
+package frc.robot.commands.debug;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class ResetAll extends InstantCommand {
+public class DebugResetAll extends InstantCommand {
 
-    public ResetAll() {
+    public DebugResetAll() {
         requires(Robot.drivetrain);
         requires(Robot.elevator);
         requires(Robot.hatchPickup);

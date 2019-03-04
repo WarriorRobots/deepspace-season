@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /** Put the cargo pickup into the Horizontal position */
-public class ExtendCargoPickup extends Command {
+public class ExtendCargoPickupArm extends Command {
 
   private static final double TARGET_ANGLE = 85;
 
-  public ExtendCargoPickup() {
+  public ExtendCargoPickupArm() {
     requires(Robot.arm);
   }
 

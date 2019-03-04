@@ -7,16 +7,10 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
-import frc.robot.Constants;
-import frc.robot.commands.cargo.IdleCargoPickupWheels;
-import frc.robot.commands.cargo.StabilizeArm;
+import frc.robot.commands.cargo.DefaultIdleCargoPickupWheels;
 
 /**
  * Contains the motors used to pickup cargo, and to rotate the mechanism in and
@@ -56,7 +50,7 @@ public class CargoIntakeSubsystem extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
-        setDefaultCommand(new IdleCargoPickupWheels());
+        setDefaultCommand(new DefaultIdleCargoPickupWheels());
     }
 
     @Override

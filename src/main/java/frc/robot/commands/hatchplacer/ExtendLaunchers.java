@@ -15,7 +15,8 @@ public class ExtendLaunchers extends Command {
 
   /** Count variable for the loop of pneumatic */
   private int i;
-  private boolean safemode; //TODO documentation
+  /** Set to true to prevent hatch shots unless within 1'6" of the velcro */
+  private boolean safemode;
 
   public ExtendLaunchers(boolean safemode) {
     requires(Robot.hatchPlacer);

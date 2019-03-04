@@ -5,21 +5,24 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.cargo;
+package frc.robot.commands.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/** Put the cargo pickup into the Up position */
-public class RetractCargoPickup extends Command {
-
-  public RetractCargoPickup() {
-    requires(Robot.arm);
+/**
+ * Push the left joystick vertically to drive the left wheels. Push the right
+ * joystick vertically to drive the right wheels.
+ */
+public class DefaultDoubleJoystickDrive extends Command {
+  
+  public DefaultDoubleJoystickDrive() {
+    requires(Robot.drivetrain);
   }
 
   @Override
   protected void execute() {
-    Robot.arm.rotateArmTo(0);
+    Robot.drivetrain.tankDriveTeleop(Robot.input.getXboxLeftY()*0.5, Robot.input.getXboxRightY()*0.5);
   }
 
   @Override
@@ -29,7 +32,6 @@ public class RetractCargoPickup extends Command {
 
   @Override
   protected void end() {
-    Robot.arm.stopArm();
+    Robot.drivetrain.stopDrive();
   }
-
 }

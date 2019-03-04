@@ -55,7 +55,9 @@ public class LineFollowerSubsystem extends Subsystem {
     }
 
     @Override
-    protected void initDefaultCommand() {}
+    protected void initDefaultCommand() {
+        // none
+    }
 
     @Override
     public void initSendable(SendableBuilder builder) {

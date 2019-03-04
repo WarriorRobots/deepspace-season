@@ -5,33 +5,37 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.drive;
+package frc.robot.commands.cargo;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/**
- * Push the left joystick vertically to drive the left wheels. Push the right
- * joystick vertically to drive the right wheels.
- */
-public class DoubleJoystickDrive extends Command {
-  
-  public DoubleJoystickDrive() {
-    requires(Robot.drivetrain);
+/** Stabilize the cargo pickup */
+public class DefaultStabilizeArm extends Command {
+
+  private double initialPosition;
+
+  public DefaultStabilizeArm() {
+    requires(Robot.arm);
+  }
+
+  @Override
+  protected void initialize() {
+    initialPosition = Robot.arm.getArmAngle();
   }
 
   @Override
   protected void execute() {
-    Robot.drivetrain.tankDriveTeleop(Robot.input.getXboxLeftY()*0.5, Robot.input.getXboxRightY()*0.5);
+    Robot.arm.rotateArmTo(initialPosition);
   }
 
   @Override
   protected boolean isFinished() {
     return false;
   }
-
+  
   @Override
   protected void end() {
-    Robot.drivetrain.stopDrive();
+    Robot.arm.stopArm();
   }
 }

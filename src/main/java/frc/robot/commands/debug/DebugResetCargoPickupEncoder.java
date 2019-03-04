@@ -1,11 +1,11 @@
-package frc.robot.commands.deprecated;
+package frc.robot.commands.debug;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class ZeroCargoPickupEncoder extends InstantCommand {
+public class DebugResetCargoPickupEncoder extends InstantCommand {
 
-    public ZeroCargoPickupEncoder() {
+    public DebugResetCargoPickupEncoder() {
         requires(Robot.arm);
     }
 

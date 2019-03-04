@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
-import frc.robot.commands.drive.DoubleJoystickDrive;
+import frc.robot.commands.drive.DefaultDoubleJoystickDrive;
 
 /**
  * Contains the drivetrain, the encoders for the left and right wheels, and the
@@ -254,6 +254,6 @@ public class DrivetrainSubsystem extends Subsystem {
 
 	@Override
 	public void initDefaultCommand() {
-		setDefaultCommand(new DoubleJoystickDrive());
+		setDefaultCommand(new DefaultDoubleJoystickDrive());
 	}
 }

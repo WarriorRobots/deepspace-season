@@ -8,11 +8,14 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
+import frc.robot.commands.hatchpickup.DefaultStopHatchPickupWheels;
 
 /**
  * Contains the motor and pneumatics used to pick up hatches from the ground.
  */
 public class HatchPickupSubsystem extends Subsystem {
+
+    private static final boolean MOTOR_INVERTED = false;
 
     private static final int INTAKE_MOTOR_PORT = 2;
     private static final int ROTATOR_SOL_FORWARD = 1;
@@ -27,9 +30,9 @@ public class HatchPickupSubsystem extends Subsystem {
      * <code> public static final HatchPickupSubystem hatchPickup = new
      * HatchPickupSubsystem();
      */
-    public HatchPickupSubsystem() { //XXX fix ids
+    public HatchPickupSubsystem() {
         intakeMotor = new WPI_VictorSPX(INTAKE_MOTOR_PORT);
-        intakeMotor.setInverted(false); // TODO constants and figure out which one
+        intakeMotor.setInverted(MOTOR_INVERTED);
         rotatorSol = new DoubleSolenoid(Constants.PCM_1, ROTATOR_SOL_FORWARD, ROTATOR_SOL_REVERSE);
     }
 
@@ -50,7 +53,8 @@ public class HatchPickupSubsystem extends Subsystem {
     }
 
     /**
-     * Shuts off the pneumatics. TODO fix documentation
+     * Shuts off power to the solenoid. Use after extending or retracting; this will
+     * not move the piston.
      */
     public void neutralizePneumatics() {
         rotatorSol.set(Value.kOff);
@@ -65,6 +69,9 @@ public class HatchPickupSubsystem extends Subsystem {
         intakeMotor.set(speed);
     }
 
+    /**
+     * Shuts off the intake motor.
+     */
     public void stopIntake() {
         intakeMotor.stopMotor();
     }
@@ -86,7 +93,9 @@ public class HatchPickupSubsystem extends Subsystem {
     }
 
     @Override
-    protected void initDefaultCommand() {}
+    protected void initDefaultCommand() {
+        setDefaultCommand(new DefaultStopHatchPickupWheels());
+    }
 
     @Override
     public void initSendable(SendableBuilder builder) {

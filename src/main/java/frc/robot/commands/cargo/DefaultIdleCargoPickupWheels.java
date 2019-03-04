@@ -3,9 +3,9 @@ package frc.robot.commands.cargo;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class IdleCargoPickupWheels extends Command {
+public class DefaultIdleCargoPickupWheels extends Command {
 
-    public IdleCargoPickupWheels() {
+    public DefaultIdleCargoPickupWheels() {
         requires(Robot.cargoIntake);
     }
 

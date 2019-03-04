@@ -1,12 +1,12 @@
-package frc.robot.commands;
+package frc.robot.commands.debug;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class EnableCompressor extends InstantCommand {
+public class DebugEnableCompressor extends InstantCommand {
 
-    public EnableCompressor() {
+    public DebugEnableCompressor() {
         requires(Robot.pneumaticBase);
     }
 

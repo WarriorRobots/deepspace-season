@@ -12,15 +12,15 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.cargo.RunCargoPickupWheels;
-import frc.robot.commands.deprecated.LinearArmControl;
-import frc.robot.commands.deprecated.LinearElevatorControl;
-import frc.robot.commands.deprecated.ZeroCargoPickupEncoder;
+import frc.robot.commands.debug.DebugLinearArmControl;
+import frc.robot.commands.debug.DebugLinearElevatorControl;
+import frc.robot.commands.debug.DebugResetCargoPickupEncoder;
 import frc.robot.commands.cargo.ReverseCargoPickupWheels;
-import frc.robot.commands.DisableCompressor;
-import frc.robot.commands.EnableCompressor;
-import frc.robot.commands.ResetAll;
-import frc.robot.commands.cargo.ExtendCargoPickup;
-import frc.robot.commands.cargo.RetractCargoPickup;
+import frc.robot.commands.debug.DebugDisableCompressor;
+import frc.robot.commands.debug.DebugEnableCompressor;
+import frc.robot.commands.debug.DebugResetAll;
+import frc.robot.commands.cargo.ExtendCargoPickupArm;
+import frc.robot.commands.cargo.RetractCargoPickupArm;
 import frc.robot.commands.drive.SingleJoystickDrive;
 import frc.robot.commands.drive.LowTurnSensitivityDrive;
 import frc.robot.commands.elevator.MoveElevatorTo;
@@ -31,9 +31,10 @@ import frc.robot.commands.hatchpickup.ExtendHatchPickup;
 import frc.robot.commands.hatchpickup.RunHatchPickupWheels;
 import frc.robot.commands.hatchplacer.LockScissors;
 import frc.robot.commands.hatchplacer.LoosenScissors;
-import frc.robot.commands.hatchplacer.PlaceHatchOnVelcro;
+import frc.robot.commands.hatchplacer.GroupPlaceHatchOnVelcro;
 import frc.robot.commands.hatchplacer.RetractLaunchers;
 import frc.robot.commands.hatchpickup.ReverseHatchPickupWheels;
+import frc.robot.util.enums.ItemType;
 import frc.robot.util.triggers.DpadTrigger;
 import frc.robot.util.triggers.ThresholdJoystick;
 import frc.robot.util.triggers.ThresholdTrigger;
@@ -41,7 +42,7 @@ import frc.robot.util.triggers.ThresholdTrigger;
 /**
  * Contains methods for receiving data from Joysticks and the Xbox controller.
  */
-@SuppressWarnings("unused") // FIXME remove this when done
+@SuppressWarnings("unused")
 public final class ControlHandler {
 
 	private static final int LEFT_JOY = 1;
@@ -103,76 +104,42 @@ public final class ControlHandler {
 		xboxL3 = new JoystickButton(xbox, 9);
 		xboxR3 = new JoystickButton(xbox, 10);
 
-		xboxL3.whileHeld(new LinearElevatorControl(() -> {
-			double speed = -xbox.getY(Hand.kLeft);
-			if (speed > 0) {
-				return speed;
-			} else {
-				return speed/2;
-			}
-		}));
-		xboxA.whenPressed(new MoveElevatorTo((27-13) / 2));
-		xboxX.whenPressed(new DropElevator());
-		xboxB.whenPressed(new MoveElevatorTo((47-13)/2));
-		xboxY.whenPressed(new MoveElevatorTo((76-13)/2));
+		// buttons on base of left joystick (hard to reach, debug only)
+		leftJoyButton7.whenPressed(new DebugResetAll());
+		leftJoyButton8.whenPressed(new DebugEnableCompressor());
+		leftJoyButton10.whenPressed(new DebugDisableCompressor());
 
-		xboxR3.whileHeld(new LinearArmControl(() -> {
-			double speed = -xbox.getY(Hand.kRight);
-			if (speed > 0) {
-				return speed*0.4;
-			} else {
-				return speed*0.3;
-			}
-		}));
-		xboxR3.whenReleased(new ZeroCargoPickupEncoder());
-		xboxUp.whenPressed(new ExtendCargoPickup());
-		xboxDown.whenPressed(new RetractCargoPickup());
-		xboxRight.whileHeld(new RunCargoPickupWheels());
-		xboxLeft.whileHeld(new ReverseCargoPickupWheels());
+		// drive alteration commands
+		rightJoyThumbButton.whileHeld(new SingleJoystickDrive());
+		rightJoyTriggerButton.whileHeld(new LowTurnSensitivityDrive());
+		// camera goes here @josh
 
-		xboxBACK.whenPressed(new PlaceHatchOnVelcro(false));
-		rightXboxBumper.whenPressed(new LoosenScissors());
+		// right joystick
+		rightJoyButton3.whenPressed(new ExtendCargoPickupArm()); // ball low
+		rightJoyButton4.whenPressed(new DropElevator());
+
+		// left joystick
+		leftJoyButton3.whenPressed(new ExtendHatchPickup());
+		leftJoyButton4.whenPressed(new GroupPlaceHatchOnVelcro(false));
+
+		// hatch XXX get real values
+		xboxA.whenPressed(new MoveElevatorTo(27, ItemType.HATCH));
+		xboxB.whenPressed(new MoveElevatorTo(47, ItemType.HATCH));
+		xboxY.whenPressed(new MoveElevatorTo(76, ItemType.HATCH));
 		rightXboxTrigger.whenPressed(new LockScissors());
+		xboxRightJoyUp.whileHeld(new ReverseHatchPickupWheels());
+		xboxRightJoyDown.whileHeld(new RunHatchPickupWheels());
 
+		// cargo
+		// low is xboxA, same as hatch (27-13 / 2)
+		// xboxX.whenPressed(new MoveElevatorTo(XXX, ItemType.CARGO));
+		// xboxSTART.whenPressed(new MoveElevatorTo(XXX, ItemType.CARGO));
+		xboxLeftJoyUp.whileHeld(new ReverseCargoPickupWheels());
+		xboxLeftJoyDown.whileHeld(new RunCargoPickupWheels());
 
-
-		// leftJoyButton7.whenPressed(new ResetAll());
-		// leftJoyButton8.whenPressed(new EnableCompressor());
-		// leftJoyButton10.whenPressed(new DisableCompressor());
-
-		// rightJoyThumbButton.whileHeld(new SingleJoystickDrive());
-		// rightJoyTriggerButton.whileHeld(new LowTurnSensitivityDrive());
-
-		// // right joystick
-		// rightJoyButton3.whenPressed(new MoveElevatorTo(5000)); // ball low
-		// rightJoyButton4.whenPressed(new ReverseCargoPickupWheels());
-
-		// // left joystick
-		// leftJoyButton3.whenPressed(new ExtendHatchPickup());
-		// leftJoyButton4.whenPressed(new PlaceHatchOnVelcro());
-		// leftJoyButton5.whenPressed(new ResetElevator());//REMOVE
-		// leftJoyButton6.whenPressed(new ResetArmEncoder()); //REMOVE
-
-		// // hatch
-		// xboxA.whenPressed(new MoveElevatorTo(5000)); // low
-		// xboxB.whenPressed(new MoveElevatorTo(10000)); // mid TODO set back to 13000
-		// xboxY.whenPressed(new MoveElevatorTo(16000)); // high TODO set back to 23000
-		// rightXboxTrigger.whenPressed(new LockScissors()); // hold
-		// rightXboxBumper.whenPressed(new LoosenScissors()); //REMOVE
-		// xboxRightJoyUp.whileHeld(new ReverseHatchPickupWheels());
-		// xboxRightJoyDown.whileHeld(new RunHatchPickupWheels());
-
-		// // ball
-		// // low is xboxA, same as hatch (5000)
-		// xboxX.whenPressed(new MoveElevatorTo(15000)); // mid
-		// xboxSTART.whenPressed(new MoveElevatorTo(17000)); // high TODO set back to 25000
-		// xboxLeftJoyUp.whileHeld(new ReverseCargoPickupWheels());
-		// xboxLeftJoyDown.whileHeld(new RunCargoPickupWheels());
-
-		// leftXboxBumper.whenPressed(new RetractCargoPickup());
-		// leftXboxTrigger.whileHeld(new LinearElevatorControl(() -> xbox.getTriggerAxis(Hand.kLeft)));
-		// rightJoyButton6.whenPressed(new ExtendCargoPickup());
-
+		// unknowns
+		leftXboxBumper.whenPressed(new RetractCargoPickupArm());
+		leftXboxBumper.whenPressed(new RetractHatchPickup());
 	}
 
 	// -----------------------------------------------------------------//

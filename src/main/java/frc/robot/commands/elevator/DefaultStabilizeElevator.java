@@ -3,11 +3,11 @@ package frc.robot.commands.elevator;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class StabilizeElevator extends Command {
+public class DefaultStabilizeElevator extends Command {
 
     private double initialPosition;
 
-    public StabilizeElevator() {
+    public DefaultStabilizeElevator() {
         requires(Robot.elevator);
     }
 

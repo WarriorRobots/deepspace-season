@@ -10,32 +10,26 @@ package frc.robot.commands.cargo;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/** Sabilize the cargo pickup */
-public class StabilizeArm extends Command {
+/** Put the cargo pickup into the Up position */
+public class RetractCargoPickupArm extends Command {
 
-  private double initialPosition;
-
-  public StabilizeArm() {
+  public RetractCargoPickupArm() {
     requires(Robot.arm);
   }
 
   @Override
-  protected void initialize() {
-    initialPosition = Robot.arm.getArmAngle();
-  }
-
-  @Override
   protected void execute() {
-    Robot.arm.rotateArmTo(initialPosition);
+    Robot.arm.rotateArmTo(0);
   }
 
   @Override
   protected boolean isFinished() {
     return false;
   }
-  
+
   @Override
   protected void end() {
     Robot.arm.stopArm();
   }
+
 }

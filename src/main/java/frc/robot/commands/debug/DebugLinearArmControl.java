@@ -1,17 +1,16 @@
-package frc.robot.commands.deprecated;
+package frc.robot.commands.debug;
 
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class LinearArmControl extends Command {
+public class DebugLinearArmControl extends Command {
     
     private DoubleSupplier input;
 
-    public LinearArmControl(DoubleSupplier input) {
+    public DebugLinearArmControl(DoubleSupplier input) {
         requires(Robot.arm);
-        requires(Robot.drivetrain);//XXX remove this
         this.input = input;
     }
 
