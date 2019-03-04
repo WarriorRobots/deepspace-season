@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
 
 /**
@@ -26,10 +27,9 @@ public class HatchPickupSubsystem extends Subsystem {
      * <code> public static final HatchPickupSubystem hatchPickup = new
      * HatchPickupSubsystem();
      */
-    public HatchPickupSubsystem() { // TODO fix ids
+    public HatchPickupSubsystem() { //XXX fix ids
         intakeMotor = new WPI_VictorSPX(INTAKE_MOTOR_PORT);
         intakeMotor.setInverted(false); // TODO constants and figure out which one
-        // TODO inversions on ALL MOTORS
         rotatorSol = new DoubleSolenoid(Constants.PCM_1, ROTATOR_SOL_FORWARD, ROTATOR_SOL_REVERSE);
     }
 
@@ -50,12 +50,23 @@ public class HatchPickupSubsystem extends Subsystem {
     }
 
     /**
+     * Shuts off the pneumatics. TODO fix documentation
+     */
+    public void neutralizePneumatics() {
+        rotatorSol.set(Value.kOff);
+    }
+
+    /**
      * Run the intake motors to pull a hatch into the mechanism.
      * 
      * @param speed Speed of motor, from -1 (out) to 1 (in).
      */
     public void runIntakeMotor(double speed) {
         intakeMotor.set(speed);
+    }
+
+    public void stopIntakeMotor() {
+        intakeMotor.stopMotor();
     }
 
     /**
@@ -75,7 +86,13 @@ public class HatchPickupSubsystem extends Subsystem {
     }
 
     @Override
-    protected void initDefaultCommand() {// TODO
+    protected void initDefaultCommand() {}
+
+    @Override
+    public void initSendable(SendableBuilder builder) {
+        builder.setSmartDashboardType("hatchpickup-subsystem");
+        builder.addDoubleProperty("intake motor speed", () -> intakeMotor.get(), null);
+        builder.addStringProperty("solenoid state", () -> rotatorSol.get().toString(), null);
     }
 
 }

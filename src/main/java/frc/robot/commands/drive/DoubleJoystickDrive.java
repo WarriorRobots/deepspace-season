@@ -10,14 +10,18 @@ package frc.robot.commands.drive;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class TeleopTankDrive extends Command {
-  public TeleopTankDrive() {
+/**
+ * Push the left joystick vertically to drive the left wheels. Push the right
+ * joystick vertically to drive the right wheels.
+ */
+public class DoubleJoystickDrive extends Command {
+  public DoubleJoystickDrive() {
     requires(Robot.drivetrain);
   }
 
   @Override
   protected void execute() {
-    Robot.drivetrain.tankDriveTeleop(Robot.input.getLeftY(), Robot.input.getRightY());
+    Robot.drivetrain.tankDriveTeleop(Robot.input.getXboxLeftY()*0.5, Robot.input.getXboxRightY()*0.5);
   }
 
   @Override

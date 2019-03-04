@@ -5,32 +5,32 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.commands.cargo;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
-/**
- * Add your docs here.
- */
-@Deprecated //TODO incomplete
-public class ClimbSubsystem extends Subsystem {
+/** Put the cargo pickup into the Up position */
+public class RetractCargoPickup extends Command {
 
-  public ClimbSubsystem() {
+  public RetractCargoPickup() {
+    requires(Robot.arm);
   }
 
-  public void extend_climb() {
+  @Override
+  protected void execute() {
+    Robot.arm.rotatePickupTo(0);
+    Robot.arm.runPickupMotor(0.1);
   }
 
-  public void retract_climb() {
-  }
-
-  public boolean get_state() {
+  @Override
+  protected boolean isFinished() {
     return false;
   }
 
   @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+  protected void end() {
+    Robot.arm.stopPickup();
   }
+
 }

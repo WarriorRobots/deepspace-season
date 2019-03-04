@@ -5,33 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.hatchpickup;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.util.PathfinderTest;
 
-@Deprecated
-public class AutoDrive extends Command {
-  
-  PathfinderTest p;
-  
-  public AutoDrive() {
-    requires(Robot.drivetrain);
-    p = new PathfinderTest();
-  }
-
-  // Called just before this Command runs the first time
-  @Override
-  protected void initialize() {
-    Robot.drivetrain.resetEncoders();
-    Robot.drivetrain.resetAngle();
+public class RunHatchPickupWheels extends Command {
+  public RunHatchPickupWheels() {
+    requires(Robot.hatchPickup);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.drivetrain.tankDriveRaw(p.calcLeft(), p.calcRight());
+    Robot.hatchPickup.runIntakeMotor(0.5);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -40,14 +27,9 @@ public class AutoDrive extends Command {
     return false;
   }
 
-  // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.hatchPickup.stopIntakeMotor();
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
-  @Override
-  protected void interrupted() {
-  }
 }

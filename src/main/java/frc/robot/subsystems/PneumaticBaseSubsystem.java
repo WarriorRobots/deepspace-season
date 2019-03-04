@@ -2,6 +2,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
+import frc.robot.Constants;
 
 /**
  * Contains the base pneumatic components (only the compressor, for now).
@@ -17,7 +19,8 @@ public class PneumaticBaseSubsystem extends Subsystem {
      * PneumaticSubsystem();
      */
     public PneumaticBaseSubsystem() {
-        compressor = new Compressor();
+        compressor = new Compressor(Constants.PCM_1);
+        compressor.start();
     }
 
     /**
@@ -37,6 +40,13 @@ public class PneumaticBaseSubsystem extends Subsystem {
     @Override
     protected void initDefaultCommand() {
         // TODO current limiting?
+    }
+
+    @Override
+    public void initSendable(SendableBuilder builder) {
+        builder.setSmartDashboardType("compressor-data");
+        builder.addBooleanProperty("low pressure?", () -> !compressor.getPressureSwitchValue(), null);
+        builder.addBooleanProperty("compressor running?", () -> compressor.enabled(), null);
     }
 
 }

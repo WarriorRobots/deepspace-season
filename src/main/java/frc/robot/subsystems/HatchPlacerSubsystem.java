@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
 
 /**
@@ -10,14 +11,12 @@ import frc.robot.Constants;
  */
 public class HatchPlacerSubsystem extends Subsystem {
 
-    private static final int SCISSOR_FORWARD = 1;
-    private static final int SCISSOR_REVERSE = 6;
-    private static final int L_LAUNCH_FORWARD = 2;
-    private static final int L_LAUNCH_REVERSE = 5;
-    private static final int R_LAUNCH_FORWARD = 3;
-    private static final int R_LAUNCH_REVERSE = 4;
+    private static final int SCISSOR_FORWARD = 5; // XXX fix ids
+    private static final int SCISSOR_REVERSE = 2;
+    private static final int LAUNCH_FORWARD = 4;
+    private static final int LAUNCH_REVERSE = 3;
 
-    private DoubleSolenoid scissorHolder, leftLauncher, rightLauncher;
+    private DoubleSolenoid scissorHolder, launcher;
 
     /**
      * Instantiates new subsystem; make ONLY ONE.
@@ -27,23 +26,22 @@ public class HatchPlacerSubsystem extends Subsystem {
      */
     public HatchPlacerSubsystem() {
         scissorHolder = new DoubleSolenoid(Constants.PCM_2, SCISSOR_FORWARD, SCISSOR_REVERSE);
-        leftLauncher = new DoubleSolenoid(Constants.PCM_2, L_LAUNCH_FORWARD, L_LAUNCH_REVERSE);
-        rightLauncher = new DoubleSolenoid(Constants.PCM_2, R_LAUNCH_FORWARD, R_LAUNCH_REVERSE);
+        launcher = new DoubleSolenoid(Constants.PCM_2, LAUNCH_FORWARD, LAUNCH_REVERSE);
     }
 
     /**
      * Secures the hatch in place by opening the scissors.
      */
-    public void secureHatch() {
-        scissorHolder.set(Value.kForward);
+    public void lockScissors() {
+        scissorHolder.set(Value.kReverse);
     }
 
     /**
      * Releases the hatch by closing the scissors; it will hang loosely and can be
      * knocked off.
      */
-    public void releaseHatch() {
-        scissorHolder.set(Value.kReverse);
+    public void loosenScissors() {
+        scissorHolder.set(Value.kForward);
     }
 
     /**
@@ -51,21 +49,50 @@ public class HatchPlacerSubsystem extends Subsystem {
      * <p>
      * <b>Warning:</b> only use if the hatch is loose (scissors are closed)!
      */
-    public void extendLauncher() {
-        leftLauncher.set(Value.kForward);
-        rightLauncher.set(Value.kForward);
+    public void extendLaunchers() {
+        launcher.set(Value.kForward);
+    }
+
+    /**
+     * Sets solenoids to off.
+     */
+    public void neutralizePneumatics() {
+        neutralizeScissors();
+        neutralizeLaunchers();
+    }
+
+    /** 
+     * Set scissors solenoid to off. TODO fix documentation
+     */
+    public void neutralizeScissors() {
+        scissorHolder.set(Value.kOff);
+    }
+
+    /**
+     * Set both launcher solenoids to off. TODO fix documentation
+     */
+    public void neutralizeLaunchers() {
+        launcher.set(Value.kOff);
     }
 
     /**
      * Retract the pistons that push the hatch off the scissors.
      */
-    public void retractLauncher() {
-        leftLauncher.set(Value.kReverse);
-        rightLauncher.set(Value.kReverse);
+    public void retractLaunchers() {
+        launcher.set(Value.kReverse);
     }
 
-    @Override // TODO default command
+    @Override
     protected void initDefaultCommand() {
+    }
+
+    @Override
+    public void initSendable(SendableBuilder builder) {
+        builder.setSmartDashboardType("hatchplacer-subsystem");
+        builder.addStringProperty("scissor state", () -> scissorHolder.get().toString(), null);
+        builder.addStringProperty("launcher state", () -> {
+            return "launcher: " + launcher.get().toString();
+        }, null);
     }
 
 }
