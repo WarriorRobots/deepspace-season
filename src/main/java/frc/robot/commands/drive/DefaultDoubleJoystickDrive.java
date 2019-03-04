@@ -22,7 +22,7 @@ public class DefaultDoubleJoystickDrive extends Command {
 
   @Override
   protected void execute() {
-    Robot.drivetrain.tankDriveTeleop(Robot.input.getXboxLeftY()*0.5, Robot.input.getXboxRightY()*0.5);
+    Robot.drivetrain.tankDriveTeleop(Robot.input.getLeftY(), Robot.input.getRightY());
   }
 
   @Override

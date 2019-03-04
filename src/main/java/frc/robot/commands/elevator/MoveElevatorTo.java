@@ -3,7 +3,6 @@ package frc.robot.commands.elevator;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.util.enums.ItemType;
 
 public class MoveElevatorTo extends Command {
 
@@ -25,10 +24,8 @@ public class MoveElevatorTo extends Command {
      * 
      * @param positionInches How far above the floor the specified item should be,
      *                       in inches.
-     * @param itemType       What item the robot will be holding (ItemType.CARGO or
-     *                       ItemType.HATCH).
      */
-    public MoveElevatorTo(double positionInches, ItemType itemType) {
+    public MoveElevatorTo(double positionInches) {
         requires(Robot.elevator);
 
         if (positionInches == 0) {
@@ -36,17 +33,7 @@ public class MoveElevatorTo extends Command {
             terminateFlag = true;
         }
 
-        switch (itemType) { // XXX check these values
-        default:
-            DriverStation.reportError("MoveElevatorTo() constructor does not specify an item", false);
-            terminateFlag = true;
-        case HATCH:
-            this.target = (positionInches - 13) / 2;
-            break;
-        case CARGO:
-            this.target = (positionInches - 21.5) / 2;
-            break;
-        }
+        this.target = (positionInches - 13) / 2;
     }
 
     @Override
@@ -60,13 +47,17 @@ public class MoveElevatorTo extends Command {
 
     @Override
     protected void execute() {
+        if (terminateFlag) {
+            Robot.elevator.stopElevator();
+        } else {
         Robot.elevator.moveElevatorTo(target);
+        }
     }
 
     @Override
     protected boolean isFinished() {
         // if this ever returns true, something went wrong
-        return terminateFlag;
+        return false;
     }
 
     @Override

@@ -34,7 +34,6 @@ import frc.robot.commands.hatchplacer.LoosenScissors;
 import frc.robot.commands.hatchplacer.GroupPlaceHatchOnVelcro;
 import frc.robot.commands.hatchplacer.RetractLaunchers;
 import frc.robot.commands.hatchpickup.ReverseHatchPickupWheels;
-import frc.robot.util.enums.ItemType;
 import frc.robot.util.triggers.DpadTrigger;
 import frc.robot.util.triggers.ThresholdJoystick;
 import frc.robot.util.triggers.ThresholdTrigger;
@@ -54,7 +53,7 @@ public final class ControlHandler {
 
 	private JoystickButton rightJoyTriggerButton, rightJoyThumbButton, leftJoyTriggerButton;
 	private JoystickButton leftJoyButton3, leftJoyButton4, leftJoyButton5, leftJoyButton6, leftJoyButton7,
-			leftJoyButton8, leftJoyButton10;
+			leftJoyButton8, leftJoyButton9, leftJoyButton10;
 	private JoystickButton rightJoyButton3, rightJoyButton4, rightJoyButton5, rightJoyButton6;
 	private ThresholdTrigger leftXboxTrigger, rightXboxTrigger;
 	private JoystickButton leftXboxBumper, rightXboxBumper, xboxL3, xboxR3;
@@ -74,6 +73,7 @@ public final class ControlHandler {
 		leftJoyButton6 = new JoystickButton(leftJoy, 6);
 		leftJoyButton7 = new JoystickButton(leftJoy, 7);
 		leftJoyButton8 = new JoystickButton(leftJoy, 8);
+		leftJoyButton9 = new JoystickButton(leftJoy, 9);
 		leftJoyButton10 = new JoystickButton(leftJoy, 10);
 
 		rightJoyTriggerButton = new JoystickButton(rightJoy, 1);
@@ -116,30 +116,29 @@ public final class ControlHandler {
 
 		// right joystick
 		rightJoyButton3.whenPressed(new ExtendCargoPickupArm()); // ball low
+		rightJoyButton3.whenPressed(new LockScissors());
 		rightJoyButton4.whenPressed(new DropElevator());
 
 		// left joystick
 		leftJoyButton3.whenPressed(new ExtendHatchPickup());
 		leftJoyButton4.whenPressed(new GroupPlaceHatchOnVelcro(false));
 
-		// hatch XXX get real values
-		xboxA.whenPressed(new MoveElevatorTo(27, ItemType.HATCH));
-		xboxB.whenPressed(new MoveElevatorTo(47, ItemType.HATCH));
-		xboxY.whenPressed(new MoveElevatorTo(76, ItemType.HATCH));
+		// hatch
+		xboxA.whenPressed(new MoveElevatorTo(27));
+		xboxB.whenPressed(new MoveElevatorTo(47));
+		xboxY.whenPressed(new MoveElevatorTo(74));
 		rightXboxTrigger.whenPressed(new LockScissors());
 		xboxRightJoyUp.whileHeld(new ReverseHatchPickupWheels());
 		xboxRightJoyDown.whileHeld(new RunHatchPickupWheels());
 
 		// cargo
 		// low is xboxA, same as hatch (27-13 / 2)
-		// xboxX.whenPressed(new MoveElevatorTo(XXX, ItemType.CARGO));
-		// xboxSTART.whenPressed(new MoveElevatorTo(XXX, ItemType.CARGO));
 		xboxLeftJoyUp.whileHeld(new ReverseCargoPickupWheels());
 		xboxLeftJoyDown.whileHeld(new RunCargoPickupWheels());
 
 		// unknowns
 		leftXboxBumper.whenPressed(new RetractCargoPickupArm());
-		leftXboxBumper.whenPressed(new RetractHatchPickup());
+		leftJoyButton9.whenPressed(new DebugResetCargoPickupEncoder());
 	}
 
 	// -----------------------------------------------------------------//
@@ -150,7 +149,7 @@ public final class ControlHandler {
 	 * @param scalingFactor Decimal value that proportionally scales output.
 	 */
 	public double getLeftY(double scalingFactor) {
-		return leftJoy.getY() * scalingFactor;
+		return leftJoy.getY() * scalingFactor * -1;
 	}
 
 	/**
@@ -166,7 +165,7 @@ public final class ControlHandler {
 	 * @param scalingFactor Decimal value that proportionally scales output.
 	 */
 	public double getRightY(double scalingFactor) {
-		return rightJoy.getY() * scalingFactor;
+		return rightJoy.getY() * scalingFactor * -1;
 	}
 
 	/**
