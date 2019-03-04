@@ -23,11 +23,11 @@ public class DebugResetAll extends InstantCommand {
         Robot.drivetrain.resetEncoders();
         Robot.drivetrain.resetAngle();
         Robot.elevator.stopElevator();
-        Robot.hatchPickup.stopIntake();
+        Robot.hatchPickup.stopPickup();
         Robot.hatchPickup.neutralizePneumatics();
         Robot.hatchPlacer.neutralizePneumatics();
         Robot.arm.stopArm();
-        Robot.cargoIntake.stopIntake();
+        Robot.cargoPickup.stopPickup();
         Robot.pneumaticBase.disableCompressor();
     }
 

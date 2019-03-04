@@ -16,20 +16,20 @@ import frc.robot.commands.cargo.DefaultIdleCargoPickupWheels;
  * Contains the motors used to pickup cargo, and to rotate the mechanism in and
  * out.
  */
-public class CargoIntakeSubsystem extends Subsystem {
+public class CargoPickupSubsystem extends Subsystem {
 
-    private static final int INTAKE_WHEELS_PORT = 1;
+    private static final int PICKUP_WHEELS_PORT = 1;
 
-    private WPI_VictorSPX intakeWheels;
+    private WPI_VictorSPX pickupWheels;
 
     /**
      * Instantiates new subsystem; make ONLY ONE.
      * <p>
      * <code> public static final CargoSubsystem cargo = new CargoSubsystem();
      */
-    public CargoIntakeSubsystem() {
-        intakeWheels = new WPI_VictorSPX(INTAKE_WHEELS_PORT);
-        intakeWheels.setInverted(true);
+    public CargoPickupSubsystem() {
+        pickupWheels = new WPI_VictorSPX(PICKUP_WHEELS_PORT);
+        pickupWheels.setInverted(true);
     }
 
     /**
@@ -37,15 +37,15 @@ public class CargoIntakeSubsystem extends Subsystem {
      * 
      * @param speed Decimal value from -1 to 1.
      */
-    public void runIntake(double speed) {
-        intakeWheels.set(speed);
+    public void runPickup(double speed) {
+        pickupWheels.set(speed);
     }
 
     /**
      * Shuts off the pickup motor.
      */
-    public void stopIntake() {
-        intakeWheels.stopMotor();
+    public void stopPickup() {
+        pickupWheels.stopMotor();
     }
 
     @Override
@@ -55,8 +55,8 @@ public class CargoIntakeSubsystem extends Subsystem {
 
     @Override
     public void initSendable(SendableBuilder builder) {
-        builder.setSmartDashboardType("cargointake-subsystem");
-        builder.addDoubleProperty("cargointake wheel speed", () -> intakeWheels.get(), null);
+        builder.setSmartDashboardType("cargopickup-subsystem");
+        builder.addDoubleProperty("cargopickup wheel speed", () -> pickupWheels.get(), null);
     }
 
 }

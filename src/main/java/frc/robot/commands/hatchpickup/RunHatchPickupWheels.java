@@ -18,7 +18,7 @@ public class RunHatchPickupWheels extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatchPickup.runIntake(0.5);
+    Robot.hatchPickup.runPickup(0.5);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -29,7 +29,7 @@ public class RunHatchPickupWheels extends Command {
 
   @Override
   protected void end() {
-    Robot.hatchPickup.stopIntake();
+    Robot.hatchPickup.stopPickup();
   }
 
 }

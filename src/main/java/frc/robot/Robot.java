@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.ArmSubsystem;
-import frc.robot.subsystems.CargoIntakeSubsystem;
+import frc.robot.subsystems.CargoPickupSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.HatchPickupSubsystem;
@@ -30,7 +30,7 @@ public class Robot extends TimedRobot {
 	public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
 	public static final LineFollowerSubsystem lineFollowers = new LineFollowerSubsystem();
 	public static final ArmSubsystem arm = new ArmSubsystem();
-	public static final CargoIntakeSubsystem cargoIntake = new CargoIntakeSubsystem();
+	public static final CargoPickupSubsystem cargoPickup = new CargoPickupSubsystem();
 	public static final PneumaticBaseSubsystem pneumaticBase = new PneumaticBaseSubsystem();
 
 	/** Reference this to get input from our joysticks. */
@@ -45,7 +45,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData(hatchPlacer);
 		SmartDashboard.putData(lineFollowers);
 		SmartDashboard.putData(arm);
-		SmartDashboard.putData(cargoIntake);
+		SmartDashboard.putData(cargoPickup);
 		SmartDashboard.putData(pneumaticBase);
 	}
 

@@ -6,12 +6,12 @@ import frc.robot.Robot;
 public class ReverseCargoPickupWheels extends Command {
 
     public ReverseCargoPickupWheels() {
-        requires(Robot.cargoIntake);
+        requires(Robot.cargoPickup);
     }
 
     @Override
     protected void execute() {
-        Robot.cargoIntake.runIntake(-1);
+        Robot.cargoPickup.runPickup(-1);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class ReverseCargoPickupWheels extends Command {
 
     @Override
     protected void end() {
-        Robot.cargoIntake.stopIntake();
+        Robot.cargoPickup.stopPickup();
     }
 
 }

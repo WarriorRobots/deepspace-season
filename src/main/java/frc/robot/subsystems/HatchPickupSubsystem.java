@@ -17,11 +17,11 @@ public class HatchPickupSubsystem extends Subsystem {
 
     private static final boolean MOTOR_INVERTED = false;
 
-    private static final int INTAKE_MOTOR_PORT = 2;
+    private static final int PICKUP_MOTOR_PORT = 2;
     private static final int ROTATOR_SOL_FORWARD = 1;
     private static final int ROTATOR_SOL_REVERSE = 6;
 
-    private WPI_VictorSPX intakeMotor;
+    private WPI_VictorSPX pickupMotor;
     private DoubleSolenoid rotatorSol;
 
     /**
@@ -31,15 +31,15 @@ public class HatchPickupSubsystem extends Subsystem {
      * HatchPickupSubsystem();
      */
     public HatchPickupSubsystem() {
-        intakeMotor = new WPI_VictorSPX(INTAKE_MOTOR_PORT);
-        intakeMotor.setInverted(MOTOR_INVERTED);
+        pickupMotor = new WPI_VictorSPX(PICKUP_MOTOR_PORT);
+        pickupMotor.setInverted(MOTOR_INVERTED);
         rotatorSol = new DoubleSolenoid(Constants.PCM_1, ROTATOR_SOL_FORWARD, ROTATOR_SOL_REVERSE);
     }
 
     /**
      * Extends the solenoid that puts the pickup mechanism on the ground.
      */
-    public void extendIntake() {
+    public void extendPickup() {
         rotatorSol.set(Value.kForward);
     }
 
@@ -48,7 +48,7 @@ public class HatchPickupSubsystem extends Subsystem {
      * <p>
      * <b>Make sure the scissors are in place!
      */
-    public void retractIntake() {
+    public void retractPickup() {
         rotatorSol.set(Value.kReverse);
     }
 
@@ -61,35 +61,35 @@ public class HatchPickupSubsystem extends Subsystem {
     }
 
     /**
-     * Run the intake motors to pull a hatch into the mechanism.
+     * Run the pickup motors to pull a hatch into the mechanism.
      * 
      * @param speed Speed of motor, from -1 (out) to 1 (in).
      */
-    public void runIntake(double speed) {
-        intakeMotor.set(speed);
+    public void runPickup(double speed) {
+        pickupMotor.set(speed);
     }
 
     /**
-     * Shuts off the intake motor.
+     * Shuts off the pickup motor.
      */
-    public void stopIntake() {
-        intakeMotor.stopMotor();
+    public void stopPickup() {
+        pickupMotor.stopMotor();
     }
 
     /**
-     * Set the intake motor to brake mode, making it more difficult for hatches to
+     * Set the pickup motor to brake mode, making it more difficult for hatches to
      * fall out of the mechanism.
      */
     public void setBrakeMode() {
-        intakeMotor.setNeutralMode(NeutralMode.Brake);
+        pickupMotor.setNeutralMode(NeutralMode.Brake);
     }
 
     /**
-     * Set the intake motor to coast mode, making it easy for hatches to slip out of
+     * Set the pickup motor to coast mode, making it easy for hatches to slip out of
      * the mechanism.
      */
     public void setCoastMode() {
-        intakeMotor.setNeutralMode(NeutralMode.Coast);
+        pickupMotor.setNeutralMode(NeutralMode.Coast);
     }
 
     @Override
@@ -100,7 +100,7 @@ public class HatchPickupSubsystem extends Subsystem {
     @Override
     public void initSendable(SendableBuilder builder) {
         builder.setSmartDashboardType("hatchpickup-subsystem");
-        builder.addDoubleProperty("intake motor speed", () -> intakeMotor.get(), null);
+        builder.addDoubleProperty("pickup motor speed", () -> pickupMotor.get(), null);
         builder.addStringProperty("solenoid state", () -> rotatorSol.get().toString(), null);
     }
 

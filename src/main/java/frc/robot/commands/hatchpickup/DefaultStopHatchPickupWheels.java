@@ -11,7 +11,7 @@ public class DefaultStopHatchPickupWheels extends Command {
 
     @Override
     protected void execute() {
-        Robot.hatchPickup.stopIntake();
+        Robot.hatchPickup.stopPickup();
     }
 
     @Override
