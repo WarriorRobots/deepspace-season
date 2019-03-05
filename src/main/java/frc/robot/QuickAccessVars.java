@@ -20,7 +20,7 @@ public final class QuickAccessVars {
 	public static final double ELEVATOR_BELOW_MINIMUM_DRIFT_SPEED = -0.05;
 
 	// degrees
-	public static final double ARM_EXTENSION_ANGLE = 75;
+	public static final double ARM_EXTENSION_ANGLE = 90;
 
 	// settings
 	public static final boolean ARM_ROTATOR_CLONE_INVERTED = false;
@@ -28,7 +28,8 @@ public final class QuickAccessVars {
 	public static final double TURNLOCK_THRESHOLD = 0.2;
 	public static final double PLACE_HATCH_DELAY = 0.2; // seconds
 	public static final double PNEUMATIC_LOOP_COUNT = 5; // how many loops will a pneumatic command run?
-	public static final double RAMPRATE_SECONDS = 0.25;
+	public static final double DRIVETRAIN_RAMPRATE_SECONDS = 0.25; // how long will it take for the drive motors to
+																	// switch directions?
 
 	// pid
 	public static final double ELEVATOR_P = 0.4;

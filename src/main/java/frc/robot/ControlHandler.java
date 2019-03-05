@@ -18,8 +18,9 @@ import frc.robot.commands.debug.DebugResetCargoPickupEncoder;
 import frc.robot.commands.cargo.ReverseCargoPickupWheels;
 import frc.robot.commands.debug.DebugDisableCompressor;
 import frc.robot.commands.debug.DebugEnableCompressor;
-import frc.robot.commands.debug.DebugResetAll;
+import frc.robot.commands.debug.DebugRebootAll;
 import frc.robot.commands.cargo.ExtendCargoPickupArm;
+import frc.robot.commands.cargo.ExtendCargoPickupArmHACK;
 import frc.robot.commands.cargo.RetractCargoPickupArm;
 import frc.robot.commands.drive.ArcadeDrive;
 import frc.robot.commands.drive.TurnLockDrive;
@@ -104,10 +105,12 @@ public final class ControlHandler {
 		xboxL3 = new JoystickButton(xbox, 9);
 		xboxR3 = new JoystickButton(xbox, 10);
 
+		xboxL3.whileHeld(new DebugLinearElevatorControl( () -> -xbox.getY(Hand.kLeft) )); // XXX standardize
+
 		// buttons on base of left joystick (hard to reach, debug only)
-		leftJoyButton7.whenPressed(new DebugResetAll());
-		leftJoyButton8.whenPressed(new DebugEnableCompressor());
-		leftJoyButton10.whenPressed(new DebugDisableCompressor());
+		// leftJoyButton8.whenPressed(new DebugEnableCompressor());
+		leftJoyButton7.whenPressed(new DebugRebootAll());
+		// leftJoyButton10.whenPressed(new DebugDisableCompressor());
 
 		// right joystick
 		rightJoyThumbButton.whileHeld(new ArcadeDrive());
@@ -115,6 +118,8 @@ public final class ControlHandler {
 		rightJoyButton3.whenPressed(new ExtendCargoPickupArm()); // ball low
 		rightJoyButton3.whenPressed(new LockScissors());
 		// rightJoyButton4.whileHeld(new CameraCommand()); // unwritten
+
+		xboxR3.whenPressed(new ExtendCargoPickupArmHACK());
 
 		// left joystick
 		leftJoyButton4.whenPressed(new GroupPlaceHatchOnVelcro(QuickAccessVars.HATCH_LAUNCH_SAFETY));

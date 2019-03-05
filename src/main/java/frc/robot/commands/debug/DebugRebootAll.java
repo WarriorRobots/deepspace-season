@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class DebugResetAll extends InstantCommand {
+public class DebugRebootAll extends InstantCommand {
 
-    public DebugResetAll() {
+    public DebugRebootAll() {
         requires(Robot.drivetrain);
         requires(Robot.elevator);
         requires(Robot.hatchPickup);
@@ -20,8 +20,6 @@ public class DebugResetAll extends InstantCommand {
     protected void execute() {
         DriverStation.reportWarning("WWDEBUG ===FULL RESET===", false);
         Robot.drivetrain.stopDrive();
-        Robot.drivetrain.resetEncoders();
-        Robot.drivetrain.resetAngle();
         Robot.elevator.stopElevator();
         Robot.hatchPickup.stopPickup();
         Robot.hatchPickup.neutralizePneumatics();

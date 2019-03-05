@@ -67,16 +67,16 @@ public class DrivetrainSubsystem extends Subsystem {
 		leftFront = new WPI_TalonSRX(LEFT_FRONT_ID);
 		leftMiddle = new WPI_TalonSRX(LEFT_MIDDLE_ID);
 		leftBack = new WPI_TalonSRX(LEFT_BACK_ID);
-		leftFront.configOpenloopRamp(QuickAccessVars.RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
-		leftMiddle.configOpenloopRamp(QuickAccessVars.RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
-		leftBack.configOpenloopRamp(QuickAccessVars.RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
+		leftFront.configOpenloopRamp(QuickAccessVars.DRIVETRAIN_RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
+		leftMiddle.configOpenloopRamp(QuickAccessVars.DRIVETRAIN_RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
+		leftBack.configOpenloopRamp(QuickAccessVars.DRIVETRAIN_RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
 
 		rightFront = new WPI_TalonSRX(RIGHT_FRONT_ID);
 		rightMiddle = new WPI_TalonSRX(RIGHT_MIDDLE_ID);
 		rightBack = new WPI_TalonSRX(RIGHT_BACK_ID);
-		rightFront.configOpenloopRamp(QuickAccessVars.RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
-		rightMiddle.configOpenloopRamp(QuickAccessVars.RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
-		rightBack.configOpenloopRamp(QuickAccessVars.RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
+		rightFront.configOpenloopRamp(QuickAccessVars.DRIVETRAIN_RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
+		rightMiddle.configOpenloopRamp(QuickAccessVars.DRIVETRAIN_RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
+		rightBack.configOpenloopRamp(QuickAccessVars.DRIVETRAIN_RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
 
 		leftGroup = new SpeedControllerGroup(leftFront, leftMiddle, leftBack);
 		rightGroup = new SpeedControllerGroup(rightFront, rightMiddle, rightBack);
