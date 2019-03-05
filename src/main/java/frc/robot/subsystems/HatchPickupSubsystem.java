@@ -15,11 +15,11 @@ import frc.robot.commands.hatchpickup.DefaultStopHatchPickupWheels;
  */
 public class HatchPickupSubsystem extends Subsystem {
 
-    private static final boolean MOTOR_INVERTED = false;
+    private static final boolean MOTOR_INVERTED = true;
 
     private static final int PICKUP_MOTOR_PORT = 2;
-    private static final int ROTATOR_SOL_FORWARD = 1;
-    private static final int ROTATOR_SOL_REVERSE = 6;
+    private static final int ROTATOR_SOL_FORWARD = 0;
+    private static final int ROTATOR_SOL_REVERSE = 7;
 
     private WPI_VictorSPX pickupMotor;
     private DoubleSolenoid rotatorSol;
