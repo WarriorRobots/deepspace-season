@@ -12,15 +12,15 @@ import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
 /** Put the cargo pickup into the Horizontal position */
-public class ExtendCargoPickupArmHACK extends Command {
+public class DropArmClimb extends Command {
 
-  public ExtendCargoPickupArmHACK() {
+  public DropArmClimb() {
     requires(Robot.arm);
   }
 
   @Override
   protected void execute() {
-    Robot.arm.rotateArmTo(QuickAccessVars.ARM_EXTENSION_ANGLE + 25);
+    Robot.arm.rotateArmTo(QuickAccessVars.ARM_CLIMB_ANGLE);
   }
 
   @Override

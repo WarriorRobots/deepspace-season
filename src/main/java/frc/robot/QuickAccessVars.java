@@ -21,6 +21,7 @@ public final class QuickAccessVars {
 
 	// degrees
 	public static final double ARM_EXTENSION_ANGLE = 90;
+	public static final double ARM_CLIMB_ANGLE = 155;
 
 	// settings
 	public static final boolean ARM_ROTATOR_CLONE_INVERTED = false;

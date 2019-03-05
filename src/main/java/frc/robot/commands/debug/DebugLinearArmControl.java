@@ -16,7 +16,18 @@ public class DebugLinearArmControl extends Command {
 
     @Override
     protected void execute() {
-        Robot.arm.rotateArmLinear(input.getAsDouble());
+        // Robot.arm.rotateArmLinear(input.getAsDouble())
+        double angle = Robot.arm.getArmAngle();
+        double speed = input.getAsDouble();
+        if (angle < 0) {
+            if (speed < 0) {
+                Robot.arm.stopArm();
+            } else {
+                Robot.arm.rotateArmLinear(speed);
+            }
+        } else {
+            Robot.arm.rotateArmLinear(speed);
+        }
     }
 
     @Override
