@@ -1,32 +1,42 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
+
 /** Anything you need to access and edit quickly */
 public final class QuickAccessVars {
 
 	// in inches from the floor
+	public static final double ELEVATOR_SAFE_MINIMUM = 3.5;
 	public static final double LVL1_HEIGHT = 27;
 	public static final double LVL2_HEIGHT = 47;
 	public static final double LVL3_HEIGHT = 74;
+	public static final double SCISSORS_HEIGHT = 13;
 
-	// motor speeds
+	// motor speeds (-1.0 to 1.0)
 	public static final double ARCADE_FORWARD_MODIFIER = 0;
 	public static final double ARCADE_TURN_MODIFIER = 0;
 	public static final double DROP_ELEVATOR_SPEED = -0.8;
+	public static final double CARGO_PICKUP_IDLE_SPEED = 0.1;
+	public static final double ELEVATOR_BELOW_MINIMUM_DRIFT_SPEED = -0.05;
 
 	// degrees
 	public static final double ARM_EXTENSION_ANGLE = 75;
 
 	// settings
 	public static final boolean ARM_ROTATOR_CLONE_INVERTED = false;
-	public static final boolean HATCH_LAUNCH_SAFETY = false;
+	public static final boolean HATCH_LAUNCH_SAFETY = false; // true means line follower required
+	public static final double TURNLOCK_THRESHOLD = 0.2;
+	public static final double PLACE_HATCH_DELAY = 0.2; // seconds
+	public static final double PNEUMATIC_LOOP_COUNT = 5; // how many loops will a pneumatic command run?
+	public static final double RAMPRATE_SECONDS = 0.25;
 
 	// pid
 	public static final double ELEVATOR_P = 0.4;
 	public static final double ARM_P = 1;
 
 	// DO NOT USE THIS CONSTRUCTOR
-	private QuickAccessVars() throws Exception {
-		throw new Exception("Do not create a QuickAccessVars object!");
+	private QuickAccessVars() {
+		DriverStation.reportError("Do not create a QuickAccessVars object!", false);
 	}
 
 }

@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
-import frc.robot.commands.drive.DefaultDoubleJoystickDrive;
+import frc.robot.QuickAccessVars;
+import frc.robot.commands.drive.DefaultTankDrive;
 
 /**
  * Contains the drivetrain, the encoders for the left and right wheels, and the
@@ -35,8 +36,6 @@ public class DrivetrainSubsystem extends Subsystem {
 	public static final boolean RIGHT_ENCODER_REVERSED = true;
 	public static final boolean LEFT_DRIVE_REVERSED = false;
 	public static final boolean RIGHT_DRIVE_REVERSED = false;
-
-	private static final double RAMPRATE_SECONDS = 0.25;
 
 	private WPI_TalonSRX leftFront, leftMiddle, leftBack, rightFront, rightMiddle, rightBack;
 	private SpeedControllerGroup leftGroup, rightGroup;
@@ -68,16 +67,16 @@ public class DrivetrainSubsystem extends Subsystem {
 		leftFront = new WPI_TalonSRX(LEFT_FRONT_ID);
 		leftMiddle = new WPI_TalonSRX(LEFT_MIDDLE_ID);
 		leftBack = new WPI_TalonSRX(LEFT_BACK_ID);
-		leftFront.configOpenloopRamp(RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
-		leftMiddle.configOpenloopRamp(RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
-		leftBack.configOpenloopRamp(RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
+		leftFront.configOpenloopRamp(QuickAccessVars.RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
+		leftMiddle.configOpenloopRamp(QuickAccessVars.RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
+		leftBack.configOpenloopRamp(QuickAccessVars.RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
 
 		rightFront = new WPI_TalonSRX(RIGHT_FRONT_ID);
 		rightMiddle = new WPI_TalonSRX(RIGHT_MIDDLE_ID);
 		rightBack = new WPI_TalonSRX(RIGHT_BACK_ID);
-		rightFront.configOpenloopRamp(RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
-		rightMiddle.configOpenloopRamp(RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
-		rightBack.configOpenloopRamp(RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
+		rightFront.configOpenloopRamp(QuickAccessVars.RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
+		rightMiddle.configOpenloopRamp(QuickAccessVars.RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
+		rightBack.configOpenloopRamp(QuickAccessVars.RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
 
 		leftGroup = new SpeedControllerGroup(leftFront, leftMiddle, leftBack);
 		rightGroup = new SpeedControllerGroup(rightFront, rightMiddle, rightBack);
@@ -254,6 +253,6 @@ public class DrivetrainSubsystem extends Subsystem {
 
 	@Override
 	public void initDefaultCommand() {
-		setDefaultCommand(new DefaultDoubleJoystickDrive());
+		setDefaultCommand(new DefaultTankDrive());
 	}
 }

@@ -8,6 +8,7 @@
 package frc.robot.commands.hatchplacer;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
 /** Set hatch placer back into a neutral position, used after launching */
@@ -46,7 +47,7 @@ public class SubgroupRetractLaunchers extends InstantCommand {
   protected boolean isFinished() {
     // Condition of for loop
     // for (---, Cond, ---) {---};
-    return (counter > 5);
+    return (counter > QuickAccessVars.PNEUMATIC_LOOP_COUNT);
     // 5 is the approximate number of loops a pneumatic takes to fire
   }
 

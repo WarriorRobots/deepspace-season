@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
+
 /**
  * Contains all values used program-wide or constants that need to be changed
  * easily.
@@ -14,8 +16,8 @@ package frc.robot;
 public final class Constants {
 
 	// DO NOT USE THIS CONSTRUCTOR
-	private Constants() throws Exception {
-		throw new Exception("Do not create an Constants object!");
+	private Constants() {
+		DriverStation.reportError("Do not create an Constants object!", false);
 	}
 
 	/**

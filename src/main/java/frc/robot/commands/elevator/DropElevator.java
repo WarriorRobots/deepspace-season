@@ -6,18 +6,16 @@ import frc.robot.Robot;
 
 public class DropElevator extends Command {
 
-    private static final double THRESHOLD_INCHES = 3.5;
-
     public DropElevator() {
         requires(Robot.elevator);
     }
 
     @Override
     protected void execute() {
-        if (Robot.elevator.getElevatorPosition() > THRESHOLD_INCHES) {
+        if (Robot.elevator.getElevatorPosition() > QuickAccessVars.ELEVATOR_SAFE_MINIMUM) {
             Robot.elevator.adjustElevatorLinear(QuickAccessVars.DROP_ELEVATOR_SPEED);
         } else {
-            Robot.elevator.adjustElevatorLinear(-0.05);
+            Robot.elevator.adjustElevatorLinear(QuickAccessVars.ELEVATOR_BELOW_MINIMUM_DRIFT_SPEED);
         }
     }
 

@@ -13,7 +13,7 @@ public class DebugDisableCompressor extends InstantCommand {
     @Override
     protected void execute() {
         Robot.pneumaticBase.disableCompressor();
-        DriverStation.reportWarning("compressor disabled", false);
+        DriverStation.reportWarning("WWDEBUG compressor disabled", false);
     }
 
 }

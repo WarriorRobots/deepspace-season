@@ -22,7 +22,7 @@ import frc.robot.commands.debug.DebugResetAll;
 import frc.robot.commands.cargo.ExtendCargoPickupArm;
 import frc.robot.commands.cargo.RetractCargoPickupArm;
 import frc.robot.commands.drive.ArcadeDrive;
-import frc.robot.commands.drive.LowTurnSensitivityDrive;
+import frc.robot.commands.drive.TurnLockDrive;
 import frc.robot.commands.elevator.MoveElevatorTo;
 import frc.robot.commands.elevator.DropElevator;
 import frc.robot.commands.hatchpickup.RetractHatchPickup;
@@ -111,7 +111,7 @@ public final class ControlHandler {
 
 		// right joystick
 		rightJoyThumbButton.whileHeld(new ArcadeDrive());
-		rightJoyTriggerButton.whileHeld(new LowTurnSensitivityDrive());
+		rightJoyTriggerButton.whileHeld(new TurnLockDrive());
 		rightJoyButton3.whenPressed(new ExtendCargoPickupArm()); // ball low
 		rightJoyButton3.whenPressed(new LockScissors());
 		// rightJoyButton4.whileHeld(new CameraCommand()); // unwritten

@@ -2,15 +2,10 @@ package frc.robot.commands.elevator;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
 public class MoveElevatorTo extends Command {
-
-    /**
-     * If the elevator receives a signal to move below this number, the command will
-     * terminate.
-     */
-    private static final int MINIMUM_SAFE_TARGET = 4; // a bit above 0
 
     /** The position, in inches, that the elevator will move to. */
     private double target;
@@ -33,12 +28,12 @@ public class MoveElevatorTo extends Command {
             terminateFlag = true;
         }
 
-        this.target = (positionInches - 13) / 2;
+        this.target = (positionInches - QuickAccessVars.SCISSORS_HEIGHT) / 2;
     }
 
     @Override
     protected void initialize() {
-        if (target < MINIMUM_SAFE_TARGET) {
+        if (target < QuickAccessVars.ELEVATOR_SAFE_MINIMUM) {
             DriverStation.reportError(
                     "FIND PROGRAMMER IMMEDIATELY: Elevator attempted to move to unsafe position: " + target, false);
             terminateFlag = true;

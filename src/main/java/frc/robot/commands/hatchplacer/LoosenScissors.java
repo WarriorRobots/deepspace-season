@@ -8,13 +8,14 @@
 package frc.robot.commands.hatchplacer;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
 /** Loosen a hatch off of the hatch placer */
 public class LoosenScissors extends Command {
 
   /** Count variable for the loop of pneumatic */
-  private int i;
+  private int counter;
 
   public LoosenScissors() {
     requires(Robot.hatchPlacer);
@@ -24,7 +25,7 @@ public class LoosenScissors extends Command {
   protected void initialize() {
     // Initialization of for loop
     // for (Init, ---, ---) {---};
-    i = 0;
+    counter = 0;
   }
 
   @Override
@@ -38,14 +39,14 @@ public class LoosenScissors extends Command {
 
     // Increment of for loop
     // for (---, ---, Inc) {---};
-    i++;
+    counter++;
   }
 
   @Override
   protected boolean isFinished() {
     // Condition of for loop
     // for (---, Cond, ---) {---};
-    return (i > 5);
+    return (counter > QuickAccessVars.PNEUMATIC_LOOP_COUNT);
   }
 
   @Override

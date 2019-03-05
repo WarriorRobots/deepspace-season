@@ -8,13 +8,14 @@
 package frc.robot.commands.hatchplacer;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
 /** Push a hatch off of the hatch placer */
 public class SubgroupExtendLaunchers extends Command {
 
   /** Count variable for the loop of pneumatic */
-  private int i;
+  private int counter;
   /** Set to true to prevent hatch shots unless within 1'6" of the velcro */
   private boolean safemode;
 
@@ -27,7 +28,7 @@ public class SubgroupExtendLaunchers extends Command {
   protected void initialize() {
     // Initialization of for loop
     // for (Init, ---, ---) {---};
-    i = 0;
+    counter = 0;
   }
 
   @Override
@@ -47,14 +48,14 @@ public class SubgroupExtendLaunchers extends Command {
 
     // Increment of for loop
     // for (---, ---, Inc) {---};
-    i++;
+    counter++;
   }
 
   @Override
   protected boolean isFinished() {
     // Condition of for loop
     // for (---, Cond, ---) {---};
-    return (i > 5);
+    return (counter > QuickAccessVars.PNEUMATIC_LOOP_COUNT);
   }
 
   @Override

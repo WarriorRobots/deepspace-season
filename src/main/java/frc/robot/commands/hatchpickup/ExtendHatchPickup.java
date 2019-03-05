@@ -8,6 +8,7 @@
 package frc.robot.commands.hatchpickup;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
 /** Make the hatch pickup move from being vertical to being on the ground */
@@ -32,7 +33,7 @@ public class ExtendHatchPickup extends Command {
 
   @Override
   protected boolean isFinished() {
-    return counter > 5;
+    return counter > QuickAccessVars.PNEUMATIC_LOOP_COUNT;
   }
 
   @Override

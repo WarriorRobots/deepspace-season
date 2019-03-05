@@ -28,7 +28,7 @@ public class ArmSubsystem extends Subsystem {
     public static final double CLICKS_PER_DEGREE = 12288 / 360; // 8.533
 
     private static final int ROTATOR_PORT = 8;
-    private static final int CLONE_PORT = 15; // XXX get real number
+    private static final int CLONE_PORT = 11;
 
     /** Main motor (receives the encoder signals) */
     private WPI_TalonSRX armRotator;

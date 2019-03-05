@@ -18,7 +18,7 @@ public class DebugResetAll extends InstantCommand {
 
     @Override
     protected void execute() {
-        DriverStation.reportWarning("FULL RESET", false);
+        DriverStation.reportWarning("WWDEBUG ===FULL RESET===", false);
         Robot.drivetrain.stopDrive();
         Robot.drivetrain.resetEncoders();
         Robot.drivetrain.resetAngle();

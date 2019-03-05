@@ -1,6 +1,7 @@
 package frc.robot.commands.cargo;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
 public class DefaultIdleCargoPickupWheels extends Command {
@@ -11,7 +12,7 @@ public class DefaultIdleCargoPickupWheels extends Command {
 
     @Override
     protected void execute() {
-        Robot.cargoPickup.runPickup(0.1);
+        Robot.cargoPickup.runPickup(QuickAccessVars.CARGO_PICKUP_IDLE_SPEED);
     }
 
     @Override
