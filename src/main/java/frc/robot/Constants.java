@@ -12,7 +12,7 @@ package frc.robot;
  * easily.
  */
 public final class Constants {
-	
+
 	// DO NOT USE THIS CONSTRUCTOR
 	private Constants() throws Exception {
 		throw new Exception("Do not create an Constants object!");

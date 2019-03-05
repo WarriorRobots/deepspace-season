@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
+import frc.robot.QuickAccessVars;
 import frc.robot.commands.cargo.DefaultStabilizeArm;
 
 /**
@@ -27,9 +28,13 @@ public class ArmSubsystem extends Subsystem {
     public static final double CLICKS_PER_DEGREE = 12288 / 360; // 8.533
 
     private static final int ROTATOR_PORT = 8;
-    private static final double ARM_P = 1;
+    private static final int CLONE_PORT = 15; // XXX get real number
 
+    /** Main motor (receives the encoder signals) */
     private WPI_TalonSRX armRotator;
+
+    /** Clone motor (copies all output from armRotator) */
+    private WPI_TalonSRX armRotatorClone;
 
     /**
      * Instantiates new subsystem; make ONLY ONE.
@@ -42,9 +47,13 @@ public class ArmSubsystem extends Subsystem {
 
         armRotator.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
         armRotator.setSensorPhase(ENCODER_INVERTED);
-        armRotator.config_kP(Constants.PID_ID, ARM_P, Constants.TIMEOUT_MS);
+        armRotator.config_kP(Constants.PID_ID, QuickAccessVars.ARM_P, Constants.TIMEOUT_MS);
 
         armRotator.configClosedLoopPeakOutput(Constants.PID_ID, 1);
+
+        armRotatorClone = new WPI_TalonSRX(CLONE_PORT);
+        armRotatorClone.setInverted(QuickAccessVars.ARM_ROTATOR_CLONE_INVERTED);
+        armRotatorClone.follow(armRotator);
     }
 
     /**

@@ -21,7 +21,7 @@ import frc.robot.commands.debug.DebugEnableCompressor;
 import frc.robot.commands.debug.DebugResetAll;
 import frc.robot.commands.cargo.ExtendCargoPickupArm;
 import frc.robot.commands.cargo.RetractCargoPickupArm;
-import frc.robot.commands.drive.SingleJoystickDrive;
+import frc.robot.commands.drive.ArcadeDrive;
 import frc.robot.commands.drive.LowTurnSensitivityDrive;
 import frc.robot.commands.elevator.MoveElevatorTo;
 import frc.robot.commands.elevator.DropElevator;
@@ -32,7 +32,7 @@ import frc.robot.commands.hatchpickup.RunHatchPickupWheels;
 import frc.robot.commands.hatchplacer.LockScissors;
 import frc.robot.commands.hatchplacer.LoosenScissors;
 import frc.robot.commands.hatchplacer.GroupPlaceHatchOnVelcro;
-import frc.robot.commands.hatchplacer.RetractLaunchers;
+import frc.robot.commands.hatchplacer.SubgroupRetractLaunchers;
 import frc.robot.commands.hatchpickup.ReverseHatchPickupWheels;
 import frc.robot.util.triggers.DpadTrigger;
 import frc.robot.util.triggers.ThresholdJoystick;
@@ -57,7 +57,7 @@ public final class ControlHandler {
 	private JoystickButton rightJoyButton3, rightJoyButton4, rightJoyButton5, rightJoyButton6;
 	private ThresholdTrigger leftXboxTrigger, rightXboxTrigger;
 	private JoystickButton leftXboxBumper, rightXboxBumper, xboxL3, xboxR3;
-	private JoystickButton xboxX, xboxY, xboxB, xboxA, xboxSTART, xboxBACK;
+	private JoystickButton xboxX, xboxY, xboxB, xboxA, xboxSTART, xboxSELECT;
 	private DpadTrigger xboxUp, xboxDown, xboxLeft, xboxRight;
 	private ThresholdJoystick xboxLeftJoyUp, xboxLeftJoyDown, xboxRightJoyUp, xboxRightJoyDown;
 
@@ -96,7 +96,7 @@ public final class ControlHandler {
 		xboxX = new JoystickButton(xbox, 3);
 		xboxY = new JoystickButton(xbox, 4);
 		xboxSTART = new JoystickButton(xbox, 8);
-		xboxBACK = new JoystickButton(xbox, 7);
+		xboxSELECT = new JoystickButton(xbox, 7);
 		xboxLeftJoyUp = new ThresholdJoystick(() -> xbox.getY(Hand.kLeft), 0.3, ThresholdJoystick.UP);
 		xboxLeftJoyDown = new ThresholdJoystick(() -> xbox.getY(Hand.kLeft), -0.3, ThresholdJoystick.DOWN);
 		xboxRightJoyUp = new ThresholdJoystick(() -> xbox.getY(Hand.kRight), 0.3, ThresholdJoystick.UP);
@@ -109,32 +109,31 @@ public final class ControlHandler {
 		leftJoyButton8.whenPressed(new DebugEnableCompressor());
 		leftJoyButton10.whenPressed(new DebugDisableCompressor());
 
-		// drive alteration commands
-		rightJoyThumbButton.whileHeld(new SingleJoystickDrive());
-		rightJoyTriggerButton.whileHeld(new LowTurnSensitivityDrive());
-		// camera goes here @josh
-
 		// right joystick
+		rightJoyThumbButton.whileHeld(new ArcadeDrive());
+		rightJoyTriggerButton.whileHeld(new LowTurnSensitivityDrive());
 		rightJoyButton3.whenPressed(new ExtendCargoPickupArm()); // ball low
 		rightJoyButton3.whenPressed(new LockScissors());
-		rightJoyButton4.whenPressed(new DropElevator());
+		// rightJoyButton4.whileHeld(new CameraCommand()); // unwritten
 
 		// left joystick
-		leftJoyButton3.whenPressed(new ExtendHatchPickup());
-		leftJoyButton4.whenPressed(new GroupPlaceHatchOnVelcro(false));
+		leftJoyButton4.whenPressed(new GroupPlaceHatchOnVelcro(QuickAccessVars.HATCH_LAUNCH_SAFETY));
+		leftJoyTriggerButton.whenPressed(new DropElevator());
 
 		// hatch
-		xboxA.whenPressed(new MoveElevatorTo(27));
-		xboxB.whenPressed(new MoveElevatorTo(47));
-		xboxY.whenPressed(new MoveElevatorTo(74));
-		rightXboxTrigger.whenPressed(new LockScissors());
-		xboxRightJoyUp.whileHeld(new ReverseHatchPickupWheels());
-		xboxRightJoyDown.whileHeld(new RunHatchPickupWheels());
-
-		// cargo
-		// low is xboxA, same as hatch (27-13 / 2)
-		xboxLeftJoyUp.whileHeld(new ReverseCargoPickupWheels());
-		xboxLeftJoyDown.whileHeld(new RunCargoPickupWheels());
+		xboxA.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL1_HEIGHT));
+		xboxB.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL2_HEIGHT));
+		xboxY.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL3_HEIGHT));
+		xboxX.whenPressed(new RetractHatchPickup());
+		xboxSTART.whenPressed(new ExtendHatchPickup());
+		xboxSTART.whenPressed(new LoosenScissors());
+		xboxSELECT.whenPressed(new RetractCargoPickupArm());
+		rightXboxTrigger.whenPressed(new RunHatchPickupWheels());
+		rightXboxBumper.whenPressed(new ReverseHatchPickupWheels());
+		leftXboxTrigger.whileHeld(new RunCargoPickupWheels());
+		leftXboxBumper.whileHeld(new ReverseCargoPickupWheels());
+		xboxLeft.whenPressed(new LoosenScissors());
+		xboxRight.whenPressed(new LockScissors());
 
 		// unknowns
 		leftXboxBumper.whenPressed(new RetractCargoPickupArm());

@@ -1,6 +1,7 @@
 package frc.robot.commands.elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
 public class DropElevator extends Command {
@@ -14,7 +15,7 @@ public class DropElevator extends Command {
     @Override
     protected void execute() {
         if (Robot.elevator.getElevatorPosition() > THRESHOLD_INCHES) {
-            Robot.elevator.adjustElevatorLinear(-0.8);
+            Robot.elevator.adjustElevatorLinear(QuickAccessVars.DROP_ELEVATOR_SPEED);
         } else {
             Robot.elevator.adjustElevatorLinear(-0.05);
         }

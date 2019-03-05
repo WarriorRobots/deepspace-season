@@ -18,6 +18,7 @@ import frc.robot.commands.cargo.DefaultIdleCargoPickupWheels;
  */
 public class CargoPickupSubsystem extends Subsystem {
 
+    private static final boolean MOTOR_INVERTED = false;
     private static final int PICKUP_WHEELS_PORT = 1;
 
     private WPI_VictorSPX pickupWheels;
@@ -29,7 +30,7 @@ public class CargoPickupSubsystem extends Subsystem {
      */
     public CargoPickupSubsystem() {
         pickupWheels = new WPI_VictorSPX(PICKUP_WHEELS_PORT);
-        pickupWheels.setInverted(true);
+        pickupWheels.setInverted(MOTOR_INVERTED);
     }
 
     /**

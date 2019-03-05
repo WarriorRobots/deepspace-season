@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
 /** Set hatch placer back into a neutral position, used after launching */
-public class RetractLaunchers extends InstantCommand {
+public class SubgroupRetractLaunchers extends InstantCommand {
 
   /** Count variable for the loop of pneumatic */
   private int counter;
 
-  public RetractLaunchers() {
+  public SubgroupRetractLaunchers() {
     requires(Robot.hatchPlacer);
   }
 

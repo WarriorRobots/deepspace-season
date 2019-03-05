@@ -11,14 +11,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 /** Push a hatch off of the hatch placer */
-public class ExtendLaunchers extends Command {
+public class SubgroupExtendLaunchers extends Command {
 
   /** Count variable for the loop of pneumatic */
   private int i;
   /** Set to true to prevent hatch shots unless within 1'6" of the velcro */
   private boolean safemode;
 
-  public ExtendLaunchers(boolean safemode) {
+  public SubgroupExtendLaunchers(boolean safemode) {
     requires(Robot.hatchPlacer);
     this.safemode = safemode;
   }
