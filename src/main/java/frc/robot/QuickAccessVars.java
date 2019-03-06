@@ -13,8 +13,8 @@ public final class QuickAccessVars {
 	public static final double SCISSORS_HEIGHT = 13;
 
 	// motor speeds (-1.0 to 1.0)
-	public static final double ARCADE_FORWARD_MODIFIER = 0;
-	public static final double ARCADE_TURN_MODIFIER = 0;
+	public static final double ARCADE_FORWARD_MODIFIER = 0.5;
+	public static final double ARCADE_TURN_MODIFIER = 0.5;
 	public static final double DROP_ELEVATOR_SPEED = -1;
 	public static final double CARGO_PICKUP_IDLE_SPEED = 0.1;
 	public static final double ELEVATOR_BELOW_MINIMUM_DRIFT_SPEED = -0.05;
