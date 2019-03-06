@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.CargoIntakeSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -28,6 +29,7 @@ public class Robot extends TimedRobot {
 	public static final HatchPickupSubsystem hatchPickup = new HatchPickupSubsystem();
 	public static final HatchPlacerSubsystem hatchPlacer = new HatchPlacerSubsystem();
 	public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
+	public static final CameraSubsystem camera = new CameraSubsystem();
 	public static final LineFollowerSubsystem lineFollowers = new LineFollowerSubsystem();
 	public static final ArmSubsystem arm = new ArmSubsystem();
 	public static final CargoIntakeSubsystem cargoIntake = new CargoIntakeSubsystem();

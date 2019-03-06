@@ -37,7 +37,7 @@ public class ExtendLaunchers extends Command {
     // Execute of for loop
     // for (---, ---, ---) {Exec};
     if (safemode) {
-      if (Robot.lineFollowers.getMiddleLineFollower()) {
+      if (Robot.lineFollowers.getMiddleLineFollower()) { // don't reference getMiddleLineFollower
         Robot.hatchPlacer.extendLaunchers();
       } //else do nothing
     } else {
