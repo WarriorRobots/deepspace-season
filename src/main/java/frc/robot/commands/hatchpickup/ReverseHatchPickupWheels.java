@@ -10,6 +10,7 @@ package frc.robot.commands.hatchpickup;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+@Deprecated // unsafe to use
 public class ReverseHatchPickupWheels extends Command {
   public ReverseHatchPickupWheels() {
     requires(Robot.hatchPickupWheels);
