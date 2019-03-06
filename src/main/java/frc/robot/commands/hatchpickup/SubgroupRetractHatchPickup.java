@@ -12,11 +12,11 @@ import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
 /** Make the hatch pickup move from being on the ground to being up */
-public class RetractHatchPickup extends Command {
+public class SubgroupRetractHatchPickup extends Command {
 
   private int counter;
 
-  public RetractHatchPickup() {
+  public SubgroupRetractHatchPickup() {
     requires(Robot.hatchPickup);
   }
 
@@ -28,7 +28,6 @@ public class RetractHatchPickup extends Command {
   @Override
   protected void execute() {
     counter++;
-    Robot.hatchPlacer.loosenScissors();
     Robot.hatchPickup.retractPickup();
   }
 

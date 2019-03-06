@@ -8,37 +8,28 @@
 package frc.robot.commands.hatchpickup;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
-/** Make the hatch pickup move from being vertical to being on the ground */
-public class ExtendHatchPickup extends Command {
-  
-  private int counter;
-
-  public ExtendHatchPickup() {
+public class SubgroupRunHatchPickupWheels extends Command {
+  public SubgroupRunHatchPickupWheels() {
     requires(Robot.hatchPickup);
   }
 
-  @Override
-  protected void initialize() {
-    counter = 0;
-  }
-
+  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    counter++;
-    Robot.hatchPickup.extendPickup();
+    Robot.hatchPickup.runPickup(1);
   }
 
+  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return counter > QuickAccessVars.PNEUMATIC_LOOP_COUNT;
+    return false;
   }
 
   @Override
   protected void end() {
-    Robot.hatchPickup.neutralizePneumatics();
+    Robot.hatchPickup.stopPickup();
   }
 
 }
