@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
+import frc.robot.QuickAccessVars;
 import frc.robot.commands.cargo.DefaultIdleCargoPickupWheels;
 
 /**
@@ -18,7 +19,6 @@ import frc.robot.commands.cargo.DefaultIdleCargoPickupWheels;
  */
 public class CargoPickupSubsystem extends Subsystem {
 
-    private static final boolean MOTOR_INVERTED = false; // XXX quickaccess
     private static final int PICKUP_WHEELS_PORT = 1;
 
     private WPI_VictorSPX pickupWheels;
@@ -30,7 +30,7 @@ public class CargoPickupSubsystem extends Subsystem {
      */
     public CargoPickupSubsystem() {
         pickupWheels = new WPI_VictorSPX(PICKUP_WHEELS_PORT);
-        pickupWheels.setInverted(MOTOR_INVERTED);
+        pickupWheels.setInverted(QuickAccessVars.CARGO_PICKUP_WHEELS_INVERTED);
     }
 
     /**
