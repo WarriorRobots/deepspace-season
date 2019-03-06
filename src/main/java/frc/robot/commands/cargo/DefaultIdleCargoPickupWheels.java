@@ -6,6 +6,10 @@ import frc.robot.Robot;
 
 public class DefaultIdleCargoPickupWheels extends Command {
 
+    /**
+     * Default command for CargoPickupSubsystem; runs the wheels inwards at a slow
+     * speed so the ball doesn't fall out.
+     */
     public DefaultIdleCargoPickupWheels() {
         requires(Robot.cargoPickupWheels);
     }

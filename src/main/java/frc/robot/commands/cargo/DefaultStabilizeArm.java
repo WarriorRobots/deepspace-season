@@ -10,11 +10,13 @@ package frc.robot.commands.cargo;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/** Stabilize the cargo pickup */
 public class DefaultStabilizeArm extends Command {
 
   private double initialPosition;
 
+  /**
+   * Holds the arm in a stable position using motor power to fight gravity.
+   */
   public DefaultStabilizeArm() {
     requires(Robot.arm);
   }
@@ -33,7 +35,7 @@ public class DefaultStabilizeArm extends Command {
   protected boolean isFinished() {
     return false;
   }
-  
+
   @Override
   protected void end() {
     Robot.arm.stopArm();

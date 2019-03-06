@@ -10,9 +10,11 @@ package frc.robot.commands.cargo;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/** Put the cargo pickup into the Up position */
 public class RetractCargoPickupArm extends Command {
 
+  /**
+   * Raises the arm to zero degrees (straight upwards).
+   */
   public RetractCargoPickupArm() {
     requires(Robot.arm);
   }

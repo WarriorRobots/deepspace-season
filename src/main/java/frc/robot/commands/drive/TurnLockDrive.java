@@ -4,13 +4,13 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
-/**
- * A drive command for use at high speeds, which will not be sensitive to small
- * changes in joystick position. Allows drivers to drive in straight lines
- * without perfect control of joysticks.
- */
 public class TurnLockDrive extends Command {
 
+    /**
+     * A drive command for use at high speeds, which will not be sensitive to small
+     * changes in joystick position. Allows drivers to drive in straight lines
+     * without perfect control of joysticks.
+     */
     public TurnLockDrive() {
         requires(Robot.drivetrain);
     }

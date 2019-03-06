@@ -7,6 +7,10 @@ public class DefaultStabilizeElevator extends Command {
 
     private double initialPosition;
 
+    /**
+     * Holds the elevator winch in a stable position using motor power to fight
+     * gravity.
+     */
     public DefaultStabilizeElevator() {
         requires(Robot.elevator);
     }
@@ -14,7 +18,7 @@ public class DefaultStabilizeElevator extends Command {
     @Override
     protected void initialize() {
         initialPosition = Robot.elevator.getElevatorPosition();
-    } 
+    }
 
     @Override
     protected void execute() {

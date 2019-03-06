@@ -14,11 +14,11 @@ public class MoveElevatorTo extends Command {
     private boolean terminateFlag = false; // initially false unless something sets it to true
 
     /**
-     * Move the specific scoring item (HATCH or CARGO) to a certain number of inches
-     * <b>relative to the floor</b>.
+     * Move the elevator's central assembly to a certain number of inches <b>above
+     * the floor</b>.
      * 
-     * @param positionInches How far above the floor the specified item should be,
-     *                       in inches.
+     * @param positionInches How far above the floor the elevator should be, in
+     *                       inches.
      */
     public MoveElevatorTo(double positionInches) {
         requires(Robot.elevator);
@@ -45,7 +45,7 @@ public class MoveElevatorTo extends Command {
         if (terminateFlag) {
             Robot.elevator.stopElevator();
         } else {
-        Robot.elevator.moveElevatorTo(target);
+            Robot.elevator.moveElevatorTo(target);
         }
     }
 

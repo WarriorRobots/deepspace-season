@@ -4,9 +4,13 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class DebugResetCargoPickupEncoder extends InstantCommand {
+public class DebugResetArmEncoder extends InstantCommand {
 
-    public DebugResetCargoPickupEncoder() {
+    /**
+     * Sets the current angle of the arm as the new "0 degrees". Use with care, as
+     * this bypasses the hall effect sensor.
+     */
+    public DebugResetArmEncoder() {
         requires(Robot.arm);
     }
 

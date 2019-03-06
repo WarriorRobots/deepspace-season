@@ -6,6 +6,11 @@ import frc.robot.Robot;
 
 public class DebugRebootAll extends InstantCommand {
 
+    /**
+     * In one loop, sets all motor speeds to zero and resets all solenoids. This
+     * effectively reboots every component on the robot except encoders. Use with
+     * care!
+     */
     public DebugRebootAll() {
         requires(Robot.drivetrain);
         requires(Robot.elevator);

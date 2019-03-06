@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.cargo.RunCargoPickupWheels;
 import frc.robot.commands.debug.DebugLinearArmControl;
 import frc.robot.commands.debug.DebugLinearElevatorControl;
-import frc.robot.commands.debug.DebugResetCargoPickupEncoder;
+import frc.robot.commands.debug.DebugResetArmEncoder;
 import frc.robot.commands.cargo.ReverseCargoPickupWheels;
 import frc.robot.commands.debug.DebugDisableCompressor;
 import frc.robot.commands.debug.DebugEnableCompressor;
@@ -141,7 +141,7 @@ public final class ControlHandler {
 
 		// unknowns
 		leftXboxBumper.whenPressed(new RetractCargoPickupArm());
-		leftJoyButton9.whenPressed(new DebugResetCargoPickupEncoder());
+		leftJoyButton9.whenPressed(new DebugResetArmEncoder());
 	}
 
 	// -----------------------------------------------------------------//
