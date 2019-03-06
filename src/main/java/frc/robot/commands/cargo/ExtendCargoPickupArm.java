@@ -8,7 +8,6 @@
 package frc.robot.commands.cargo;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
 /** Put the cargo pickup into the Horizontal position */
