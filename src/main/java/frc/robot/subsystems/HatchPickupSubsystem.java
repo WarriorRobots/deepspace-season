@@ -5,14 +5,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
+import frc.robot.QuickAccessVars;
 import frc.robot.commands.hatchpickup.DefaultStopHatchPickupWheels;
 
 /**
  * Contains the motor and pneumatics used to pick up hatches from the ground.
  */
 public class HatchPickupSubsystem extends Subsystem {
-
-    private static final boolean MOTOR_INVERTED = true;
 
     private static final int PICKUP_MOTOR_PORT = 2;
 
@@ -26,7 +25,7 @@ public class HatchPickupSubsystem extends Subsystem {
      */
     public HatchPickupSubsystem() {
         pickupMotor = new WPI_VictorSPX(PICKUP_MOTOR_PORT);
-        pickupMotor.setInverted(MOTOR_INVERTED);
+        pickupMotor.setInverted(QuickAccessVars.HATCH_PICKUP_WHEELS_INVERTED);
     }
 
     /**

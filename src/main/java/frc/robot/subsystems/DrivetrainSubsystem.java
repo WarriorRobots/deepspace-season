@@ -84,7 +84,6 @@ public class DrivetrainSubsystem extends Subsystem {
 		rightGroup.setInverted(RIGHT_DRIVE_REVERSED);
 
 		differentialDrive = new DifferentialDrive(leftGroup, rightGroup);
-		differentialDrive.setSafetyEnabled(false);
 
 		// if NavX is missing, this code will handle errors and prevent a crash
 		try {

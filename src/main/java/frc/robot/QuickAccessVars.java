@@ -32,6 +32,9 @@ public final class QuickAccessVars {
 	// settings
 	public static final boolean ARM_ROTATOR_CLONE_INVERTED = false;
 	public static final boolean CARGO_PICKUP_WHEELS_INVERTED = false;
+	public static final boolean HATCH_PICKUP_WHEELS_INVERTED = true;
+	public static final boolean ELEVATOR_WINCH_INVERTED = true;
+	public static final boolean ELEVATOR_ENCODER_INVERTED = false;
 	public static final boolean HATCH_LAUNCH_SAFETY = false; // true means line follower required
 	public static final double TURNLOCK_THRESHOLD = 0.2;
 	public static final double PNEUMATIC_LOOP_COUNT = 5; // how many loops will a pneumatic command run?

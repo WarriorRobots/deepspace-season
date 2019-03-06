@@ -22,9 +22,6 @@ import frc.robot.commands.cargo.DefaultStabilizeArm;
  */
 public class ArmSubsystem extends Subsystem {
 
-    private static final boolean MOTOR_INVERTED = true;
-    private static final boolean ENCODER_INVERTED = false;
-
     public static final double CLICKS_PER_DEGREE = 12288 / 360; // 8.533
 
     private static final int ROTATOR_PORT = 8;
@@ -43,10 +40,10 @@ public class ArmSubsystem extends Subsystem {
      */
     public ArmSubsystem() {
         armRotator = new WPI_TalonSRX(ROTATOR_PORT);
-        armRotator.setInverted(MOTOR_INVERTED);
+        armRotator.setInverted(QuickAccessVars.ELEVATOR_WINCH_INVERTED);
 
         armRotator.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
-        armRotator.setSensorPhase(ENCODER_INVERTED);
+        armRotator.setSensorPhase(QuickAccessVars.ELEVATOR_ENCODER_INVERTED);
         armRotator.config_kP(Constants.PID_ID, QuickAccessVars.ARM_P, Constants.TIMEOUT_MS);
 
         armRotator.configClosedLoopPeakOutput(Constants.PID_ID, 1);
