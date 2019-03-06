@@ -10,8 +10,8 @@ package frc.robot.commands.hatchpickup;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class SubgroupRunHatchPickupWheels extends Command {
-  public SubgroupRunHatchPickupWheels() {
+public class RunHatchPickupWheels extends Command {
+  public RunHatchPickupWheels() {
     requires(Robot.hatchPickupWheels);
   }
 

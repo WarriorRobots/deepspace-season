@@ -143,7 +143,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	 *                     (right).
 	 */
 	public void arcadeDriveTeleop(double forwardSpeed, double turnSpeed) {
-		turnSpeed = -turnSpeed; // turning is inverted on the robot
+		turnSpeed = turnSpeed; // turning is inverted on the robot
 		differentialDrive.arcadeDrive(forwardSpeed, turnSpeed, true);
 	}
 
@@ -160,7 +160,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	 *                     (right).
 	 */
 	public void arcadeDriveRaw(double forwardSpeed, double turnSpeed) {
-		turnSpeed = -turnSpeed; // turning is inverted on the robot
+		turnSpeed = turnSpeed; // turning is inverted on the robot
 		differentialDrive.arcadeDrive(forwardSpeed, turnSpeed, false);
 	}
 
