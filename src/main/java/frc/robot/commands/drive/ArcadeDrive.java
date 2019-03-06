@@ -16,7 +16,7 @@ public class ArcadeDrive extends Command {
   protected void execute() {
     Robot.drivetrain.arcadeDriveTeleop(
       Robot.input.getRightY(QuickAccessVars.ARCADE_FORWARD_MODIFIER),
-      Robot.input.getRightX(QuickAccessVars.ARCADE_TURN_MODIFIER)
+      -Robot.input.getRightX(QuickAccessVars.ARCADE_TURN_MODIFIER)
     );
   }
 

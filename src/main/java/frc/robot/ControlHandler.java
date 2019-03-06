@@ -20,7 +20,6 @@ import frc.robot.commands.debug.DebugDisableCompressor;
 import frc.robot.commands.debug.DebugEnableCompressor;
 import frc.robot.commands.debug.DebugRebootAll;
 import frc.robot.commands.cargo.ExtendCargoPickupArm;
-import frc.robot.commands.cargo.DropArmClimb;
 import frc.robot.commands.cargo.RetractCargoPickupArm;
 import frc.robot.commands.drive.ArcadeDrive;
 import frc.robot.commands.drive.TurnLockDrive;
@@ -30,7 +29,6 @@ import frc.robot.commands.hatchpickup.SubgroupRetractHatchPickup;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.commands.hatchpickup.DefaultStopHatchPickupWheels;
 import frc.robot.commands.hatchpickup.GroupExtendHatchPickup;
-import frc.robot.commands.hatchpickup.GroupRetractHatchPickup;
 import frc.robot.commands.hatchpickup.SubgroupExtendHatchPickup;
 import frc.robot.commands.hatchpickup.SubgroupRunHatchPickupWheels;
 import frc.robot.commands.hatchplacer.LockScissors;
@@ -121,10 +119,8 @@ public final class ControlHandler {
 		// rightJoyButton4.whileHeld(new CameraCommand()); // unwritten
 
 		// 
-		rightJoyButton3.whenPressed(new ExtendCargoPickupArm()); // ball low
+		rightJoyButton3.whenPressed(new ExtendCargoPickupArm(QuickAccessVars.ARM_PICKUP_ANGLE)); // ball low
 		rightJoyButton3.whenPressed(new LockScissors());
-
-		// ???.whenPressed(new DropArmClimb()); // find a new button
 
 		// left joystick
 		leftJoyButton4.whenPressed(new GroupPlaceHatchOnVelcro(QuickAccessVars.HATCH_LAUNCH_SAFETY));
@@ -134,7 +130,8 @@ public final class ControlHandler {
 		xboxA.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL1_HEIGHT));
 		xboxB.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL2_HEIGHT));
 		xboxY.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL3_HEIGHT));
-		xboxX.whenPressed(new GroupRetractHatchPickup());
+		xboxX.whenPressed(new SubgroupRetractHatchPickup());
+		xboxX.whenPressed(new DefaultStopHatchPickupWheels());
 		xboxSTART.whenPressed(new GroupExtendHatchPickup());
 		xboxSELECT.whenPressed(new RetractCargoPickupArm());
 		rightXboxBumper.whileHeld(new ReverseHatchPickupWheels());

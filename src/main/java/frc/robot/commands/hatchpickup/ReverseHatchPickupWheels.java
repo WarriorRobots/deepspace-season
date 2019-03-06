@@ -12,13 +12,13 @@ import frc.robot.Robot;
 
 public class ReverseHatchPickupWheels extends Command {
   public ReverseHatchPickupWheels() {
-    requires(Robot.hatchPickup);
+    requires(Robot.hatchPickupWheels);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatchPickup.runPickup(-1);
+    Robot.hatchPickupWheels.runPickup(-1);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -29,7 +29,7 @@ public class ReverseHatchPickupWheels extends Command {
 
   @Override
   protected void end() {
-    Robot.hatchPickup.stopPickup();
+    Robot.hatchPickupWheels.stopPickup();
   }
 
 }

@@ -7,12 +7,12 @@ import frc.robot.Robot;
 public class DebugDisableCompressor extends InstantCommand {
 
     public DebugDisableCompressor() {
-        requires(Robot.pneumaticBase);
+        requires(Robot.pneumatics);
     }
 
     @Override
     protected void execute() {
-        Robot.pneumaticBase.disableCompressor();
+        Robot.pneumatics.disableCompressor();
         DriverStation.reportWarning("WWDEBUG compressor disabled", false);
     }
 

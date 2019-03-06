@@ -7,12 +7,12 @@ import frc.robot.Robot;
 public class DefaultIdleCargoPickupWheels extends Command {
 
     public DefaultIdleCargoPickupWheels() {
-        requires(Robot.cargoPickup);
+        requires(Robot.cargoPickupWheels);
     }
 
     @Override
     protected void execute() {
-        Robot.cargoPickup.runPickup(QuickAccessVars.CARGO_PICKUP_IDLE_SPEED);
+        Robot.cargoPickupWheels.runPickup(QuickAccessVars.CARGO_PICKUP_IDLE_SPEED);
     }
 
     @Override
@@ -22,7 +22,7 @@ public class DefaultIdleCargoPickupWheels extends Command {
 
     @Override
     protected void end() {
-        Robot.cargoPickup.stopPickup();
+        Robot.cargoPickupWheels.stopPickup();
     }
 
 }

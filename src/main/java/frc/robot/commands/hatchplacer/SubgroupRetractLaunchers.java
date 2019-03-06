@@ -18,7 +18,7 @@ public class SubgroupRetractLaunchers extends InstantCommand {
   private int counter;
 
   public SubgroupRetractLaunchers() {
-    requires(Robot.hatchPlacer);
+    requires(Robot.pneumatics);
   }
 
   @Override
@@ -36,7 +36,7 @@ public class SubgroupRetractLaunchers extends InstantCommand {
 
     // Execute of for loop
     // for (---, ---, ---) {Exec};
-    Robot.hatchPlacer.retractLaunchers();
+    Robot.pneumatics.retractLaunchers();
 
     // Increment of for loop
     // for (---, ---, Inc) {---};
@@ -54,7 +54,7 @@ public class SubgroupRetractLaunchers extends InstantCommand {
   @Override
   protected void end() {
     // set solonoid to neutral to increase lifespan
-    Robot.hatchPlacer.neutralizePneumatics();
+    Robot.pneumatics.neutralizeLaunchers();
   }
 
 }

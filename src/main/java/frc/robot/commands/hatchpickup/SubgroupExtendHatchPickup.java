@@ -17,7 +17,7 @@ public class SubgroupExtendHatchPickup extends Command {
   private int counter;
 
   public SubgroupExtendHatchPickup() {
-    requires(Robot.hatchPickup);
+    requires(Robot.pneumatics);
   }
 
   @Override
@@ -28,7 +28,7 @@ public class SubgroupExtendHatchPickup extends Command {
   @Override
   protected void execute() {
     counter++;
-    Robot.hatchPickup.extendPickup();
+    Robot.pneumatics.extendPickup();
   }
 
   @Override
@@ -38,7 +38,7 @@ public class SubgroupExtendHatchPickup extends Command {
 
   @Override
   protected void end() {
-    Robot.hatchPickup.neutralizePneumatics();
+    Robot.pneumatics.neutralizePickup();
   }
 
 }

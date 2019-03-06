@@ -18,7 +18,7 @@ public class LockScissors extends Command {
   private int counter;
 
   public LockScissors() {
-    requires(Robot.hatchPlacer);
+    requires(Robot.pneumatics);
   }
 
   @Override
@@ -35,7 +35,7 @@ public class LockScissors extends Command {
     // (1 loop is not enough time for the pneumatic to fire)
     // Execute of for loop
     // for (---, ---, ---) {Exec};
-    Robot.hatchPlacer.lockScissors();
+    Robot.pneumatics.lockScissors();
 
     // Increment of for loop
     // for (---, ---, Inc) {---};
@@ -52,7 +52,7 @@ public class LockScissors extends Command {
   @Override
   protected void end() {
     // set solonoid to neutral to increase lifespan
-    Robot.hatchPlacer.neutralizePneumatics();
+    Robot.pneumatics.neutralizeScissors();
   }
 
 }

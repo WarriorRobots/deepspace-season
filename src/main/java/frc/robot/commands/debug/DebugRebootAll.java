@@ -9,10 +9,10 @@ public class DebugRebootAll extends InstantCommand {
     public DebugRebootAll() {
         requires(Robot.drivetrain);
         requires(Robot.elevator);
-        requires(Robot.hatchPickup);
-        requires(Robot.hatchPlacer);
+        requires(Robot.hatchPickupWheels);
+        requires(Robot.pneumatics);
         requires(Robot.arm);
-        requires(Robot.pneumaticBase);
+        requires(Robot.pneumatics);
         requires(Robot.lineFollowers);
     }
 
@@ -21,17 +21,16 @@ public class DebugRebootAll extends InstantCommand {
         DriverStation.reportWarning("WWDEBUG ===FULL RESET===", false);
         Robot.drivetrain.stopDrive();
         Robot.elevator.stopElevator();
-        Robot.hatchPickup.stopPickup();
-        Robot.hatchPickup.neutralizePneumatics();
-        Robot.hatchPlacer.neutralizePneumatics();
+        Robot.hatchPickupWheels.stopPickup();
+        Robot.pneumatics.neutralizeAll();
         Robot.arm.stopArm();
-        Robot.cargoPickup.stopPickup();
-        Robot.pneumaticBase.disableCompressor();
+        Robot.cargoPickupWheels.stopPickup();
+        Robot.pneumatics.disableCompressor();
     }
 
     @Override
     protected void end() {
-        Robot.pneumaticBase.enableCompressor();
+        Robot.pneumatics.enableCompressor();
     }
 
 }

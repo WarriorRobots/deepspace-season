@@ -6,12 +6,12 @@ import frc.robot.Robot;
 public class DefaultStopHatchPickupWheels extends Command {
 
     public DefaultStopHatchPickupWheels() {
-        requires(Robot.hatchPickup);
+        requires(Robot.hatchPickupWheels);
     }
 
     @Override
     protected void execute() {
-        Robot.hatchPickup.stopPickup();
+        Robot.hatchPickupWheels.stopPickup();
     }
 
     @Override

@@ -20,7 +20,7 @@ public class SubgroupExtendLaunchers extends Command {
   private boolean safemode;
 
   public SubgroupExtendLaunchers(boolean safemode) {
-    requires(Robot.hatchPlacer);
+    requires(Robot.pneumatics);
     this.safemode = safemode;
   }
 
@@ -40,10 +40,10 @@ public class SubgroupExtendLaunchers extends Command {
     // for (---, ---, ---) {Exec};
     if (safemode) {
       if (Robot.lineFollowers.getMiddleLineFollower()) {
-        Robot.hatchPlacer.extendLaunchers();
+        Robot.pneumatics.extendLaunchers();
       } //else do nothing
     } else {
-      Robot.hatchPlacer.extendLaunchers();
+      Robot.pneumatics.extendLaunchers();
     }
 
     // Increment of for loop
@@ -61,7 +61,7 @@ public class SubgroupExtendLaunchers extends Command {
   @Override
   protected void end() {
     // set solonoid to neutral to increase lifespan
-    Robot.hatchPlacer.neutralizePneumatics();
+    Robot.pneumatics.neutralizeLaunchers();
   }
 
 }
