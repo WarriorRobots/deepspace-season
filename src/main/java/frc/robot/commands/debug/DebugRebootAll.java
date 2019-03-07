@@ -23,7 +23,7 @@ public class DebugRebootAll extends InstantCommand {
 
     @Override
     protected void execute() {
-        DriverStation.reportWarning("WWDEBUG ===FULL RESET===", false);
+        DriverStation.reportWarning("WWDEBUG: ===FULL RESET===", false);
         Robot.drivetrain.stopDrive();
         Robot.elevator.stopElevator();
         Robot.hatchPickupWheels.stopPickup();

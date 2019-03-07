@@ -17,7 +17,7 @@ public class DebugResetArmEncoder extends InstantCommand {
     @Override
     protected void execute() {
         Robot.arm.resetArmAngle();
-        DriverStation.reportWarning("WWDEBUG resetting encoder", false);
+        DriverStation.reportWarning("WWDEBUG: resetting encoder", false);
     }
 
 }

@@ -6,18 +6,20 @@ import edu.wpi.first.wpilibj.DriverStation;
 public final class QuickAccessVars {
 
 	// in inches from the floor
-	public static final double ELEVATOR_SAFE_MINIMUM = 5;
-	public static final double LVL1_HEIGHT = 27;
+	public static final double ELEVATOR_MINIMUM_TARGET = 1;
+	public static final double CARGO_SCORING_HEIGHT = 29;
+	public static final double LVL1_HEIGHT = 19;
 	public static final double LVL2_HEIGHT = 47;
 	public static final double LVL3_HEIGHT = 74;
 	public static final double SCISSORS_HEIGHT = 13;
+	public static final double ELEVATOR_DOWNWARD_DRIFT_THRESHOLD = 5;
 
 	// motor speeds (-1.0 to 1.0)
 	public static final double ARCADE_FORWARD_MODIFIER = 0.5;
 	public static final double ARCADE_TURN_MODIFIER = 0.75;
-	public static final double DROP_ELEVATOR_SPEED = -1;
+	public static final double ELEVATOR_DROP_SPEED = -1;
 	public static final double CARGO_PICKUP_IDLE_SPEED = 0.1;
-	public static final double ELEVATOR_BELOW_MINIMUM_DRIFT_SPEED = -0.05;
+	public static final double ELEVATOR_DOWNWARD_DRIFT_SPEED = -0.05;
 
 	// degrees
 	public static final double ARM_PICKUP_ANGLE = 90;

@@ -99,10 +99,10 @@ public final class ControlHandler {
 		xboxY = new JoystickButton(xbox, 4);
 		xboxSTART = new JoystickButton(xbox, 8);
 		xboxSELECT = new JoystickButton(xbox, 7);
-		xboxLeftJoyUp = new ThresholdJoystick(() -> xbox.getY(Hand.kLeft), 0.3, ThresholdJoystick.UP);
-		xboxLeftJoyDown = new ThresholdJoystick(() -> xbox.getY(Hand.kLeft), -0.3, ThresholdJoystick.DOWN);
-		xboxRightJoyUp = new ThresholdJoystick(() -> xbox.getY(Hand.kRight), 0.3, ThresholdJoystick.UP);
-		xboxRightJoyDown = new ThresholdJoystick(() -> xbox.getY(Hand.kRight), -0.3, ThresholdJoystick.DOWN);
+		xboxLeftJoyUp = new ThresholdJoystick(() -> -xbox.getY(Hand.kLeft), 0.3, ThresholdJoystick.UP);
+		xboxLeftJoyDown = new ThresholdJoystick(() -> -xbox.getY(Hand.kLeft), -0.3, ThresholdJoystick.DOWN);
+		xboxRightJoyUp = new ThresholdJoystick(() -> -xbox.getY(Hand.kRight), 0.3, ThresholdJoystick.UP);
+		xboxRightJoyDown = new ThresholdJoystick(() -> -xbox.getY(Hand.kRight), -0.3, ThresholdJoystick.DOWN);
 		xboxL3 = new JoystickButton(xbox, 9);
 		xboxR3 = new JoystickButton(xbox, 10);
 
@@ -127,11 +127,12 @@ public final class ControlHandler {
 		leftJoyTriggerButton.whenPressed(new DropElevator());
 
 		// hatch
-		xboxA.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL1_HEIGHT));
+		xboxX.whenPressed(new MoveElevatorTo(QuickAccessVars.CARGO_SCORING_HEIGHT));
 		xboxB.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL2_HEIGHT));
 		xboxY.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL3_HEIGHT));
-		xboxX.whenPressed(new GroupRetractHatchPickup());
-		xboxSTART.whenPressed(new GroupExtendHatchPickup());
+		xboxA.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL1_HEIGHT));
+		xboxRightJoyUp.whenPressed(new GroupExtendHatchPickup());
+		xboxRightJoyDown.whenPressed(new GroupRetractHatchPickup());
 		xboxSELECT.whenPressed(new RetractCargoPickupArm());
 		rightXboxTrigger.whileHeld(new RunHatchPickupWheels());
 		leftXboxTrigger.whileHeld(new RunCargoPickupWheels());
