@@ -110,19 +110,19 @@ public final class Constants {
 	public static final class AutoDrive {
 
 		/** kP value for {@link ApproachWall#PIDapproach} */
-		public static final double KP_APPROACH = 0.020;
+		public static final double KP_APPROACH = 0.025;
 		/** */
 		public static final double KI_APPROACH = 0;
 		/** */
 		public static final double KD_APPROACH = 0;
 		/** SetPoint value for {@link ApproachWall#PIDapproach} */
-		public static final double SETPOINT_APPROACH = 41;
+		public static final double SETPOINT_APPROACH = 23;
 		/** Tolerance value for {@link ApproachWall#PIDapproach} */
 		public static final double TOLERANCE_APPROACH = 2;
 
 
 		/** kP value for {@link ApproachWall#PIDcenter} */
-		public static final double KP_CENTER = 0.025;
+		public static final double KP_CENTER = 0.030;
 		/** */
 		public static final double KI_CENTER = 0;
 		/** */
@@ -141,9 +141,9 @@ public final class Constants {
 	public static final class Camera {
 
 		/** Angle the camera is tilted downards in radians, 40 degrees */
-		public static final double CAMERA_TILT = 9 *Math.PI/180;
+		public static final double CAMERA_TILT = 15 *Math.PI/180;
 		/** Height the lens is off of the ground in inches*/
-		public static final double ELEVATION = 47;
+		public static final double ELEVATION = 40;
 
 		// this applies to most but not all targets
 		/** Height between the bottom of the target and the ground in inches */

@@ -19,6 +19,9 @@ import frc.robot.commands.cargo.ReverseCargoPickupWheels;
 import frc.robot.commands.DisableCompressor;
 import frc.robot.commands.EnableCompressor;
 import frc.robot.commands.ResetAll;
+import frc.robot.commands.autonomous.ApproachCurve;
+import frc.robot.commands.autonomous.ApproachStraight;
+import frc.robot.commands.autonomous.CameraNFollower;
 import frc.robot.commands.cargo.ExtendCargoPickup;
 import frc.robot.commands.cargo.RetractCargoPickup;
 import frc.robot.commands.drive.SingleJoystickDrive;
@@ -103,38 +106,38 @@ public final class ControlHandler {
 		xboxL3 = new JoystickButton(xbox, 9);
 		xboxR3 = new JoystickButton(xbox, 10);
 
-		xboxL3.whileHeld(new LinearElevatorControl(() -> {
-			double speed = -xbox.getY(Hand.kLeft);
-			if (speed > 0) {
-				return speed;
-			} else {
-				return speed/2;
-			}
-		}));
-		xboxA.whenPressed(new MoveElevatorTo((27-13) / 2));
-		xboxX.whenPressed(new DropElevator());
-		xboxB.whenPressed(new MoveElevatorTo((47-13)/2));
-		xboxY.whenPressed(new MoveElevatorTo((76-13)/2));
+		// xboxL3.whileHeld(new LinearElevatorControl(() -> {
+		// 	double speed = -xbox.getY(Hand.kLeft);
+		// 	if (speed > 0) {
+		// 		return speed;
+		// 	} else {
+		// 		return speed/2;
+		// 	}
+		// }));
+		// xboxA.whenPressed(new MoveElevatorTo((27-13) / 2));
+		// xboxX.whenPressed(new DropElevator());
+		// xboxB.whenPressed(new MoveElevatorTo((47-13)/2));
+		// xboxY.whenPressed(new MoveElevatorTo((76-13)/2));
 
-		xboxR3.whileHeld(new LinearArmControl(() -> {
-			double speed = -xbox.getY(Hand.kRight);
-			if (speed > 0) {
-				return speed*0.4;
-			} else {
-				return speed*0.3;
-			}
-		}));
-		xboxR3.whenReleased(new ZeroCargoPickupEncoder());
-		xboxUp.whenPressed(new ExtendCargoPickup());
-		xboxDown.whenPressed(new RetractCargoPickup());
-		xboxRight.whileHeld(new RunCargoPickupWheels());
-		xboxLeft.whileHeld(new ReverseCargoPickupWheels());
+		// xboxR3.whileHeld(new LinearArmControl(() -> {
+		// 	double speed = -xbox.getY(Hand.kRight);
+		// 	if (speed > 0) {
+		// 		return speed*0.4;
+		// 	} else {
+		// 		return speed*0.3;
+		// 	}
+		// }));
+		// xboxR3.whenReleased(new ZeroCargoPickupEncoder());
+		// xboxUp.whenPressed(new ExtendCargoPickup());
+		// xboxDown.whenPressed(new RetractCargoPickup());
+		// xboxRight.whileHeld(new RunCargoPickupWheels());
+		// xboxLeft.whileHeld(new ReverseCargoPickupWheels());
 
-		xboxBACK.whenPressed(new PlaceHatchOnVelcro(false));
-		rightXboxBumper.whenPressed(new LoosenScissors());
-		rightXboxTrigger.whenPressed(new LockScissors());
+		// xboxBACK.whenPressed(new PlaceHatchOnVelcro(false));
+		// rightXboxBumper.whenPressed(new LoosenScissors());
+		// rightXboxTrigger.whenPressed(new LockScissors());
 
-
+		xboxA.whileHeld(new ApproachStraight(0));
 
 		// leftJoyButton7.whenPressed(new ResetAll());
 		// leftJoyButton8.whenPressed(new EnableCompressor());

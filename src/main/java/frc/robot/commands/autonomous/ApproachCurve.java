@@ -138,7 +138,8 @@ public class ApproachCurve extends Command {
 			valuecenter = 0;
 		}
 
-		Robot.drivetrain.arcadeDriveRaw(valueapproach, -valuecenter);
+		Robot.drivetrain.arcadeDriveRaw(-valueapproach, valuecenter);
+		System.out.println(valueapproach + " " + valuecenter);
 	}
 
 	private void updateTargetData() {
@@ -219,7 +220,8 @@ public class ApproachCurve extends Command {
 	
     @Override
 	protected boolean isFinished() {
-		return Robot.lineFollowers.onLine();
+		// return Robot.lineFollowers.onLine();
+		return false;
 		/*
 		return (Robot.camera.getTargetDistance() < Constants.AutoDrive.SETPOINT_APPROACH &&
 			PIDapproach.onTarget(Constants.AutoDrive.TOLERANCE_APPROACH));
