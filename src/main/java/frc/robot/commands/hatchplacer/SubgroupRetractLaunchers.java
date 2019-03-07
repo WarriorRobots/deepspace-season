@@ -7,26 +7,25 @@
 
 package frc.robot.commands.hatchplacer;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
-/** Push a hatch off of the hatch placer */
-public class ExtendLaunchers extends Command {
+/** Set hatch placer back into a neutral position, used after launching */
+public class SubgroupRetractLaunchers extends InstantCommand {
 
   /** Count variable for the loop of pneumatic */
-  private int i;
-  private boolean safemode; //TODO documentation
+  private int counter;
 
-  public ExtendLaunchers(boolean safemode) {
-    requires(Robot.hatchPlacer);
-    this.safemode = safemode;
+  public SubgroupRetractLaunchers() {
+    requires(Robot.pneumatics);
   }
 
   @Override
   protected void initialize() {
     // Initialization of for loop
     // for (Init, ---, ---) {---};
-    i = 0;
+    counter = 0;
   }
 
   @Override
@@ -34,32 +33,28 @@ public class ExtendLaunchers extends Command {
     // The purpose of running the pneumatic in a loop format is to garantee the
     // pneumatic fires
     // (1 loop is not enough time for the pneumatic to fire)
+
     // Execute of for loop
     // for (---, ---, ---) {Exec};
-    if (safemode) {
-      if (Robot.lineFollowers.getMiddleLineFollower()) {
-        Robot.hatchPlacer.extendLaunchers();
-      } //else do nothing
-    } else {
-      Robot.hatchPlacer.extendLaunchers();
-    }
+    Robot.pneumatics.retractLaunchers();
 
     // Increment of for loop
     // for (---, ---, Inc) {---};
-    i++;
+    counter++;
   }
 
   @Override
   protected boolean isFinished() {
     // Condition of for loop
     // for (---, Cond, ---) {---};
-    return (i > 5);
+    return (counter > QuickAccessVars.PNEUMATIC_LOOP_COUNT);
+    // 5 is the approximate number of loops a pneumatic takes to fire
   }
 
   @Override
   protected void end() {
     // set solonoid to neutral to increase lifespan
-    Robot.hatchPlacer.neutralizePneumatics();
+    Robot.pneumatics.neutralizeLaunchers();
   }
 
 }

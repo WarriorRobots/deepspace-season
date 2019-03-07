@@ -10,12 +10,11 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
-import frc.robot.commands.cargo.StabilizeArm;
+import frc.robot.QuickAccessVars;
+import frc.robot.commands.cargo.DefaultStabilizeArm;
 
 /**
  * Contains the motors used to pickup cargo, and to rotate the mechanism in and
@@ -23,12 +22,16 @@ import frc.robot.commands.cargo.StabilizeArm;
  */
 public class ArmSubsystem extends Subsystem {
 
-    private static final double ARM_P = 1; // TODO refine this
-    public static final double CLICKS_PER_DEGREE = 12288/360; // 8.533
+    public static final double CLICKS_PER_DEGREE = 12288 / 360; // 8.533
 
     private static final int ROTATOR_PORT = 8;
+    private static final int CLONE_PORT = 11;
 
+    /** Main motor (receives the encoder signals) */
     private WPI_TalonSRX armRotator;
+
+    /** Clone motor (copies all output from armRotator) */
+    private WPI_TalonSRX armRotatorClone;
 
     /**
      * Instantiates new subsystem; make ONLY ONE.
@@ -37,33 +40,44 @@ public class ArmSubsystem extends Subsystem {
      */
     public ArmSubsystem() {
         armRotator = new WPI_TalonSRX(ROTATOR_PORT);
-        armRotator.setInverted(true);
+        armRotator.setInverted(QuickAccessVars.ELEVATOR_WINCH_INVERTED);
 
         armRotator.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
-        armRotator.setSensorPhase(false);
-        armRotator.config_kP(Constants.PID_ID, ARM_P, Constants.TIMEOUT_MS);
+        armRotator.setSensorPhase(QuickAccessVars.ELEVATOR_ENCODER_INVERTED);
+        armRotator.config_kP(Constants.PID_ID, QuickAccessVars.ARM_P, Constants.TIMEOUT_MS);
 
         armRotator.configClosedLoopPeakOutput(Constants.PID_ID, 1);
+
+        armRotatorClone = new WPI_TalonSRX(CLONE_PORT);
+        armRotatorClone.setInverted(QuickAccessVars.ARM_ROTATOR_CLONE_INVERTED);
+        armRotatorClone.follow(armRotator);
     }
 
     /**
      * Rotate the pickup assembly to the specified angle in degrees.
      * 
-     * @param degrees Intended position in degrees (TODO specify range).
+     * @param degrees Intended position in degrees (stay within about 0-85 degrees).
      */
     public void rotateArmTo(double degrees) {
-        armRotator.set(ControlMode.Position, toClicks(degrees)); // TODO degrees and ticks
+        armRotator.set(ControlMode.Position, toClicks(degrees));
     }
 
+    /**
+     * Rotate the pickup assembly at a constant speed. This has no safeties and has
+     * potential to cause damage, so be careful!
+     * 
+     * @param speed Percentage speed of the motor, from -1 (towards the robot) to 1
+     *              (away from the robot).
+     */
     public void rotateArmLinear(double speed) {
-        armRotator.set(speed); // XXX write safety constraints
+        armRotator.set(speed);
     }
 
     /**
      * Returns the angular position, in degrees, of the pickup assembly.
      */
     public double getArmAngle() {
-        return toDegrees(armRotator.getSelectedSensorPosition()); // TODO degrees conversion
+        return toDegrees(armRotator.getSelectedSensorPosition());
     }
 
     /**
@@ -74,10 +88,10 @@ public class ArmSubsystem extends Subsystem {
     }
 
     /**
-     * <b>Do not use except in emergencies! </b>Shuts off the rotator motor.
+     * <b>Do not use except in end() !</b> Shuts off the rotator motor.
      * <p>
-     * <i>Warning:</i> Leaving the pickup in a half-rotated position could cause
-     * damage.
+     * <i>Warning:</i> Shutting off the pickup motor will make it fall and snap off
+     * the hatch scissors.
      */
     public void stopArm() {
         armRotator.stopMotor();
@@ -93,7 +107,7 @@ public class ArmSubsystem extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
-        setDefaultCommand(new StabilizeArm());
+        setDefaultCommand(new DefaultStabilizeArm());
     }
 
     @Override

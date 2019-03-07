@@ -11,13 +11,12 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.ArmSubsystem;
-import frc.robot.subsystems.CargoIntakeSubsystem;
+import frc.robot.subsystems.CargoPickupSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.HatchPickupSubsystem;
-import frc.robot.subsystems.HatchPlacerSubsystem;
+import frc.robot.subsystems.PneumaticSubsystem;
 import frc.robot.subsystems.LineFollowerSubsystem;
-import frc.robot.subsystems.PneumaticBaseSubsystem;
 
 /**
  * Main class of the Robot.
@@ -25,13 +24,12 @@ import frc.robot.subsystems.PneumaticBaseSubsystem;
 public class Robot extends TimedRobot {
 
 	public static final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
-	public static final HatchPickupSubsystem hatchPickup = new HatchPickupSubsystem();
-	public static final HatchPlacerSubsystem hatchPlacer = new HatchPlacerSubsystem();
+	public static final HatchPickupSubsystem hatchPickupWheels = new HatchPickupSubsystem();
+	public static final PneumaticSubsystem pneumatics = new PneumaticSubsystem();
 	public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
 	public static final LineFollowerSubsystem lineFollowers = new LineFollowerSubsystem();
 	public static final ArmSubsystem arm = new ArmSubsystem();
-	public static final CargoIntakeSubsystem cargoIntake = new CargoIntakeSubsystem();
-	public static final PneumaticBaseSubsystem pneumaticBase = new PneumaticBaseSubsystem();
+	public static final CargoPickupSubsystem cargoPickupWheels = new CargoPickupSubsystem();
 
 	/** Reference this to get input from our joysticks. */
 	public static ControlHandler input;
@@ -41,12 +39,11 @@ public class Robot extends TimedRobot {
 		input = new ControlHandler();
 		SmartDashboard.putData(drivetrain);
 		SmartDashboard.putData(elevator);
-		SmartDashboard.putData(hatchPickup);
-		SmartDashboard.putData(hatchPlacer);
+		SmartDashboard.putData(hatchPickupWheels);
+		SmartDashboard.putData(pneumatics);
 		SmartDashboard.putData(lineFollowers);
 		SmartDashboard.putData(arm);
-		SmartDashboard.putData(cargoIntake);
-		SmartDashboard.putData(pneumaticBase);
+		SmartDashboard.putData(cargoPickupWheels);
 	}
 
 	@Override

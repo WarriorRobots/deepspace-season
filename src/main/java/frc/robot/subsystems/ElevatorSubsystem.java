@@ -16,7 +16,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
-import frc.robot.commands.elevator.StabilizeElevator;
+import frc.robot.QuickAccessVars;
+import frc.robot.commands.elevator.DefaultStabilizeElevator;
 
 /**
  * Contains the winch motor used to raise the elevator, and the limit switch
@@ -25,10 +26,6 @@ import frc.robot.commands.elevator.StabilizeElevator;
 public class ElevatorSubsystem extends Subsystem {
 
 	public static final double CLICKS_PER_INCH = 1024;
-
-	private static final double ELEVATOR_P = 0.4;
-	private static final double ELEVATOR_I = 0;
-	private static final double ELEVATOR_D = 0;
 
 	private static final int WINCH_PORT = 7;
 	private static final int LIMIT_SWITCH_PORT = 4;
@@ -49,9 +46,7 @@ public class ElevatorSubsystem extends Subsystem {
 
 		winch.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
 		winch.setSensorPhase(true);
-		winch.config_kP(Constants.PID_ID, ELEVATOR_P, Constants.TIMEOUT_MS);
-		winch.config_kI(Constants.PID_ID, ELEVATOR_I, Constants.TIMEOUT_MS);
-		winch.config_kD(Constants.PID_ID, ELEVATOR_D, Constants.TIMEOUT_MS);
+		winch.config_kP(Constants.PID_ID, QuickAccessVars.ELEVATOR_P, Constants.TIMEOUT_MS);
 	}
 
 	/**
@@ -109,14 +104,19 @@ public class ElevatorSubsystem extends Subsystem {
 		return !limitSwitch.get();
 	}
 
-	// TODO documentation here and other
+	/**
+	 * Drives the winch motor at a constant speed. This has no safeties & can damage
+	 * the robot, so be careful!
+	 * 
+	 * @param speed Percentage speed of the winch, from -1 (down) to 1 (up).
+	 */
 	public void adjustElevatorLinear(double speed) {
-		winch.set(speed); // TODO set constraints
+		winch.set(speed);
 	}
 
 	@Override
 	public void initDefaultCommand() {
-		setDefaultCommand(new StabilizeElevator());
+		setDefaultCommand(new DefaultStabilizeElevator());
 	}
 
 	public double toInches(int clicks) {

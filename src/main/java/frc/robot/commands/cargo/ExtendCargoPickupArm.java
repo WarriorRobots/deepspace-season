@@ -5,41 +5,42 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.hatchpickup;
+package frc.robot.commands.cargo;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/** Make the hatch pickup move from being on the ground to being up */
-public class RetractHatchPickup extends Command {
+public class ExtendCargoPickupArm extends Command {
 
-  private int counter;
+  private double angle;
 
-  public RetractHatchPickup() {
-    requires(Robot.hatchPickup);
-  }
-
-  @Override
-  protected void initialize() {
-    counter = 0;
+  /**
+   * Drops the arm to the specified angle.
+   * 
+   * @param angle Between 0 and 180 degrees
+   */
+  public ExtendCargoPickupArm(double angle) {
+    requires(Robot.arm);
+    if (angle < 0 || angle > 180) {
+      this.angle = 0;
+    } else {
+      this.angle = angle;
+    }
   }
 
   @Override
   protected void execute() {
-    counter++;
-    Robot.hatchPlacer.loosenScissors();
-    Robot.hatchPickup.retractIntake();
+    Robot.arm.rotateArmTo(angle);
   }
 
   @Override
   protected boolean isFinished() {
-    return counter > 5;
+    return false;
   }
 
   @Override
   protected void end() {
-    Robot.hatchPickup.neutralizePneumatics();
-    Robot.hatchPlacer.neutralizePneumatics();
+    Robot.arm.stopArm();
   }
 
 }

@@ -5,39 +5,33 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.hatchpickup;
+package frc.robot.commands.cargo;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/** Make the hatch pickup move from being vertical to being on the ground */
-public class ExtendHatchPickup extends Command {
-  
-  private int counter;
+public class RetractCargoPickupArm extends Command {
 
-  public ExtendHatchPickup() {
-    requires(Robot.hatchPickup);
-  }
-
-  @Override
-  protected void initialize() {
-    counter = 0;
+  /**
+   * Raises the arm to zero degrees (straight upwards).
+   */
+  public RetractCargoPickupArm() {
+    requires(Robot.arm);
   }
 
   @Override
   protected void execute() {
-    counter++;
-    Robot.hatchPickup.extendIntake();
+    Robot.arm.rotateArmTo(0);
   }
 
   @Override
   protected boolean isFinished() {
-    return counter > 5;
+    return false;
   }
 
   @Override
   protected void end() {
-    Robot.hatchPickup.neutralizePneumatics();
+    Robot.arm.stopArm();
   }
 
 }

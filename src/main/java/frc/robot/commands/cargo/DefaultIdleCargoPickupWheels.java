@@ -1,21 +1,22 @@
 package frc.robot.commands.cargo;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
-public class ReverseCargoPickupWheels extends Command {
+public class DefaultIdleCargoPickupWheels extends Command {
 
     /**
-     * Runs the cargo pickup wheels backwards at full speed, hopefully for scoring a
-     * ball into a cargo/rocket bay.
+     * Default command for CargoPickupSubsystem; runs the wheels inwards at a slow
+     * speed so the ball doesn't fall out.
      */
-    public ReverseCargoPickupWheels() {
+    public DefaultIdleCargoPickupWheels() {
         requires(Robot.cargoPickupWheels);
     }
 
     @Override
     protected void execute() {
-        Robot.cargoPickupWheels.runPickup(-1);
+        Robot.cargoPickupWheels.runPickup(QuickAccessVars.CARGO_PICKUP_IDLE_SPEED);
     }
 
     @Override

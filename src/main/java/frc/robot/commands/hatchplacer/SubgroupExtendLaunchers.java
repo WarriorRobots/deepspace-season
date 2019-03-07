@@ -7,17 +7,21 @@
 
 package frc.robot.commands.hatchplacer;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
-/** Set hatch placer back into a neutral position, used after launching */
-public class RetractLaunchers extends InstantCommand {
+/** Push a hatch off of the hatch placer */
+public class SubgroupExtendLaunchers extends Command {
 
   /** Count variable for the loop of pneumatic */
   private int counter;
+  /** Set to true to prevent hatch shots unless within 1'6" of the velcro */
+  private boolean safemode;
 
-  public RetractLaunchers() {
-    requires(Robot.hatchPlacer);
+  public SubgroupExtendLaunchers(boolean safemode) {
+    requires(Robot.pneumatics);
+    this.safemode = safemode;
   }
 
   @Override
@@ -32,10 +36,15 @@ public class RetractLaunchers extends InstantCommand {
     // The purpose of running the pneumatic in a loop format is to garantee the
     // pneumatic fires
     // (1 loop is not enough time for the pneumatic to fire)
-
     // Execute of for loop
     // for (---, ---, ---) {Exec};
-    Robot.hatchPlacer.retractLaunchers();
+    if (safemode) {
+      if (Robot.lineFollowers.getMiddleLineFollower()) {
+        Robot.pneumatics.extendLaunchers();
+      } //else do nothing
+    } else {
+      Robot.pneumatics.extendLaunchers();
+    }
 
     // Increment of for loop
     // for (---, ---, Inc) {---};
@@ -46,14 +55,13 @@ public class RetractLaunchers extends InstantCommand {
   protected boolean isFinished() {
     // Condition of for loop
     // for (---, Cond, ---) {---};
-    return (counter > 5);
-    // 5 is the approximate number of loops a pneumatic takes to fire
+    return (counter > QuickAccessVars.PNEUMATIC_LOOP_COUNT);
   }
 
   @Override
   protected void end() {
     // set solonoid to neutral to increase lifespan
-    Robot.hatchPlacer.neutralizePneumatics();
+    Robot.pneumatics.neutralizeLaunchers();
   }
 
 }

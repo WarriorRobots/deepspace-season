@@ -5,37 +5,33 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.cargo;
+package frc.robot.commands.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/** Sabilize the cargo pickup */
-public class StabilizeArm extends Command {
+public class DefaultTankDrive extends Command {
 
-  private double initialPosition;
-
-  public StabilizeArm() {
-    requires(Robot.arm);
-  }
-
-  @Override
-  protected void initialize() {
-    initialPosition = Robot.arm.getArmAngle();
+  /**
+   * Push the left joystick vertically to drive the left wheels. Push the right
+   * joystick vertically to drive the right wheels.
+   */
+  public DefaultTankDrive() {
+    requires(Robot.drivetrain);
   }
 
   @Override
   protected void execute() {
-    Robot.arm.rotateArmTo(initialPosition);
+    Robot.drivetrain.tankDriveTeleop(Robot.input.getLeftY(), Robot.input.getRightY());
   }
 
   @Override
   protected boolean isFinished() {
     return false;
   }
-  
+
   @Override
   protected void end() {
-    Robot.arm.stopArm();
+    Robot.drivetrain.stopDrive();
   }
 }

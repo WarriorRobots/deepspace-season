@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
-import frc.robot.commands.drive.DoubleJoystickDrive;
+import frc.robot.QuickAccessVars;
+import frc.robot.commands.drive.DefaultTankDrive;
 
 /**
  * Contains the drivetrain, the encoders for the left and right wheels, and the
@@ -35,8 +36,6 @@ public class DrivetrainSubsystem extends Subsystem {
 	public static final boolean RIGHT_ENCODER_REVERSED = true;
 	public static final boolean LEFT_DRIVE_REVERSED = false;
 	public static final boolean RIGHT_DRIVE_REVERSED = false;
-
-	private static final double RAMPRATE_SECONDS = 0.25;
 
 	private WPI_TalonSRX leftFront, leftMiddle, leftBack, rightFront, rightMiddle, rightBack;
 	private SpeedControllerGroup leftGroup, rightGroup;
@@ -68,16 +67,16 @@ public class DrivetrainSubsystem extends Subsystem {
 		leftFront = new WPI_TalonSRX(LEFT_FRONT_ID);
 		leftMiddle = new WPI_TalonSRX(LEFT_MIDDLE_ID);
 		leftBack = new WPI_TalonSRX(LEFT_BACK_ID);
-		leftFront.configOpenloopRamp(RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
-		leftMiddle.configOpenloopRamp(RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
-		leftBack.configOpenloopRamp(RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
+		leftFront.configOpenloopRamp(QuickAccessVars.DRIVETRAIN_RAMPRATE, Constants.TIMEOUT_MS);
+		leftMiddle.configOpenloopRamp(QuickAccessVars.DRIVETRAIN_RAMPRATE, Constants.TIMEOUT_MS);
+		leftBack.configOpenloopRamp(QuickAccessVars.DRIVETRAIN_RAMPRATE, Constants.TIMEOUT_MS);
 
 		rightFront = new WPI_TalonSRX(RIGHT_FRONT_ID);
 		rightMiddle = new WPI_TalonSRX(RIGHT_MIDDLE_ID);
 		rightBack = new WPI_TalonSRX(RIGHT_BACK_ID);
-		rightFront.configOpenloopRamp(RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
-		rightMiddle.configOpenloopRamp(RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
-		rightBack.configOpenloopRamp(RAMPRATE_SECONDS, Constants.TIMEOUT_MS);
+		rightFront.configOpenloopRamp(QuickAccessVars.DRIVETRAIN_RAMPRATE, Constants.TIMEOUT_MS);
+		rightMiddle.configOpenloopRamp(QuickAccessVars.DRIVETRAIN_RAMPRATE, Constants.TIMEOUT_MS);
+		rightBack.configOpenloopRamp(QuickAccessVars.DRIVETRAIN_RAMPRATE, Constants.TIMEOUT_MS);
 
 		leftGroup = new SpeedControllerGroup(leftFront, leftMiddle, leftBack);
 		rightGroup = new SpeedControllerGroup(rightFront, rightMiddle, rightBack);
@@ -85,7 +84,6 @@ public class DrivetrainSubsystem extends Subsystem {
 		rightGroup.setInverted(RIGHT_DRIVE_REVERSED);
 
 		differentialDrive = new DifferentialDrive(leftGroup, rightGroup);
-		differentialDrive.setSafetyEnabled(false);
 
 		// if NavX is missing, this code will handle errors and prevent a crash
 		try {
@@ -144,7 +142,6 @@ public class DrivetrainSubsystem extends Subsystem {
 	 *                     (right).
 	 */
 	public void arcadeDriveTeleop(double forwardSpeed, double turnSpeed) {
-		turnSpeed = -turnSpeed; // turning is inverted on the robot
 		differentialDrive.arcadeDrive(forwardSpeed, turnSpeed, true);
 	}
 
@@ -161,7 +158,6 @@ public class DrivetrainSubsystem extends Subsystem {
 	 *                     (right).
 	 */
 	public void arcadeDriveRaw(double forwardSpeed, double turnSpeed) {
-		turnSpeed = -turnSpeed; // turning is inverted on the robot
 		differentialDrive.arcadeDrive(forwardSpeed, turnSpeed, false);
 	}
 
@@ -201,10 +197,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	}
 
 	/**
-	 * Resets all drive encoders to 0 ticks.
-	 * <p>
-	 * Shorthand for {@code resetEncoderTicks(Side.LEFT)} and
-	 * {@code resetEncoderTicks(Side.RIGHT)}.
+	 * Resets all drive encoders to 0 clicks.
 	 */
 	public void resetEncoders() {
 		resetLeftEncoder();
@@ -249,7 +242,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	@Override
 	public void initSendable(SendableBuilder builder) {
 		builder.setSmartDashboardType("subsystem-drivetrain");
-		builder.addStringProperty("encoder-ticks", () -> {
+		builder.addStringProperty("encoder-clicks", () -> {
 			return (Integer.toString(getLeftEncoderClicks()) + " " + Integer.toString(getRightEncoderClicks()));
 		}, null);
 		builder.addDoubleProperty("angle", () -> getAngleDegrees(), null);
@@ -257,6 +250,6 @@ public class DrivetrainSubsystem extends Subsystem {
 
 	@Override
 	public void initDefaultCommand() {
-		setDefaultCommand(new DoubleJoystickDrive());
+		setDefaultCommand(new DefaultTankDrive());
 	}
 }
