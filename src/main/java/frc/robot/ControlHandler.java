@@ -97,12 +97,12 @@ public final class ControlHandler {
 		xboxB = new JoystickButton(xbox, 2);
 		xboxX = new JoystickButton(xbox, 3);
 		xboxY = new JoystickButton(xbox, 4);
-		xboxSTART = new JoystickButton(xbox, 8);
+		xboxSTART = new JoystickButton(xbox, 8); // TODO raise by 2
 		xboxSELECT = new JoystickButton(xbox, 7);
-		xboxLeftJoyUp = new ThresholdJoystick(() -> -xbox.getY(Hand.kLeft), 0.3, ThresholdJoystick.UP);
-		xboxLeftJoyDown = new ThresholdJoystick(() -> -xbox.getY(Hand.kLeft), -0.3, ThresholdJoystick.DOWN);
-		xboxRightJoyUp = new ThresholdJoystick(() -> -xbox.getY(Hand.kRight), 0.3, ThresholdJoystick.UP);
-		xboxRightJoyDown = new ThresholdJoystick(() -> -xbox.getY(Hand.kRight), -0.3, ThresholdJoystick.DOWN);
+		xboxLeftJoyUp = new ThresholdJoystick(() -> -xbox.getY(Hand.kLeft), () -> xbox.getStickButton(Hand.kLeft), 0.3, ThresholdJoystick.UP);
+		xboxLeftJoyDown = new ThresholdJoystick(() -> -xbox.getY(Hand.kLeft), () -> xbox.getStickButton(Hand.kLeft), -0.3, ThresholdJoystick.DOWN);
+		xboxRightJoyUp = new ThresholdJoystick(() -> -xbox.getY(Hand.kRight), () -> xbox.getStickButton(Hand.kRight), 0.3, ThresholdJoystick.UP);
+		xboxRightJoyDown = new ThresholdJoystick(() -> -xbox.getY(Hand.kRight), () -> xbox.getStickButton(Hand.kRight), -0.3, ThresholdJoystick.DOWN);
 		xboxL3 = new JoystickButton(xbox, 9);
 		xboxR3 = new JoystickButton(xbox, 10);
 
@@ -110,7 +110,7 @@ public final class ControlHandler {
 		leftJoyButton8.whenPressed(new DebugEnableCompressor());
 		leftJoyButton10.whenPressed(new DebugDisableCompressor());
 		leftJoyButton7.whenPressed(new DebugRebootAll());		
-		xboxL3.whileHeld(new DebugLinearElevatorControl( () -> -xbox.getY(Hand.kLeft) ));
+		xboxL3.whileHeld(new DebugLinearElevatorControl( () -> -xbox.getY(Hand.kLeft) * 0.5));
 		xboxR3.whileHeld(new DebugLinearArmControl( () -> -xbox.getY(Hand.kRight) * 0.5));
 
 		// drive alteration
@@ -118,7 +118,6 @@ public final class ControlHandler {
 		rightJoyTriggerButton.whileHeld(new TurnLockDrive());
 		// rightJoyButton4.whileHeld(new CameraCommand()); // unwritten
 
-		// 
 		rightJoyButton3.whenPressed(new ExtendCargoPickupArm(QuickAccessVars.ARM_PICKUP_ANGLE)); // ball low
 		rightJoyButton3.whenPressed(new LockScissors());
 
