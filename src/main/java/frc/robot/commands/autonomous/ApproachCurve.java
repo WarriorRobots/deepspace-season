@@ -5,9 +5,10 @@ import frc.robot.util.SynchronousPIDF;
 import edu.wpi.first.wpilibj.Timer;
 
 import frc.robot.Constants;
+import frc.robot.ControlHandler;
 import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
-
+import frc.robot.commands.drive.ArcadeDrive;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.LineFollowerSubsystem;;
 
@@ -48,6 +49,9 @@ public class ApproachCurve extends Command {
 
 	private double target_distance;
 
+	/** Denotes if the drivers are in control of the robot during the duration of the command. */
+	private boolean driver_control;
+
 	/** Used for {@link #target_height} and {@link #target_x} */
 	private final int LEFT = 0;
 	/** Used for {@link #target_height} and {@link #target_x} */
@@ -68,7 +72,7 @@ public class ApproachCurve extends Command {
 	/** Left:Right height ratio of targets */
 	private double heightRatio;
 
-    public ApproachCurve() {//TODO: ignore int pipeline
+    public ApproachCurve() {
 		requires(Robot.drivetrain);
 		requires(Robot.camera);
 		requires(Robot.lineFollowers);
@@ -109,14 +113,29 @@ public class ApproachCurve extends Command {
 		target_x = new double[3];
 		target_distance = 0;
 		
+		driver_control = false;
+		
 	}
 	
 	@Override
 	protected void execute() {
 		
-
 		updateTargetData();
 
+		if (Math.abs(Robot.input.getRightY()) > QuickAccessVars.CAMERA_DRIVE_THRESHOLD
+			||
+			Math.abs(Robot.input.getRightX()) > QuickAccessVars.CAMERA_DRIVE_THRESHOLD)
+		{driver_control = true;}
+
+		if(!driver_control) { // if the drivers are not controlling it do the auto part
+			auto();
+		} else { // if the drivers are controlling it then let them do arcade drive
+			drive();
+		}
+	}
+
+	/** Moves the robot autonomously to the target. */
+	private void auto() {
 		if (
 			target_height[LEFT] == 0 || target_height[OVERALL] == 0 || target_height[RIGHT] == 0 ||
 			target_x[LEFT] == 0 || target_x[OVERALL] == 0 || target_x[RIGHT] == 0 ||
@@ -139,8 +158,13 @@ public class ApproachCurve extends Command {
 			valuecenter = 0;
 		}
 
-		Robot.drivetrain.arcadeDriveRaw(-valueapproach, valuecenter);
+		Robot.drivetrain.arcadeDriveRaw(-valueapproach, -valuecenter);
 		System.out.println(valueapproach + " " + valuecenter);
+	}
+
+	private void drive() {
+		Robot.drivetrain.arcadeDriveTeleop(Robot.input.getRightY(QuickAccessVars.ARCADE_FORWARD_MODIFIER),
+        	Robot.input.getRightX(QuickAccessVars.ARCADE_TURN_MODIFIER));
 	}
 
 	private void updateTargetData() {

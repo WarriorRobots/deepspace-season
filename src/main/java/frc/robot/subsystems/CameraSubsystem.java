@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
 import frc.robot.QuickAccessVars;
+import frc.robot.commands.ChangePipeline;
 
 /**
  * CameraSubsystem is supposed to recive data from the limelight to be output or processed.
@@ -35,10 +36,8 @@ public class CameraSubsystem extends Subsystem {
 	
 	/** Pipeline id for the crosshair in the center. */
 	public static final int PIPELINE_CENTER = 0;
-	/** Pipeline id for the crosshair on the left. */
-	public static final int PIPELINE_LEFT = 1;
-	/** Pipeline id for the crosshair on the right. */
-	public static final int PIPELINE_RIGHT = 2;
+	/** Pipeline id for Driver exposure and use */
+	public static final int PIPELINE_DRIVER = 1;
 	/** Pipeline id for a single target on the left. */
 	public static final int PIPELINE_TARGETLEFT = 3;
 	/** Pipeline id for a single target on the right. */
@@ -254,6 +253,8 @@ public class CameraSubsystem extends Subsystem {
 	}
 
 	@Override
-	public void initDefaultCommand() {}
+	public void initDefaultCommand() {
+		setDefaultCommand(new ChangePipeline(PIPELINE_DRIVER)); // TODO Alex is worried about CPU usage
+	}
 
 }

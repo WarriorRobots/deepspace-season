@@ -57,17 +57,18 @@ public final class QuickAccessVars {
 	public static final double PPR_H = PIXELS_H/RAD_H;
 	public static final double PPR_V = PIXELS_V/RAD_V;
 	public static final double TARGET_HEIGHT = 5.83;
+	public static final double CAMERA_DRIVE_THRESHOLD = 0.1; // Amount the driver must push the controller to activate arcade drive during ApproachCurve
 
 
 	// pid
 	public static final double ELEVATOR_P = 0.4;
 	public static final double ARM_P = 1;
-	public static final double KP_APPROACH = 0.025;
+	public static final double KP_APPROACH = 0.020;
 	public static final double KI_APPROACH = 0;
 	public static final double KD_APPROACH = 0;
 	public static final double SETPOINT_APPROACH = 23;
 	public static final double TOLERANCE_APPROACH = 2;
-	public static final double KP_CENTER = 0.030;
+	public static final double KP_CENTER = 0.04;
 	public static final double KI_CENTER = 0;
 	public static final double KD_CENTER = 0;
 	public static final double SETPOINT_CENTER = 0;
