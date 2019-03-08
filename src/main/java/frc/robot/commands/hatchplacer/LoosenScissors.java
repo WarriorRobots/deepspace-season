@@ -11,10 +11,15 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
-/** Loosen a hatch off of the hatch placer */
 public class LoosenScissors extends Command {
 
-  /** Count variable for the loop of pneumatic */
+  /**
+   * Loosen the scissor mechanism, meaning that any hatch will no longer be held
+   * in place.
+   * <p>
+   * The scissors will conflict with the cargo pickup arm if they are in this
+   * position.
+   */
   private int counter;
 
   public LoosenScissors() {
@@ -23,35 +28,22 @@ public class LoosenScissors extends Command {
 
   @Override
   protected void initialize() {
-    // Initialization of for loop
-    // for (Init, ---, ---) {---};
     counter = 0;
   }
 
   @Override
   protected void execute() {
-    // The purpose of running the pneumatic in a loop format is to garantee the
-    // pneumatic fires
-    // (1 loop is not enough time for the pneumatic to fire)
-    // Execute of for loop
-    // for (---, ---, ---) {Exec};
     Robot.pneumatics.loosenScissors();
-
-    // Increment of for loop
-    // for (---, ---, Inc) {---};
     counter++;
   }
 
   @Override
   protected boolean isFinished() {
-    // Condition of for loop
-    // for (---, Cond, ---) {---};
     return (counter > QuickAccessVars.PNEUMATIC_LOOP_COUNT);
   }
 
   @Override
   protected void end() {
-    // set solonoid to neutral to increase lifespan
     Robot.pneumatics.neutralizeScissors();
   }
 
