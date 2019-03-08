@@ -112,7 +112,7 @@ public class ApproachCurve extends Command {
 		target_height= new double[3];
 		target_x = new double[3];
 		target_distance = 0;
-		
+
 		driver_control = false;
 		
 	}
@@ -163,6 +163,7 @@ public class ApproachCurve extends Command {
 	}
 
 	private void drive() {
+		// Robot.camera.setPipeline(CameraSubsystem.PIPELINE_DRIVER); Conner does not want this
 		Robot.drivetrain.arcadeDriveTeleop(Robot.input.getRightY(QuickAccessVars.ARCADE_FORWARD_MODIFIER),
         	Robot.input.getRightX(QuickAccessVars.ARCADE_TURN_MODIFIER));
 	}
