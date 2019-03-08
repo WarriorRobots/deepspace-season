@@ -8,16 +8,17 @@
 package frc.robot.commands.hatchplacer;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
 /** Set hatch placer back into a neutral position, used after launching */
-public class RetractLaunchers extends InstantCommand {
+public class SubgroupRetractLaunchers extends InstantCommand {
 
   /** Count variable for the loop of pneumatic */
   private int counter;
 
-  public RetractLaunchers() {
-    requires(Robot.hatchPlacer);
+  public SubgroupRetractLaunchers() {
+    requires(Robot.pneumatics);
   }
 
   @Override
@@ -35,7 +36,7 @@ public class RetractLaunchers extends InstantCommand {
 
     // Execute of for loop
     // for (---, ---, ---) {Exec};
-    Robot.hatchPlacer.retractLaunchers();
+    Robot.pneumatics.retractLaunchers();
 
     // Increment of for loop
     // for (---, ---, Inc) {---};
@@ -46,14 +47,14 @@ public class RetractLaunchers extends InstantCommand {
   protected boolean isFinished() {
     // Condition of for loop
     // for (---, Cond, ---) {---};
-    return (counter > 5);
+    return (counter > QuickAccessVars.PNEUMATIC_LOOP_COUNT);
     // 5 is the approximate number of loops a pneumatic takes to fire
   }
 
   @Override
   protected void end() {
     // set solonoid to neutral to increase lifespan
-    Robot.hatchPlacer.neutralizePneumatics();
+    Robot.pneumatics.neutralizeLaunchers();
   }
 
 }

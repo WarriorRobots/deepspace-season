@@ -5,13 +5,17 @@ import frc.robot.Robot;
 
 public class RunCargoPickupWheels extends Command {
 
+    /**
+     * Runs the cargo pickup wheels inwards at full speed, hopefully for sucking a
+     * ball in.
+     */
     public RunCargoPickupWheels() {
-        requires(Robot.cargoIntake);
+        requires(Robot.cargoPickupWheels);
     }
 
     @Override
     protected void execute() {
-        Robot.cargoIntake.runIntake(1);
+        Robot.cargoPickupWheels.runPickup(1);
     }
 
     @Override
@@ -21,7 +25,7 @@ public class RunCargoPickupWheels extends Command {
 
     @Override
     protected void end() {
-        Robot.cargoIntake.stopIntake();
+        Robot.cargoPickupWheels.stopPickup();
     }
 
 }

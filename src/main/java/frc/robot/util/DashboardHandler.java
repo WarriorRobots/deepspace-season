@@ -1,5 +1,6 @@
 package frc.robot.util;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.util.enums.StartingPosition;
@@ -13,8 +14,8 @@ public class DashboardHandler {
 	private static SendableChooser<StartingPosition> positionDropdown;
 
 	// Do not use this constructor
-	private DashboardHandler() throws Exception {
-		throw new Exception("Do not create an DashboardHandler object, call it statically");
+	private DashboardHandler() {
+		DriverStation.reportError("Do not create a DashboardHandler object!", false);
 	}
 
 	public static void init() {

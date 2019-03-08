@@ -1,22 +1,17 @@
 package frc.robot.commands.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
-/**
- * A drive command for use at high speeds, which will not be sensitive to small
- * changes in joystick position. Allows drivers to drive in straight lines
- * without perfect control of joysticks.
- */
-public class LowTurnSensitivityDrive extends Command {
+public class TurnLockDrive extends Command {
 
     /**
-     * How far apart the joystick values have to be (in decimal percentage) before
-     * TurnLock disables.
+     * A drive command for use at high speeds, which will not be sensitive to small
+     * changes in joystick position. Allows drivers to drive in straight lines
+     * without perfect control of joysticks.
      */
-    private static final double TURNLOCK_THRESHOLD = 0.2;
-
-    public LowTurnSensitivityDrive() {
+    public TurnLockDrive() {
         requires(Robot.drivetrain);
     }
 
@@ -28,7 +23,9 @@ public class LowTurnSensitivityDrive extends Command {
         double difference = Math.abs(leftSpeed - rightSpeed);
         double average = (leftSpeed + rightSpeed) / 2.0;
 
-        if (difference < TURNLOCK_THRESHOLD) {
+        // TURNLOCK_THRESHOLD is how far apart the joystick values have to be (in
+        // decimal percentage) before TurnLock disables.
+        if (difference < QuickAccessVars.TURNLOCK_THRESHOLD) {
             // the values are averaged and the robot drives straight
             Robot.drivetrain.tankDriveTeleop(average, average);
         } else {

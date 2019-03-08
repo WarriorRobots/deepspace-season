@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
+import frc.robot.QuickAccessVars;
 
 /**
  * CameraSubsystem is supposed to recive data from the limelight to be output or processed.
@@ -160,10 +161,10 @@ public class CameraSubsystem extends Subsystem {
 		double height = visionTable.getEntry(TARGET_HEIGHT).getDouble(0);
 
 		// angle in radians
-		double angle = height / Constants.Camera.Limelight2.PPR_V;
+		double angle = height / QuickAccessVars.PPR_V;
 
 		// range = adj = opp/tan(Theta)
-		double range = Constants.Camera.TARGET_HEIGHT / Math.tan(angle);
+		double range = QuickAccessVars.TARGET_HEIGHT / Math.tan(angle);
 
 		return range;
 	}
@@ -182,10 +183,10 @@ public class CameraSubsystem extends Subsystem {
 		double target_offset = visionTable.getEntry(TARGET_Y).getDouble(0) * Math.PI/180;
 
 		// Height difference between the camera and the target center
-		double height_difference = Constants.Camera.ELEVATION - Constants.Camera.TARGET_ELEVATION - Constants.Camera.TARGET_HEIGHT/2;
+		double height_difference = QuickAccessVars.ELEVATION - QuickAccessVars.TARGET_ELEVATION - QuickAccessVars.TARGET_HEIGHT/2;
 
 		// Angle from the elevator to the center of the target
-		double angle = Math.PI/2 - Constants.Camera.CAMERA_TILT + target_offset;
+		double angle = Math.PI/2 - QuickAccessVars.CAMERA_TILT + target_offset;
 
 		//System.out.println("Angle:");
 		//System.out.println(angle);

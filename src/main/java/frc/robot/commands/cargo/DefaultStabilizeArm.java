@@ -10,18 +10,25 @@ package frc.robot.commands.cargo;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/** Put the cargo pickup into the Horizontal position */
-public class ExtendCargoPickup extends Command {
+public class DefaultStabilizeArm extends Command {
 
-  private static final double TARGET_ANGLE = 85;
+  private double initialPosition;
 
-  public ExtendCargoPickup() {
+  /**
+   * Holds the arm in a stable position using motor power to fight gravity.
+   */
+  public DefaultStabilizeArm() {
     requires(Robot.arm);
   }
 
   @Override
+  protected void initialize() {
+    initialPosition = Robot.arm.getArmAngle();
+  }
+
+  @Override
   protected void execute() {
-    Robot.arm.rotateArmTo(TARGET_ANGLE);
+    Robot.arm.rotateArmTo(initialPosition);
   }
 
   @Override
@@ -33,5 +40,4 @@ public class ExtendCargoPickup extends Command {
   protected void end() {
     Robot.arm.stopArm();
   }
-
 }

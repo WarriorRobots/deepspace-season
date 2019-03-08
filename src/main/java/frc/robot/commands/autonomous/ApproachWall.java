@@ -2,6 +2,7 @@ package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Constants;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 import frc.robot.util.SynchronousPIDF;
 import edu.wpi.first.wpilibj.Timer;
@@ -29,14 +30,14 @@ public class ApproachWall extends Command {
 		valuecenter = 0;
 
 		PIDapproach = new SynchronousPIDF(
-			Constants.AutoDrive.KP_APPROACH,
-			Constants.AutoDrive.KI_APPROACH,
-			Constants.AutoDrive.KD_APPROACH
+			QuickAccessVars.KP_APPROACH,
+			QuickAccessVars.KI_APPROACH,
+			QuickAccessVars.KD_APPROACH
 		);
 		PIDcenter = new SynchronousPIDF(
-			Constants.AutoDrive.KP_CENTER,
-			Constants.AutoDrive.KI_CENTER,
-			Constants.AutoDrive.KD_CENTER
+			QuickAccessVars.KP_CENTER,
+			QuickAccessVars.KI_CENTER,
+			QuickAccessVars.KD_CENTER
 		);
 
 		timer = new Timer();
@@ -46,10 +47,10 @@ public class ApproachWall extends Command {
 	protected void initialize() {
 		//PID.setIzone(minimumI, maximumI);
 		//PIDapproach.setOutputRange(-1, 1);
-		PIDapproach.setSetpoint(Constants.AutoDrive.SETPOINT_APPROACH); // Robot should aim to be be 50 in away from the target
+		PIDapproach.setSetpoint(QuickAccessVars.SETPOINT_APPROACH); // Robot should aim to be be 50 in away from the target
 
 		//PIDcenter.setOutputRange(-1, 1);
-		PIDcenter.setSetpoint(Constants.AutoDrive.SETPOINT_CENTER); // Robot should aim to keep the target centered on the crosshair
+		PIDcenter.setSetpoint(QuickAccessVars.SETPOINT_CENTER); // Robot should aim to keep the target centered on the crosshair
 
 		timer.start();
 		
@@ -78,8 +79,8 @@ public class ApproachWall extends Command {
 	protected boolean isFinished() {
 		return false;
 		/*
-		return (Robot.camera.getTargetDistance() < Constants.AutoDrive.SETPOINT_APPROACH &&
-			PIDapproach.onTarget(Constants.AutoDrive.TOLERANCE_APPROACH));
+		return (Robot.camera.getTargetDistance() < QuickAccessVars.SETPOINT_APPROACH &&
+			PIDapproach.onTarget(QuickAccessVars.TOLERANCE_APPROACH));
 		*/
 	}
 	

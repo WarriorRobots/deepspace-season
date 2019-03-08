@@ -5,37 +5,40 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.cargo;
+package frc.robot.commands.hatchpickup;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
-/** Sabilize the cargo pickup */
-public class StabilizeArm extends Command {
+/** Make the hatch pickup move from being vertical to being on the ground */
+public class SubgroupExtendHatchPickup extends Command {
+  
+  private int counter;
 
-  private double initialPosition;
-
-  public StabilizeArm() {
-    requires(Robot.arm);
+  public SubgroupExtendHatchPickup() {
+    requires(Robot.pneumatics);
   }
 
   @Override
   protected void initialize() {
-    initialPosition = Robot.arm.getArmAngle();
+    counter = 0;
   }
 
   @Override
   protected void execute() {
-    Robot.arm.rotateArmTo(initialPosition);
+    counter++;
+    Robot.pneumatics.extendPickup();
   }
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return counter > QuickAccessVars.PNEUMATIC_LOOP_COUNT;
   }
-  
+
   @Override
   protected void end() {
-    Robot.arm.stopArm();
+    Robot.pneumatics.neutralizePickup();
   }
+
 }

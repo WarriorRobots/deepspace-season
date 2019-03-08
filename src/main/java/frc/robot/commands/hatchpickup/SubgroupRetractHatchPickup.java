@@ -8,15 +8,16 @@
 package frc.robot.commands.hatchpickup;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
 /** Make the hatch pickup move from being on the ground to being up */
-public class RetractHatchPickup extends Command {
+public class SubgroupRetractHatchPickup extends Command {
 
   private int counter;
 
-  public RetractHatchPickup() {
-    requires(Robot.hatchPickup);
+  public SubgroupRetractHatchPickup() {
+    requires(Robot.pneumatics);
   }
 
   @Override
@@ -27,19 +28,17 @@ public class RetractHatchPickup extends Command {
   @Override
   protected void execute() {
     counter++;
-    Robot.hatchPlacer.loosenScissors();
-    Robot.hatchPickup.retractIntake();
+    Robot.pneumatics.retractPickup();
   }
 
   @Override
   protected boolean isFinished() {
-    return counter > 5;
+    return counter > QuickAccessVars.PNEUMATIC_LOOP_COUNT;
   }
 
   @Override
   protected void end() {
-    Robot.hatchPickup.neutralizePneumatics();
-    Robot.hatchPlacer.neutralizePneumatics();
+    Robot.pneumatics.neutralizePickup();
   }
 
 }

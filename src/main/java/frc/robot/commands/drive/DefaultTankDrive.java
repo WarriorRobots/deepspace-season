@@ -5,39 +5,33 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.hatchpickup;
+package frc.robot.commands.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/** Make the hatch pickup move from being vertical to being on the ground */
-public class ExtendHatchPickup extends Command {
-  
-  private int counter;
+public class DefaultTankDrive extends Command {
 
-  public ExtendHatchPickup() {
-    requires(Robot.hatchPickup);
-  }
-
-  @Override
-  protected void initialize() {
-    counter = 0;
+  /**
+   * Push the left joystick vertically to drive the left wheels. Push the right
+   * joystick vertically to drive the right wheels.
+   */
+  public DefaultTankDrive() {
+    requires(Robot.drivetrain);
   }
 
   @Override
   protected void execute() {
-    counter++;
-    Robot.hatchPickup.extendIntake();
+    Robot.drivetrain.tankDriveTeleop(Robot.input.getLeftY(), Robot.input.getRightY());
   }
 
   @Override
   protected boolean isFinished() {
-    return counter > 5;
+    return false;
   }
 
   @Override
   protected void end() {
-    Robot.hatchPickup.neutralizePneumatics();
+    Robot.drivetrain.stopDrive();
   }
-
 }

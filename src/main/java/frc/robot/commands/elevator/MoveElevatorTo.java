@@ -2,32 +2,56 @@ package frc.robot.commands.elevator;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
 public class MoveElevatorTo extends Command {
 
-    private double position;
-    private static final int MINIMUM_POSITION = 4; // a bit above 0
+    /** The position, in inches, that the elevator will move to. */
+    private double target;
 
+    /** If this is set to true, the elevator will immediately shut off. */
+    private boolean terminateFlag = false; // initially false unless something sets it to true
+
+    /**
+     * Move the elevator's central assembly to a certain number of inches <b>above
+     * the floor</b>.
+     * 
+     * @param positionInches How far above the floor the elevator should be, in
+     *                       inches.
+     */
     public MoveElevatorTo(double positionInches) {
         requires(Robot.elevator);
+
         if (positionInches == 0) {
-            DriverStation.reportError("Use ResetElevator instead of MoveElevatorTo(0)", false);
-        } else if (positionInches < MINIMUM_POSITION) { // TODO find max
-            DriverStation.reportError("FIND PROGRAMMER IMMEDIATELY: Elevator attempted to move to unsafe position: " + positionInches, false);
-            this.position = MINIMUM_POSITION;
-        } else {
-            this.position = positionInches;
+            DriverStation.reportError("Use ResetElevator() instead of MoveElevatorTo(0)", false);
+            terminateFlag = true;
+        }
+
+        this.target = (positionInches - QuickAccessVars.SCISSORS_HEIGHT) / 2;
+    }
+
+    @Override
+    protected void initialize() {
+        if (target < QuickAccessVars.ELEVATOR_SAFE_MINIMUM) {
+            DriverStation.reportError(
+                    "FIND PROGRAMMER IMMEDIATELY: Elevator attempted to move to unsafe position: " + target, false);
+            terminateFlag = true;
         }
     }
 
     @Override
     protected void execute() {
-        Robot.elevator.moveElevatorTo(position);
+        if (terminateFlag) {
+            Robot.elevator.stopElevator();
+        } else {
+            Robot.elevator.moveElevatorTo(target);
+        }
     }
 
     @Override
     protected boolean isFinished() {
+        // if this ever returns true, something went wrong
         return false;
     }
 
