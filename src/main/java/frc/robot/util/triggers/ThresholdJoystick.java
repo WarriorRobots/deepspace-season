@@ -1,5 +1,6 @@
 package frc.robot.util.triggers;
 
+import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -13,6 +14,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 public class ThresholdJoystick extends Button {
 
 	private DoubleSupplier input;
+	private BooleanSupplier isStickPressedIn;
 
 	/*
 	 * {@code true} for x; {@code false} for y
@@ -52,14 +54,21 @@ public class ThresholdJoystick extends Button {
 	 * @param direction The direction the joystick has to be pushed past the threshold to trigger.
 	 * @see #direction
 	 */
-	public ThresholdJoystick(DoubleSupplier input, double threshold, boolean direction) {
+	public ThresholdJoystick(DoubleSupplier input, BooleanSupplier isStickPressedIn, double threshold, boolean direction) {
 		this.input = input;
+		this.isStickPressedIn = isStickPressedIn;
 		this.threshold = threshold;
 		this.direction = direction;
 	}
 
 	@Override
 	public boolean get() {
+
+		// if stick is pressed in, assume that joysticks should NOT run
+		if (isStickPressedIn.getAsBoolean()) {
+			return false;
+		}
+
 		if(
 			direction && input.getAsDouble() > threshold //(value should be greater than threshold) && value > treshold
 			||
