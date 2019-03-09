@@ -123,7 +123,7 @@ public final class ControlHandler {
 		// drive alteration
 		rightJoyThumbButton.whileHeld(new ArcadeDrive());
 		rightJoyTriggerButton.whileHeld(new TurnLockDrive());
-		// rightJoyButton4.whileHeld(new CameraCommand()); // unwritten
+		rightJoyButton5.whenPressed(new ExtendCargoPickupArm(QuickAccessVars.ARM_CLIMB_ANGLE));
 
 		rightJoyButton3.whenPressed(new ExtendCargoPickupArm(QuickAccessVars.ARM_PICKUP_ANGLE)); // ball low
 		rightJoyButton3.whenPressed(new LockScissors());
