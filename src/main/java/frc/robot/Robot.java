@@ -56,7 +56,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotPeriodic() {
 		elevator.loop();
-		System.out.println(t.get());
+		//System.out.println(t.get());
 	}
 
 	@Override

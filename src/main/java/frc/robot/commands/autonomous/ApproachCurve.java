@@ -69,6 +69,9 @@ public class ApproachCurve extends Command {
 	/** Keeps the id of the pipeline that is currently being asked to give values to the data arrays */
 	private int intendedPipe;
 
+	/** Denotes if the camera is missing data in order to start driving */
+	private boolean data_missing;
+
 	/** Left:Right height ratio of targets */
 	private double heightRatio;
 
@@ -106,7 +109,7 @@ public class ApproachCurve extends Command {
 
 		timer.start();
 
-		intendedPipe = PIPELEFT;
+		intendedPipe = PIPERIGHT;
 		Robot.camera.setPipeline(intendedPipe);
 
 		target_height= new double[3];
@@ -114,6 +117,7 @@ public class ApproachCurve extends Command {
 		target_distance = 0;
 
 		driver_control = false;
+		data_missing = false;
 
 		System.out.println("WWDEBUG: initialize() of ApproachCurve"); // TODO remove debug
 		
@@ -148,10 +152,15 @@ public class ApproachCurve extends Command {
 			target_distance == 0
 			)
 		{
+			data_missing = true;
 			System.out.println("WWDEBUG: Skipping moving, lacks data."); // TODO remove debug
 			return; // if any part of the data is unwritten to, then return out of function to avoid the
 			// the robot driving before it has data
-		} 
+		} else {
+			data_missing = false;
+		}
+
+		debug_missing();
 
 		if (Robot.camera.canSeeObject()) {
 			System.out.println("WWDEBUG: Can see object");
@@ -203,7 +212,7 @@ public class ApproachCurve extends Command {
 					target_x[OVERALL] = Robot.camera.getObjectX();
 					target_distance = Robot.camera.getTargetDistance();
 					// don't move off the center pipeline if the targets become centered
-					if ( !(1/1.1 < heightRatio && heightRatio < 1.1/1) ) {
+					if ( !(1/1.1 < heightRatio && heightRatio < 1.1/1) || data_missing) {
 						Robot.camera.setPipeline(PIPERIGHT);
 						intendedPipe = PIPERIGHT;
 					} else {
@@ -274,6 +283,16 @@ public class ApproachCurve extends Command {
 		double point = x * 25;
 		System.out.println("WWDEBUG: Set PIDcenter's setpoint to: "+Double.toString(point)); // TODO remove debug
 		PIDcenter.setSetpoint(point);
+	}
+
+	private void debug_missing() {
+		if( target_height[LEFT] == 0 ) { System.out.println("WWDEBUG: Missing data: target_height[LEFT]"); }
+		if( target_height[OVERALL] == 0 ) { System.out.println("WWDEBUG: Missing data: target_height[OVERALL]"); }
+		if( target_height[RIGHT] == 0 ) { System.out.println("WWDEBUG: Missing data: target_height[RIGHT]"); }
+		if( target_x[LEFT] == 0 ) { System.out.println("WWDEBUG: Missing data: target_x[LEFT]"); }
+		if( target_x[OVERALL] == 0 ) { System.out.println("WWDEBUG: Missing data: target_x[OVERALL]"); }
+		if( target_x[RIGHT] == 0 ) { System.out.println("WWDEBUG: Missing data: target_x[RIGHT]"); }
+		if( target_distance == 0 ) { System.out.println("WWDEBUG: Missing data: target_distance"); }
 	}
 	
     @Override

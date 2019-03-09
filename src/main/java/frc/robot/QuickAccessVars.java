@@ -65,7 +65,7 @@ public final class QuickAccessVars {
 	// pid
 	public static final double ELEVATOR_P = 0.4;
 	public static final double ARM_P = 1.2;
-	public static final double KP_APPROACH = 0.020;
+	public static final double KP_APPROACH = 0.015;
 	public static final double KI_APPROACH = 0;
 	public static final double KD_APPROACH = 0;
 	public static final double SETPOINT_APPROACH = 23;
