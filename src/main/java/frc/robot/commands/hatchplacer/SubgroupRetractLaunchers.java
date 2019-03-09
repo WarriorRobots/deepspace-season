@@ -17,6 +17,10 @@ public class SubgroupRetractLaunchers extends InstantCommand {
   /** Count variable for the loop of pneumatic */
   private int counter;
 
+  /**
+   * Subgroup command that retracts the launcher pistons. Do not use this; use the
+   * GroupCommand instead.
+   */
   public SubgroupRetractLaunchers() {
     requires(Robot.pneumatics);
   }

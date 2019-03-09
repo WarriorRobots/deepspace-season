@@ -1,6 +1,5 @@
 package frc.robot.commands.debug;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
@@ -23,7 +22,7 @@ public class DebugRebootAll extends InstantCommand {
 
     @Override
     protected void execute() {
-        DriverStation.reportWarning("WWDEBUG ===FULL RESET===", false);
+        System.out.println("WWDEBUG: DebugRebootAll");
         Robot.drivetrain.stopDrive();
         Robot.elevator.stopElevator();
         Robot.hatchPickupWheels.stopPickup();

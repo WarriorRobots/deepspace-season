@@ -12,7 +12,6 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
@@ -31,7 +30,7 @@ public class ElevatorSubsystem extends Subsystem {
 	private static final int LIMIT_SWITCH_PORT = 4;
 
 	private WPI_TalonSRX winch;
-	/** Hall effect sensor */
+	/** Magnetic "Hall effect" sensor */
 	private DigitalInput limitSwitch;
 
 	/**
@@ -54,13 +53,6 @@ public class ElevatorSubsystem extends Subsystem {
 	 * the encoder when it is triggered.
 	 */
 	public void loop() {
-		// limiter
-		if (getElevatorPosition() < -100) {
-			DriverStation.reportError(
-					"The elevator is at a negative position?" + "Check encoder and Hall effect sensor.", false);
-		}
-
-		// resets the encoder when hall effect switch is triggered
 		if (isElevatorFloored()) {
 			resetEncoder();
 		}
@@ -129,10 +121,9 @@ public class ElevatorSubsystem extends Subsystem {
 
 	@Override
 	public void initSendable(SendableBuilder builder) {
-		builder.setSmartDashboardType("elevator-subsystem");
-		builder.addDoubleProperty("elevator position inches", () -> getElevatorPosition(), null);
-		builder.addDoubleProperty("elevator position clicks", () -> winch.getSelectedSensorPosition(), null);
+		builder.addDoubleProperty("position", () -> getElevatorPosition(), null);
+		builder.addDoubleProperty("clicks", () -> winch.getSelectedSensorPosition(), null);
 		builder.addBooleanProperty("floored?", () -> isElevatorFloored(), null);
-		builder.addDoubleProperty("winch speed", () -> winch.get(), null);
+		builder.addDoubleProperty("speed", () -> winch.get(), null);
 	}
 }

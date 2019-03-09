@@ -67,8 +67,7 @@ public class HatchPickupSubsystem extends Subsystem {
 
     @Override
     public void initSendable(SendableBuilder builder) {
-        builder.setSmartDashboardType("hatchpickup-subsystem");
-        builder.addDoubleProperty("pickup motor speed", () -> pickupMotor.get(), null);
+        builder.addDoubleProperty("speed", () -> pickupMotor.get(), null);
     }
 
 }

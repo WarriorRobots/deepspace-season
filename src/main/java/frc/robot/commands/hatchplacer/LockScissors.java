@@ -11,47 +11,39 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
-/** Loosen a hatch off of the hatch placer */
 public class LockScissors extends Command {
 
-  /** Count variable for the loop of pneumatic */
   private int counter;
 
+  /**
+   * Apply outward pressure with the "scissor" mechanism, grasping securely onto a
+   * hatch if one is present.
+   * <p>
+   * This also gets the scissors out of the way of the arm mechanism if it is
+   * being lowered.
+   */
   public LockScissors() {
     requires(Robot.pneumatics);
   }
 
   @Override
   protected void initialize() {
-    // Initialization of for loop
-    // for (Init, ---, ---) {---};
     counter = 0;
   }
 
   @Override
   protected void execute() {
-    // The purpose of running the pneumatic in a loop format is to garantee the
-    // pneumatic fires
-    // (1 loop is not enough time for the pneumatic to fire)
-    // Execute of for loop
-    // for (---, ---, ---) {Exec};
     Robot.pneumatics.lockScissors();
-
-    // Increment of for loop
-    // for (---, ---, Inc) {---};
     counter++;
   }
 
   @Override
   protected boolean isFinished() {
-    // Condition of for loop
-    // for (---, Cond, ---) {---};
     return (counter > QuickAccessVars.PNEUMATIC_LOOP_COUNT);
   }
 
   @Override
   protected void end() {
-    // set solonoid to neutral to increase lifespan
     Robot.pneumatics.neutralizeScissors();
   }
 

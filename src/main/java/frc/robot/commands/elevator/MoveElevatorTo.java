@@ -33,9 +33,9 @@ public class MoveElevatorTo extends Command {
 
     @Override
     protected void initialize() {
-        if (target < QuickAccessVars.ELEVATOR_SAFE_MINIMUM) {
+        if (target < QuickAccessVars.ELEVATOR_MINIMUM_TARGET) {
             DriverStation.reportError(
-                    "FIND PROGRAMMER IMMEDIATELY: Elevator attempted to move to unsafe position: " + target, false);
+                    "WWDEBUG: Elevator attempted to move to unsafe position: " + target, false);
             terminateFlag = true;
         }
     }

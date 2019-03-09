@@ -20,10 +20,10 @@ public class DropElevator extends Command {
 
     @Override
     protected void execute() {
-        if (Robot.elevator.getElevatorPosition() > QuickAccessVars.ELEVATOR_SAFE_MINIMUM) {
-            Robot.elevator.adjustElevatorLinear(QuickAccessVars.DROP_ELEVATOR_SPEED);
+        if (Robot.elevator.getElevatorPosition() > QuickAccessVars.ELEVATOR_DOWNWARD_DRIFT_THRESHOLD) {
+            Robot.elevator.adjustElevatorLinear(QuickAccessVars.ELEVATOR_DROP_SPEED);
         } else {
-            Robot.elevator.adjustElevatorLinear(QuickAccessVars.ELEVATOR_BELOW_MINIMUM_DRIFT_SPEED);
+            Robot.elevator.adjustElevatorLinear(QuickAccessVars.ELEVATOR_DOWNWARD_DRIFT_SPEED);
         }
     }
 
