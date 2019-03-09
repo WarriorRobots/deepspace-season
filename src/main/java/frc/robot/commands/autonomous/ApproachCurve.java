@@ -114,6 +114,8 @@ public class ApproachCurve extends Command {
 		target_distance = 0;
 
 		driver_control = false;
+
+		System.out.println("WWDEBUG: initialize() of ApproachCurve"); // TODO remove debug
 		
 	}
 	
@@ -125,7 +127,10 @@ public class ApproachCurve extends Command {
 		if (Math.abs(Robot.input.getRightY()) > QuickAccessVars.CAMERA_DRIVE_THRESHOLD
 			||
 			Math.abs(Robot.input.getRightX()) > QuickAccessVars.CAMERA_DRIVE_THRESHOLD)
-		{driver_control = true;}
+		{
+			driver_control = true;
+			System.out.println("WWDEBUG: driver_control = true"); // TODO remove debug
+		}
 
 		if(!driver_control) { // if the drivers are not controlling it do the auto part
 			auto();
@@ -136,63 +141,80 @@ public class ApproachCurve extends Command {
 
 	/** Moves the robot autonomously to the target. */
 	private void auto() {
+		System.out.println("WWDEBUG: auto()"); // TODO remove debug
 		if (
 			target_height[LEFT] == 0 || target_height[OVERALL] == 0 || target_height[RIGHT] == 0 ||
 			target_x[LEFT] == 0 || target_x[OVERALL] == 0 || target_x[RIGHT] == 0 ||
 			target_distance == 0
 			)
-		return; // if any part of the data is unwritten to, then return out of function to avoid the
-		// the robot driving before it has data
+		{
+			System.out.println("WWDEBUG: Skipping moving, lacks data."); // TODO remove debug
+			return; // if any part of the data is unwritten to, then return out of function to avoid the
+			// the robot driving before it has data
+		} 
 
 		if (Robot.camera.canSeeObject()) {
+			System.out.println("WWDEBUG: Can see object");
+
 			shiftCenter();
 
+			System.out.println("WWDEBUG: Calculating PIDs");
 			valueapproach = PIDapproach.calculate(target_distance, timer.get());
 			valuecenter = PIDcenter.calculate(target_x[OVERALL], timer.get());
 			
 			// helps to keep the robot to drive in a missile approach curve
 		} else {
+			System.out.println("WWDEBUG: Can not see object, setting motion to 0"); // TODO remove debug
 			// Set value to zero if the target can not be seen so robot does not go crazy
 			valueapproach = 0; 
 			// Don't 0 valuecenter because it should "remember" what direction it's attempting to turn.
 			valuecenter = 0;
 		}
 
+		System.out.println("WWDEBUG: -valueapproach : "+Double.toString(-valueapproach)); // TODO remove debug
+		System.out.println("WWDEBUG: -valuecenter : "+Double.toString(-valuecenter)); // TODO remove debug
 		Robot.drivetrain.arcadeDriveRaw(-valueapproach, -valuecenter);
-		System.out.println(valueapproach + " " + valuecenter);
+		//System.out.println(valueapproach + " " + valuecenter);
 	}
 
 	private void drive() {
+		System.out.println("WWDEBUG: drive()"); // TODO remove debug
 		// Robot.camera.setPipeline(CameraSubsystem.PIPELINE_DRIVER); Conner does not want this
 		Robot.drivetrain.arcadeDriveTeleop(Robot.input.getRightY(QuickAccessVars.ARCADE_FORWARD_MODIFIER),
         	Robot.input.getRightX(QuickAccessVars.ARCADE_TURN_MODIFIER));
 	}
 
 	private void updateTargetData() {
+		System.out.println("WWDEBUG: updateTargetData()"); // TODO remove debug
 
 		if (Robot.camera.getPipeline() == intendedPipe) { // wait for pipeline to be the intened one
 			switch (intendedPipe) {
 		
 				case PIPELEFT: // Left
+					System.out.println("WWDEBUG: Looking at Left"); // TODO remove debug
 					target_height[LEFT] = Robot.camera.getTargetHeight();
 					target_x[LEFT] = Robot.camera.getObjectX();
 					Robot.camera.setPipeline(PIPEOVERALL);
 					intendedPipe = PIPEOVERALL;
 					break;
 				case PIPEOVERALL: // Overall
+					System.out.println("WWDEBUG: Looking at Both"); // TODO remove debug
 					target_height[OVERALL] = Robot.camera.getTargetHeight();
 					target_x[OVERALL] = Robot.camera.getObjectX();
 					target_distance = Robot.camera.getTargetDistance();
 					// don't move off the center pipeline if the targets become centered
 					if ( !(1/1.1 < heightRatio && heightRatio < 1.1/1) ) {
+						Robot.camera.setPipeline(PIPERIGHT);
+						intendedPipe = PIPERIGHT;
+					} else {
 						// set the targets to be the same height
 						// so it doesn't try to turn to fix it
 						heightRatio = 1;
-						Robot.camera.setPipeline(PIPERIGHT);
-						intendedPipe = PIPERIGHT;
+						System.out.println("WWDEBUG: Staying looking for Both (assuming straight on)"); // TODO remove debug
 					}
 					break;
 				case PIPERIGHT: // Right
+					System.out.println("WWDEBUG: Looking at Right"); // TODO remove debug
 					target_height[RIGHT] = Robot.camera.getTargetHeight();
 					target_x[RIGHT] = Robot.camera.getObjectX();
 					Robot.camera.setPipeline(PIPELEFT);
@@ -204,8 +226,15 @@ public class ApproachCurve extends Command {
 		}
 
 		try { // try statement makes the robot doesn't crash when target_height isn't set
-			heightRatio = target_height[LEFT]/target_height[RIGHT];
+			if (heightRatio != 1) {
+				// if the height ratio doesn't say its straight on...
+				// find how off it is
+				heightRatio = target_height[LEFT]/target_height[RIGHT];
+				System.out.println("WWDEBUG: Set heightRatio = "+Double.toString(heightRatio)); // TODO remove debug
+			}
 		} catch(Exception e) {
+			System.out.println(e); // TODO remove debug
+			System.out.println("WWDEBUG: Error above forces heightRatio to be 0"); // TODO remove debug
 			heightRatio = 0;
 		}
 
@@ -217,6 +246,8 @@ public class ApproachCurve extends Command {
 	 * This should make the turn be an arc to make the robot perpendicular to the target.
 	 */ 
 	private void shiftCenter(){
+		System.out.println("WWDEBUG: shiftCenter()");
+
 		// don't move the setpoint if there is an issue
 		if (heightRatio==0) return;
 
@@ -241,6 +272,7 @@ public class ApproachCurve extends Command {
 		// now with x being between -1 and 1 we can multiply by the degrees we want the camera to turn
 		// at most (25 degrees)
 		double point = x * 25;
+		System.out.println("WWDEBUG: Set PIDcenter's setpoint to: "+Double.toString(point)); // TODO remove debug
 		PIDcenter.setSetpoint(point);
 	}
 	
@@ -256,6 +288,7 @@ public class ApproachCurve extends Command {
 	
 	@Override
 	protected void end() {
+		System.out.println("WWDEBUG: end() of ApproachCurve");
 		timer.stop();
 		PIDapproach.reset();
 		PIDcenter.reset();
