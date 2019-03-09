@@ -56,8 +56,7 @@ public class CargoPickupSubsystem extends Subsystem {
 
     @Override
     public void initSendable(SendableBuilder builder) {
-        builder.setSmartDashboardType("cargopickup-subsystem");
-        builder.addDoubleProperty("cargopickup wheel speed", () -> pickupWheels.get(), null);
+        builder.addDoubleProperty("speed", () -> pickupWheels.get(), null);
     }
 
 }

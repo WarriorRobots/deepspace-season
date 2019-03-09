@@ -135,12 +135,11 @@ public class PneumaticSubsystem extends Subsystem {
 
     @Override
     public void initSendable(SendableBuilder builder) {
-        builder.setSmartDashboardType("pneumatic-subsystem");
         builder.addBooleanProperty("low pressure?", () -> !compressor.getPressureSwitchValue(), null);
-        builder.addBooleanProperty("compressor running?", () -> compressor.enabled(), null);
-        builder.addStringProperty("scissor state", () -> scissorsSol.get().toString(), null);
-        builder.addStringProperty("launcher state", () -> launcherSol.get().toString(), null);
-        builder.addStringProperty("pickup state", () -> pickupSol.get().toString(), null);
+        builder.addBooleanProperty("compressor?", () -> compressor.enabled(), null);
+        builder.addStringProperty("scissors", () -> scissorsSol.get().toString(), null);
+        builder.addStringProperty("launchers", () -> launcherSol.get().toString(), null);
+        builder.addStringProperty("hatchpickup", () -> pickupSol.get().toString(), null);
     }
 
 }

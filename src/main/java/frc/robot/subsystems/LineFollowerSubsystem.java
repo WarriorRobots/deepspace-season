@@ -61,9 +61,8 @@ public class LineFollowerSubsystem extends Subsystem {
 
     @Override
     public void initSendable(SendableBuilder builder) {
-        builder.setSmartDashboardType("line-follow-subsystem");
         builder.addBooleanProperty("left", () -> getLeftLineFollower(), null);
-        builder.addBooleanProperty("middle", () -> getMiddleLineFollower(), null);
+        builder.addBooleanProperty("mid", () -> getMiddleLineFollower(), null);
         builder.addBooleanProperty("right", () -> getRightLineFollower(), null);
     }
 

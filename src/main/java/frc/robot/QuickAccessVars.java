@@ -22,10 +22,12 @@ public final class QuickAccessVars {
 	public static final double ELEVATOR_DROP_SPEED = -1;
 	public static final double CARGO_PICKUP_IDLE_SPEED = 0.1;
 	public static final double ELEVATOR_DOWNWARD_DRIFT_SPEED = -0.05;
+	public static final double ARM_RESET_SPEED = -0.1;
 
 	// degrees
 	public static final double ARM_PICKUP_ANGLE = 90;
 	public static final double ARM_CLIMB_ANGLE = 155;
+	public static final double ARM_RESET_ANGLE = -2;
 
 	// delay timers (seconds)
 	public static final double PLACE_HATCH_DELAY = 0.2; // seconds
@@ -48,7 +50,7 @@ public final class QuickAccessVars {
 
 	// pid
 	public static final double ELEVATOR_P = 0.4;
-	public static final double ARM_P = 1;
+	public static final double ARM_P = 1.2;
 
 	// DO NOT USE THIS CONSTRUCTOR
 	private QuickAccessVars() {

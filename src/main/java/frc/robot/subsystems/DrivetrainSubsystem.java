@@ -84,6 +84,7 @@ public class DrivetrainSubsystem extends Subsystem {
 		rightGroup.setInverted(RIGHT_DRIVE_REVERSED);
 
 		differentialDrive = new DifferentialDrive(leftGroup, rightGroup);
+		differentialDrive.setSafetyEnabled(false);
 
 		// if NavX is missing, this code will handle errors and prevent a crash
 		try {
@@ -241,8 +242,7 @@ public class DrivetrainSubsystem extends Subsystem {
 
 	@Override
 	public void initSendable(SendableBuilder builder) {
-		builder.setSmartDashboardType("subsystem-drivetrain");
-		builder.addStringProperty("encoder-clicks", () -> {
+		builder.addStringProperty("encoders", () -> {
 			return (Integer.toString(getLeftEncoderClicks()) + " " + Integer.toString(getRightEncoderClicks()));
 		}, null);
 		builder.addDoubleProperty("angle", () -> getAngleDegrees(), null);
