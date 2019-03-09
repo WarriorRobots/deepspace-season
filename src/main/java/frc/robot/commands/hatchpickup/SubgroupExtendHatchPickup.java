@@ -11,11 +11,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
-/** Make the hatch pickup move from being vertical to being on the ground */
 public class SubgroupExtendHatchPickup extends Command {
-  
+
   private int counter;
 
+  /**
+   * Subgroup command to extend the hatch pickup. Don't run this, use a
+   * GroupCommand instead.
+   */
   public SubgroupExtendHatchPickup() {
     requires(Robot.pneumatics);
   }

@@ -94,7 +94,7 @@ public class ApproachStraight extends Command {
 			// Don't 0 valuecenter because it should "remember" what direction it's attempting to turn.
 		}
 
-		Robot.drivetrain.arcadeDriveRaw(-valueapproach, valuecenter);
+		Robot.drivetrain.arcadeDriveRaw(-valueapproach, -valuecenter);
 	}
 	
     @Override

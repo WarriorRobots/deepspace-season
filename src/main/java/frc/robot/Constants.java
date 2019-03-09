@@ -10,8 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 
 /**
- * Contains all values used program-wide or constants that need to be changed
- * easily.
+ * Contains all mathematical constants and calculations.
  */
 public final class Constants {
 

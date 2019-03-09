@@ -11,11 +11,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
-/** Make the hatch pickup move from being on the ground to being up */
 public class SubgroupRetractHatchPickup extends Command {
 
   private int counter;
 
+  /**
+   * Subgroup command to retract the hatch pickup. Don't run this, use a
+   * GroupCommand instead.
+   */
   public SubgroupRetractHatchPickup() {
     requires(Robot.pneumatics);
   }

@@ -10,6 +10,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
@@ -26,12 +28,16 @@ public class ArmSubsystem extends Subsystem {
 
     private static final int ROTATOR_PORT = 8;
     private static final int CLONE_PORT = 11;
+    private static final int LIMIT_SWITCH_PORT = 5;
 
     /** Main motor (receives the encoder signals) */
     private WPI_TalonSRX armRotator;
 
     /** Clone motor (copies all output from armRotator) */
     private WPI_TalonSRX armRotatorClone;
+
+    /** Magnetic "hall effect" sensor */
+    private DigitalInput limitSwitch;
 
     /**
      * Instantiates new subsystem; make ONLY ONE.
@@ -51,6 +57,8 @@ public class ArmSubsystem extends Subsystem {
         armRotatorClone = new WPI_TalonSRX(CLONE_PORT);
         armRotatorClone.setInverted(QuickAccessVars.ARM_ROTATOR_CLONE_INVERTED);
         armRotatorClone.follow(armRotator);
+
+        limitSwitch = new DigitalInput(LIMIT_SWITCH_PORT);
     }
 
     /**
@@ -81,10 +89,13 @@ public class ArmSubsystem extends Subsystem {
     }
 
     /**
-     * Set the position of the Arm back to 0.
+     * Set the current angle of the arm as the specified number of degrees
+     * (preferably using a hall effect sensor).
+     * 
+     * @param degrees The new degree value of the arm's current position.
      */
-    public void resetArmAngle() {
-        armRotator.setSelectedSensorPosition(0);
+    public void resetArmAngle(double degrees) {
+        armRotator.setSelectedSensorPosition(toClicks(degrees));
     }
 
     /**
@@ -105,6 +116,10 @@ public class ArmSubsystem extends Subsystem {
         return (int) Math.round(degrees * CLICKS_PER_DEGREE);
     }
 
+    public boolean isLimitSwitchTriggered() {
+        return !limitSwitch.get(); // sensor reads true if there is NO magnet
+    }
+
     @Override
     public void initDefaultCommand() {
         setDefaultCommand(new DefaultStabilizeArm());
@@ -112,8 +127,7 @@ public class ArmSubsystem extends Subsystem {
 
     @Override
     public void initSendable(SendableBuilder builder) {
-        builder.setSmartDashboardType("arm-subsystem");
-        builder.addDoubleProperty("Rotator motor angle", () -> getArmAngle(), null);
+        builder.addDoubleProperty("angle", () -> getArmAngle(), null);
     }
 
 }

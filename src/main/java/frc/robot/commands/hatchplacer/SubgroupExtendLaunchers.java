@@ -11,14 +11,16 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
-/** Push a hatch off of the hatch placer */
 public class SubgroupExtendLaunchers extends Command {
 
-  /** Count variable for the loop of pneumatic */
   private int counter;
   /** Set to true to prevent hatch shots unless within 1'6" of the velcro */
   private boolean safemode;
 
+  /**
+   * Subgroup command that extends the hatch launcher pistons. Do not use this; use the GroupCommand instead.
+   * @param safemode If this is true, the launchers cannot fire without a signal from the line followers.
+   */
   public SubgroupExtendLaunchers(boolean safemode) {
     requires(Robot.pneumatics);
     this.safemode = safemode;
@@ -26,18 +28,11 @@ public class SubgroupExtendLaunchers extends Command {
 
   @Override
   protected void initialize() {
-    // Initialization of for loop
-    // for (Init, ---, ---) {---};
     counter = 0;
   }
 
   @Override
   protected void execute() {
-    // The purpose of running the pneumatic in a loop format is to garantee the
-    // pneumatic fires
-    // (1 loop is not enough time for the pneumatic to fire)
-    // Execute of for loop
-    // for (---, ---, ---) {Exec};
     if (safemode) {
       if (Robot.lineFollowers.getMiddleLineFollower()) {
         Robot.pneumatics.extendLaunchers();
@@ -45,22 +40,16 @@ public class SubgroupExtendLaunchers extends Command {
     } else {
       Robot.pneumatics.extendLaunchers();
     }
-
-    // Increment of for loop
-    // for (---, ---, Inc) {---};
     counter++;
   }
 
   @Override
   protected boolean isFinished() {
-    // Condition of for loop
-    // for (---, Cond, ---) {---};
     return (counter > QuickAccessVars.PNEUMATIC_LOOP_COUNT);
   }
 
   @Override
   protected void end() {
-    // set solonoid to neutral to increase lifespan
     Robot.pneumatics.neutralizeLaunchers();
   }
 

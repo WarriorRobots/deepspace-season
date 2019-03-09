@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 
 /**
  * Contains methods used for reading three line followers; two on the outside of
@@ -80,7 +81,12 @@ public class LineFollowerSubsystem extends Subsystem {
     }
 
     @Override
-    protected void initDefaultCommand() {
+    protected void initDefaultCommand() {}
+
+    public void initSendable(SendableBuilder builder) {
+        builder.addBooleanProperty("left", () -> getLeftLineFollower(), null);
+        builder.addBooleanProperty("mid", () -> getMiddleLineFollower(), null);
+        builder.addBooleanProperty("right", () -> getRightLineFollower(), null);
     }
 
 }

@@ -20,6 +20,7 @@ import frc.robot.commands.debug.DebugDisableCompressor;
 import frc.robot.commands.debug.DebugEnableCompressor;
 import frc.robot.commands.debug.DebugRebootAll;
 import frc.robot.commands.autonomous.ApproachCurve;
+import frc.robot.commands.autonomous.ApproachStraight;
 import frc.robot.commands.cargo.ExtendCargoPickupArm;
 import frc.robot.commands.cargo.RetractCargoPickupArm;
 import frc.robot.commands.drive.ArcadeDrive;
@@ -125,6 +126,7 @@ public final class ControlHandler {
 		rightJoyThumbButton.whileHeld(new ArcadeDrive());
 		rightJoyTriggerButton.whileHeld(new TurnLockDrive());
 		rightJoyButton4.whileHeld(new ApproachCurve());
+		rightJoyButton5.whenPressed(new ExtendCargoPickupArm(QuickAccessVars.ARM_CLIMB_ANGLE));
 
 		rightJoyButton3.whenPressed(new ExtendCargoPickupArm(QuickAccessVars.ARM_PICKUP_ANGLE)); // ball low
 		rightJoyButton3.whenPressed(new LockScissors());

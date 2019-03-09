@@ -16,15 +16,17 @@ public class ThresholdJoystick extends Button {
 	private DoubleSupplier input;
 	private BooleanSupplier isStickPressedIn;
 
-	/*
+	/**
 	 * {@code true} for x; {@code false} for y
+	 * 
 	 * @see #AXIS_X
 	 * @see #AXIS_Y
-	*/
-	// private boolean axis;
+	 */
 	private double threshold;
 	/**
-	 * Set to show what direction the joystick has to be pushed past the threshold to return true.
+	 * Set to show what direction the joystick has to be pushed past the threshold
+	 * to return true.
+	 * 
 	 * @see #LEFT
 	 * @see #RIGHT
 	 * @see #UP
@@ -32,29 +34,24 @@ public class ThresholdJoystick extends Button {
 	 */
 	private boolean direction;
 
-	// public static final boolean AXIS_X = true;
-	// public static final boolean AXIS_Y = false;
-
 	public static final boolean LEFT = false;
 	public static final boolean RIGHT = true;
 	public static final boolean UP = true;
 	public static final boolean DOWN = false;
-	
-	/*
-	 * @param axis		{@code true} if threshold is measured on x direction and {@code false}
-	 * 					if measured on y.
-	 */
 
 	/**
-	 * Usage: <code>new ThresholdTrigger( () -> input(), threshold, direction)</code>
+	 * Usage:
+	 * <code>new ThresholdTrigger( () -> input(), threshold, direction)</code>
 	 * 
 	 * @param input     Any joystick-related function that returns a <b>double</b>
 	 *                  value.
-	 * @param threshold The value to compare against for joystick.
-	 * @param direction The direction the joystick has to be pushed past the threshold to trigger.
+	 * @param threshold The minimum value required for the trigger to return true.
+	 * @param direction The direction the joystick has to be pushed in for the
+	 *                  threshold to trigger.
 	 * @see #direction
 	 */
-	public ThresholdJoystick(DoubleSupplier input, BooleanSupplier isStickPressedIn, double threshold, boolean direction) {
+	public ThresholdJoystick(DoubleSupplier input, BooleanSupplier isStickPressedIn, double threshold,
+			boolean direction) {
 		this.input = input;
 		this.isStickPressedIn = isStickPressedIn;
 		this.threshold = threshold;
@@ -69,14 +66,13 @@ public class ThresholdJoystick extends Button {
 			return false;
 		}
 
-		if(
-			direction && input.getAsDouble() > threshold //(value should be greater than threshold) && value > treshold
-			||
-			!direction && input.getAsDouble() < threshold //(value should NOT be greater than threshold) && value < treshold
+		if (direction && input.getAsDouble() > threshold // (value should be greater than threshold) && value > threshold
+				|| !direction && input.getAsDouble() < threshold // (value should NOT be greater than threshold) &&
+																	// value < treshold
 		) {
 			return true;
 		} else {
-		return false;
+			return false;
 		}
 	}
 }
