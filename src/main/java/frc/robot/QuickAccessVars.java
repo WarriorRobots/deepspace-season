@@ -49,7 +49,7 @@ public final class QuickAccessVars {
 	public static final double LINEAR_CONTROLS_MODIFIER = 0.5; // how much are the linear elevator/arm commands modified by?
 
 	// camera
-	public static final double CAMERA_TILT = 15 *Math.PI/180; // TODO put back all camera constant comments
+	public static final double CAMERA_TILT = 22 *Math.PI/180; // TODO put back all camera constant comments
 	public static final double ELEVATION = 40;
 	public static final double TARGET_ELEVATION = 25;
 	public static final double PIXELS_H = 320;
