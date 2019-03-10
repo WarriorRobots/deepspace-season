@@ -103,6 +103,8 @@ public class ApproachCurve extends Command {
 		//PID.setIzone(minimumI, maximumI);
 		//PIDapproach.setOutputRange(-1, 1);
 		PIDapproach.setSetpoint(QuickAccessVars.SETPOINT_APPROACH); // Robot should aim to be be 50 in away from the target
+		try {PIDapproach.setOutputRange(-0.7, 0.7);}
+		catch(Exception e) {}
 
 		//PIDcenter.setOutputRange(-1, 1);	
 		PIDcenter.setSetpoint(QuickAccessVars.SETPOINT_CENTER); // Robot should aim to keep the target centered on the crosshair

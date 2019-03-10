@@ -70,7 +70,7 @@ public final class QuickAccessVars {
 	public static final double KD_APPROACH = 0;
 	public static final double SETPOINT_APPROACH = 23;
 	public static final double TOLERANCE_APPROACH = 2;
-	public static final double KP_CENTER = 0.04;
+	public static final double KP_CENTER = 0.045;
 	public static final double KI_CENTER = 0;
 	public static final double KD_CENTER = 0;
 	public static final double SETPOINT_CENTER = 0;
