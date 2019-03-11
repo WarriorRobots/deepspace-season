@@ -119,6 +119,7 @@ public final class ControlHandler {
 		leftJoyButton7.whenPressed(new DebugRebootAll());
 		xboxL3.whileHeld(new DebugLinearElevatorControl(
 				() -> -xbox.getY(Hand.kLeft) * QuickAccessVars.LINEAR_CONTROLS_MODIFIER));
+		//xboxL3.whileNotHeld(new LinearClimb); there is no whileInactive so it is stopped within the command
 		xboxR3.whileHeld(
 				new DebugLinearArmControl(() -> -xbox.getY(Hand.kRight) * QuickAccessVars.LINEAR_CONTROLS_MODIFIER));
 
@@ -153,6 +154,11 @@ public final class ControlHandler {
 		// unknowns
 		leftXboxBumper.whenPressed(new RetractCargoPickupArm());
 		leftJoyButton9.whenPressed(new DebugResetArmEncoder());
+	}
+
+	// XXX HACK a bad way of seeing if the L3 is pressed on the xbox controller to disable the linear command on the elevator
+	public boolean getXboxL3() {
+		return xboxL3.get();
 	}
 
 	//-----------------------------------------------------------------//

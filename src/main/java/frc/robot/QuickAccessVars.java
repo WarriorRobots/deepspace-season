@@ -46,25 +46,29 @@ public final class QuickAccessVars {
 	public static final double PNEUMATIC_LOOP_COUNT = 5; // how many loops will a pneumatic command run?
 	public static final double XBOX_JOYSTICK_THRESHOLD = 0.7; // this seems high, but the xbox joysticks reach 1 before
 																// hitting the edge
-	public static final double LINEAR_CONTROLS_MODIFIER = 0.5; // how much are the linear elevator/arm commands modified by?
+	public static final double LINEAR_CONTROLS_MODIFIER = 0.5; // how much are the linear elevator/arm/climb commands
+																// modified by?
 
 	// camera
-	public static final double CAMERA_TILT = 22 *Math.PI/180; // TODO put back all camera constant comments
+	public static final double CAMERA_TILT = 22 * Math.PI / 180; // TODO put back all camera constant comments
 	public static final double ELEVATION = 40;
 	public static final double TARGET_ELEVATION = 25;
 	public static final double PIXELS_H = 320;
 	public static final double PIXELS_V = 240;
 	public static final double RAD_H = 1.04;
 	public static final double RAD_V = 0.867;
-	public static final double PPR_H = PIXELS_H/RAD_H;
-	public static final double PPR_V = PIXELS_V/RAD_V;
+	public static final double PPR_H = PIXELS_H / RAD_H;
+	public static final double PPR_V = PIXELS_V / RAD_V;
 	public static final double TARGET_HEIGHT = 5.83;
-	public static final double CAMERA_DRIVE_THRESHOLD = 0.2; // Amount the driver must push the controller to activate arcade drive during ApproachCurve
-
+	public static final double CAMERA_DRIVE_THRESHOLD = 0.2; // Amount the driver must push the controller to activate
+																// arcade drive during ApproachCurve
 
 	// pid
 	public static final double ELEVATOR_P = 0.4;
 	public static final double ARM_P = 1.2;
+	public static final double CLIMB_P = 0; // XXX tune climb
+
+	// camera pid
 	public static final double KP_APPROACH = 0.015;
 	public static final double KI_APPROACH = 0;
 	public static final double KD_APPROACH = 0;
