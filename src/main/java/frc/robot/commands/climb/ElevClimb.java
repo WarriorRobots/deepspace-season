@@ -7,27 +7,29 @@
 
 package frc.robot.commands.climb;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class Climb extends Command {
+public class ElevClimb extends Command {
 
-  private double target;
+  private double target, initialClimbPos, initialElevPos;
 
-  public Climb(double target) {
+  public ElevClimb(double target) {
     requires(Robot.climb);
+    requires(Robot.elevator);
     this.target = target;
   }
 
   @Override
   protected void initialize() {
-    DriverStation.reportWarning("moving to " + target, false);
+    initialClimbPos = Robot.climb.getClimbPosition();
+    initialElevPos = Robot.elevator.getElevatorPosition();
   }
 
   @Override
   protected void execute() {
     Robot.climb.moveClimbTo(target);
+    Robot.elevator.moveElevatorTo(Robot.climb.getClimbPosition() - initialClimbPos + initialElevPos);
   }
 
   @Override
@@ -40,3 +42,14 @@ public class Climb extends Command {
     Robot.climb.stopClimb();
   }
 }
+
+/*
+change = final - initial
+c = f - i
+
+Cc = Cf - Ci
+Ec = Ef - Ei
+Cc = Ec
+Cf - Ci = Ef - Ei
+Cf - Ci + Ei = Ef
+*/

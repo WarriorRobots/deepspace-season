@@ -17,7 +17,9 @@ public class LinearClimb extends Command {
    * Run the climb linearly based on the input from the Left joystick on the xbox controller
    * (as long as the elevator linear isn't being run)
    */
-  public LinearClimb() {}
+  public LinearClimb() {
+    requires(Robot.climb);
+  }
   
   @Override
   protected void initialize() {

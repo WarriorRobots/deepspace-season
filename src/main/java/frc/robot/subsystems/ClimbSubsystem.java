@@ -19,67 +19,68 @@ import frc.robot.commands.climb.LinearClimb;
 
 // TODO documentation
 public class ClimbSubsystem extends Subsystem {
-  
-  public static final double CLICKS_PER_INCH = 1024;
 
-  private static final int WINCH_PORT = 12; // XXX check port
-  // FIXME talk to alex about semantics, PORT vs ID
-  
-  private WPI_TalonSRX winch; // TODO semantics
+	public static final double CLICKS_PER_INCH = 1024;
 
-  // TODO documentation
-  public ClimbSubsystem() {
+	private static final int WINCH_PORT = 12; // XXX check port
+	// FIXME talk to alex about semantics, PORT vs ID
 
-    winch = new WPI_TalonSRX(WINCH_PORT);
+	private WPI_TalonSRX climbWinch; // TODO semantics
 
-    winch.config_kP(Constants.PID_ID, QuickAccessVars.CLIMB_P, Constants.TIMEOUT_MS);
-	// FIXME put in code for inversion & sensorphase
-  }
+	// TODO documentation
+	public ClimbSubsystem() {
 
-  /**
+		climbWinch = new WPI_TalonSRX(WINCH_PORT);
+		climbWinch.setInverted(true); // FIXME quickaccess
+		climbWinch.setSensorPhase(true);
+
+		climbWinch.config_kP(Constants.PID_ID, QuickAccessVars.CLIMB_P, Constants.TIMEOUT_MS);
+	}
+
+	/**
 	 * Moves the climb to the position specified.
 	 * 
 	 * @param position Intended position of the climb, in inches
 	 */
 	public void moveClimbTo(double inches) {
-		winch.set(ControlMode.Position, toClicks(inches));
-  }
+		climbWinch.set(ControlMode.Position, toClicks(inches));
+	}
 
-  /**
+	/**
 	 * Shuts off the climb winch motor.
 	 */
 	public void stopClimb() {
-		winch.stopMotor();
-  }
+		climbWinch.stopMotor();
+	}
 
-  /**
+	/**
 	 * Returns the position of the climb in inches
 	 */
 	public double getClimbPosition() {
-		return toInches(winch.getSelectedSensorPosition());
-  }
-  
-  /**
+		return toInches(climbWinch.getSelectedSensorPosition());
+	}
+
+	/**
 	 * Zeroes out the climb encoder.
 	 */
 	public void resetEncoder() {
-		winch.setSelectedSensorPosition(0);
+		climbWinch.setSelectedSensorPosition(0);
 	}
-  
-  /**
+
+	/**
 	 * Drives the winch motor at a constant speed. This has no safeties & can damage
 	 * the robot, so be careful!
 	 * 
 	 * @param speed Percentage speed of the winch, from -1 (down) to 1 (up).
 	 */
 	public void adjustClimbLinear(double speed) {
-		winch.set(speed);
-  }
-  
-  @Override
+		climbWinch.set(speed);
+	}
+
+	@Override
 	public void initDefaultCommand() {
-		setDefaultCommand(new LinearClimb());
-		// setDefaultCommand(new DefaultStabilizeClimb()); XXX prepare default climb with P value
+		// setDefaultCommand(new LinearClimb());
+		setDefaultCommand(new DefaultStabilizeClimb());
 	}
 
 	public double toInches(int clicks) {
@@ -88,12 +89,12 @@ public class ClimbSubsystem extends Subsystem {
 
 	public int toClicks(double inches) {
 		return (int) Math.round(inches * CLICKS_PER_INCH);
-  }
-  
-  @Override
+	}
+
+	@Override
 	public void initSendable(SendableBuilder builder) {
 		builder.addDoubleProperty("position", () -> getClimbPosition(), null);
-		builder.addDoubleProperty("clicks", () -> winch.getSelectedSensorPosition(), null);
-		builder.addDoubleProperty("speed", () -> winch.get(), null);
+		builder.addDoubleProperty("clicks", () -> climbWinch.getSelectedSensorPosition(), null);
+		builder.addDoubleProperty("speed", () -> climbWinch.get(), null);
 	}
 }

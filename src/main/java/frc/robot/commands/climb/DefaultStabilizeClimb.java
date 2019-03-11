@@ -5,8 +5,6 @@ import frc.robot.Robot;
 
 public class DefaultStabilizeClimb extends Command {
 
-    private double initialPosition;
-
     /**
      * Keeps the climb at a consistant height so if it starts to go down it gets picked up.
      */
@@ -15,13 +13,8 @@ public class DefaultStabilizeClimb extends Command {
     }
 
     @Override
-    protected void initialize() {
-        initialPosition = Robot.climb.getClimbPosition();
-    }
-
-    @Override
     protected void execute() {
-        Robot.climb.moveClimbTo(initialPosition);
+        Robot.climb.moveClimbTo(-0.3); // FIXME quickaccess
     }
 
     @Override

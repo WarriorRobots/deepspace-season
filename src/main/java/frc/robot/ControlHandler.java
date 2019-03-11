@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.cargo.RunCargoPickupWheels;
+import frc.robot.commands.climb.Climb;
+import frc.robot.commands.climb.ElevClimb;
+import frc.robot.commands.climb.ZeroClimb;
 import frc.robot.commands.debug.DebugLinearArmControl;
 import frc.robot.commands.debug.DebugLinearElevatorControl;
 import frc.robot.commands.debug.DebugResetArmEncoder;
@@ -58,7 +61,7 @@ public final class ControlHandler {
 
 	private JoystickButton rightJoyTriggerButton, rightJoyThumbButton, leftJoyTriggerButton;
 	private JoystickButton leftJoyButton3, leftJoyButton4, leftJoyButton5, leftJoyButton6, leftJoyButton7,
-			leftJoyButton8, leftJoyButton9, leftJoyButton10;
+			leftJoyButton8, leftJoyButton9, leftJoyButton10, leftJoyButton11;
 	private JoystickButton rightJoyButton3, rightJoyButton4, rightJoyButton5, rightJoyButton6;
 	private ThresholdTrigger leftXboxTrigger, rightXboxTrigger;
 	private JoystickButton leftXboxBumper, rightXboxBumper, xboxL3, xboxR3;
@@ -80,6 +83,7 @@ public final class ControlHandler {
 		leftJoyButton8 = new JoystickButton(leftJoy, 8);
 		leftJoyButton9 = new JoystickButton(leftJoy, 9);
 		leftJoyButton10 = new JoystickButton(leftJoy, 10);
+		leftJoyButton11 = new JoystickButton(leftJoy, 11);
 
 		rightJoyTriggerButton = new JoystickButton(rightJoy, 1);
 		rightJoyThumbButton = new JoystickButton(rightJoy, 2);
@@ -114,14 +118,16 @@ public final class ControlHandler {
 		xboxR3 = new JoystickButton(xbox, 10);
 
 		// debug
-		leftJoyButton8.whenPressed(new DebugEnableCompressor());
-		leftJoyButton10.whenPressed(new DebugDisableCompressor());
+		// leftJoyButton8.whenPressed(new DebugEnableCompressor());
+		// leftJoyButton10.whenPressed(new DebugDisableCompressor());
+		leftJoyButton8.whenPressed(new Climb(-0.5));
+		leftJoyButton10.whenPressed(new ElevClimb(-20));
 		leftJoyButton7.whenPressed(new DebugRebootAll());
 		xboxL3.whileHeld(new DebugLinearElevatorControl(
 				() -> -xbox.getY(Hand.kLeft) * QuickAccessVars.LINEAR_CONTROLS_MODIFIER));
-		//xboxL3.whileNotHeld(new LinearClimb); there is no whileInactive so it is stopped within the command
 		xboxR3.whileHeld(
 				new DebugLinearArmControl(() -> -xbox.getY(Hand.kRight) * QuickAccessVars.LINEAR_CONTROLS_MODIFIER));
+		leftJoyButton11.whenPressed(new ZeroClimb());
 
 		// drive alteration
 		rightJoyThumbButton.whileHeld(new ArcadeDrive());

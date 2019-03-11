@@ -13,7 +13,6 @@ import frc.robot.Robot;
 public class ZeroClimb extends InstantCommand {
   
   public ZeroClimb() {
-    super();
     requires(Robot.climb);
   }
 

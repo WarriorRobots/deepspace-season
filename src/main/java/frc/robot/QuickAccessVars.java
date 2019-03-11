@@ -20,13 +20,13 @@ public final class QuickAccessVars {
 	public static final double ARCADE_FORWARD_MODIFIER = 0.5;
 	public static final double ARCADE_TURN_MODIFIER = 0.75;
 	public static final double ELEVATOR_DROP_SPEED = -1;
-	public static final double CARGO_PICKUP_IDLE_SPEED = 0.1;
+	public static final double CARGO_PICKUP_IDLE_SPEED = 0;
 	public static final double ELEVATOR_DOWNWARD_DRIFT_SPEED = -0.05;
 	public static final double ARM_RESET_SPEED = -0.2;
 
 	// degrees
 	public static final double ARM_PICKUP_ANGLE = 90;
-	public static final double ARM_CLIMB_ANGLE = 155;
+	public static final double ARM_CLIMB_ANGLE = 145;
 	public static final double ARM_RESET_ANGLE = -2;
 
 	// delay timers (seconds)
@@ -66,7 +66,7 @@ public final class QuickAccessVars {
 	// pid
 	public static final double ELEVATOR_P = 0.4;
 	public static final double ARM_P = 1.2;
-	public static final double CLIMB_P = 0; // XXX tune climb
+	public static final double CLIMB_P = 0.4; // XXX tune climb
 
 	// camera pid
 	public static final double KP_APPROACH = 0.015;
