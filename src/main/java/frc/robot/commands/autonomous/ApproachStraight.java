@@ -21,8 +21,6 @@ public class ApproachStraight extends Command {
 
 	/** Pipeline that ApproachCurve will use. */
 	private int pipeline;
-	/** Boolean to tell whether the robot is aligned or not. */
-	private boolean aligned;
 
 	private Timer timer;
 	/** Calculated PID output from {@link #PIDapproach} should stored in value. */
@@ -42,7 +40,6 @@ public class ApproachStraight extends Command {
 		this.pipeline = pipeline;
 		valueapproach = 0;
 		valuecenter = 0;
-		aligned = false;
 
 		PIDapproach = new SynchronousPIDF(
 			QuickAccessVars.KP_APPROACH,
@@ -78,7 +75,6 @@ public class ApproachStraight extends Command {
 		
 		if (Robot.camera.getObjectAspectRatio() >= 2.6) { // when the object is aligned
 			Robot.camera.setPipeline(CameraSubsystem.PIPELINE_CENTER); // it should go straight on
-			aligned = true;
 		}
 
 		if (Robot.camera.canSeeObject()) {

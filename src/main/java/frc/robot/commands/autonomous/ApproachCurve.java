@@ -19,11 +19,6 @@ public class ApproachCurve extends Command {
 	/** PID for keeping the target centered */
 	private SynchronousPIDF PIDcenter;
 
-	/** Pipeline that ApproachCurve will use. */
-	private int pipeline;
-	/** Boolean to tell whether the robot is aligned or not. */
-	private boolean aligned;
-
 	private Timer timer;
 	/** Calculated PID output from {@link #PIDapproach} should stored in value. */
 	private double valueapproach;
@@ -75,7 +70,6 @@ public class ApproachCurve extends Command {
 
 		valueapproach = 0;
 		valuecenter = 0;
-		aligned = false;
 
 		PIDapproach = new SynchronousPIDF(
 			QuickAccessVars.KP_APPROACH,
