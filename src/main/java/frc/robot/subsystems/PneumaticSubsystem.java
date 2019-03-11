@@ -16,11 +16,11 @@ public class PneumaticSubsystem extends Subsystem {
     private static final int SCISSOR_REVERSE = 2;
     private static final int LAUNCH_FORWARD = 4;
     private static final int LAUNCH_REVERSE = 3;
-    private static final int ROTATOR_SOL_FORWARD = 0;
-    private static final int ROTATOR_SOL_REVERSE = 7;
+    private static final int PICKUP_FORWARD = 0;
+    private static final int PICKUP_REVERSE = 7;
 
     private Compressor compressor;
-    private DoubleSolenoid scissorsSol, launcherSol, pickupSol;
+    private DoubleSolenoid scissorSol, launcherSol, pickupSol;
 
     /**
      * Instantiates new subsystem; make ONLY ONE.
@@ -32,16 +32,16 @@ public class PneumaticSubsystem extends Subsystem {
         compressor = new Compressor(Constants.PCM_1);
         compressor.start();
 
-        scissorsSol = new DoubleSolenoid(Constants.PCM_2, SCISSOR_FORWARD, SCISSOR_REVERSE);
+        scissorSol = new DoubleSolenoid(Constants.PCM_2, SCISSOR_FORWARD, SCISSOR_REVERSE);
         launcherSol = new DoubleSolenoid(Constants.PCM_2, LAUNCH_FORWARD, LAUNCH_REVERSE);
-        pickupSol = new DoubleSolenoid(Constants.PCM_1, ROTATOR_SOL_FORWARD, ROTATOR_SOL_REVERSE);
+        pickupSol = new DoubleSolenoid(Constants.PCM_1, PICKUP_FORWARD, PICKUP_REVERSE);
     }
 
     /**
      * Secures the hatch in place by opening the scissors.
      */
     public void lockScissors() {
-        scissorsSol.set(Value.kReverse);
+        scissorSol.set(Value.kReverse);
     }
 
     /**
@@ -49,7 +49,7 @@ public class PneumaticSubsystem extends Subsystem {
      * knocked off.
      */
     public void loosenScissors() {
-        scissorsSol.set(Value.kForward);
+        scissorSol.set(Value.kForward);
     }
 
     /**
@@ -97,7 +97,7 @@ public class PneumaticSubsystem extends Subsystem {
      * this will not move the piston.
      */
     public void neutralizeScissors() {
-        scissorsSol.set(Value.kOff);
+        scissorSol.set(Value.kOff);
     }
 
     public void neutralizePickup() {
@@ -137,7 +137,7 @@ public class PneumaticSubsystem extends Subsystem {
     public void initSendable(SendableBuilder builder) {
         builder.addBooleanProperty("low pressure?", () -> !compressor.getPressureSwitchValue(), null);
         builder.addBooleanProperty("compressor?", () -> compressor.enabled(), null);
-        builder.addStringProperty("scissors", () -> scissorsSol.get().toString(), null);
+        builder.addStringProperty("scissors", () -> scissorSol.get().toString(), null);
         builder.addStringProperty("launchers", () -> launcherSol.get().toString(), null);
         builder.addStringProperty("hatchpickup", () -> pickupSol.get().toString(), null);
     }
