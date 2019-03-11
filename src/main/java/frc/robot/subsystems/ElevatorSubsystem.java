@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
@@ -63,8 +64,13 @@ public class ElevatorSubsystem extends Subsystem {
 	 * 
 	 * @param position Intended position of the elevator, in inches
 	 */
-	public void moveElevatorTo(double inches) {
-		winch.set(ControlMode.Position, toClicks(inches));
+	public void moveElevatorTo(double inches) { // XXX HACK get max and min safeties
+		if (inches > 1) {
+			winch.set(ControlMode.Position, toClicks(inches));
+		} else {
+			winch.stopMotor();
+			DriverStation.reportError("elevator subsystem unsafe target", false);
+		}
 	}
 
 	/**

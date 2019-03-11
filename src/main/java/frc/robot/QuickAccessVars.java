@@ -26,7 +26,7 @@ public final class QuickAccessVars {
 
 	// degrees
 	public static final double ARM_PICKUP_ANGLE = 90;
-	public static final double ARM_CLIMB_ANGLE = 155;
+	public static final double ARM_CLIMB_ANGLE = 145;
 	public static final double ARM_RESET_ANGLE = -2;
 
 	// delay timers (seconds)
@@ -60,6 +60,9 @@ public final class QuickAccessVars {
 	// pid
 	public static final double ELEVATOR_P = 0.4;
 	public static final double ARM_P = 1.2;
+	public static final double CLIMB_P = 0.4; // XXX tune climb
+
+	// camera pid
 	public static final double KP_APPROACH = 0.015;
 	public static final double KI_APPROACH = 0;
 	public static final double KD_APPROACH = 0;

@@ -1,5 +1,6 @@
 package frc.robot.commands.elevator;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
@@ -23,13 +24,6 @@ public class AdjustElevatorRelative extends Command {
     protected void initialize() {
         initialPosition = Robot.elevator.getElevatorPosition();
         target = initialPosition + adjustBy; // works with negatives too
-
-        // safeties to prevent derailing at top & bottom
-        if (target < QuickAccessVars.ELEVATOR_MINIMUM_TARGET) {
-            target = QuickAccessVars.ELEVATOR_MINIMUM_TARGET;
-        } else if (target > QuickAccessVars.ELEVATOR_MAXIMUM_TARGET) {
-            target = QuickAccessVars.ELEVATOR_MAXIMUM_TARGET;
-        }
     }
 
     @Override
