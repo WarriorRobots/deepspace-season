@@ -53,4 +53,36 @@ public final class Constants {
 		return mPerSec * (1 / 0.3048);
 	}
 
+	/**
+	 * All gearbox ratios of important non-driving moters
+	 * All ratios should be in terms of inner rotations to outer rotations
+	 */
+	public static final class gearbox {
+		
+		/**
+		 * Cargo intake
+		 * 10:1 in:out
+		 */
+		public static final double intakeCargo = 10;
+
+		/**
+		 * Cargo arm
+		 * 300:1 in:out 
+		 */
+		public static final double arm = 300;
+
+		/**
+		 * Hatch intake
+		 * 10:1 in:out
+		 */
+		public static final double intakeHatch = 10;
+
+		/**
+		 * Elevator
+		 * 50:1 in:out
+		 */
+		public static final double elevator = 50;
+
+	}
+
 }

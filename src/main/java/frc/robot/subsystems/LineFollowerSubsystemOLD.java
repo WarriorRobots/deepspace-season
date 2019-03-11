@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
  * When properly lined up, the middle line follower should read true, and the
  * other two should read false.
  */
-public class LineFollowerSubsystem extends Subsystem {
+public class LineFollowerSubsystemOLD extends Subsystem {
 
     private static final int LEFT_PORT = 7;
     private static final int MIDDLE_PORT = 8;
@@ -27,7 +27,7 @@ public class LineFollowerSubsystem extends Subsystem {
      * <code> public static final LineFollowerSubsystem lineFollowers = new
      * LineFollowerSubsystem();
      */
-    public LineFollowerSubsystem() {
+    public LineFollowerSubsystemOLD() {
         leftFollower = new DigitalInput(LEFT_PORT);
         middleFollower = new DigitalInput(MIDDLE_PORT);
         rightFollower = new DigitalInput(RIGHT_PORT);
@@ -36,56 +36,32 @@ public class LineFollowerSubsystem extends Subsystem {
     /**
      * Returns true if left follower sees a white line, false otherwise.
      */
-    private boolean getLeftLineFollower() {
-        return !leftFollower.get(); // inverted because it reads white as false
+    public boolean getLeftLineFollower() {
+        return !leftFollower.get();
     }
 
     /**
      * Returns true if middle follower sees a white line, false otherwise.
      */
     public boolean getMiddleLineFollower() {
-        return !middleFollower.get(); // inverted because it reads white as false
+        return !middleFollower.get();
     }
 
     /**
      * Returns true if right follower sees a white line, false otherwise.
      */
-    private boolean getRightLineFollower() {
-        return !rightFollower.get(); // inverted because it reads white as false
-    }
-
-    /**
-     * Returns true if left and right followers don't see line, and middle follower
-     * does; false otherwise;
-     */
-    public boolean onCenter() {
-        return (!getLeftLineFollower() && !getRightLineFollower()) && getMiddleLineFollower();
-    }
-
-    public boolean onLine(){
-        return (getLeftLineFollower() || getRightLineFollower() || getMiddleLineFollower());
-    }
-
-    /**
-     * Returns true if robot is too far right of the line.
-     */
-    public boolean onLeftOfLine() {
-        return getRightLineFollower();
-    }
-
-    /**
-     * Returns true if robot is too far left of the line.
-     */
-    public boolean onRightOfLine() {
-        return getLeftLineFollower();
+    public boolean getRightLineFollower() {
+        return !rightFollower.get();
     }
 
     @Override
     protected void initDefaultCommand() {}
 
+    @Override
     public void initSendable(SendableBuilder builder) {
+        builder.setSmartDashboardType("line-follow-subsystem");
         builder.addBooleanProperty("left", () -> getLeftLineFollower(), null);
-        builder.addBooleanProperty("mid", () -> getMiddleLineFollower(), null);
+        builder.addBooleanProperty("middle", () -> getMiddleLineFollower(), null);
         builder.addBooleanProperty("right", () -> getRightLineFollower(), null);
     }
 

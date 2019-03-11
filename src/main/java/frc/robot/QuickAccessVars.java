@@ -22,7 +22,7 @@ public final class QuickAccessVars {
 	public static final double ELEVATOR_DROP_SPEED = -1;
 	public static final double CARGO_PICKUP_IDLE_SPEED = 0.1;
 	public static final double ELEVATOR_DOWNWARD_DRIFT_SPEED = -0.05;
-	public static final double ARM_RESET_SPEED = -0.1;
+	public static final double ARM_RESET_SPEED = -0.2;
 
 	// degrees
 	public static final double ARM_PICKUP_ANGLE = 90;
@@ -48,9 +48,32 @@ public final class QuickAccessVars {
 																// hitting the edge
 	public static final double LINEAR_CONTROLS_MODIFIER = 0.5; // how much are the linear elevator/arm commands modified by?
 
+	// camera
+	public static final double CAMERA_TILT = 22 *Math.PI/180; // TODO put back all camera constant comments
+	public static final double ELEVATION = 40;
+	public static final double TARGET_ELEVATION = 25;
+	public static final double PIXELS_H = 320;
+	public static final double PIXELS_V = 240;
+	public static final double RAD_H = 1.04;
+	public static final double RAD_V = 0.867;
+	public static final double PPR_H = PIXELS_H/RAD_H;
+	public static final double PPR_V = PIXELS_V/RAD_V;
+	public static final double TARGET_HEIGHT = 5.83;
+	public static final double CAMERA_DRIVE_THRESHOLD = 0.2; // Amount the driver must push the controller to activate arcade drive during ApproachCurve
+
+
 	// pid
 	public static final double ELEVATOR_P = 0.4;
 	public static final double ARM_P = 1.2;
+	public static final double KP_APPROACH = 0.015;
+	public static final double KI_APPROACH = 0;
+	public static final double KD_APPROACH = 0;
+	public static final double SETPOINT_APPROACH = 23;
+	public static final double TOLERANCE_APPROACH = 2;
+	public static final double KP_CENTER = 0.045;
+	public static final double KI_CENTER = 0;
+	public static final double KD_CENTER = 0;
+	public static final double SETPOINT_CENTER = 0;
 
 	// DO NOT USE THIS CONSTRUCTOR
 	private QuickAccessVars() {
