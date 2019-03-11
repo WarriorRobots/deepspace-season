@@ -162,7 +162,7 @@ public class ApproachCurve extends Command {
 			data_missing = false;
 		}
 
-		debug_missing();
+		debug_missing(); // TODO remove debug
 
 		if (Robot.camera.canSeeObject()) {
 			System.out.println("WWDEBUG: Can see object");
