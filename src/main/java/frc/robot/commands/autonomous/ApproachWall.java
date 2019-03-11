@@ -1,7 +1,6 @@
 package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Constants;
 import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 import frc.robot.util.SynchronousPIDF;

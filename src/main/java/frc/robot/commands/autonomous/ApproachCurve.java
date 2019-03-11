@@ -4,16 +4,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.util.SynchronousPIDF;
 import edu.wpi.first.wpilibj.Timer;
 
-import frc.robot.Constants;
-import frc.robot.ControlHandler;
 import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
-import frc.robot.commands.drive.ArcadeDrive;
 import frc.robot.subsystems.CameraSubsystem;
-import frc.robot.subsystems.LineFollowerSubsystem;;
-
-
-
 
 /** ApproachCurve approachs the target keeping it to the left or right (depending on the direction
  * of approach) and when it is aligned up (by the aspect ratio being 2.3 or above),

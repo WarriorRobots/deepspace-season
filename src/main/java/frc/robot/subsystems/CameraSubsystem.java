@@ -160,7 +160,7 @@ public class CameraSubsystem extends Subsystem {
 		double height = visionTable.getEntry(TARGET_HEIGHT).getDouble(0);
 
 		// angle in radians
-		double angle = height / QuickAccessVars.PPR_V;
+		double angle = height / Constants.PPR_V;
 
 		// range = adj = opp/tan(Theta)
 		double range = QuickAccessVars.TARGET_HEIGHT / Math.tan(angle);
@@ -182,7 +182,7 @@ public class CameraSubsystem extends Subsystem {
 		double target_offset = visionTable.getEntry(TARGET_Y).getDouble(0) * Math.PI/180;
 
 		// Height difference between the camera and the target center
-		double height_difference = QuickAccessVars.ELEVATION - QuickAccessVars.TARGET_ELEVATION - QuickAccessVars.TARGET_HEIGHT/2;
+		double height_difference = QuickAccessVars.CAMERA_ELEVATION - QuickAccessVars.TARGET_ELEVATION - QuickAccessVars.TARGET_HEIGHT/2;
 
 		// Angle from the elevator to the center of the target
 		double angle = Math.PI/2 - QuickAccessVars.CAMERA_TILT + target_offset;
@@ -215,7 +215,7 @@ public class CameraSubsystem extends Subsystem {
 		
 		// if pipeline is NOT between 0 and 9, warn the dashboard and quit the command.
 		if(!(0<=pipeline && pipeline<=9)) {
-			DriverStation.getInstance().reportWarning(
+			DriverStation.reportWarning(
 				Integer.toString(pipeline)+" is not a valid pipeline to change to.", true);
 			// leave function to prevent a real error from the limelight
 			return;
@@ -254,7 +254,7 @@ public class CameraSubsystem extends Subsystem {
 
 	@Override
 	public void initDefaultCommand() {
-		setDefaultCommand(new ChangePipeline(PIPELINE_DRIVER)); // TODO Alex is worried about CPU usage
+		setDefaultCommand(new ChangePipeline(PIPELINE_DRIVER));
 	}
 
 }

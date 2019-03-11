@@ -8,7 +8,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.ArmSubsystem;
@@ -37,8 +36,6 @@ public class Robot extends TimedRobot {
 	/** Reference this to get input from our joysticks. */
 	public static ControlHandler input;
 
-	private Timer t; // TODO remove debug code later
-
 	@Override
 	public void robotInit() {
 		input = new ControlHandler();
@@ -49,14 +46,11 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData(lineFollowers);
 		SmartDashboard.putData(arm);
 		SmartDashboard.putData(cargoPickupWheels);
-		t = new Timer();
-		t.start();
 	}
 
 	@Override
 	public void robotPeriodic() {
 		elevator.loop();
-		//System.out.println(t.get());
 	}
 
 	@Override

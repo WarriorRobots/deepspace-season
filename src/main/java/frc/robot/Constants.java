@@ -19,6 +19,13 @@ public final class Constants {
 		DriverStation.reportError("Do not create an Constants object!", false);
 	}
 
+	public static final double PIXELS_H = 320;
+	public static final double PIXELS_V = 240;
+	public static final double RAD_H = 1.04;
+	public static final double RAD_V = 0.867;
+	public static final double PPR_H = PIXELS_H / RAD_H;
+	public static final double PPR_V = PIXELS_V / RAD_V;
+
 	/**
 	 * ID number ({@value}) of the main PCM, which has the compressor and pressure
 	 * switch plugged in.
@@ -54,32 +61,28 @@ public final class Constants {
 	}
 
 	/**
-	 * All gearbox ratios of important non-driving moters
-	 * All ratios should be in terms of inner rotations to outer rotations
+	 * All gearbox ratios of important non-driving moters All ratios should be in
+	 * terms of inner rotations to outer rotations
 	 */
 	public static final class gearbox {
-		
+
 		/**
-		 * Cargo intake
-		 * 10:1 in:out
+		 * Cargo intake 10:1 in:out
 		 */
 		public static final double intakeCargo = 10;
 
 		/**
-		 * Cargo arm
-		 * 300:1 in:out 
+		 * Cargo arm 300:1 in:out
 		 */
 		public static final double arm = 300;
 
 		/**
-		 * Hatch intake
-		 * 10:1 in:out
+		 * Hatch intake 10:1 in:out
 		 */
 		public static final double intakeHatch = 10;
 
 		/**
-		 * Elevator
-		 * 50:1 in:out
+		 * Elevator 50:1 in:out
 		 */
 		public static final double elevator = 50;
 
