@@ -12,10 +12,7 @@ public class DebugLinearElevatorControl extends Command {
     /**
      * Given a lambda function reading a joystick, this command will drive the
      * elevator winch motor at a percentage speed.
-     * <p>
-     * Minimal safeties are in place to avoid driving the elevator too far
-     * downwards, but not upwards. Be careful!
-     * 
+     * <p> Safeties are built in to avoid crashing the elevator.
      * @param input A lambda function <code>() -> getSomeValue()</code> that returns
      *              a number between -1 (downwards) and 1 (upwards).
      */
@@ -26,15 +23,7 @@ public class DebugLinearElevatorControl extends Command {
 
     @Override
     protected void execute() {
-        if (!Robot.elevator.isElevatorFloored()) {
-            Robot.elevator.adjustElevatorLinear(input.getAsDouble());
-        } else {
-            if (input.getAsDouble() < 0) {
-                Robot.elevator.stopElevator();
-            } else {
-                Robot.elevator.adjustElevatorLinear(input.getAsDouble());
-            }
-        }
+        Robot.elevator.adjustElevatorLinear(input.getAsDouble());
     }
 
     @Override

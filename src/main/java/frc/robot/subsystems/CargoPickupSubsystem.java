@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -14,12 +7,11 @@ import frc.robot.QuickAccessVars;
 import frc.robot.commands.cargo.DefaultIdleCargoPickupWheels;
 
 /**
- * Contains the motors used to pickup cargo, and to rotate the mechanism in and
- * out.
+ * Contains the motors used to pickup and shoot cargo balls.
  */
 public class CargoPickupSubsystem extends Subsystem {
 
-    private static final int PICKUP_WHEELS_PORT = 1;
+    private static final int PICKUP_WHEELS_ID = 1;
 
     private WPI_VictorSPX pickupWheels;
 
@@ -29,14 +21,13 @@ public class CargoPickupSubsystem extends Subsystem {
      * <code> public static final CargoSubsystem cargo = new CargoSubsystem();
      */
     public CargoPickupSubsystem() {
-        pickupWheels = new WPI_VictorSPX(PICKUP_WHEELS_PORT);
+        pickupWheels = new WPI_VictorSPX(PICKUP_WHEELS_ID);
         pickupWheels.setInverted(QuickAccessVars.CARGO_PICKUP_WHEELS_INVERTED);
     }
 
     /**
-     * Run the motor that holds cargo balls.
-     * 
-     * @param speed Decimal value from -1 to 1.
+     * Run the pickup motor at a constant speed.
+     * @param speed From -1 (ball shoots out) to 1 (ball gets sucked in).
      */
     public void runPickup(double speed) {
         pickupWheels.set(speed);
@@ -58,5 +49,5 @@ public class CargoPickupSubsystem extends Subsystem {
     public void initSendable(SendableBuilder builder) {
         builder.addDoubleProperty("speed", () -> pickupWheels.get(), null);
     }
-
+    
 }

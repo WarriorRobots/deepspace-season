@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
 
 /**
- * Contains the pneumatics required to place hatches on the velcro targets.
+ * Contains all pneumatics on the robot.
  */
 public class PneumaticSubsystem extends Subsystem {
 
@@ -45,8 +45,7 @@ public class PneumaticSubsystem extends Subsystem {
     }
 
     /**
-     * Releases the hatch by closing the scissors; it will hang loosely and can be
-     * knocked off.
+     * Releases the hatch by closing the scissors; it will hang loosely and can fall off.
      */
     public void loosenScissors() {
         scissorSol.set(Value.kForward);
@@ -54,8 +53,7 @@ public class PneumaticSubsystem extends Subsystem {
 
     /**
      * Extend the pistons that push the hatch off the scissors.
-     * <p>
-     * <b>Warning:</b> only use if the hatch is loose (scissors are closed)!
+     * Only use if the scissors are loose!
      */
     public void extendLaunchers() {
         launcherSol.set(Value.kForward);
@@ -63,6 +61,7 @@ public class PneumaticSubsystem extends Subsystem {
 
     /**
      * Retract the pistons that push the hatch off the scissors.
+     * Always run this after launching to avoid unsafe conditions.
      */
     public void retractLaunchers() {
         launcherSol.set(Value.kReverse);
@@ -77,46 +76,44 @@ public class PneumaticSubsystem extends Subsystem {
 
     /**
      * Pulls the pickup mechanism back up to the robot.
-     * <p>
-     * <b>Make sure the scissors are in place!
+     * Make sure the scissors are in place!
      */
     public void retractPickup() {
         pickupSol.set(Value.kReverse);
     }
 
     /**
-     * Shuts off power to the launcher solenoid(s). Use after extending or
-     * retracting; this will not move the piston.
+     * Shuts off power to the launcher solenoid(s).
+     * Use after extending or retracting; this will not move the piston.
      */
     public void neutralizeLaunchers() {
         launcherSol.set(Value.kOff);
     }
 
     /**
-     * Shuts off power to the scissors solenoid. Use after extending or retracting;
-     * this will not move the piston.
+     * Shuts off power to the scissors solenoid.
+     * Use after extending or retracting; this will not move the piston.
      */
     public void neutralizeScissors() {
         scissorSol.set(Value.kOff);
     }
 
+    /**
+     * Shuts off power to the pickup solenoid.
+     * Use after extending or retracting; this will not move the piston.
+     */
     public void neutralizePickup() {
         pickupSol.set(Value.kOff);
     }
 
     /**
-     * Shuts off power to both solenoids. Use after extending or retracting; this
-     * will not move the piston.
+     * Shuts off power to all solenoids.
+     * Use after extending or retracting; this will not move any pistons.
      */
     public void neutralizeAll() {
         neutralizeScissors();
         neutralizeLaunchers();
         neutralizePickup();
-    }
-
-    @Override
-    protected void initDefaultCommand() {
-        // none
     }
 
     /**
@@ -131,6 +128,11 @@ public class PneumaticSubsystem extends Subsystem {
      */
     public void disableCompressor() {
         compressor.stop();
+    }
+
+    @Override
+    protected void initDefaultCommand() {
+        // none
     }
 
     @Override

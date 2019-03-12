@@ -1,15 +1,9 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.debug.DebugRebootAll;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.CargoPickupSubsystem;
@@ -25,40 +19,42 @@ import frc.robot.subsystems.LineFollowerSubsystem;
  */
 public class Robot extends TimedRobot {
 
-	public static final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
-	public static final HatchPickupSubsystem hatchPickupWheels = new HatchPickupSubsystem();
-	public static final PneumaticSubsystem pneumatics = new PneumaticSubsystem();
-	public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
-	public static final ClimbSubsystem climb = new ClimbSubsystem();
-	public static final CameraSubsystem camera = new CameraSubsystem();
-	public static final LineFollowerSubsystem lineFollowers = new LineFollowerSubsystem();
 	public static final ArmSubsystem arm = new ArmSubsystem();
+	public static final CameraSubsystem camera = new CameraSubsystem();
 	public static final CargoPickupSubsystem cargoPickupWheels = new CargoPickupSubsystem();
+	public static final ClimbSubsystem climb = new ClimbSubsystem();
+	public static final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
+	public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
+	public static final HatchPickupSubsystem hatchPickupWheels = new HatchPickupSubsystem();
+	public static final LineFollowerSubsystem lineFollowers = new LineFollowerSubsystem();
+	public static final PneumaticSubsystem pneumatics = new PneumaticSubsystem();
 
-	/** Reference this to get input from our joysticks. */
+	/** Reference this to get input from the joysticks and Xbox controller. */
 	public static ControlHandler input;
 
 	@Override
 	public void robotInit() {
 		input = new ControlHandler();
+		SmartDashboard.putData(arm);
+		SmartDashboard.putData(camera);
+		SmartDashboard.putData(cargoPickupWheels);
+		SmartDashboard.putData(climb);
 		SmartDashboard.putData(drivetrain);
 		SmartDashboard.putData(elevator);
-		SmartDashboard.putData(climb);
 		SmartDashboard.putData(hatchPickupWheels);
-		SmartDashboard.putData(pneumatics);
 		SmartDashboard.putData(lineFollowers);
-		SmartDashboard.putData(arm);
-		SmartDashboard.putData(cargoPickupWheels);
+		SmartDashboard.putData(pneumatics);
 	}
 
 	@Override
 	public void robotPeriodic() {
-		elevator.loop();
+		elevator.resetEncoderWhenFloored();
 	}
 
 	@Override
 	public void disabledInit() {
 		Scheduler.getInstance().removeAll();
+		DebugRebootAll.rebootAll();
 	}
 
 	@Override
@@ -78,6 +74,16 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopPeriodic() {
+		Scheduler.getInstance().run();
+	}
+
+	@Override
+	public void testInit() {
+		Scheduler.getInstance().removeAll();
+	}
+
+	@Override
+	public void testPeriodic() {
 		Scheduler.getInstance().run();
 	}
 

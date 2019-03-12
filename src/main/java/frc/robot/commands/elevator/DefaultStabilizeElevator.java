@@ -22,7 +22,7 @@ public class DefaultStabilizeElevator extends Command {
 
     @Override
     protected void execute() {
-        Robot.elevator.moveElevatorTo(initialPosition);
+        Robot.elevator.stabilizeElevator(initialPosition);
     }
 
     @Override

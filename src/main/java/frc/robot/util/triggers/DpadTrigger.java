@@ -16,11 +16,12 @@ public class DpadTrigger extends Button {
 	private int angle;
 
 	/**
-	 * Usage: <code>new DpadTrigger( () -> input(), angle)</code>
+	 * Create a trigger with the following parameters:
 	 * 
-	 * @param input Any function that returns the angular direction of a D-pad
-	 *              button press. Try <code>getPOV()</code>.
-	 * @param angle The angle position required for the trigger to return true.
+	 * @param input A lambda function that returns the angular direction of a D-pad
+	 *              button press. Try <code>() -> xbox.getPOV()</code>
+	 * @param angle The angle required for the trigger to return true.
+	 *              <code>-1</code> means the D-pad is not being pressed.
 	 */
 	public DpadTrigger(Supplier<Integer> input, int angle) {
 		this.angle = angle;

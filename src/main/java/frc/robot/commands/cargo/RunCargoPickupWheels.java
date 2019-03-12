@@ -6,8 +6,8 @@ import frc.robot.Robot;
 public class RunCargoPickupWheels extends Command {
 
     /**
-     * Runs the cargo pickup wheels inwards at full speed, hopefully for sucking a
-     * ball in.
+     * Runs the cargo pickup wheels inwards at full speed, 
+     * hopefully for sucking a ball in.
      */
     public RunCargoPickupWheels() {
         requires(Robot.cargoPickupWheels);

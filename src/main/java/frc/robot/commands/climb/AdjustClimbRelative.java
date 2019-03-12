@@ -1,31 +1,31 @@
-package frc.robot.commands.elevator;
+package frc.robot.commands.climb;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class AdjustElevatorRelative extends Command {
+public class AdjustClimbRelative extends Command {
 
     private double initialPosition, adjustBy, target;
 
     /**
-     * Adjust the elevator position relative to its current position.
+     * Adjust the climb position relative to its current position.
      * @param adjustBy How far up or down the elevator will move from its current
      *                 position. Positive for up, negative for down.
      */
-    public AdjustElevatorRelative(double adjustBy) {
-        requires(Robot.elevator);
+    public AdjustClimbRelative(double adjustBy) {
+        requires(Robot.climb);
         this.adjustBy = adjustBy;
     }
 
     @Override
     protected void initialize() {
-        initialPosition = Robot.elevator.getElevatorPosition();
-        target = initialPosition + adjustBy; // works with negatives too
+        initialPosition = Robot.climb.getClimbPosition();
+        target = initialPosition + adjustBy;
     }
 
     @Override
     protected void execute() {
-        Robot.elevator.moveElevatorTo(target);
+        Robot.climb.moveClimbTo(target);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class AdjustElevatorRelative extends Command {
 
     @Override
     protected void end() {
-        Robot.elevator.stopElevator();
+        Robot.climb.stopClimb();
     }
 
 }

@@ -7,8 +7,8 @@ import frc.robot.Robot;
 public class DebugResetArmEncoder extends Command {
 
     /**
-     * Slowly moves the arm upwards until the hall effect sensor gets triggered. Use
-     * if, in the rare case, the encoder becomes out-of-sync.
+     * Slowly moves the arm upwards until the hall effect sensor gets triggered.
+     * Use if, in the rare case, the encoder becomes out-of-sync.
      */
     public DebugResetArmEncoder() {
         requires(Robot.arm);
@@ -27,7 +27,7 @@ public class DebugResetArmEncoder extends Command {
 
     @Override
     protected void end() {
-        Robot.arm.resetArmAngle(0);
+        Robot.arm.resetArmAngleTo(0);
         System.out.println("WWDEBUG: DebugResetArmEncoder finished successfully");
     }
 

@@ -15,8 +15,7 @@ import frc.robot.QuickAccessVars;
 import frc.robot.commands.drive.DefaultTankDrive;
 
 /**
- * Contains the drivetrain, the encoders for the left and right wheels, and the
- * NavX gyroscope.
+ * Contains the drivetrain, the encoders for the left and right wheels, and the NavX gyroscope.
  */
 public class DrivetrainSubsystem extends Subsystem {
 
@@ -107,7 +106,6 @@ public class DrivetrainSubsystem extends Subsystem {
 	 * <p>
 	 * The arguments provided are squared to create a more intuitive control
 	 * sensitivity.
-	 * 
 	 * @param leftSpeed  Percentage speed of left side, from -1 to 1.
 	 * @param rightSpeed Percentage speed of right side, from -1 to 1.
 	 */
@@ -136,7 +134,6 @@ public class DrivetrainSubsystem extends Subsystem {
 	 * <p>
 	 * The arguments provided are squared to create a more intuitive control
 	 * sensitivity.
-	 * 
 	 * @param forwardSpeed Percentage speed for driving forwards or backwards, from
 	 *                     -1 to 1.
 	 * @param turnSpeed    Percentage speed for turning, from -1 (left) to 1
@@ -152,7 +149,6 @@ public class DrivetrainSubsystem extends Subsystem {
 	 * <b>USE WITH PID ONLY.</b>
 	 * <p>
 	 * The arguments provided are not squared to prevent PID overcompensation.
-	 * 
 	 * @param forwardSpeed Percentage speed for driving forwards or backwards, from
 	 *                     -1 to 1.
 	 * @param turnSpeed    Percentage speed for turning, from -1 (left) to 1

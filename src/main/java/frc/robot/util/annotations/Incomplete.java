@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.SOURCE) // SOURCE means the compiler will ignore this line, preventing crashes
-@Target(ElementType.METHOD) // this annotation goes on methods/functions
+@Target({ ElementType.METHOD, ElementType.CONSTRUCTOR, ElementType.TYPE }) // this annotation goes on methods/functions
 
 /**
  * Specifies that a method isn't written yet.
