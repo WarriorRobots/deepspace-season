@@ -23,7 +23,7 @@ public class SynchronizedClimb extends Command {
   @Override
   protected void initialize() {
     initialClimbPos = Robot.climb.getClimbPosition();
-    initialElevPos = Robot.elevator.getElevatorPosition(); // FIXME explanation
+    initialElevPos = Robot.elevator.getElevatorPosition();
   }
 
   @Override

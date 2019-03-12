@@ -69,9 +69,9 @@ public class ArmSubsystem extends Subsystem {
     public void rotateArmTo(double degrees) {
         armRotator.set(ControlMode.Position, toClicks(degrees));
         if (belowMinimum(degrees)) {
-            armRotator.set(ControlMode.Position, toClicks(0));
+            armRotator.set(ControlMode.Position, toClicks(QuickAccessVars.ARM_MINIMUM_ANGLE));
         } else if (aboveMaximum(degrees)) {
-            armRotator.set(ControlMode.Position, toClicks(160));
+            armRotator.set(ControlMode.Position, toClicks(QuickAccessVars.ARM_MAXIMUM_ANGLE));
         } else {
             armRotator.set(ControlMode.Position, toClicks(degrees));
         }
@@ -144,12 +144,12 @@ public class ArmSubsystem extends Subsystem {
 
     /** true is bad */
 	public boolean belowMinimum(double degrees) {
-		return degrees < 0; // XXX quickaccess
+		return degrees < QuickAccessVars.ARM_MINIMUM_ANGLE; // XXX quickaccess
 	}
 
 	/** true is bad */
 	public boolean aboveMaximum(double degrees) {
-		return degrees > 160;
+		return degrees > QuickAccessVars.ARM_MAXIMUM_ANGLE;
 	}
 
     @Override

@@ -8,12 +8,10 @@
 package frc.robot.commands.climb;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-// import frc.robot.commands.elevator.DropElevator; TODO put this back
 
 public class CancelClimb extends CommandGroup {
 
   public CancelClimb() {
-    // addParallel(new DropElevator());
     addParallel(new MoveClimbTo(0));
   }
 

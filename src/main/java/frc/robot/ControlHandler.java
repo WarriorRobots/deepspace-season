@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.cargo.RunCargoPickupWheels;
+import frc.robot.commands.climb.AdjustClimbRelative;
 import frc.robot.commands.climb.CancelClimb;
 import frc.robot.commands.climb.SynchronizedClimb;
 import frc.robot.commands.debug.DebugResetClimbEncoder;
@@ -33,17 +34,12 @@ import frc.robot.commands.drive.TurnLockDrive;
 import frc.robot.commands.elevator.MoveElevatorTo;
 import frc.robot.commands.elevator.AdjustElevatorRelative;
 import frc.robot.commands.elevator.DropElevator;
-import frc.robot.commands.hatchpickup.SubgroupRetractHatchPickup;
-import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.commands.hatchpickup.DefaultStopHatchPickupWheels;
 import frc.robot.commands.hatchpickup.GroupExtendHatchPickup;
 import frc.robot.commands.hatchpickup.GroupRetractHatchPickup;
-import frc.robot.commands.hatchpickup.SubgroupExtendHatchPickup;
 import frc.robot.commands.hatchpickup.RunHatchPickupWheels;
 import frc.robot.commands.hatchplacer.LockScissors;
 import frc.robot.commands.hatchplacer.LoosenScissors;
 import frc.robot.commands.hatchplacer.GroupPlaceHatchOnVelcro;
-import frc.robot.commands.hatchplacer.SubgroupRetractLaunchers;
 import frc.robot.util.triggers.DpadTrigger;
 import frc.robot.util.triggers.ThresholdJoystick;
 import frc.robot.util.triggers.ThresholdTrigger;
@@ -58,26 +54,27 @@ public final class ControlHandler {
 	private static final int RIGHT_JOY = 0;
 	private static final int XBOX = 2;
 
-	private Joystick leftJoy, rightJoy;
-	private XboxController xbox;
+	private Joystick leftJoy;
+	private JoystickButton leftJoyTriggerButton, leftJoyThumbButton, leftJoyButton3, leftJoyButton4, leftJoyButton5,
+			leftJoyButton6, leftJoyButton7, leftJoyButton8, leftJoyButton9, leftJoyButton10, leftJoyButton11,
+			leftJoyButton12;
 
-	private JoystickButton rightJoyTriggerButton, rightJoyThumbButton, leftJoyTriggerButton;
-	private JoystickButton leftJoyButton3, leftJoyButton4, leftJoyButton5, leftJoyButton6, leftJoyButton7,
-			leftJoyButton8, leftJoyButton9, leftJoyButton10, leftJoyButton11;
-	private JoystickButton rightJoyButton3, rightJoyButton4, rightJoyButton5, rightJoyButton6;
+	private Joystick rightJoy;
+	private JoystickButton rightJoyTriggerButton, rightJoyThumbButton, rightJoyButton3, rightJoyButton4,
+			rightJoyButton5, rightJoyButton6, rightJoyButton7, rightJoyButton8, rightJoyButton9, rightJoyButton10,
+			rightJoyButton11, rightJoyButton12;
+
+	private XboxController xbox;
+	private ThresholdJoystick leftXboxJoyUp, leftXboxJoyDown, rightXboxJoyUp, rightXboxJoyDown;
 	private ThresholdTrigger leftXboxTrigger, rightXboxTrigger;
-	private JoystickButton leftXboxBumper, rightXboxBumper, xboxL3, xboxR3;
-	private JoystickButton xboxX, xboxY, xboxB, xboxA, xboxSTART, xboxSELECT;
+	private JoystickButton xboxX, xboxY, xboxB, xboxA, xboxSTART, xboxSELECT, leftXboxBumper, rightXboxBumper, xboxL3,
+			xboxR3;
 	private DpadTrigger xboxUp, xboxDown, xboxLeft, xboxRight;
-	private ThresholdJoystick xboxLeftJoyUp, xboxLeftJoyDown, xboxRightJoyUp, xboxRightJoyDown;
 
 	public ControlHandler() {
-		// XXX all button objects, and cleanup
 		leftJoy = new Joystick(LEFT_JOY);
-		rightJoy = new Joystick(RIGHT_JOY);
-		xbox = new XboxController(XBOX);
-
 		leftJoyTriggerButton = new JoystickButton(leftJoy, 1);
+		leftJoyThumbButton = new JoystickButton(leftJoy, 2);
 		leftJoyButton3 = new JoystickButton(leftJoy, 3);
 		leftJoyButton4 = new JoystickButton(leftJoy, 4);
 		leftJoyButton5 = new JoystickButton(leftJoy, 5);
@@ -87,86 +84,88 @@ public final class ControlHandler {
 		leftJoyButton9 = new JoystickButton(leftJoy, 9);
 		leftJoyButton10 = new JoystickButton(leftJoy, 10);
 		leftJoyButton11 = new JoystickButton(leftJoy, 11);
+		leftJoyButton12 = new JoystickButton(leftJoy, 12);
 
+		rightJoy = new Joystick(RIGHT_JOY);
 		rightJoyTriggerButton = new JoystickButton(rightJoy, 1);
 		rightJoyThumbButton = new JoystickButton(rightJoy, 2);
 		rightJoyButton3 = new JoystickButton(rightJoy, 3);
 		rightJoyButton4 = new JoystickButton(rightJoy, 4);
 		rightJoyButton5 = new JoystickButton(rightJoy, 5);
 		rightJoyButton6 = new JoystickButton(rightJoy, 6);
+		rightJoyButton7 = new JoystickButton(rightJoy, 7);
+		rightJoyButton8 = new JoystickButton(rightJoy, 8);
+		rightJoyButton9 = new JoystickButton(rightJoy, 9);
+		rightJoyButton10 = new JoystickButton(rightJoy, 10);
+		rightJoyButton11 = new JoystickButton(rightJoy, 11);
+		rightJoyButton12 = new JoystickButton(rightJoy, 12);
 
-		leftXboxTrigger = new ThresholdTrigger(() -> xbox.getTriggerAxis(Hand.kLeft), 0.5);
-		rightXboxTrigger = new ThresholdTrigger(() -> xbox.getTriggerAxis(Hand.kRight), 0.5);
-		leftXboxBumper = new JoystickButton(xbox, 5);
-		rightXboxBumper = new JoystickButton(xbox, 6);
-		xboxUp = new DpadTrigger(() -> xbox.getPOV(), 0);
-		xboxDown = new DpadTrigger(() -> xbox.getPOV(), 180);
-		xboxRight = new DpadTrigger(() -> xbox.getPOV(), 90);
-		xboxLeft = new DpadTrigger(() -> xbox.getPOV(), 270);
+		xbox = new XboxController(XBOX);
 		xboxA = new JoystickButton(xbox, 1);
 		xboxB = new JoystickButton(xbox, 2);
 		xboxX = new JoystickButton(xbox, 3);
 		xboxY = new JoystickButton(xbox, 4);
+		leftXboxBumper = new JoystickButton(xbox, 5);
+		rightXboxBumper = new JoystickButton(xbox, 6);
 		xboxSTART = new JoystickButton(xbox, 8);
 		xboxSELECT = new JoystickButton(xbox, 7);
-		xboxLeftJoyUp = new ThresholdJoystick(() -> -xbox.getY(Hand.kLeft), () -> xbox.getStickButton(Hand.kLeft),
-				QuickAccessVars.XBOX_JOYSTICK_THRESHOLD, ThresholdJoystick.UP);
-		xboxLeftJoyDown = new ThresholdJoystick(() -> -xbox.getY(Hand.kLeft), () -> xbox.getStickButton(Hand.kLeft),
-				-QuickAccessVars.XBOX_JOYSTICK_THRESHOLD, ThresholdJoystick.DOWN);
-		xboxRightJoyUp = new ThresholdJoystick(() -> -xbox.getY(Hand.kRight), () -> xbox.getStickButton(Hand.kRight),
-				QuickAccessVars.XBOX_JOYSTICK_THRESHOLD, ThresholdJoystick.UP);
-		xboxRightJoyDown = new ThresholdJoystick(() -> -xbox.getY(Hand.kRight), () -> xbox.getStickButton(Hand.kRight),
-				-QuickAccessVars.XBOX_JOYSTICK_THRESHOLD, ThresholdJoystick.DOWN);
 		xboxL3 = new JoystickButton(xbox, 9);
 		xboxR3 = new JoystickButton(xbox, 10);
+		leftXboxTrigger = new ThresholdTrigger(() -> xbox.getTriggerAxis(Hand.kLeft), 0.5);
+		rightXboxTrigger = new ThresholdTrigger(() -> xbox.getTriggerAxis(Hand.kRight), 0.5);
+		xboxUp = new DpadTrigger(() -> xbox.getPOV(), 0);
+		xboxDown = new DpadTrigger(() -> xbox.getPOV(), 180);
+		xboxRight = new DpadTrigger(() -> xbox.getPOV(), 90);
+		xboxLeft = new DpadTrigger(() -> xbox.getPOV(), 270);
+		leftXboxJoyUp = new ThresholdJoystick(() -> -xbox.getY(Hand.kLeft), () -> xbox.getStickButton(Hand.kLeft),
+				QuickAccessVars.XBOX_JOYSTICK_THRESHOLD, ThresholdJoystick.UP);
+		leftXboxJoyDown = new ThresholdJoystick(() -> -xbox.getY(Hand.kLeft), () -> xbox.getStickButton(Hand.kLeft),
+				-QuickAccessVars.XBOX_JOYSTICK_THRESHOLD, ThresholdJoystick.DOWN);
+		rightXboxJoyUp = new ThresholdJoystick(() -> -xbox.getY(Hand.kRight), () -> xbox.getStickButton(Hand.kRight),
+				QuickAccessVars.XBOX_JOYSTICK_THRESHOLD, ThresholdJoystick.UP);
+		rightXboxJoyDown = new ThresholdJoystick(() -> -xbox.getY(Hand.kRight), () -> xbox.getStickButton(Hand.kRight),
+				-QuickAccessVars.XBOX_JOYSTICK_THRESHOLD, ThresholdJoystick.DOWN);
 
-		// debug
-		// leftJoyButton8.whenPressed(new DebugEnableCompressor());
-		// leftJoyButton10.whenPressed(new DebugDisableCompressor());
+		leftJoyTriggerButton.whenPressed(new DropElevator());
+		leftJoyButton4.whenPressed(new GroupPlaceHatchOnVelcro(QuickAccessVars.HATCH_LAUNCH_SAFETY));
+		leftJoyButton5.whenPressed(new CancelClimb());
 		leftJoyButton7.whenPressed(new DebugRebootAll());
-		xboxL3.whileHeld(new DebugLinearElevatorControl(
-				() -> -xbox.getY(Hand.kLeft) * QuickAccessVars.LINEAR_CONTROLS_MODIFIER));
-		xboxR3.whileHeld(
-				new DebugLinearArmControl(() -> -xbox.getY(Hand.kRight) * QuickAccessVars.LINEAR_CONTROLS_MODIFIER));
+		leftJoyButton8.whenPressed(new DebugEnableCompressor());
+		leftJoyButton9.whenPressed(new DebugResetArmEncoder());
+		leftJoyButton10.whenPressed(new DebugDisableCompressor());
 		leftJoyButton11.whenPressed(new DebugResetClimbEncoder());
+		leftJoyButton12.whenPressed(new AdjustClimbRelative(QuickAccessVars.ADJUST_CLIMB_BY));
 
-		// drive alteration
 		rightJoyThumbButton.whileHeld(new ArcadeDrive());
 		rightJoyTriggerButton.whileHeld(new TurnLockDrive());
+		rightJoyButton3.whenPressed(new ExtendCargoPickupArm(QuickAccessVars.ARM_PICKUP_CARGO_ANGLE));
+		rightJoyButton3.whenPressed(new LockScissors());
 		rightJoyButton4.whileHeld(new ApproachCurve());
 		rightJoyButton5.whenPressed(new ExtendCargoPickupArm(QuickAccessVars.ARM_CLIMB_ANGLE));
-
-		rightJoyButton3.whenPressed(new ExtendCargoPickupArm(QuickAccessVars.ARM_PICKUP_ANGLE)); // ball low
-		rightJoyButton3.whenPressed(new LockScissors());
-
 		rightJoyButton6.whenPressed(new SynchronizedClimb());
-		leftJoyButton5.whenPressed(new CancelClimb());
 
-		// left joystick
-		leftJoyButton4.whenPressed(new GroupPlaceHatchOnVelcro(QuickAccessVars.HATCH_LAUNCH_SAFETY));
-		leftJoyTriggerButton.whenPressed(new DropElevator());
+		xboxL3.whileHeld(new DebugLinearElevatorControl(
+				() -> xbox.getY(Hand.kLeft) * QuickAccessVars.LINEAR_CONTROLS_MODIFIER * -1));
+		xboxR3.whileHeld(new DebugLinearArmControl(
+				() -> xbox.getY(Hand.kRight) * QuickAccessVars.LINEAR_CONTROLS_MODIFIER * -1));
 
-		// hatch
-		xboxX.whenPressed(new MoveElevatorTo(QuickAccessVars.CARGO_SCORING_HEIGHT));
+		xboxA.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL1_HEIGHT));
 		xboxB.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL2_HEIGHT));
 		xboxY.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL3_HEIGHT));
-		xboxA.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL1_HEIGHT));
-		xboxRightJoyUp.whenPressed(new GroupExtendHatchPickup());
-		xboxRightJoyDown.whenPressed(new GroupRetractHatchPickup());
+		xboxX.whenPressed(new MoveElevatorTo(QuickAccessVars.CARGO_SCORING_HEIGHT));
+		rightXboxJoyUp.whenPressed(new GroupExtendHatchPickup());
+		rightXboxJoyDown.whenPressed(new GroupRetractHatchPickup());
 		xboxSTART.whenPressed(new AdjustElevatorRelative(QuickAccessVars.ADJUST_ELEVATOR_BY));
 		xboxSELECT.whenPressed(new RetractCargoPickupArm());
 		rightXboxTrigger.whileHeld(new RunHatchPickupWheels());
 		leftXboxTrigger.whileHeld(new RunCargoPickupWheels());
+		leftXboxBumper.whenPressed(new RetractCargoPickupArm());
 		leftXboxBumper.whileHeld(new ReverseCargoPickupWheels());
 		xboxLeft.whenPressed(new LoosenScissors());
 		xboxRight.whenPressed(new LockScissors());
-
-		// unknowns
-		leftXboxBumper.whenPressed(new RetractCargoPickupArm());
-		leftJoyButton9.whenPressed(new DebugResetArmEncoder());
 	}
 
-	//-----------------------------------------------------------------//
+	// -----------------------------------------------------------------//
 
 	/**
 	 * Gets Y-value of left joystick multiplied by scalingFactor.

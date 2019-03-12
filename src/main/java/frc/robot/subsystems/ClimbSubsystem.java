@@ -41,10 +41,10 @@ public class ClimbSubsystem extends Subsystem {
 	 */
 	public void moveClimbTo(double inches) {
 		if (belowMinimum(inches)) {
-			winch.set(ControlMode.Position, toClicks(-22));
+			winch.set(ControlMode.Position, toClicks(QuickAccessVars.CLIMB_MINIMUM_TARGET));
 			System.out.println("Climb moving to " + inches + ", cutting short to prevent crash!");
 		} else if (aboveMaximum(inches)) {
-			winch.set(ControlMode.Position, toClicks(0));
+			winch.set(ControlMode.Position, toClicks(QuickAccessVars.CLIMB_MINIMUM_TARGET));
 			System.out.println("Climb moving to " + inches + ", cutting short to prevent crash!");
 		} else {
 			winch.set(ControlMode.Position, toClicks(inches));
@@ -108,12 +108,12 @@ public class ClimbSubsystem extends Subsystem {
 
 	/** true is bad */
 	public boolean belowMinimum(double inches) {
-		return inches < -22;
+		return inches < QuickAccessVars.CLIMB_MINIMUM_TARGET;
 	}
 
 	/** true is bad */
 	public boolean aboveMaximum(double inches) {
-		return inches > 0;
+		return inches > QuickAccessVars.CLIMB_MAXIMUM_TARGET;
 	}
 
 	public double toInches(int clicks) {
