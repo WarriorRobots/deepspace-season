@@ -42,6 +42,10 @@ public final class QuickAccessVars {
 		// how long will it take for the drive motors to switch directions?
 
 	// settings COMPTEST be careful
+	public static final boolean LEFT_DRIVE_REVERSED = false;
+	public static final boolean RIGHT_DRIVE_REVERSED = false;
+	public static final boolean LEFT_ENCODER_REVERSED = false;
+	public static final boolean RIGHT_ENCODER_REVERSED = true;
 	public static final boolean CLIMB_WINCH_INVERTED = true;
 	public static final boolean CLIMB_ENCODER_INVERTED = true;
 	public static final boolean ARM_ROTATOR_INVERTED = true;

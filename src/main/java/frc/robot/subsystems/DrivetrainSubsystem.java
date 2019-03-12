@@ -31,11 +31,6 @@ public class DrivetrainSubsystem extends Subsystem {
 	private static final int RIGHT_ENCODER_PORTA = 2;
 	private static final int RIGHT_ENCODER_PORTB = 3;
 
-	public static final boolean LEFT_ENCODER_REVERSED = false;
-	public static final boolean RIGHT_ENCODER_REVERSED = true;
-	public static final boolean LEFT_DRIVE_REVERSED = false;
-	public static final boolean RIGHT_DRIVE_REVERSED = false;
-
 	private WPI_TalonSRX leftFront, leftMiddle, leftBack, rightFront, rightMiddle, rightBack;
 	private SpeedControllerGroup leftGroup, rightGroup;
 	private DifferentialDrive differentialDrive;
@@ -79,8 +74,8 @@ public class DrivetrainSubsystem extends Subsystem {
 
 		leftGroup = new SpeedControllerGroup(leftFront, leftMiddle, leftBack);
 		rightGroup = new SpeedControllerGroup(rightFront, rightMiddle, rightBack);
-		leftGroup.setInverted(LEFT_DRIVE_REVERSED);
-		rightGroup.setInverted(RIGHT_DRIVE_REVERSED);
+		leftGroup.setInverted(QuickAccessVars.LEFT_DRIVE_REVERSED);
+		rightGroup.setInverted(QuickAccessVars.RIGHT_DRIVE_REVERSED);
 
 		differentialDrive = new DifferentialDrive(leftGroup, rightGroup);
 		differentialDrive.setSafetyEnabled(false);
@@ -95,8 +90,8 @@ public class DrivetrainSubsystem extends Subsystem {
 		leftEnc = new Encoder(LEFT_ENCODER_PORTA, LEFT_ENCODER_PORTB);
 		rightEnc = new Encoder(RIGHT_ENCODER_PORTA, RIGHT_ENCODER_PORTB);
 
-		leftEnc.setReverseDirection(LEFT_ENCODER_REVERSED);
-		rightEnc.setReverseDirection(RIGHT_ENCODER_REVERSED);
+		leftEnc.setReverseDirection(QuickAccessVars.LEFT_ENCODER_REVERSED);
+		rightEnc.setReverseDirection(QuickAccessVars.RIGHT_ENCODER_REVERSED);
 	}
 
 	/**
