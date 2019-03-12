@@ -2,13 +2,13 @@ update talons
 check brakemode
 update the wiring guide and print it
 packing list
+move github cards onto a txt file
 golden master (create a release)
 setup dashboard layout
 quickaccessvars
 make a button map of all buttons for programmers (including debug buttons)
 port vs id?
 standardize indentation
-autoformat all files
 
 AFTER COMP:
 fix angle measurement in armSubsystem (12288 / 360) should be 34.133 not 34
