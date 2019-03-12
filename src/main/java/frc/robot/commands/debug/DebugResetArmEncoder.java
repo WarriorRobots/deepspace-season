@@ -27,7 +27,7 @@ public class DebugResetArmEncoder extends Command {
 
     @Override
     protected void end() {
-        Robot.arm.resetArmAngle(0);
+        Robot.arm.resetArmAngleTo(0);
         System.out.println("WWDEBUG: DebugResetArmEncoder finished successfully");
     }
 

@@ -1,19 +1,15 @@
 update the wiring guide and print it
-desktop to repo
 packing list
 golden master (create a release)
-should we keep debug commands
 setup dashboard layout
 standardize indentation
-check for super() calls
-change climb angle
 quickaccessvars
 make a button map of all buttons for programmers (including debug buttons)
-write objects for the base buttons on joystick
+standardize indentation
+autoformat all files
+port vs id?
+check brakemode
+update talons
 
-elevator 0 is absolute top
-elevator to floor is 19.6 inches
-debug disable idle
-
-moving on enable is NOT SAFE, have an encoder reset button and a manual move
-put a reset on the disableInit
+AFTER COMP:
+fix angle measurement in armSubsystem (12288 / 360) should be 34.133 not 34

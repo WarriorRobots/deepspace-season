@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -9,7 +8,7 @@ import frc.robot.QuickAccessVars;
 import frc.robot.commands.hatchpickup.DefaultStopHatchPickupWheels;
 
 /**
- * Contains the motor and pneumatics used to pick up hatches from the ground.
+ * Contains the motor used to pick up hatches from the ground.
  */
 public class HatchPickupSubsystem extends Subsystem {
 
@@ -30,8 +29,8 @@ public class HatchPickupSubsystem extends Subsystem {
 
     /**
      * Run the pickup motors to pull a hatch into the mechanism.
-     * 
-     * @param speed Speed of motor, from -1 (out) to 1 (in).
+     * <p>Warning: Running the pickup in while it isn't extended will damage the ramp.
+     * @param speed From -1 (out) to 1 (in).
      */
     public void runPickup(double speed) {
         pickupMotor.set(speed);
@@ -42,22 +41,6 @@ public class HatchPickupSubsystem extends Subsystem {
      */
     public void stopPickup() {
         pickupMotor.stopMotor();
-    }
-
-    /**
-     * Set the pickup motor to brake mode, making it more difficult for hatches to
-     * fall out of the mechanism.
-     */
-    public void setBrakeMode() {
-        pickupMotor.setNeutralMode(NeutralMode.Brake);
-    }
-
-    /**
-     * Set the pickup motor to coast mode, making it easy for hatches to slip out of
-     * the mechanism.
-     */
-    public void setCoastMode() {
-        pickupMotor.setNeutralMode(NeutralMode.Coast);
     }
 
     @Override

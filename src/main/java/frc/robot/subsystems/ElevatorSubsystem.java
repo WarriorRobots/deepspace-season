@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -30,7 +23,7 @@ public class ElevatorSubsystem extends Subsystem {
 	private static final int LIMIT_SWITCH_PORT = 4;
 
 	private WPI_TalonSRX winch;
-	/** Magnetic "Hall effect" sensor */
+	/** Magnetic "Hall effect" sensor. */
 	private DigitalInput limitSwitch;
 
 	/**
@@ -49,8 +42,8 @@ public class ElevatorSubsystem extends Subsystem {
 	}
 
 	/**
-	 * Runs in Robot.java every tick, checking the Hall effect sensor and resetting
-	 * the encoder when it is triggered.
+	 * Runs in Robot.java every tick, checking the Hall effect sensor and
+	 * resetting the encoder when it is triggered.
 	 */
 	public void resetEncoderWhenFloored() {
 		if (isElevatorFloored()) {
@@ -60,8 +53,9 @@ public class ElevatorSubsystem extends Subsystem {
 
 	/**
 	 * Moves the elevator to the position specified.
-	 * 
-	 * @param inches Intended position of the elevator, in inches
+	 * This has safeties built in to avoid crashing the elevator.
+	 * @param inches From 0 (the elevator's bottom position) 
+	 * 		  to a positive number (distance traveled on the inner carriage).
 	 */
 	public void moveElevatorTo(double inches) {
 		if (belowMinimum(inches)) {
@@ -75,6 +69,36 @@ public class ElevatorSubsystem extends Subsystem {
 		}
 	}
 
+	/**
+	* Drives the winch motor at a constant speed.
+	* This has safeties built in to prevent crashing the elevator.
+	* @param speed Percentage speed of the winch, from -1 (down) to 1 (up).
+	*/
+	public void adjustElevatorLinear(double speed) {
+		double pos = getElevatorPosition();
+		if (belowMinimum(pos)) {
+			if (speed > 0) {
+				winch.set(speed);
+			} else {
+				winch.stopMotor();
+				System.out.println("Elevator over-driving down, cutting short to prevent crash! " + pos + " " + speed);
+			}
+		} else if (aboveMaximum(pos)) {
+			if (speed < 0) {
+				winch.set(speed);
+			} else {
+				winch.stopMotor();
+				System.out.println("Elevator over-driving up, cutting short to prevent crash! " + pos + " " + speed);
+			}
+		} else {
+			winch.set(speed);
+		}
+	}
+
+	/**
+	 * Holds the elevator at the position specified.
+	 * @param inches Should always be positive.
+	 */
 	public void stabilizeElevator(double inches) {
 		winch.set(ControlMode.Position, toClicks(inches));
 	}
@@ -101,60 +125,49 @@ public class ElevatorSubsystem extends Subsystem {
 	}
 
 	/**
-	 * Returns if the limit switch at the bottom of the elevator is being triggered.
+	 * Returns true if the limit switch at the bottom of the elevator is being triggered.
 	 */
 	public boolean isElevatorFloored() {
-		// NOTE digital sensors are inverted; all ports read true by default
-		return !limitSwitch.get();
+		return !limitSwitch.get(); // flipped because sensor reads true if there is NO magnet
 	}
 
 	/**
-	 * Drives the winch motor at a constant speed. This has no safeties & can damage
-	 * the robot, so be careful!
-	 * 
-	 * @param speed Percentage speed of the winch, from -1 (down) to 1 (up).
+	 * Returns true if the specified distance is below the lower bound of motion.
+	 * <p>True is BAD. Use this in code to avoid crashing the elevator.
+	 * @param inches Any distance measurement related to the elevator.
 	 */
-	public void adjustElevatorLinear(double speed) {
-		double pos = getElevatorPosition();
-		if (belowMinimum(pos)) {
-			if (speed > 0) {
-				winch.set(speed);
-			} else {
-				winch.stopMotor();
-			}
-		} else if (aboveMaximum(pos)) {
-			if (speed < 0) {
-				winch.set(speed);
-			} else {
-				winch.stopMotor();
-			}
-		} else {
-			winch.set(speed);
-		}
+	public boolean belowMinimum(double inches) {
+		return inches < QuickAccessVars.ELEVATOR_MINIMUM_TARGET;
+	}
+
+	/**
+	 * Returns true if the specified distance is above the upper bound of motion.
+	 * <p>True is BAD. Use this in code to avoid crashing the elevator.
+	 * @param inches Any distance measurement related to the elevator.
+	 */
+	public boolean aboveMaximum(double inches) {
+		return inches > QuickAccessVars.ELEVATOR_MAXIMUM_TARGET;
+	}
+
+	/**
+	 * Converts encoder clicks to inches traveled (of the inner carriage).
+	 * @param clicks Encoder clicks measured from the output axle.
+	 */
+	public double toInches(int clicks) {
+		return clicks / CLICKS_PER_INCH;
+	}
+
+	/**
+	 * Converts inches to encoder clicks.
+	 * @param inches Inches traveled, measured from the inner carriage (NOT the chain).
+	 */
+	public int toClicks(double inches) {
+		return (int) Math.round(inches * CLICKS_PER_INCH);
 	}
 
 	@Override
 	public void initDefaultCommand() {
 		setDefaultCommand(new DefaultStabilizeElevator());
-	}
-
-	/** true is bad */
-	public boolean belowMinimum(double inches) {
-		return inches < QuickAccessVars.ELEVATOR_MINIMUM_TARGET;
-	}
-
-	/** true is bad */
-	public boolean aboveMaximum(double inches) {
-		return inches > QuickAccessVars.ELEVATOR_MAXIMUM_TARGET;
-	}
-
-	public double toInches(int clicks) {
-		return clicks / CLICKS_PER_INCH;
-	}
-
-	/** for the chain / outer frame */
-	public int toClicks(double inches) {
-		return (int) Math.round(inches * CLICKS_PER_INCH);
 	}
 
 	@Override

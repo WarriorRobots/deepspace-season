@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -41,7 +34,6 @@ import frc.robot.commands.hatchplacer.LockScissors;
 import frc.robot.commands.hatchplacer.LoosenScissors;
 import frc.robot.commands.hatchplacer.GroupPlaceHatchOnVelcro;
 import frc.robot.util.triggers.DpadTrigger;
-import frc.robot.util.triggers.ThresholdJoystick;
 import frc.robot.util.triggers.ThresholdTrigger;
 
 /**
@@ -65,8 +57,8 @@ public final class ControlHandler {
 			rightJoyButton11, rightJoyButton12;
 
 	private XboxController xbox;
-	private ThresholdJoystick leftXboxJoyUp, leftXboxJoyDown, rightXboxJoyUp, rightXboxJoyDown;
-	private ThresholdTrigger leftXboxTrigger, rightXboxTrigger;
+	private ThresholdTrigger leftXboxTrigger, rightXboxTrigger, leftXboxJoyUp, leftXboxJoyDown, rightXboxJoyUp,
+			rightXboxJoyDown;
 	private JoystickButton xboxX, xboxY, xboxB, xboxA, xboxSTART, xboxSELECT, leftXboxBumper, rightXboxBumper, xboxL3,
 			xboxR3;
 	private DpadTrigger xboxUp, xboxDown, xboxLeft, xboxRight;
@@ -117,14 +109,14 @@ public final class ControlHandler {
 		xboxDown = new DpadTrigger(() -> xbox.getPOV(), 180);
 		xboxRight = new DpadTrigger(() -> xbox.getPOV(), 90);
 		xboxLeft = new DpadTrigger(() -> xbox.getPOV(), 270);
-		leftXboxJoyUp = new ThresholdJoystick(() -> -xbox.getY(Hand.kLeft), () -> xbox.getStickButton(Hand.kLeft),
-				QuickAccessVars.XBOX_JOYSTICK_THRESHOLD, ThresholdJoystick.UP);
-		leftXboxJoyDown = new ThresholdJoystick(() -> -xbox.getY(Hand.kLeft), () -> xbox.getStickButton(Hand.kLeft),
-				-QuickAccessVars.XBOX_JOYSTICK_THRESHOLD, ThresholdJoystick.DOWN);
-		rightXboxJoyUp = new ThresholdJoystick(() -> -xbox.getY(Hand.kRight), () -> xbox.getStickButton(Hand.kRight),
-				QuickAccessVars.XBOX_JOYSTICK_THRESHOLD, ThresholdJoystick.UP);
-		rightXboxJoyDown = new ThresholdJoystick(() -> -xbox.getY(Hand.kRight), () -> xbox.getStickButton(Hand.kRight),
-				-QuickAccessVars.XBOX_JOYSTICK_THRESHOLD, ThresholdJoystick.DOWN);
+		leftXboxJoyUp = new ThresholdTrigger(() -> -xbox.getY(Hand.kLeft), QuickAccessVars.XBOX_JOYSTICK_THRESHOLD,
+				false, () -> xbox.getStickButton(Hand.kLeft));
+		leftXboxJoyDown = new ThresholdTrigger(() -> -xbox.getY(Hand.kLeft), -QuickAccessVars.XBOX_JOYSTICK_THRESHOLD,
+				false, () -> xbox.getStickButton(Hand.kLeft));
+		rightXboxJoyUp = new ThresholdTrigger(() -> -xbox.getY(Hand.kRight), QuickAccessVars.XBOX_JOYSTICK_THRESHOLD,
+				false, () -> xbox.getStickButton(Hand.kRight));
+		rightXboxJoyDown = new ThresholdTrigger(() -> -xbox.getY(Hand.kRight), -QuickAccessVars.XBOX_JOYSTICK_THRESHOLD,
+				false, () -> xbox.getStickButton(Hand.kRight));
 
 		leftJoyTriggerButton.whenPressed(new DropElevator());
 		leftJoyButton4.whenPressed(new GroupPlaceHatchOnVelcro(QuickAccessVars.HATCH_LAUNCH_SAFETY));

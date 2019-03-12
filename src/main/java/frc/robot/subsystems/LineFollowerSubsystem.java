@@ -7,9 +7,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 /**
  * Contains methods used for reading three line followers; two on the outside of
  * a 2-inch line and one inside.
- * <p>
- * When properly lined up, the middle line follower should read true, and the
- * other two should read false.
  */
 public class LineFollowerSubsystem extends Subsystem {
 
@@ -55,33 +52,38 @@ public class LineFollowerSubsystem extends Subsystem {
     }
 
     /**
-     * Returns true if left and right followers don't see line, and middle follower
-     * does; false otherwise;
+     * Returns true when properly lined up (the middle line follower should detect a line, and the
+     * other two should not).
      */
     public boolean onCenter() {
-        return (!getLeftLineFollower() && !getRightLineFollower()) && getMiddleLineFollower();
+        return (!getLeftLineFollower() && getMiddleLineFollower() && !getRightLineFollower());
     }
 
-    public boolean onLine(){
+    /**
+     * Returns true if ANY line follower detects a line.
+     */
+    public boolean onLine() {
         return (getLeftLineFollower() || getRightLineFollower() || getMiddleLineFollower());
     }
 
     /**
-     * Returns true if robot is too far right of the line.
+     * Returns true if robot is too far right of the line (the left follower detects a line)
      */
     public boolean onLeftOfLine() {
         return getRightLineFollower();
     }
 
     /**
-     * Returns true if robot is too far left of the line.
+     * Returns true if robot is too far left of the line (the right follower detects a line).
      */
     public boolean onRightOfLine() {
         return getLeftLineFollower();
     }
 
     @Override
-    protected void initDefaultCommand() {}
+    protected void initDefaultCommand() {
+        // none
+    }
 
     public void initSendable(SendableBuilder builder) {
         builder.addBooleanProperty("left", () -> getLeftLineFollower(), null);

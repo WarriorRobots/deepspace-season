@@ -2,7 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
-/** Anything you need to access and edit quickly */
+/** Anything you need to access and edit quickly */ // @formatter:off
 public final class QuickAccessVars {
 
 	// in inches from the floor
@@ -37,11 +37,15 @@ public final class QuickAccessVars {
 	// delay timers (seconds)
 	public static final double PLACE_HATCH_DELAY = 0.2; // seconds
 	public static final double HATCH_PICKUP_DELAY = 0.3;
-	public static final double DRIVETRAIN_RAMPRATE = 0.25; // how long will it take for the drive motors to
-															// switch directions?
+	public static final double DRIVETRAIN_RAMPRATE = 0.25;
+		// how long will it take for the drive motors to switch directions?
 
 	// settings
+	public static final boolean CLIMB_WINCH_INVERTED = true;
+	public static final boolean CLIMB_ENCODER_INVERTED = true;
+	public static final boolean ARM_ROTATOR_INVERTED = true;
 	public static final boolean ARM_ROTATOR_CLONE_INVERTED = false;
+	public static final boolean ARM_ENCODER_INVERTED = false;
 	public static final boolean CARGO_PICKUP_WHEELS_INVERTED = false;
 	public static final boolean HATCH_PICKUP_WHEELS_INVERTED = true;
 	public static final boolean ELEVATOR_WINCH_INVERTED = true;
@@ -49,10 +53,10 @@ public final class QuickAccessVars {
 	public static final boolean HATCH_LAUNCH_SAFETY = false; // true means line follower required
 	public static final double TURNLOCK_THRESHOLD = 0.2;
 	public static final double PNEUMATIC_LOOP_COUNT = 5; // how many loops will a pneumatic command run?
-	public static final double XBOX_JOYSTICK_THRESHOLD = 0.7; // this seems high, but the xbox joysticks reach 1 before
-																// hitting the edge
-	public static final double LINEAR_CONTROLS_MODIFIER = 0.5; // how much are the linear elevator/arm/climb commands
-																// modified by?
+	public static final double XBOX_JOYSTICK_THRESHOLD = 0.7;
+		// this seems high, but the xbox joysticks reach 1 before hitting the edge
+	public static final double LINEAR_CONTROLS_MODIFIER = 0.5;
+		// how much are the linear elevator/arm/climb commands modified by?
 
 	// camera
 	public static final double CAMERA_TILT = 22 * Math.PI / 180; // TODO put back all camera constant comments
@@ -65,8 +69,8 @@ public final class QuickAccessVars {
 	public static final double PPR_H = PIXELS_H / RAD_H;
 	public static final double PPR_V = PIXELS_V / RAD_V;
 	public static final double TARGET_HEIGHT = 5.83;
-	public static final double CAMERA_DRIVE_THRESHOLD = 0.2; // Amount the driver must push the controller to activate
-																// arcade drive during ApproachCurve
+	public static final double CAMERA_DRIVE_THRESHOLD = 0.2;
+		// how far does the driver push the joystick to activate arcade drive during ApproachCurve
 
 	// pid
 	public static final double ELEVATOR_P = 0.4;
