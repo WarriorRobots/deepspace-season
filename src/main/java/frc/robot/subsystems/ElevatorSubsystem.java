@@ -19,7 +19,7 @@ public class ElevatorSubsystem extends Subsystem {
 
 	public static final double CLICKS_PER_INCH = 512;
 
-	private static final int WINCH_PORT = 7;
+	private static final int WINCH_ID = 7;
 	private static final int LIMIT_SWITCH_PORT = 4;
 
 	private WPI_TalonSRX winch;
@@ -33,7 +33,7 @@ public class ElevatorSubsystem extends Subsystem {
 	 * ElevatorSubsystem();
 	 */
 	public ElevatorSubsystem() {
-		winch = new WPI_TalonSRX(WINCH_PORT);
+		winch = new WPI_TalonSRX(WINCH_ID);
 		limitSwitch = new DigitalInput(LIMIT_SWITCH_PORT);
 
 		winch.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);

@@ -18,8 +18,8 @@ public class ArmSubsystem extends Subsystem {
 
     public static final double CLICKS_PER_DEGREE = 34.0;
 
-    private static final int ROTATOR_PORT = 8;
-    private static final int CLONE_PORT = 11;
+    private static final int ROTATOR_ID = 8;
+    private static final int CLONE_ID = 11;
     private static final int LIMIT_SWITCH_PORT = 5;
 
     /** Main motor (reads the encoder and runs the PID. */
@@ -35,13 +35,13 @@ public class ArmSubsystem extends Subsystem {
      * <code> public static final CargoSubsystem cargo = new CargoSubsystem();
      */
     public ArmSubsystem() {
-        armRotator = new WPI_TalonSRX(ROTATOR_PORT);
+        armRotator = new WPI_TalonSRX(ROTATOR_ID);
         armRotator.setInverted(QuickAccessVars.ARM_ROTATOR_INVERTED);
         armRotator.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
         armRotator.setSensorPhase(QuickAccessVars.ARM_ENCODER_INVERTED);
         armRotator.config_kP(Constants.PID_ID, QuickAccessVars.ARM_P, Constants.TIMEOUT_MS);
 
-        armRotatorClone = new WPI_TalonSRX(CLONE_PORT);
+        armRotatorClone = new WPI_TalonSRX(CLONE_ID);
         armRotatorClone.setInverted(QuickAccessVars.ARM_ROTATOR_CLONE_INVERTED);
         armRotatorClone.follow(armRotator);
 

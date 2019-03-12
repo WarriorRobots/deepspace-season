@@ -17,12 +17,12 @@ public class ClimbSubsystem extends Subsystem {
 
 	public static final double CLICKS_PER_INCH = 1024.0;
 
-	private static final int WINCH_PORT = 12;
+	private static final int WINCH_ID = 12;
 
 	private WPI_TalonSRX winch;
 
 	public ClimbSubsystem() {
-		winch = new WPI_TalonSRX(WINCH_PORT);
+		winch = new WPI_TalonSRX(WINCH_ID);
 		winch.setInverted(QuickAccessVars.CLIMB_WINCH_INVERTED);
 		winch.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
 		winch.setSensorPhase(QuickAccessVars.CLIMB_ENCODER_INVERTED);

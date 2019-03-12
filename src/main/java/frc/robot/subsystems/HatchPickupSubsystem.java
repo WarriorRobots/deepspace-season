@@ -12,7 +12,7 @@ import frc.robot.commands.hatchpickup.DefaultStopHatchPickupWheels;
  */
 public class HatchPickupSubsystem extends Subsystem {
 
-    private static final int PICKUP_MOTOR_PORT = 2;
+    private static final int PICKUP_MOTOR_ID = 2;
 
     private WPI_VictorSPX pickupMotor;
 
@@ -23,7 +23,7 @@ public class HatchPickupSubsystem extends Subsystem {
      * HatchPickupSubsystem();
      */
     public HatchPickupSubsystem() {
-        pickupMotor = new WPI_VictorSPX(PICKUP_MOTOR_PORT);
+        pickupMotor = new WPI_VictorSPX(PICKUP_MOTOR_ID);
         pickupMotor.setInverted(QuickAccessVars.HATCH_PICKUP_WHEELS_INVERTED);
     }
 

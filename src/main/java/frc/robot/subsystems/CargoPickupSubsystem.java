@@ -11,7 +11,7 @@ import frc.robot.commands.cargo.DefaultIdleCargoPickupWheels;
  */
 public class CargoPickupSubsystem extends Subsystem {
 
-    private static final int PICKUP_WHEELS_PORT = 1;
+    private static final int PICKUP_WHEELS_ID = 1;
 
     private WPI_VictorSPX pickupWheels;
 
@@ -21,7 +21,7 @@ public class CargoPickupSubsystem extends Subsystem {
      * <code> public static final CargoSubsystem cargo = new CargoSubsystem();
      */
     public CargoPickupSubsystem() {
-        pickupWheels = new WPI_VictorSPX(PICKUP_WHEELS_PORT);
+        pickupWheels = new WPI_VictorSPX(PICKUP_WHEELS_ID);
         pickupWheels.setInverted(QuickAccessVars.CARGO_PICKUP_WHEELS_INVERTED);
     }
 
