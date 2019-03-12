@@ -68,6 +68,13 @@ public class ArmSubsystem extends Subsystem {
      */
     public void rotateArmTo(double degrees) {
         armRotator.set(ControlMode.Position, toClicks(degrees));
+        if (belowMinimum(degrees)) {
+            armRotator.set(ControlMode.Position, toClicks(0));
+        } else if (aboveMaximum(degrees)) {
+            armRotator.set(ControlMode.Position, toClicks(160));
+        } else {
+            armRotator.set(ControlMode.Position, toClicks(degrees));
+        }
     }
 
     /**
@@ -78,7 +85,22 @@ public class ArmSubsystem extends Subsystem {
      *              (away from the robot).
      */
     public void rotateArmLinear(double speed) {
-        armRotator.set(speed);
+        double angle = getArmAngle();
+		if (belowMinimum(angle)) {
+			if (speed > 0) {
+				armRotator.set(speed);
+			} else {
+				armRotator.stopMotor();
+			}
+		} else if (aboveMaximum(angle)) {
+			if (speed < 0) {
+				armRotator.set(speed);
+			} else {
+				armRotator.stopMotor();
+			}
+		} else {
+			armRotator.set(speed);
+		}
     }
 
     /**
@@ -120,6 +142,16 @@ public class ArmSubsystem extends Subsystem {
         return !limitSwitch.get(); // sensor reads true if there is NO magnet
     }
 
+    /** true is bad */
+	public boolean belowMinimum(double degrees) {
+		return degrees < 0; // XXX quickaccess
+	}
+
+	/** true is bad */
+	public boolean aboveMaximum(double degrees) {
+		return degrees > 160;
+	}
+
     @Override
     public void initDefaultCommand() {
         setDefaultCommand(new DefaultStabilizeArm());
@@ -128,6 +160,8 @@ public class ArmSubsystem extends Subsystem {
     @Override
     public void initSendable(SendableBuilder builder) {
         builder.addDoubleProperty("angle", () -> getArmAngle(), null);
+        builder.addDoubleProperty("master speed", () -> armRotator.get(), null);
+        builder.addDoubleProperty("clone speed", () -> armRotatorClone.get(), null);
     }
 
 }

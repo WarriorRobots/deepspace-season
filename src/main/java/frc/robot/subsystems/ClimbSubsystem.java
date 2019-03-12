@@ -15,26 +15,23 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
 import frc.robot.QuickAccessVars;
 import frc.robot.commands.climb.DefaultStabilizeClimb;
-import frc.robot.commands.climb.LinearClimb;
 
-// TODO documentation
 public class ClimbSubsystem extends Subsystem {
 
 	public static final double CLICKS_PER_INCH = 1024;
 
-	private static final int WINCH_PORT = 12; // XXX check port
+	private static final int WINCH_PORT = 12;
 	// FIXME talk to alex about semantics, PORT vs ID
 
-	private WPI_TalonSRX climbWinch; // TODO semantics
+	private WPI_TalonSRX winch;
 
-	// TODO documentation
 	public ClimbSubsystem() {
 
-		climbWinch = new WPI_TalonSRX(WINCH_PORT);
-		climbWinch.setInverted(true); // FIXME quickaccess
-		climbWinch.setSensorPhase(true);
+		winch = new WPI_TalonSRX(WINCH_PORT);
+		winch.setInverted(true); // FIXME quickaccess
+		winch.setSensorPhase(true);
 
-		climbWinch.config_kP(Constants.PID_ID, QuickAccessVars.CLIMB_P, Constants.TIMEOUT_MS);
+		winch.config_kP(Constants.PID_ID, QuickAccessVars.CLIMB_P, Constants.TIMEOUT_MS);
 	}
 
 	/**
@@ -43,28 +40,40 @@ public class ClimbSubsystem extends Subsystem {
 	 * @param position Intended position of the climb, in inches
 	 */
 	public void moveClimbTo(double inches) {
-		climbWinch.set(ControlMode.Position, toClicks(inches));
+		if (belowMinimum(inches)) {
+			winch.set(ControlMode.Position, toClicks(-22));
+			System.out.println("Climb moving to " + inches + ", cutting short to prevent crash!");
+		} else if (aboveMaximum(inches)) {
+			winch.set(ControlMode.Position, toClicks(0));
+			System.out.println("Climb moving to " + inches + ", cutting short to prevent crash!");
+		} else {
+			winch.set(ControlMode.Position, toClicks(inches));
+		}
+	}
+
+	public void stabilizeClimb(double inches) {
+		winch.set(ControlMode.Position, toClicks(inches));
 	}
 
 	/**
 	 * Shuts off the climb winch motor.
 	 */
 	public void stopClimb() {
-		climbWinch.stopMotor();
+		winch.stopMotor();
 	}
 
 	/**
 	 * Returns the position of the climb in inches
 	 */
 	public double getClimbPosition() {
-		return toInches(climbWinch.getSelectedSensorPosition());
+		return toInches(winch.getSelectedSensorPosition());
 	}
 
 	/**
 	 * Zeroes out the climb encoder.
 	 */
 	public void resetEncoder() {
-		climbWinch.setSelectedSensorPosition(0);
+		winch.setSelectedSensorPosition(0);
 	}
 
 	/**
@@ -74,13 +83,37 @@ public class ClimbSubsystem extends Subsystem {
 	 * @param speed Percentage speed of the winch, from -1 (down) to 1 (up).
 	 */
 	public void adjustClimbLinear(double speed) {
-		climbWinch.set(speed);
+		double pos = getClimbPosition();
+		if (aboveMaximum(pos)) {
+			if (speed > 0) {
+				winch.stopMotor();
+			} else {
+				winch.set(speed);
+			}
+		} else if (belowMinimum(pos)) {
+			if (speed < 0) {
+				winch.stopMotor();
+			} else {
+				winch.set(speed);
+			}
+		} else {
+			winch.set(speed);
+		}
 	}
 
 	@Override
 	public void initDefaultCommand() {
-		// setDefaultCommand(new LinearClimb());
 		setDefaultCommand(new DefaultStabilizeClimb());
+	}
+
+	/** true is bad */
+	public boolean belowMinimum(double inches) {
+		return inches < -22;
+	}
+
+	/** true is bad */
+	public boolean aboveMaximum(double inches) {
+		return inches > 0;
 	}
 
 	public double toInches(int clicks) {
@@ -94,7 +127,7 @@ public class ClimbSubsystem extends Subsystem {
 	@Override
 	public void initSendable(SendableBuilder builder) {
 		builder.addDoubleProperty("position", () -> getClimbPosition(), null);
-		builder.addDoubleProperty("clicks", () -> climbWinch.getSelectedSensorPosition(), null);
-		builder.addDoubleProperty("speed", () -> climbWinch.get(), null);
+		builder.addDoubleProperty("clicks", () -> winch.getSelectedSensorPosition(), null);
+		builder.addDoubleProperty("speed", () -> winch.get(), null);
 	}
 }

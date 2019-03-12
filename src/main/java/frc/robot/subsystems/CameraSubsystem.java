@@ -5,7 +5,6 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
-import frc.robot.Constants;
 import frc.robot.QuickAccessVars;
 import frc.robot.commands.ChangePipeline;
 
@@ -215,7 +214,7 @@ public class CameraSubsystem extends Subsystem {
 		
 		// if pipeline is NOT between 0 and 9, warn the dashboard and quit the command.
 		if(!(0<=pipeline && pipeline<=9)) {
-			DriverStation.getInstance().reportWarning(
+			DriverStation.reportWarning(
 				Integer.toString(pipeline)+" is not a valid pipeline to change to.", true);
 			// leave function to prevent a real error from the limelight
 			return;
@@ -254,7 +253,7 @@ public class CameraSubsystem extends Subsystem {
 
 	@Override
 	public void initDefaultCommand() {
-		setDefaultCommand(new ChangePipeline(PIPELINE_DRIVER)); // TODO Alex is worried about CPU usage
+		setDefaultCommand(new ChangePipeline(PIPELINE_DRIVER));
 	}
 
 }

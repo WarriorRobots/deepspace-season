@@ -12,7 +12,6 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
@@ -25,7 +24,7 @@ import frc.robot.commands.elevator.DefaultStabilizeElevator;
  */
 public class ElevatorSubsystem extends Subsystem {
 
-	public static final double CLICKS_PER_INCH = 1024;
+	public static final double CLICKS_PER_INCH = 512;
 
 	private static final int WINCH_PORT = 7;
 	private static final int LIMIT_SWITCH_PORT = 4;
@@ -45,7 +44,7 @@ public class ElevatorSubsystem extends Subsystem {
 		limitSwitch = new DigitalInput(LIMIT_SWITCH_PORT);
 
 		winch.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
-		winch.setSensorPhase(true);
+		winch.setSensorPhase(true); // XXX quickaccess
 		winch.config_kP(Constants.PID_ID, QuickAccessVars.ELEVATOR_P, Constants.TIMEOUT_MS);
 	}
 
@@ -62,15 +61,22 @@ public class ElevatorSubsystem extends Subsystem {
 	/**
 	 * Moves the elevator to the position specified.
 	 * 
-	 * @param position Intended position of the elevator, in inches
+	 * @param inches Intended position of the elevator, in inches
 	 */
-	public void moveElevatorTo(double inches) { // XXX HACK get max and min safeties
-		if (inches > 1) {
-			winch.set(ControlMode.Position, toClicks(inches));
+	public void moveElevatorTo(double inches) {
+		if (belowMinimum(inches)) {
+			winch.set(ControlMode.Position, toClicks(QuickAccessVars.ELEVATOR_MINIMUM_TARGET));
+			System.out.println("Elevator moving to " + inches + ", cutting short to prevent crash!");
+		} else if (aboveMaximum(inches)) {
+			winch.set(ControlMode.Position, toClicks(QuickAccessVars.ELEVATOR_MAXIMUM_TARGET));
+			System.out.println("Elevator moving to " + inches + ", cutting short to prevent crash!");
 		} else {
-			winch.stopMotor();
-			DriverStation.reportError("elevator subsystem unsafe target", false);
+			winch.set(ControlMode.Position, toClicks(inches));
 		}
+	}
+
+	public void stabilizeElevator(double inches) {
+		winch.set(ControlMode.Position, toClicks(inches));
 	}
 
 	/**
@@ -109,7 +115,22 @@ public class ElevatorSubsystem extends Subsystem {
 	 * @param speed Percentage speed of the winch, from -1 (down) to 1 (up).
 	 */
 	public void adjustElevatorLinear(double speed) {
-		winch.set(speed);
+		double pos = getElevatorPosition();
+		if (belowMinimum(pos)) {
+			if (speed > 0) {
+				winch.set(speed);
+			} else {
+				winch.stopMotor();
+			}
+		} else if (aboveMaximum(pos)) {
+			if (speed < 0) {
+				winch.set(speed);
+			} else {
+				winch.stopMotor();
+			}
+		} else {
+			winch.set(speed);
+		}
 	}
 
 	@Override
@@ -117,10 +138,21 @@ public class ElevatorSubsystem extends Subsystem {
 		setDefaultCommand(new DefaultStabilizeElevator());
 	}
 
+	/** true is bad */
+	public boolean belowMinimum(double inches) {
+		return inches < QuickAccessVars.ELEVATOR_MINIMUM_TARGET;
+	}
+
+	/** true is bad */
+	public boolean aboveMaximum(double inches) {
+		return inches > QuickAccessVars.ELEVATOR_MAXIMUM_TARGET;
+	}
+
 	public double toInches(int clicks) {
 		return clicks / CLICKS_PER_INCH;
 	}
 
+	/** for the chain / outer frame */
 	public int toClicks(double inches) {
 		return (int) Math.round(inches * CLICKS_PER_INCH);
 	}

@@ -7,18 +7,14 @@
 
 package frc.robot.commands.climb;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
-import frc.robot.Robot;
+import edu.wpi.first.wpilibj.command.CommandGroup;
+// import frc.robot.commands.elevator.DropElevator; TODO put this back
 
-public class ZeroClimb extends InstantCommand {
-  
-  public ZeroClimb() {
-    requires(Robot.climb);
-  }
+public class CancelClimb extends CommandGroup {
 
-  @Override
-  protected void initialize() {
-    Robot.climb.resetEncoder();
+  public CancelClimb() {
+    // addParallel(new DropElevator());
+    addParallel(new MoveClimbTo(0));
   }
 
 }

@@ -8,14 +8,16 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.cargo.RunCargoPickupWheels;
-import frc.robot.commands.climb.Climb;
-import frc.robot.commands.climb.ElevClimb;
-import frc.robot.commands.climb.ZeroClimb;
+import frc.robot.commands.climb.CancelClimb;
+import frc.robot.commands.climb.SynchronizedClimb;
+import frc.robot.commands.debug.DebugResetClimbEncoder;
 import frc.robot.commands.debug.DebugLinearArmControl;
+import frc.robot.commands.debug.DebugLinearClimbControl;
 import frc.robot.commands.debug.DebugLinearElevatorControl;
 import frc.robot.commands.debug.DebugResetArmEncoder;
 import frc.robot.commands.cargo.ReverseCargoPickupWheels;
@@ -70,6 +72,7 @@ public final class ControlHandler {
 	private ThresholdJoystick xboxLeftJoyUp, xboxLeftJoyDown, xboxRightJoyUp, xboxRightJoyDown;
 
 	public ControlHandler() {
+		// XXX all button objects, and cleanup
 		leftJoy = new Joystick(LEFT_JOY);
 		rightJoy = new Joystick(RIGHT_JOY);
 		xbox = new XboxController(XBOX);
@@ -120,14 +123,12 @@ public final class ControlHandler {
 		// debug
 		// leftJoyButton8.whenPressed(new DebugEnableCompressor());
 		// leftJoyButton10.whenPressed(new DebugDisableCompressor());
-		leftJoyButton8.whenPressed(new Climb(-0.5));
-		leftJoyButton10.whenPressed(new ElevClimb(-20));
 		leftJoyButton7.whenPressed(new DebugRebootAll());
 		xboxL3.whileHeld(new DebugLinearElevatorControl(
 				() -> -xbox.getY(Hand.kLeft) * QuickAccessVars.LINEAR_CONTROLS_MODIFIER));
 		xboxR3.whileHeld(
 				new DebugLinearArmControl(() -> -xbox.getY(Hand.kRight) * QuickAccessVars.LINEAR_CONTROLS_MODIFIER));
-		leftJoyButton11.whenPressed(new ZeroClimb());
+		leftJoyButton11.whenPressed(new DebugResetClimbEncoder());
 
 		// drive alteration
 		rightJoyThumbButton.whileHeld(new ArcadeDrive());
@@ -137,6 +138,9 @@ public final class ControlHandler {
 
 		rightJoyButton3.whenPressed(new ExtendCargoPickupArm(QuickAccessVars.ARM_PICKUP_ANGLE)); // ball low
 		rightJoyButton3.whenPressed(new LockScissors());
+
+		rightJoyButton6.whenPressed(new SynchronizedClimb());
+		leftJoyButton5.whenPressed(new CancelClimb());
 
 		// left joystick
 		leftJoyButton4.whenPressed(new GroupPlaceHatchOnVelcro(QuickAccessVars.HATCH_LAUNCH_SAFETY));
@@ -160,11 +164,6 @@ public final class ControlHandler {
 		// unknowns
 		leftXboxBumper.whenPressed(new RetractCargoPickupArm());
 		leftJoyButton9.whenPressed(new DebugResetArmEncoder());
-	}
-
-	// XXX HACK a bad way of seeing if the L3 is pressed on the xbox controller to disable the linear command on the elevator
-	public boolean getXboxL3() {
-		return xboxL3.get();
 	}
 
 	//-----------------------------------------------------------------//

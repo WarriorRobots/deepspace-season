@@ -6,28 +6,28 @@ import edu.wpi.first.wpilibj.DriverStation;
 public final class QuickAccessVars {
 
 	// in inches from the floor
-	public static final double ELEVATOR_MINIMUM_TARGET = 1;
+	public static final double ELEVATOR_MINIMUM_TARGET = 0.5; // 1
 	public static final double ELEVATOR_MAXIMUM_TARGET = 75;
-	public static final double ADJUST_ELEVATOR_BY = 2;
+	public static final double ADJUST_ELEVATOR_BY = 4; // XXX check this
 	public static final double CARGO_SCORING_HEIGHT = 29;
 	public static final double LVL1_HEIGHT = 21;
 	public static final double LVL2_HEIGHT = 47;
 	public static final double LVL3_HEIGHT = 74;
 	public static final double SCISSORS_HEIGHT = 13;
-	public static final double ELEVATOR_DOWNWARD_DRIFT_THRESHOLD = 5;
+	public static final double ELEVATOR_DOWNWARD_DRIFT_THRESHOLD = 10;
 
 	// motor speeds (-1.0 to 1.0)
 	public static final double ARCADE_FORWARD_MODIFIER = 0.5;
 	public static final double ARCADE_TURN_MODIFIER = 0.75;
 	public static final double ELEVATOR_DROP_SPEED = -1;
-	public static final double CARGO_PICKUP_IDLE_SPEED = 0;
+	public static final double CARGO_PICKUP_IDLE_SPEED = 0.1;
 	public static final double ELEVATOR_DOWNWARD_DRIFT_SPEED = -0.05;
 	public static final double ARM_RESET_SPEED = -0.2;
 
 	// degrees
 	public static final double ARM_PICKUP_ANGLE = 90;
 	public static final double ARM_CLIMB_ANGLE = 145;
-	public static final double ARM_RESET_ANGLE = -2;
+	public static final double ARM_RESET_ANGLE = -3;
 
 	// delay timers (seconds)
 	public static final double PLACE_HATCH_DELAY = 0.2; // seconds
@@ -66,7 +66,7 @@ public final class QuickAccessVars {
 	// pid
 	public static final double ELEVATOR_P = 0.4;
 	public static final double ARM_P = 1.2;
-	public static final double CLIMB_P = 0.4; // XXX tune climb
+	public static final double CLIMB_P = 0.4;
 
 	// camera pid
 	public static final double KP_APPROACH = 0.015;

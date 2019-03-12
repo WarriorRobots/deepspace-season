@@ -8,31 +8,21 @@
 package frc.robot.commands.climb;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.ControlHandler;
 import frc.robot.Robot;
 
-public class LinearClimb extends Command {
+@Deprecated
+public class MoveClimbTo extends Command {
 
-  /**
-   * Run the climb linearly based on the input from the Left joystick on the xbox controller
-   * (as long as the elevator linear isn't being run)
-   */
-  public LinearClimb() {
+  private double target;
+
+  public MoveClimbTo(double target) {
     requires(Robot.climb);
-  }
-  
-  @Override
-  protected void initialize() {
-    requires(Robot.climb);
+    this.target = target;
   }
 
   @Override
   protected void execute() {
-    if(!Robot.input.getXboxL3()) {
-      Robot.climb.adjustClimbLinear(Robot.input.getXboxLeftY());
-    }
-    // XXX Do not use the XBox controller as linear input
-    // Other things use the XBox joysticks for input
+    Robot.climb.moveClimbTo(target);
   }
 
   @Override

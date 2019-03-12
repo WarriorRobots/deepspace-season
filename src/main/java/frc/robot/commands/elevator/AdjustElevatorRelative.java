@@ -1,8 +1,6 @@
 package frc.robot.commands.elevator;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
 public class AdjustElevatorRelative extends Command {

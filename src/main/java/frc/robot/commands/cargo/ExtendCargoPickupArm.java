@@ -21,11 +21,7 @@ public class ExtendCargoPickupArm extends Command {
    */
   public ExtendCargoPickupArm(double angle) {
     requires(Robot.arm);
-    if (angle < 0 || angle > 180) {
-      this.angle = 0;
-    } else {
-      this.angle = angle;
-    }
+    this.angle = angle;
   }
 
   @Override

@@ -26,15 +26,7 @@ public class DebugLinearElevatorControl extends Command {
 
     @Override
     protected void execute() {
-        if (!Robot.elevator.isElevatorFloored()) {
-            Robot.elevator.adjustElevatorLinear(input.getAsDouble());
-        } else {
-            if (input.getAsDouble() < 0) {
-                Robot.elevator.stopElevator();
-            } else {
-                Robot.elevator.adjustElevatorLinear(input.getAsDouble());
-            }
-        }
+        Robot.elevator.adjustElevatorLinear(input.getAsDouble());
     }
 
     @Override

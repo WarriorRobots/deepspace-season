@@ -5,31 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.climb;
+package frc.robot.commands.debug;
+
+import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ElevClimb extends Command {
+public class DebugLinearClimbControl extends Command {
 
-  private double target, initialClimbPos, initialElevPos;
+  private DoubleSupplier input;
 
-  public ElevClimb(double target) {
+  /**
+   * Run the climb linearly based on the input from the Left joystick on the xbox
+   * controller (as long as the elevator linear isn't being run)
+   */
+  public DebugLinearClimbControl(DoubleSupplier input) {
     requires(Robot.climb);
-    requires(Robot.elevator);
-    this.target = target;
-  }
-
-  @Override
-  protected void initialize() {
-    initialClimbPos = Robot.climb.getClimbPosition();
-    initialElevPos = Robot.elevator.getElevatorPosition();
+    this.input = input;
   }
 
   @Override
   protected void execute() {
-    Robot.climb.moveClimbTo(target);
-    Robot.elevator.moveElevatorTo(Robot.climb.getClimbPosition() - initialClimbPos + initialElevPos);
+    Robot.climb.adjustClimbLinear(input.getAsDouble());
   }
 
   @Override
@@ -42,14 +40,3 @@ public class ElevClimb extends Command {
     Robot.climb.stopClimb();
   }
 }
-
-/*
-change = final - initial
-c = f - i
-
-Cc = Cf - Ci
-Ec = Ef - Ei
-Cc = Ec
-Cf - Ci = Ef - Ei
-Cf - Ci + Ei = Ef
-*/

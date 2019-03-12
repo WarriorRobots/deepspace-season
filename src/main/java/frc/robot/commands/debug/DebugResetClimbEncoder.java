@@ -5,38 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.climb;
+package frc.robot.commands.debug;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class Climb extends Command {
-
-  private double target;
-
-  public Climb(double target) {
+public class DebugResetClimbEncoder extends InstantCommand {
+  
+  public DebugResetClimbEncoder() {
     requires(Robot.climb);
-    this.target = target;
-  }
-
-  @Override
-  protected void initialize() {
-    DriverStation.reportWarning("moving to " + target, false);
   }
 
   @Override
   protected void execute() {
-    Robot.climb.moveClimbTo(target);
+    Robot.climb.resetEncoder();
   }
 
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
-
-  @Override
-  protected void end() {
-    Robot.climb.stopClimb();
-  }
 }
