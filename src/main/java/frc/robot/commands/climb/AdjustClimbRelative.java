@@ -21,7 +21,7 @@ public class AdjustClimbRelative extends Command {
     @Override
     protected void initialize() {
         initialPosition = Robot.climb.getClimbPosition();
-        target = initialPosition + adjustBy; // works with negatives too
+        target = initialPosition + adjustBy;
     }
 
     @Override

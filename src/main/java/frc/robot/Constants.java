@@ -24,6 +24,7 @@ public final class Constants {
 	 * switch plugged in.
 	 */
 	public static final int PCM_1 = 1;
+	
 	/**
 	 * ID number ({@value}) of the extra PCM, used only for extra solenoid ports.
 	 */
@@ -44,45 +45,5 @@ public final class Constants {
 	 * <code>configSelectedFeedbackSensor(FeedbackSensor.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS)</code>
 	 */
 	public static final int TIMEOUT_MS = 10;
-
-	public static final double ftToM(double ftPerSec) {
-		return ftPerSec * 0.3048;
-	}
-
-	public static final double mToFt(double mPerSec) {
-		return mPerSec * (1 / 0.3048);
-	}
-
-	/**
-	 * All gearbox ratios of important non-driving moters
-	 * All ratios should be in terms of inner rotations to outer rotations
-	 */
-	public static final class gearbox {
-		
-		/**
-		 * Cargo intake
-		 * 10:1 in:out
-		 */
-		public static final double intakeCargo = 10;
-
-		/**
-		 * Cargo arm
-		 * 300:1 in:out 
-		 */
-		public static final double arm = 300;
-
-		/**
-		 * Hatch intake
-		 * 10:1 in:out
-		 */
-		public static final double intakeHatch = 10;
-
-		/**
-		 * Elevator
-		 * 50:1 in:out
-		 */
-		public static final double elevator = 50;
-
-	}
 
 }

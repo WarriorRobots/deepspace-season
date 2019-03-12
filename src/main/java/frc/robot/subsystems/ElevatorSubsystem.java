@@ -52,7 +52,7 @@ public class ElevatorSubsystem extends Subsystem {
 	 * Runs in Robot.java every tick, checking the Hall effect sensor and resetting
 	 * the encoder when it is triggered.
 	 */
-	public void loop() {
+	public void resetEncoderWhenFloored() {
 		if (isElevatorFloored()) {
 			resetEncoder();
 		}
