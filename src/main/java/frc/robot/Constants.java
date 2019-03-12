@@ -34,6 +34,14 @@ public final class Constants {
 	 */
 	public static final int TIMEOUT_MS = 10;
 
+	//camera
+	public static final double PIXELS_H = 320;
+	public static final double PIXELS_V = 240;
+	public static final double RAD_H = 1.04;
+	public static final double RAD_V = 0.867;
+	public static final double PPR_H = PIXELS_H / RAD_H;
+	public static final double PPR_V = PIXELS_V / RAD_V;
+
 	// DO NOT USE THIS CONSTRUCTOR
 	private Constants() {
 		DriverStation.reportError("Do not create an Constants object!", false);

@@ -5,6 +5,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
+import frc.robot.Constants;
 import frc.robot.QuickAccessVars;
 import frc.robot.commands.ChangePipeline;
 
@@ -156,7 +157,7 @@ public class CameraSubsystem extends Subsystem {
 		double height = visionTable.getEntry(TARGET_HEIGHT).getDouble(0);
 
 		// angle in radians
-		double angle = height / QuickAccessVars.PPR_V;
+		double angle = height / Constants.PPR_V;
 
 		// range = adj = opp/tan(Theta)
 		double range = QuickAccessVars.TARGET_HEIGHT / Math.tan(angle);

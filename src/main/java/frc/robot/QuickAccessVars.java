@@ -64,15 +64,9 @@ public final class QuickAccessVars {
 		// how much are the linear elevator/TreeUIarm/climb commands modified by?
 
 	// camera
-	public static final double CAMERA_TILT = 22 * Math.PI / 180; // TODO put back all camera constant comments
+	public static final double CAMERA_TILT = 22 * Math.PI / 180;
 	public static final double ELEVATION = 40;
 	public static final double TARGET_ELEVATION = 25;
-	public static final double PIXELS_H = 320;
-	public static final double PIXELS_V = 240;
-	public static final double RAD_H = 1.04;
-	public static final double RAD_V = 0.867;
-	public static final double PPR_H = PIXELS_H / RAD_H;
-	public static final double PPR_V = PIXELS_V / RAD_V;
 	public static final double TARGET_HEIGHT = 5.83;
 	public static final double CAMERA_DRIVE_THRESHOLD = 0.2;
 		// how far does the driver push the joystick to activate arcade drive during ApproachCurve
