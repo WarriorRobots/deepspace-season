@@ -12,7 +12,7 @@ import frc.robot.subsystems.CameraSubsystem;
  * of approach) and when it is aligned up (by the aspect ratio being 2.3 or above),
  * it approach the rest of the distance with it in front.
  */
-public class ApproachCurve extends Command {
+public class ApproachCurveDebug extends Command {
 
 	/** PID used for approaching the wall. */
 	private SynchronousPIDF PIDapproach;
@@ -63,7 +63,7 @@ public class ApproachCurve extends Command {
 	/** Left:Right height ratio of targets */
 	private double heightRatio;
 
-    public ApproachCurve() {
+    public ApproachCurveDebug() {
 		requires(Robot.drivetrain);
 		requires(Robot.camera);
 		requires(Robot.lineFollowers);
@@ -87,10 +87,13 @@ public class ApproachCurve extends Command {
 
 	@Override
 	protected void initialize() {
-		PIDapproach.setSetpoint(QuickAccessVars.SETPOINT_APPROACH); // Robot should aim to be be <setpoint> in away from the target
+		//PID.setIzone(minimumI, maximumI);
+		//PIDapproach.setOutputRange(-1, 1);
+		PIDapproach.setSetpoint(QuickAccessVars.SETPOINT_APPROACH); // Robot should aim to be be 50 in away from the target
 		try {PIDapproach.setOutputRange(-0.7, 0.7);}
 		catch(Exception e) {}
 
+		//PIDcenter.setOutputRange(-1, 1);	
 		PIDcenter.setSetpoint(QuickAccessVars.SETPOINT_CENTER); // Robot should aim to keep the target centered on the crosshair
 
 		timer.start();
@@ -104,6 +107,8 @@ public class ApproachCurve extends Command {
 
 		driver_control = false;
 		data_missing = false;
+
+		System.out.println("WWDEBUG: initialize() of ApproachCurve"); // TODO remove debug
 		
 	}
 	
@@ -117,6 +122,7 @@ public class ApproachCurve extends Command {
 			Math.abs(Robot.input.getRightX()) > QuickAccessVars.CAMERA_DRIVE_THRESHOLD)
 		{
 			driver_control = true;
+			System.out.println("WWDEBUG: driver_control = true"); // TODO remove debug
 		}
 
 		if(!driver_control) { // if the drivers are not controlling it do the auto part
@@ -128,6 +134,7 @@ public class ApproachCurve extends Command {
 
 	/** Moves the robot autonomously to the target. */
 	private void auto() {
+		System.out.println("WWDEBUG: auto()"); // TODO remove debug
 		if (
 			target_height[LEFT] == 0 || target_height[OVERALL] == 0 || target_height[RIGHT] == 0 ||
 			target_x[LEFT] == 0 || target_x[OVERALL] == 0 || target_x[RIGHT] == 0 ||
@@ -135,47 +142,61 @@ public class ApproachCurve extends Command {
 			)
 		{
 			data_missing = true;
+			System.out.println("WWDEBUG: Skipping moving, lacks data."); // TODO remove debug
 			return; // if any part of the data is unwritten to, then return out of function to avoid the
 			// the robot driving before it has data
 		} else {
 			data_missing = false;
 		}
 
+		debug_missing(); // TODO remove debug
+
 		if (Robot.camera.canSeeObject()) {
+			System.out.println("WWDEBUG: Can see object");
 
 			shiftCenter();
 
+			System.out.println("WWDEBUG: Calculating PIDs");
 			valueapproach = PIDapproach.calculate(target_distance, timer.get());
 			valuecenter = PIDcenter.calculate(target_x[OVERALL], timer.get());
 			
 			// helps to keep the robot to drive in a missile approach curve
 		} else {
+			System.out.println("WWDEBUG: Can not see object, setting motion to 0"); // TODO remove debug
 			// Set value to zero if the target can not be seen so robot does not go crazy
 			valueapproach = 0; 
 			// Don't 0 valuecenter because it should "remember" what direction it's attempting to turn.
 			valuecenter = 0;
 		}
-		
+
+		System.out.println("WWDEBUG: -valueapproach : "+Double.toString(-valueapproach)); // TODO remove debug
+		System.out.println("WWDEBUG: -valuecenter : "+Double.toString(-valuecenter)); // TODO remove debug
 		Robot.drivetrain.arcadeDriveRaw(-valueapproach, -valuecenter);
+		//System.out.println(valueapproach + " " + valuecenter);
 	}
 
 	private void drive() {
+		System.out.println("WWDEBUG: drive()"); // TODO remove debug
+		// Robot.camera.setPipeline(CameraSubsystem.PIPELINE_DRIVER); Conner does not want this
 		Robot.drivetrain.arcadeDriveTeleop(Robot.input.getRightY(QuickAccessVars.ARCADE_FORWARD_MODIFIER),
         	Robot.input.getRightX(QuickAccessVars.ARCADE_TURN_MODIFIER));
 	}
 
 	private void updateTargetData() {
+		System.out.println("WWDEBUG: updateTargetData()"); // TODO remove debug
 
 		if (Robot.camera.getPipeline() == intendedPipe) { // wait for pipeline to be the intened one
 			switch (intendedPipe) {
 		
 				case PIPELEFT: // Left
+					System.out.println("WWDEBUG: Looking at Left"); // TODO remove debug
 					target_height[LEFT] = Robot.camera.getTargetHeight();
 					target_x[LEFT] = Robot.camera.getObjectX();
 					Robot.camera.setPipeline(PIPEOVERALL);
 					intendedPipe = PIPEOVERALL;
 					break;
 				case PIPEOVERALL: // Overall
+					System.out.println("WWDEBUG: Looking at Both"); // TODO remove debug
 					target_height[OVERALL] = Robot.camera.getTargetHeight();
 					target_x[OVERALL] = Robot.camera.getObjectX();
 					target_distance = Robot.camera.getTargetDistance();
@@ -187,9 +208,11 @@ public class ApproachCurve extends Command {
 						// set the targets to be the same height
 						// so it doesn't try to turn to fix it
 						heightRatio = 1;
+						System.out.println("WWDEBUG: Staying looking for Both (assuming straight on)"); // TODO remove debug
 					}
 					break;
 				case PIPERIGHT: // Right
+					System.out.println("WWDEBUG: Looking at Right"); // TODO remove debug
 					target_height[RIGHT] = Robot.camera.getTargetHeight();
 					target_x[RIGHT] = Robot.camera.getObjectX();
 					Robot.camera.setPipeline(PIPELEFT);
@@ -205,8 +228,11 @@ public class ApproachCurve extends Command {
 				// if the height ratio doesn't say its straight on...
 				// find how off it is
 				heightRatio = target_height[LEFT]/target_height[RIGHT];
+				System.out.println("WWDEBUG: Set heightRatio = "+Double.toString(heightRatio)); // TODO remove debug
 			}
 		} catch(Exception e) {
+			System.out.println(e); // TODO remove debug
+			System.out.println("WWDEBUG: Error above forces heightRatio to be 0"); // TODO remove debug
 			heightRatio = 0;
 		}
 
@@ -218,6 +244,7 @@ public class ApproachCurve extends Command {
 	 * This should make the turn be an arc to make the robot perpendicular to the target.
 	 */ 
 	private void shiftCenter(){
+		System.out.println("WWDEBUG: shiftCenter()");
 
 		// don't move the setpoint if there is an issue
 		if (heightRatio==0) return;
@@ -243,16 +270,33 @@ public class ApproachCurve extends Command {
 		// now with x being between -1 and 1 we can multiply by the degrees we want the camera to turn
 		// at most (25 degrees)
 		double point = x * 25;
+		System.out.println("WWDEBUG: Set PIDcenter's setpoint to: "+Double.toString(point)); // TODO remove debug
 		PIDcenter.setSetpoint(point);
+	}
+
+	private void debug_missing() {
+		if( target_height[LEFT] == 0 ) { System.out.println("WWDEBUG: Missing data: target_height[LEFT]"); }
+		if( target_height[OVERALL] == 0 ) { System.out.println("WWDEBUG: Missing data: target_height[OVERALL]"); }
+		if( target_height[RIGHT] == 0 ) { System.out.println("WWDEBUG: Missing data: target_height[RIGHT]"); }
+		if( target_x[LEFT] == 0 ) { System.out.println("WWDEBUG: Missing data: target_x[LEFT]"); }
+		if( target_x[OVERALL] == 0 ) { System.out.println("WWDEBUG: Missing data: target_x[OVERALL]"); }
+		if( target_x[RIGHT] == 0 ) { System.out.println("WWDEBUG: Missing data: target_x[RIGHT]"); }
+		if( target_distance == 0 ) { System.out.println("WWDEBUG: Missing data: target_distance"); }
 	}
 	
     @Override
 	protected boolean isFinished() {
+		// return Robot.lineFollowers.onLine();
 		return false;
+		/*
+		return (Robot.camera.getTargetDistance() < QuickAccessVars.SETPOINT_APPROACH &&
+			PIDapproach.onTarget(QuickAccessVars.TOLERANCE_APPROACH));
+		*/
 	}
 	
 	@Override
 	protected void end() {
+		System.out.println("WWDEBUG: end() of ApproachCurve");
 		timer.stop();
 		PIDapproach.reset();
 		PIDcenter.reset();
