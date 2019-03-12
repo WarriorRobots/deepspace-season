@@ -44,6 +44,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData(hatchPickupWheels);
 		SmartDashboard.putData(lineFollowers);
 		SmartDashboard.putData(pneumatics);
+		climb.resetEncoder();
 	}
 
 	@Override
