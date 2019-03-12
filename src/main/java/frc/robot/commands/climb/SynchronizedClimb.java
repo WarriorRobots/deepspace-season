@@ -8,6 +8,9 @@ public class SynchronizedClimb extends Command {
 
   private double initialClimbPos, initialElevPos;
 
+  /**
+   * Move the elevator and climb down in sync.
+   */
   public SynchronizedClimb() {
     requires(Robot.climb);
     requires(Robot.elevator);

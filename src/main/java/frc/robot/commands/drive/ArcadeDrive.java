@@ -7,8 +7,8 @@ import frc.robot.Robot;
 public class ArcadeDrive extends Command {
 
   /**
-   * Push the right joystick vertically to drive forwards/backwards, and
-   * horizontally to turn.
+   * Push the right joystick vertically to drive forwards/backwards,
+   * and horizontally to turn.
    */
   public ArcadeDrive() {
     requires(Robot.drivetrain);

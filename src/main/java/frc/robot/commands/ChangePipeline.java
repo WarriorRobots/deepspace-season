@@ -3,11 +3,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-/** ChangePipeline changes the pipeline of the limeight to a new specified pipeline. */
 public class ChangePipeline extends Command {
 
   int pipeline;
 
+  /**
+   * Changes the pipeline ID of the limelight, which switches the vision tracking settings.
+   * Use the static variables in CameraSubsystem.
+   */
   public ChangePipeline(int pipeline) {
     requires(Robot.camera);
     this.pipeline = pipeline;

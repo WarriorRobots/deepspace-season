@@ -15,6 +15,8 @@ public class DebugRebootAll extends InstantCommand {
      * <p>
      * The static method <code>rebootAll()</code> is also made available for running
      * this outside of a command.
+     * 
+     * @see #rebootAll()
      */
     public DebugRebootAll() {
         requires(Robot.arm);
@@ -33,6 +35,11 @@ public class DebugRebootAll extends InstantCommand {
         rebootAll();
     }
 
+    /**
+     * In one loop: sets all motor speeds to zero, resets all solenoids, and stops
+     * all commands. This effectively reboots every component on the robot except
+     * encoders. Use with care!
+     */
     public static void rebootAll() {
         System.out.println("WWDEBUG: DebugRebootAll");
         Robot.arm.stopArm();

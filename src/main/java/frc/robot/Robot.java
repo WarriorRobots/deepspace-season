@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
 	public static final LineFollowerSubsystem lineFollowers = new LineFollowerSubsystem();
 	public static final PneumaticSubsystem pneumatics = new PneumaticSubsystem();
 
-	/** Reference this to get input from our joysticks. */
+	/** Reference this to get input from the joysticks and Xbox controller. */
 	public static ControlHandler input;
 
 	@Override

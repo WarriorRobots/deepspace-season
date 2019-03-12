@@ -9,7 +9,6 @@ public class AdjustElevatorRelative extends Command {
 
     /**
      * Adjust the elevator position relative to its current position.
-     * 
      * @param adjustBy How far up or down the elevator will move from its current
      *                 position. Positive for up, negative for down.
      */

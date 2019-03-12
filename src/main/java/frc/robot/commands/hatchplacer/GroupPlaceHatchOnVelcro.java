@@ -8,7 +8,6 @@ public class GroupPlaceHatchOnVelcro extends CommandGroup {
 
     /**
      * Command to place a hatch on the velcro strips.
-     * 
      * @param safemode If this is set to true, the hatch cannot be placed without a
      *                 signal from the line followers.
      */

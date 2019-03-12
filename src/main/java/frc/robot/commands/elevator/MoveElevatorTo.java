@@ -10,11 +10,8 @@ public class MoveElevatorTo extends Command {
     private double target;
 
     /**
-     * Move the elevator's central assembly to a certain number of inches <b>above
-     * the floor</b>.
-     * 
-     * @param positionInches How far ABOVE THE FLOOR the elevator should be, in
-     *                       inches.
+     * Move the elevator's central assembly to a certain number of inches <b>above the floor</b>.
+     * @param positionInches How far ABOVE THE FLOOR the elevator should be, in inches.
      */
     public MoveElevatorTo(double positionInches) {
         requires(Robot.elevator);

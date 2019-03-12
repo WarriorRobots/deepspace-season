@@ -6,8 +6,8 @@ import frc.robot.Robot;
 public class DefaultTankDrive extends Command {
 
   /**
-   * Push the left joystick vertically to drive the left wheels. Push the right
-   * joystick vertically to drive the right wheels.
+   * Push the left joystick vertically to drive the left wheels.
+   * Push the right joystick vertically to drive the right wheels.
    */
   public DefaultTankDrive() {
     requires(Robot.drivetrain);
