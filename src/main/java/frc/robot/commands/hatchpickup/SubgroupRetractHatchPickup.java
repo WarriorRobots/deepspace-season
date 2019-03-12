@@ -6,35 +6,35 @@ import frc.robot.Robot;
 
 public class SubgroupRetractHatchPickup extends Command {
 
-  private int counter;
+	private int counter;
 
-  /**
-   * Subgroup command to retract the hatch pickup. Don't run this, use a
-   * GroupCommand instead.
-   */
-  public SubgroupRetractHatchPickup() {
-    requires(Robot.pneumatics);
-  }
+	/**
+	 * Subgroup command to retract the hatch pickup. Don't run this, use a
+	 * GroupCommand instead.
+	 */
+	public SubgroupRetractHatchPickup() {
+		requires(Robot.pneumatics);
+	}
 
-  @Override
-  protected void initialize() {
-    counter = 0;
-  }
+	@Override
+	protected void initialize() {
+		counter = 0;
+	}
 
-  @Override
-  protected void execute() {
-    counter++;
-    Robot.pneumatics.retractPickup();
-  }
+	@Override
+	protected void execute() {
+		counter++;
+		Robot.pneumatics.retractPickup();
+	}
 
-  @Override
-  protected boolean isFinished() {
-    return counter > QuickAccessVars.PNEUMATIC_LOOP_COUNT;
-  }
+	@Override
+	protected boolean isFinished() {
+		return counter > QuickAccessVars.PNEUMATIC_LOOP_COUNT;
+	}
 
-  @Override
-  protected void end() {
-    Robot.pneumatics.neutralizePickup();
-  }
+	@Override
+	protected void end() {
+		Robot.pneumatics.neutralizePickup();
+	}
 
 }

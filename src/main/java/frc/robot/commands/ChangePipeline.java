@@ -5,24 +5,24 @@ import frc.robot.Robot;
 
 public class ChangePipeline extends Command {
 
-  int pipeline;
+	int pipeline;
 
-  /**
-   * Changes the pipeline ID of the limelight, which switches the vision tracking settings.
-   * Use the static variables in CameraSubsystem.
-   */
-  public ChangePipeline(int pipeline) {
-    requires(Robot.camera);
-    this.pipeline = pipeline;
-  }
+	/**
+	 * Changes the pipeline ID of the limelight, which switches the vision tracking settings.
+	 * Use the static variables in CameraSubsystem.
+	 */
+	public ChangePipeline(int pipeline) {
+		requires(Robot.camera);
+		this.pipeline = pipeline;
+	}
 
-  @Override
-  protected void initialize() {
-    Robot.camera.setPipeline(pipeline);
-  }
+	@Override
+	protected void initialize() {
+		Robot.camera.setPipeline(pipeline);
+	}
 
-  @Override
-  protected boolean isFinished() {
-    return true;
-  }
+	@Override
+	protected boolean isFinished() {
+		return true;
+	}
 }

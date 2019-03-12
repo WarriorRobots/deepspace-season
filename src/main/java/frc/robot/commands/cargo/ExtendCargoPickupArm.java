@@ -5,30 +5,30 @@ import frc.robot.Robot;
 
 public class ExtendCargoPickupArm extends Command {
 
-  private double angle;
+	private double angle;
 
-  /**
-   * Rotates the arm to the specified angle.
-   * @param angle Should always be positive.
-   */
-  public ExtendCargoPickupArm(double angle) {
-    requires(Robot.arm);
-    this.angle = angle;
-  }
+	/**
+	 * Rotates the arm to the specified angle.
+	 * @param angle Should always be positive.
+	 */
+	public ExtendCargoPickupArm(double angle) {
+		requires(Robot.arm);
+		this.angle = angle;
+	}
 
-  @Override
-  protected void execute() {
-    Robot.arm.rotateArmTo(angle);
-  }
+	@Override
+	protected void execute() {
+		Robot.arm.rotateArmTo(angle);
+	}
 
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
+	@Override
+	protected boolean isFinished() {
+		return false;
+	}
 
-  @Override
-  protected void end() {
-    Robot.arm.stopArm();
-  }
+	@Override
+	protected void end() {
+		Robot.arm.stopArm();
+	}
 
 }

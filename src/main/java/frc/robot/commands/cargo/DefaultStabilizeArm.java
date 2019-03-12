@@ -5,32 +5,32 @@ import frc.robot.Robot;
 
 public class DefaultStabilizeArm extends Command {
 
-  private double initialPosition;
+	private double initialPosition;
 
-  /**
-   * Holds the arm in a stable position using motor power to fight gravity.
-   */
-  public DefaultStabilizeArm() {
-    requires(Robot.arm);
-  }
+	/**
+	 * Holds the arm in a stable position using motor power to fight gravity.
+	 */
+	public DefaultStabilizeArm() {
+		requires(Robot.arm);
+	}
 
-  @Override
-  protected void initialize() {
-    initialPosition = Robot.arm.getArmAngle();
-  }
+	@Override
+	protected void initialize() {
+		initialPosition = Robot.arm.getArmAngle();
+	}
 
-  @Override
-  protected void execute() {
-    Robot.arm.stabilizeArm(initialPosition);
-  }
+	@Override
+	protected void execute() {
+		Robot.arm.stabilizeArm(initialPosition);
+	}
 
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
+	@Override
+	protected boolean isFinished() {
+		return false;
+	}
 
-  @Override
-  protected void end() {
-    Robot.arm.stopArm();
-  }
+	@Override
+	protected void end() {
+		Robot.arm.stopArm();
+	}
 }

@@ -19,7 +19,7 @@ public class DebugResetArmEncoder extends Command {
         Robot.arm.rotateArmLinear(QuickAccessVars.ARM_RESET_SPEED);
         System.out.println("WWDEBUG: DebugResetArmEncoder is running");
     }
-    
+
     @Override
     protected boolean isFinished() {
         return Robot.arm.isLimitSwitchTriggered();

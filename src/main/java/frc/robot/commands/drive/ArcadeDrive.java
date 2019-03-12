@@ -6,27 +6,27 @@ import frc.robot.Robot;
 
 public class ArcadeDrive extends Command {
 
-  /**
-   * Push the right joystick vertically to drive forwards/backwards,
-   * and horizontally to turn.
-   */
-  public ArcadeDrive() {
-    requires(Robot.drivetrain);
-  }
+	/**
+	 * Push the right joystick vertically to drive forwards/backwards,
+	 * and horizontally to turn.
+	 */
+	public ArcadeDrive() {
+		requires(Robot.drivetrain);
+	}
 
-  @Override
-  protected void execute() {
-    Robot.drivetrain.arcadeDriveTeleop(Robot.input.getRightY(QuickAccessVars.ARCADE_FORWARD_MODIFIER),
-        Robot.input.getRightX(QuickAccessVars.ARCADE_TURN_MODIFIER));
-  }
+	@Override
+	protected void execute() {
+		Robot.drivetrain.arcadeDriveTeleop(Robot.input.getRightY(QuickAccessVars.ARCADE_FORWARD_MODIFIER),
+				Robot.input.getRightX(QuickAccessVars.ARCADE_TURN_MODIFIER));
+	}
 
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
+	@Override
+	protected boolean isFinished() {
+		return false;
+	}
 
-  @Override
-  protected void end() {
-    Robot.drivetrain.stopDrive();
-  }
+	@Override
+	protected void end() {
+		Robot.drivetrain.stopDrive();
+	}
 }

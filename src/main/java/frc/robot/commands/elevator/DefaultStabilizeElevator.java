@@ -5,34 +5,34 @@ import frc.robot.Robot;
 
 public class DefaultStabilizeElevator extends Command {
 
-    private double initialPosition;
+	private double initialPosition;
 
-    /**
-     * Holds the elevator winch in a stable position using motor power to fight
-     * gravity.
-     */
-    public DefaultStabilizeElevator() {
-        requires(Robot.elevator);
-    }
+	/**
+	 * Holds the elevator winch in a stable position using motor power to fight
+	 * gravity.
+	 */
+	public DefaultStabilizeElevator() {
+		requires(Robot.elevator);
+	}
 
-    @Override
-    protected void initialize() {
-        initialPosition = Robot.elevator.getElevatorPosition();
-    }
+	@Override
+	protected void initialize() {
+		initialPosition = Robot.elevator.getElevatorPosition();
+	}
 
-    @Override
-    protected void execute() {
-        Robot.elevator.stabilizeElevator(initialPosition);
-    }
+	@Override
+	protected void execute() {
+		Robot.elevator.stabilizeElevator(initialPosition);
+	}
 
-    @Override
-    protected boolean isFinished() {
-        return false;
-    }
+	@Override
+	protected boolean isFinished() {
+		return false;
+	}
 
-    @Override
-    protected void end() {
-        Robot.elevator.stopElevator();
-    }
+	@Override
+	protected void end() {
+		Robot.elevator.stopElevator();
+	}
 
 }

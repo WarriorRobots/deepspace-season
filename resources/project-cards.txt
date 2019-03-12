@@ -1,0 +1,34 @@
+Limelight 2:
+	Tracking Speed: 90fps
+	Tracking Resolution: 320 x 240 pixels
+	Field-of-View: 59.6 x 49.7 degrees
+	Dimensions: 3.819 x 2.194 x 0.984 in (97.005 x 53.730 x 25.00 mm)
+	Weight: .25 lbs
+	Tracking Interfaces: Network Tables  
+	Total latency (Photons -> Robot) : 21-25 milliseconds
+   Pipeline Latency: 3-7 milliseconds
+   NetworkTables -> Robot latency: .3 milliseconds 
+   (NT limits bypassed to instantly submit targeting data.)
+	Luminous Flux: 400 lumens
+   60% more light than the standard dual-ring setup
+   Illuminance is increased by gloss-finish LED cones
+	Constant-brightness LEDs down to 7 volts
+
+Limelight 1:
+	Tracking Speed: 90fps
+	Tracking Resolution: 320x240
+	Field-of-View: 54 x 41 degrees
+	Size: 3.8" x 3.8" x .8"
+	Weight: .25 lbs
+	Tracking Interfaces: Network Tables, Seria
+	Luminous Flux: 400 lumens
+	Image-To-Target Latency: 6ms
+
+Pathfinder Values:
+- max vel 10 ft/s (10.25)
+- max accel 12 ft/s^2 (half of the theoretical max)
+- max jerk:
+	- slope formula from 0.19 seconds to 0.92 seconds of the accel curve
+	- comes out to 27.397 ft/sec^3
+	- round down to 27.3 ft/sec^3
+- wheelbase 2.167 ft

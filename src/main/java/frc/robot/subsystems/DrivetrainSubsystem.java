@@ -40,10 +40,10 @@ public class DrivetrainSubsystem extends Subsystem {
 
 	/** The robot wheel is {@value} inches in diameter. */
 	public static final double WHEEL_DIAMETER = 6.0;
-	
+
 	/** A Grayhill encoder has {@value} clicks per revolution. */
 	public static final int CLICKS_PER_REV = 128;
-	
+
 	/**
 	 * The robot travels {@value} inches per encoder click.
 	 */

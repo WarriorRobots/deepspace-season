@@ -6,37 +6,37 @@ import frc.robot.Robot;
 
 public class TurnLockDrive extends Command {
 
-    /**
-     * A drive command for use at high speeds, which will not be sensitive to small
-     * changes in joystick position. Allows drivers to drive in straight lines
-     * without perfect control of joysticks.
-     */
-    public TurnLockDrive() {
-        requires(Robot.drivetrain);
-    }
+	/**
+	 * A drive command for use at high speeds, which will not be sensitive to small
+	 * changes in joystick position. Allows drivers to drive in straight lines
+	 * without perfect control of joysticks.
+	 */
+	public TurnLockDrive() {
+		requires(Robot.drivetrain);
+	}
 
-    @Override
-    protected void execute() {
-        double leftSpeed = Robot.input.getLeftY();
-        double rightSpeed = Robot.input.getRightY();
+	@Override
+	protected void execute() {
+		double leftSpeed = Robot.input.getLeftY();
+		double rightSpeed = Robot.input.getRightY();
 
-        double difference = Math.abs(leftSpeed - rightSpeed);
-        double average = (leftSpeed + rightSpeed) / 2.0;
+		double difference = Math.abs(leftSpeed - rightSpeed);
+		double average = (leftSpeed + rightSpeed) / 2.0;
 
-        // TURNLOCK_THRESHOLD is how far apart the joystick values have to be (in
-        // decimal percentage) before TurnLock disables.
-        if (difference < QuickAccessVars.TURNLOCK_THRESHOLD) {
-            // the values are averaged and the robot drives straight
-            Robot.drivetrain.tankDriveTeleop(average, average);
-        } else {
-            // normal TeleopTankDrive behavior
-            Robot.drivetrain.tankDriveTeleop(leftSpeed, rightSpeed);
-        }
-    }
+		// TURNLOCK_THRESHOLD is how far apart the joystick values have to be (in
+		// decimal percentage) before TurnLock disables.
+		if (difference < QuickAccessVars.TURNLOCK_THRESHOLD) {
+			// the values are averaged and the robot drives straight
+			Robot.drivetrain.tankDriveTeleop(average, average);
+		} else {
+			// normal TeleopTankDrive behavior
+			Robot.drivetrain.tankDriveTeleop(leftSpeed, rightSpeed);
+		}
+	}
 
-    @Override
-    protected boolean isFinished() {
-        return false;
-    }
+	@Override
+	protected boolean isFinished() {
+		return false;
+	}
 
 }

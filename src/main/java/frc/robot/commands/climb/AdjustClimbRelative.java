@@ -5,37 +5,37 @@ import frc.robot.Robot;
 
 public class AdjustClimbRelative extends Command {
 
-    private double initialPosition, adjustBy, target;
+	private double initialPosition, adjustBy, target;
 
-    /**
-     * Adjust the climb position relative to its current position.
-     * @param adjustBy How far up or down the elevator will move from its current
-     *                 position. Positive for up, negative for down.
-     */
-    public AdjustClimbRelative(double adjustBy) {
-        requires(Robot.climb);
-        this.adjustBy = adjustBy;
-    }
+	/**
+	 * Adjust the climb position relative to its current position.
+	 * @param adjustBy How far up or down the elevator will move from its current
+	 *                 position. Positive for up, negative for down.
+	 */
+	public AdjustClimbRelative(double adjustBy) {
+		requires(Robot.climb);
+		this.adjustBy = adjustBy;
+	}
 
-    @Override
-    protected void initialize() {
-        initialPosition = Robot.climb.getClimbPosition();
-        target = initialPosition + adjustBy;
-    }
+	@Override
+	protected void initialize() {
+		initialPosition = Robot.climb.getClimbPosition();
+		target = initialPosition + adjustBy;
+	}
 
-    @Override
-    protected void execute() {
-        Robot.climb.moveClimbTo(target);
-    }
+	@Override
+	protected void execute() {
+		Robot.climb.moveClimbTo(target);
+	}
 
-    @Override
-    protected boolean isFinished() {
-        return false;
-    }
+	@Override
+	protected boolean isFinished() {
+		return false;
+	}
 
-    @Override
-    protected void end() {
-        Robot.climb.stopClimb();
-    }
+	@Override
+	protected void end() {
+		Robot.climb.stopClimb();
+	}
 
 }
