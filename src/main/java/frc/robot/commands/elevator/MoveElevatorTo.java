@@ -15,7 +15,7 @@ public class MoveElevatorTo extends Command {
      */
     public MoveElevatorTo(double positionInches) {
         requires(Robot.elevator);
-        this.target = positionInches - QuickAccessVars.SCISSORS_HEIGHT;
+        this.target = positionInches - QuickAccessVars.ELEVATOR_BASE_HEIGHT;
     }
 
     @Override

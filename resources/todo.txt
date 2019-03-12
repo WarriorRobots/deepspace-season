@@ -1,7 +1,5 @@
 update talons
 check brakemode
-update the wiring guide and print it
-packing list
 move github cards onto a txt file
 golden master (create a release)
 setup dashboard layout
