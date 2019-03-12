@@ -90,8 +90,8 @@ public class DrivetrainSubsystem extends Subsystem {
 		leftEnc = new Encoder(LEFT_ENCODER_PORTA, LEFT_ENCODER_PORTB);
 		rightEnc = new Encoder(RIGHT_ENCODER_PORTA, RIGHT_ENCODER_PORTB);
 
-		leftEnc.setReverseDirection(QuickAccessVars.LEFT_ENCODER_REVERSED);
-		rightEnc.setReverseDirection(QuickAccessVars.RIGHT_ENCODER_REVERSED);
+		leftEnc.setReverseDirection(QuickAccessVars.LEFT_DRIVE_ENCODER_REVERSED);
+		rightEnc.setReverseDirection(QuickAccessVars.RIGHT_DRIVE_ENCODER_REVERSED);
 	}
 
 	/**

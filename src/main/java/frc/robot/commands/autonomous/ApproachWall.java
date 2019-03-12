@@ -7,6 +7,7 @@ import frc.robot.util.SynchronousPIDF;
 import edu.wpi.first.wpilibj.Timer;
 
 /** Approach the wall keeping the target centered using 2 different PIDs. */
+@Deprecated
 public class ApproachWall extends Command {
 
 	/** PID used for approaching the wall. */

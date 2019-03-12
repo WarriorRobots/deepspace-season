@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Timer;
  * on the direction of approach) and when it is aligned up (by the aspect ratio
  * being 2.3 or above), it approach the rest of the distance with it in front.
  */
+@Deprecated
 public class ApproachStraight extends Command {
 
 	/** PID used for approaching the wall. */

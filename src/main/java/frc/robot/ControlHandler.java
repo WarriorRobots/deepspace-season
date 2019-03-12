@@ -18,7 +18,6 @@ import frc.robot.commands.debug.DebugDisableCompressor;
 import frc.robot.commands.debug.DebugEnableCompressor;
 import frc.robot.commands.debug.DebugRebootAll;
 import frc.robot.commands.autonomous.ApproachCurve;
-import frc.robot.commands.autonomous.ApproachStraight;
 import frc.robot.commands.cargo.ExtendCargoPickupArm;
 import frc.robot.commands.cargo.RetractCargoPickupArm;
 import frc.robot.commands.drive.ArcadeDrive;
