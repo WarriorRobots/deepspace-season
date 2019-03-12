@@ -8,8 +8,7 @@ public class AdjustClimbRelative extends Command {
     private double initialPosition, adjustBy, target;
 
     /**
-     * Adjust the elevator position relative to its current position.
-     * 
+     * Adjust the climb position relative to its current position.
      * @param adjustBy How far up or down the elevator will move from its current
      *                 position. Positive for up, negative for down.
      */

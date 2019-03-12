@@ -8,9 +8,8 @@ public class ExtendCargoPickupArm extends Command {
   private double angle;
 
   /**
-   * Drops the arm to the specified angle.
-   * 
-   * @param angle Between 0 and 180 degrees
+   * Rotates the arm to the specified angle.
+   * @param angle Should always be positive.
    */
   public ExtendCargoPickupArm(double angle) {
     requires(Robot.arm);

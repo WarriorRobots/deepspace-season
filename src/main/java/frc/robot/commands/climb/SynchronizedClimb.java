@@ -1,16 +1,16 @@
 package frc.robot.commands.climb;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
 public class SynchronizedClimb extends Command {
 
-  private double target, initialClimbPos, initialElevPos;
+  private double initialClimbPos, initialElevPos;
 
   public SynchronizedClimb() {
     requires(Robot.climb);
     requires(Robot.elevator);
-    this.target = -20; // XXX
   }
 
   @Override
@@ -21,7 +21,9 @@ public class SynchronizedClimb extends Command {
 
   @Override
   protected void execute() {
-    Robot.climb.moveClimbTo(target);
+    Robot.climb.moveClimbTo(QuickAccessVars.CLIMB_TARGET_HEIGHT);
+    // current - initial climb position gets the difference
+    // then add initial elevator position to find out where the elevator should be
     Robot.elevator.moveElevatorTo(Robot.climb.getClimbPosition() - initialClimbPos + initialElevPos);
   }
 
@@ -36,14 +38,3 @@ public class SynchronizedClimb extends Command {
     Robot.elevator.stopElevator();
   }
 }
-
-/* TODO fix
-change = final - initial
-c = f - i
-
-Cc = Cf - Ci
-Ec = Ef - Ei
-Cc = Ec
-Cf - Ci = Ef - Ei
-Cf - Ci + Ei = Ef
-*/

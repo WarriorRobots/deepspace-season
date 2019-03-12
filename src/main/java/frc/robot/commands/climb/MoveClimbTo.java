@@ -7,9 +7,13 @@ public class MoveClimbTo extends Command {
 
   private double target;
 
-  public MoveClimbTo(double target) {
+  /**
+   * Move the climb to the specified position in inches.
+   * @param inches Should always be negative, where 0 is the absolute top position.
+   */
+  public MoveClimbTo(double inches) {
     requires(Robot.climb);
-    this.target = target;
+    this.target = inches;
   }
 
   @Override

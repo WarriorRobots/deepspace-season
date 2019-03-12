@@ -6,7 +6,7 @@ import frc.robot.Robot;
 public class RetractCargoPickupArm extends Command {
 
   /**
-   * Raises the arm to zero degrees (straight upwards).
+   * Rotates the arm to zero degrees (straight upwards).
    */
   public RetractCargoPickupArm() {
     requires(Robot.arm);

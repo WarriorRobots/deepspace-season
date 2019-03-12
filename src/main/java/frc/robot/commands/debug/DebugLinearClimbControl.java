@@ -10,8 +10,11 @@ public class DebugLinearClimbControl extends Command {
   private DoubleSupplier input;
 
   /**
-   * Run the climb linearly based on the input from the Left joystick on the xbox
-   * controller (as long as the elevator linear isn't being run)
+   * Given a lambda function reading a joystick, this command 
+   * will drive the arm motor at a percentage speed.
+   * <p> Safety is built in to avoid crashing the arm.
+   * @param input A lambda function <code>() -> getSomeValue()</code> that returns
+   *              a number between -1 (upwards) and 1 (outwards).
    */
   public DebugLinearClimbControl(DoubleSupplier input) {
     requires(Robot.climb);

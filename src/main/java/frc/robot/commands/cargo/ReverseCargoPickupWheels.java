@@ -6,8 +6,8 @@ import frc.robot.Robot;
 public class ReverseCargoPickupWheels extends Command {
 
     /**
-     * Runs the cargo pickup wheels backwards at full speed, hopefully for scoring a
-     * ball into a cargo/rocket bay.
+     * Runs the cargo pickup wheels backwards at full speed,
+     * hopefully for scoring a ball into a cargo/rocket bay.
      */
     public ReverseCargoPickupWheels() {
         requires(Robot.cargoPickupWheels);

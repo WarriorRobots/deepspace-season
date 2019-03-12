@@ -7,6 +7,10 @@ public class DefaultStabilizeClimb extends Command {
 
     private double initialPosition;
 
+    /**
+     * Holds the climb in a stable position,
+     * using motor power to fight changes in position.
+     */
     public DefaultStabilizeClimb() {
         requires(Robot.climb);
     }

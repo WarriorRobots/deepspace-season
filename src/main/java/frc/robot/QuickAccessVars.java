@@ -18,6 +18,7 @@ public final class QuickAccessVars {
 	public static final double CLIMB_MINIMUM_TARGET = -22;
 	public static final double CLIMB_MAXIMUM_TARGET = 0;
 	public static final double ADJUST_CLIMB_BY = 0.5;
+	public static final double CLIMB_TARGET_HEIGHT = -20;
 
 	// motor speeds (-1.0 to 1.0)
 	public static final double ARCADE_FORWARD_MODIFIER = 0.5;
