@@ -33,7 +33,7 @@ Do these tasks as they become available (robot starts to be put together):
 2. Glance over the robot for any backwards/loose wires.
 3. Press OFF on the breaker, then plug in the battery.
 4. Turn on the robot. If there is any popping or sparking, turn it off IMMEDIATELY.
-5. Is the orange RSL light (Mr. Blinky) lit up with solid orange?
+5. Is the orange RSL light lit up with solid orange?
 6. Are the talons, PDP, and PCM blinking red? If so, plug in the computer and fix IDs using Phoenix Tuner. Use the wiring guide in the top of the toolbox. Talons will blink yellow when you successfully finish.
 7. Is the radio blinking with blue and/or orange lights? If not, check the power cable.
 8. Are the hall effect sensors lit up with a green light? Wave a magnet near both hall effect sensors and verify that a yellow light turns on.
