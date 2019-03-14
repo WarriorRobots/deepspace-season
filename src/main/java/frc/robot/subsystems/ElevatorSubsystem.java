@@ -68,7 +68,7 @@ public class ElevatorSubsystem extends Subsystem {
 			winch.set(ControlMode.Position, toClicks(QuickAccessVars.ELEVATOR_MINIMUM_TARGET));
 			System.out.println("Elevator moving to " + inches + ", cutting short to prevent crash!");
 		} else if (aboveMaximum(inches)) {
-			winch.set(ControlMode.Position, toClicks(QuickAccessVars.ELEVATOR_MAXIMUM_TARGET));
+			winch.set(ControlMode.Position, toClicks(QuickAccessVars.ELEVATOR_MAXIMUM_TARGET)); // FIXME too high, go from 13
 			System.out.println("Elevator moving to " + inches + ", cutting short to prevent crash!");
 		} else {
 			winch.set(ControlMode.Position, toClicks(inches));
