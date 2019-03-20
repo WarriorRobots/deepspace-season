@@ -14,6 +14,11 @@ public class ReverseCargoPickupWheels extends Command {
 	}
 
 	@Override
+	protected void initialize() {
+		System.out.println("CargoPickup: Starting " + this.getClass().getSimpleName());
+	}
+
+	@Override
 	protected void execute() {
 		Robot.cargoPickupWheels.runPickup(-1);
 	}
@@ -26,6 +31,13 @@ public class ReverseCargoPickupWheels extends Command {
 	@Override
 	protected void end() {
 		Robot.cargoPickupWheels.stopPickup();
+		System.out.println("Arm: Finishing " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		Robot.arm.stopArm();
+		System.out.println("Arm: Canceling " + this.getClass().getSimpleName());
 	}
 
 }

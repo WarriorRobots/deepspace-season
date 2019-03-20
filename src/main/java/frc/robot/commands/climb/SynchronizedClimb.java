@@ -45,6 +45,8 @@ public class SynchronizedClimb extends Command {
 
 	@Override
 	protected void interrupted() {
+		Robot.climb.stopClimb();
+		Robot.elevator.stopElevator();
 		System.out.println("Climb: Canceling " + this.getClass().getSimpleName());
 	}
 }

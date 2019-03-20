@@ -39,6 +39,7 @@ public class DefaultStabilizeClimb extends Command {
 
 	@Override
 	protected void interrupted() {
+		Robot.climb.stopClimb();
 		System.out.println("Climb: Canceling " + this.getClass().getSimpleName());
 	}
 
