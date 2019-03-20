@@ -19,6 +19,7 @@ public class SubgroupExtendHatchPickup extends Command {
 	@Override
 	protected void initialize() {
 		counter = 0;
+		System.out.println("Pneumatics: Starting " + this.getClass().getSimpleName());
 	}
 
 	@Override
@@ -35,6 +36,13 @@ public class SubgroupExtendHatchPickup extends Command {
 	@Override
 	protected void end() {
 		Robot.pneumatics.neutralizePickup();
+		System.out.println("Pneumatics: Finishing " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		Robot.pneumatics.neutralizePickup();
+		System.out.println("Pneumatics: Canceling " + this.getClass().getSimpleName());
 	}
 
 }

@@ -19,6 +19,11 @@ public class MoveElevatorTo extends Command {
 	}
 
 	@Override
+	protected void initialize() {
+		System.out.println("Elevator: Starting " + this.getClass().getSimpleName());
+	}
+
+	@Override
 	protected void execute() {
 		Robot.elevator.moveElevatorTo(target);
 	}
@@ -31,6 +36,13 @@ public class MoveElevatorTo extends Command {
 	@Override
 	protected void end() {
 		Robot.elevator.stopElevator();
+		System.out.println("Elevator: Finishing " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		Robot.elevator.stopElevator();
+		System.out.println("Elevator: Canceling " + this.getClass().getSimpleName());
 	}
 
 }

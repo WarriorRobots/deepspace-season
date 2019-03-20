@@ -21,6 +21,7 @@ public class AdjustClimbRelative extends Command {
 	protected void initialize() {
 		initialPosition = Robot.climb.getClimbPosition();
 		target = initialPosition + adjustBy;
+		System.out.println("Climb: Starting " + this.getClass().getSimpleName());
 	}
 
 	@Override
@@ -36,6 +37,12 @@ public class AdjustClimbRelative extends Command {
 	@Override
 	protected void end() {
 		Robot.climb.stopClimb();
+		System.out.println("Climb: Finishing " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		System.out.println("Climb: Canceling " + this.getClass().getSimpleName());
 	}
 
 }

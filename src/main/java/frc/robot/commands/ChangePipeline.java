@@ -1,9 +1,9 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class ChangePipeline extends Command {
+public class ChangePipeline extends InstantCommand {
 
 	int pipeline;
 
@@ -17,12 +17,8 @@ public class ChangePipeline extends Command {
 	}
 
 	@Override
-	protected void initialize() {
+	protected void execute() {
 		Robot.camera.setPipeline(pipeline);
-	}
-
-	@Override
-	protected boolean isFinished() {
-		return true;
+		System.out.println("Camera: Running " + this.getClass().getSimpleName());
 	}
 }

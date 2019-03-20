@@ -4,15 +4,14 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
-/** Set hatch placer back into a neutral position, used after launching */
 public class SubgroupRetractLaunchers extends InstantCommand {
 
 	/** Count variable for the loop of pneumatic */
 	private int counter;
 
 	/**
-	 * Subgroup command that retracts the launcher pistons. Do not use this; use the
-	 * GroupCommand instead.
+	 * Subgroup command that retracts the launcher pistons. 
+	 * Do not use this; use the GroupCommand instead.
 	 */
 	public SubgroupRetractLaunchers() {
 		requires(Robot.pneumatics);
@@ -20,38 +19,31 @@ public class SubgroupRetractLaunchers extends InstantCommand {
 
 	@Override
 	protected void initialize() {
-		// Initialization of for loop
-		// for (Init, ---, ---) {---};
 		counter = 0;
+		System.out.println("Pneumatics: Starting " + this.getClass().getSimpleName());
 	}
 
 	@Override
 	protected void execute() {
-		// The purpose of running the pneumatic in a loop format is to garantee the
-		// pneumatic fires
-		// (1 loop is not enough time for the pneumatic to fire)
-
-		// Execute of for loop
-		// for (---, ---, ---) {Exec};
 		Robot.pneumatics.retractLaunchers();
-
-		// Increment of for loop
-		// for (---, ---, Inc) {---};
 		counter++;
 	}
 
 	@Override
 	protected boolean isFinished() {
-		// Condition of for loop
-		// for (---, Cond, ---) {---};
 		return (counter > QuickAccessVars.PNEUMATIC_LOOP_COUNT);
-		// 5 is the approximate number of loops a pneumatic takes to fire
 	}
 
 	@Override
 	protected void end() {
-		// set solonoid to neutral to increase lifespan
 		Robot.pneumatics.neutralizeLaunchers();
+		System.out.println("Pneumatics: Finishing " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		Robot.pneumatics.neutralizeLaunchers();
+		System.out.println("Pneumatics: Canceling " + this.getClass().getSimpleName());
 	}
 
 }

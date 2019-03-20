@@ -41,7 +41,7 @@ public class DebugRebootAll extends InstantCommand {
 	 * encoders. Use with care!
 	 */
 	public static void rebootAll() {
-		System.out.println("WWDEBUG: DebugRebootAll");
+		System.out.println("Debug: Running DebugRebootAll"); // can't use this.getClass().getSimpleName() because it's static
 		Robot.arm.stopArm();
 		Robot.camera.setPipeline(CameraSubsystem.PIPELINE_DRIVER);
 		Robot.cargoPickupWheels.stopPickup();

@@ -14,10 +14,14 @@ public class DebugResetArmEncoder extends Command {
         requires(Robot.arm);
     }
 
+	@Override
+	protected void initialize() {
+		System.out.println("Debug: Starting " + this.getClass().getSimpleName());
+	}
+	
     @Override
     protected void execute() {
         Robot.arm.rotateArmLinear(QuickAccessVars.ARM_RESET_SPEED);
-        System.out.println("WWDEBUG: DebugResetArmEncoder is running");
     }
 
     @Override
@@ -28,11 +32,13 @@ public class DebugResetArmEncoder extends Command {
     @Override
     protected void end() {
         Robot.arm.resetArmAngleTo(0);
-        System.out.println("WWDEBUG: DebugResetArmEncoder finished successfully");
+		System.out.println("Debug: Finishing " + this.getClass().getSimpleName());
     }
 
     @Override
     protected void interrupted() {
-        System.out.println("WWDEBUG: DebugResetArmEncoder was interrupted");
-    }
+		// do NOT reset arm angle
+		System.out.println("Debug: Canceling " + this.getClass().getSimpleName());
+	}
+	
 }

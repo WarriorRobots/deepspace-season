@@ -16,7 +16,7 @@ public class DebugEnableCompressor extends InstantCommand {
 	@Override
 	protected void execute() {
 		Robot.pneumatics.enableCompressor();
-		System.out.println("WWDEBUG: DebugEnableCompressor");
+		System.out.println("Debug: Running " + this.getClass().getSimpleName());
 	}
 
 }

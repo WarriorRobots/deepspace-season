@@ -19,6 +19,11 @@ public class DropElevator extends Command {
 	}
 
 	@Override
+	protected void initialize() {
+		System.out.println("Elevator: Starting " + this.getClass().getSimpleName());
+	}
+
+	@Override
 	protected void execute() {
 		if (Robot.elevator.getElevatorPosition() > QuickAccessVars.ELEVATOR_DOWNWARD_DRIFT_THRESHOLD) {
 			Robot.elevator.adjustElevatorLinear(QuickAccessVars.ELEVATOR_DROP_SPEED);
@@ -35,6 +40,13 @@ public class DropElevator extends Command {
 	@Override
 	protected void end() {
 		Robot.elevator.stopElevator();
+		System.out.println("Elevator: Finishing " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		Robot.elevator.stopElevator();
+		System.out.println("Elevator: Canceling " + this.getClass().getSimpleName());
 	}
 
 }

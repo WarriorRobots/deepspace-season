@@ -14,6 +14,11 @@ public class RunHatchPickupWheels extends Command {
 	}
 
 	@Override
+	protected void initialize() {
+		System.out.println("HatchPickup: Starting " + this.getClass().getSimpleName());
+	}
+
+	@Override
 	protected void execute() {
 		Robot.hatchPickupWheels.runPickup(1);
 	}
@@ -26,6 +31,13 @@ public class RunHatchPickupWheels extends Command {
 	@Override
 	protected void end() {
 		Robot.hatchPickupWheels.stopPickup();
+		System.out.println("HatchPickup: Finishing " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		Robot.hatchPickupWheels.stopPickup();
+		System.out.println("HatchPickup: Canceling " + this.getClass().getSimpleName());
 	}
 
 }

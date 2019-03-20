@@ -20,6 +20,7 @@ public class SynchronizedClimb extends Command {
 	protected void initialize() {
 		initialClimbPos = Robot.climb.getClimbPosition();
 		initialElevPos = Robot.elevator.getElevatorPosition();
+		System.out.println("Climb: Starting " + this.getClass().getSimpleName());
 	}
 
 	@Override
@@ -39,5 +40,11 @@ public class SynchronizedClimb extends Command {
 	protected void end() {
 		Robot.climb.stopClimb();
 		Robot.elevator.stopElevator();
+		System.out.println("Climb: Finishing " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		System.out.println("Climb: Canceling " + this.getClass().getSimpleName());
 	}
 }

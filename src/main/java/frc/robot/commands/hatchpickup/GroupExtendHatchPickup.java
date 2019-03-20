@@ -21,4 +21,19 @@ public class GroupExtendHatchPickup extends CommandGroup {
 		addSequential(new RunHatchPickupWheels());
 	}
 
+	@Override
+	protected void initialize() {
+		System.out.println("Pneumatics: Starting " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void end() {
+		System.out.println("Pneumatics: Finishing " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		System.out.println("Pneumatics: Canceling " + this.getClass().getSimpleName());
+	}
+
 }

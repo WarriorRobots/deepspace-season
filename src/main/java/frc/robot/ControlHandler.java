@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.cargo.RunCargoPickupWheels;
 import frc.robot.commands.climb.AdjustClimbRelative;
-import frc.robot.commands.climb.CancelClimb;
+import frc.robot.commands.climb.MoveClimbTo;
 import frc.robot.commands.climb.SynchronizedClimb;
 import frc.robot.commands.debug.DebugLinearArmControl;
 import frc.robot.commands.debug.DebugLinearElevatorControl;
@@ -118,7 +118,7 @@ public final class ControlHandler {
 
 		leftJoyTriggerButton.whenPressed(new DropElevator());
 		leftJoyButton4.whenPressed(new GroupPlaceHatchOnVelcro(QuickAccessVars.HATCH_LAUNCH_SAFETY));
-		leftJoyButton5.whenPressed(new CancelClimb());
+		leftJoyButton5.whenPressed(new MoveClimbTo(0));
 		leftJoyButton7.whenPressed(new DebugRebootAll());
 		leftJoyButton8.whenPressed(new DebugEnableCompressor());
 		leftJoyButton9.whenPressed(new DebugResetArmEncoder());

@@ -14,6 +14,11 @@ public class DefaultTankDrive extends Command {
 	}
 
 	@Override
+	protected void initialize() {
+		System.out.println("Drivetrain: Starting " + this.getClass().getSimpleName());
+	}
+
+	@Override
 	protected void execute() {
 		Robot.drivetrain.tankDriveTeleop(Robot.input.getLeftY(), Robot.input.getRightY());
 	}
@@ -26,5 +31,12 @@ public class DefaultTankDrive extends Command {
 	@Override
 	protected void end() {
 		Robot.drivetrain.stopDrive();
+		System.out.println("Drivetrain: Finishing " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		Robot.drivetrain.stopDrive();
+		System.out.println("Drivetrain: Canceling " + this.getClass().getSimpleName());
 	}
 }

@@ -22,6 +22,11 @@ public class DebugLinearArmControl extends Command {
 	}
 
 	@Override
+	protected void initialize() {
+		System.out.println("Debug: Starting " + this.getClass().getSimpleName());
+	}
+
+	@Override
 	protected void execute() {
 		Robot.arm.rotateArmLinear(input.getAsDouble());
 	}
@@ -34,6 +39,13 @@ public class DebugLinearArmControl extends Command {
 	@Override
 	protected void end() {
 		Robot.arm.stopArm();
+		System.out.println("Debug: Finishing " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    protected void interrupted() {
+		Robot.arm.stopArm();
+		System.out.println("Debug: Canceling " + this.getClass().getSimpleName());
 	}
 
 }
