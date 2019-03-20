@@ -54,8 +54,13 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledInit() {
-		Scheduler.getInstance().removeAll();
 		DebugRebootAll.rebootAll();
+		Scheduler.getInstance().removeAll();
+	}
+
+	@Override
+	public void disabledPeriodic() {
+		camera.setPipeline(CameraSubsystem.PIPELINE_DRIVER);
 	}
 
 	@Override

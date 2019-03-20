@@ -177,6 +177,7 @@ public class ArmSubsystem extends Subsystem {
 		builder.addDoubleProperty("angle", () -> getArmAngle(), null);
 		builder.addDoubleProperty("master speed", () -> armRotator.get(), null);
 		builder.addDoubleProperty("clone speed", () -> armRotatorClone.get(), null);
+		builder.addBooleanProperty("limit switch?", () -> isLimitSwitchTriggered(), null);
 	}
 
 }
