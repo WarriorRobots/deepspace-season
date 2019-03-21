@@ -18,6 +18,10 @@ public class LineFollowerSubsystem extends Subsystem {
 	// in this case line followers
 	private DigitalInput leftFollower, middleFollower, rightFollower;
 
+	public enum Direction {
+		WEAKLEFT, STRONGLEFT, WEAKRIGHT, STRONGRIGHT, STRAIGHT, STOP
+	}
+
 	/**
 	 * Instantiates new subsystem; make ONLY ONE.
 	 * <p>
@@ -33,7 +37,7 @@ public class LineFollowerSubsystem extends Subsystem {
 	/**
 	 * Returns true if left follower sees a white line, false otherwise.
 	 */
-	private boolean getLeftLineFollower() {
+	public boolean getLeftLineFollower() {
 		return !leftFollower.get(); // inverted because it reads white as false
 	}
 
@@ -47,37 +51,22 @@ public class LineFollowerSubsystem extends Subsystem {
 	/**
 	 * Returns true if right follower sees a white line, false otherwise.
 	 */
-	private boolean getRightLineFollower() {
+	public boolean getRightLineFollower() {
 		return !rightFollower.get(); // inverted because it reads white as false
 	}
 
-	/**
-	 * Returns true when properly lined up (the middle line follower should detect a line, and the
-	 * other two should not).
-	 */
-	public boolean onCenter() {
-		return (!getLeftLineFollower() && getMiddleLineFollower() && !getRightLineFollower());
-	}
-
-	/**
-	 * Returns true if ANY line follower detects a line.
-	 */
-	public boolean onLine() {
-		return (getLeftLineFollower() || getRightLineFollower() || getMiddleLineFollower());
-	}
-
-	/**
-	 * Returns true if robot is too far right of the line (the left follower detects a line)
-	 */
-	public boolean onLeftOfLine() {
-		return getRightLineFollower();
-	}
-
-	/**
-	 * Returns true if robot is too far left of the line (the right follower detects a line).
-	 */
-	public boolean onRightOfLine() {
-		return getLeftLineFollower();
+	public Direction getCorrection() {
+		boolean l = getLeftLineFollower();
+		boolean m = getMiddleLineFollower();
+		boolean r = getRightLineFollower();
+		if ( (l && m && r) || (l && !m && r) || (!l && !m && !r) ) return Direction.STOP; // XXX add curly brackets
+		if (!l && m && !r) return Direction.STRAIGHT;
+		if (l && m && !r) return Direction.WEAKLEFT;
+		if (l && !m && !r) return Direction.STRONGLEFT;
+		if (!l && m && r) return Direction.WEAKRIGHT;
+		if (!l && !m && r) return Direction.STRONGRIGHT;
+		// else
+		return Direction.STOP;
 	}
 
 	@Override
