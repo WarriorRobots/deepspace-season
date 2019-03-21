@@ -14,18 +14,18 @@ public class SubgroupRetractLaunchers extends InstantCommand {
 	 * Do not use this; use the GroupCommand instead.
 	 */
 	public SubgroupRetractLaunchers() {
-		requires(Robot.pneumatics);
+		requires(Robot.launchers);
 	}
 
 	@Override
 	protected void initialize() {
 		counter = 0;
-		System.out.println("Pneumatics: Starting " + this.getClass().getSimpleName());
+		System.out.println("Launchers: Starting " + this.getClass().getSimpleName());
 	}
 
 	@Override
 	protected void execute() {
-		Robot.pneumatics.retractLaunchers();
+		Robot.launchers.retractLaunchers();
 		counter++;
 	}
 
@@ -36,14 +36,14 @@ public class SubgroupRetractLaunchers extends InstantCommand {
 
 	@Override
 	protected void end() {
-		Robot.pneumatics.neutralizeLaunchers();
-		System.out.println("Pneumatics: Finishing " + this.getClass().getSimpleName());
+		Robot.launchers.neutralizeLaunchers();
+		System.out.println("Launchers: Finishing " + this.getClass().getSimpleName());
 	}
 
 	@Override
 	protected void interrupted() {
-		Robot.pneumatics.neutralizeLaunchers();
-		System.out.println("Pneumatics: Canceling " + this.getClass().getSimpleName());
+		Robot.launchers.neutralizeLaunchers();
+		System.out.println("Launchers: Canceling " + this.getClass().getSimpleName());
 	}
 
 }
