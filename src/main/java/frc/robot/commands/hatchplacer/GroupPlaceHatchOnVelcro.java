@@ -31,7 +31,7 @@ public class GroupPlaceHatchOnVelcro extends CommandGroup {
 
 	@Override
 	protected void interrupted() {
-		System.out.println("Pneumatics: Canceling " + this.getClass().getSimpleName());
+		System.out.println("Pneumatics: Canceling " + this.getClass().getSimpleName()); // XXX if interrupted, fix launchers?
 	}
 
 }
