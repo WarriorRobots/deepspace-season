@@ -36,7 +36,9 @@ public class GroupPlaceHatchOnVelcro extends CommandGroup {
 
 	@Override
 	public boolean isInterruptible() {
-		return false;
+		return false; // returns false so the launcher pistons are unable to be stuck out
+		// this is because if it cannot be interrupted the command must go to completion
+		// making sure the retract launcher command runs
 	}
 
 }

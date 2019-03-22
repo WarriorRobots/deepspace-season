@@ -18,7 +18,10 @@ public class GroupExtendHatchPickup extends CommandGroup {
 		addParallel(new LoosenScissors());
 		addParallel(new SubgroupExtendHatchPickup());
 		addSequential(new WaitCommand(QuickAccessVars.HATCH_PICKUP_DELAY));
-		addSequential(new LoosenScissors());
+		addSequential(new LoosenScissors()); // loosen scissors as drivers have requested
+		// this may cause issues of the scissor commands interrupting the wheels but 
+		// drivers have stated that the only time the scissors will be pressed is when they
+		// the hatch pickup is up so it should not be an issue
 		addSequential(new RunHatchPickupWheels());
 	}
 
