@@ -32,6 +32,7 @@ import frc.robot.commands.hatchpickup.GroupExtendHatchPickup;
 import frc.robot.commands.hatchpickup.GroupRetractHatchPickup;
 import frc.robot.commands.hatchpickup.RunHatchPickupWheels;
 import frc.robot.commands.hatchplacer.LockScissors;
+import frc.robot.commands.hatchplacer.LockScissorsNPosition;
 import frc.robot.commands.hatchplacer.LoosenScissors;
 import frc.robot.commands.hatchplacer.GroupPlaceHatchOnVelcro;
 import frc.robot.util.triggers.DpadTrigger;
@@ -156,7 +157,7 @@ public final class ControlHandler {
 		leftXboxBumper.whenPressed(new RetractCargoPickupArm());
 		leftXboxBumper.whileHeld(new ReverseCargoPickupWheels());
 		xboxLeft.whenPressed(new LoosenScissors());
-		xboxRight.whenPressed(new LockScissors());
+		xboxRight.whenPressed(new LockScissorsNPosition());
 	}
 
 	// -----------------------------------------------------------------//
