@@ -22,9 +22,9 @@ public final class QuickAccessVars {
 	
 	// degrees
 	public static final double ARM_MINIMUM_ANGLE = 0;
-	public static final double ARM_MAXIMUM_ANGLE = 160;
-	public static final double ARM_PICKUP_CARGO_ANGLE = 90;
-	public static final double ARM_CLIMB_ANGLE = 145;
+	public static final double ARM_MAXIMUM_ANGLE = 157;
+	public static final double ARM_PICKUP_CARGO_ANGLE = 87;
+	public static final double ARM_CLIMB_ANGLE = 142;
 	public static final double ARM_RESET_ANGLE = -3;
 
 	// motor speeds (-1.0 to 1.0)
