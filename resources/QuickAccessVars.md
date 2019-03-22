@@ -6,7 +6,7 @@ Upper and lower bounds of elevator's range of motion.
 - `ELEVATOR_MAXIMUM_TARGET = 75;`
 
 Amount to adjust elevator by when using +2
-- `ADJUST_ELEVATOR_BY = 4;`
+- `ELEVATOR_DELTA = 6;`
 
 Height of elevator when placing cargo in the bay and when trying to climb to hab platform 3.
 - `CARGO_SCORING_HEIGHT = 29;`
@@ -27,7 +27,7 @@ Upper and lower bounds of the elevator's range of motion.
 - `CLIMB_MAXIMUM_TARGET = 0;`
 
 Amount to adjust climb by when using +1/2
-- `ADJUST_CLIMB_BY = 0.5;`
+- `CLIMB_DELTA = 0.5;`
 
 ## Motor Speeds
 All motor speeds are from -1 to 1.

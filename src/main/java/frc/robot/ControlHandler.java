@@ -128,7 +128,7 @@ public final class ControlHandler {
 		leftJoyButton9.whenPressed(new DebugResetArmEncoder());
 		leftJoyButton10.whenPressed(new DebugDisableCompressor());
 		leftJoyButton11.whenPressed(new DebugResetClimbEncoder());
-		leftJoyButton12.whenPressed(new AdjustClimbRelative(QuickAccessVars.ADJUST_CLIMB_BY));
+		leftJoyButton12.whenPressed(new AdjustClimbRelative(QuickAccessVars.CLIMB_DELTA));
 
 		rightJoyThumbButton.whileHeld(new ArcadeDrive());
 		rightJoyTriggerButton.whileHeld(new TurnLockDrive());
@@ -150,7 +150,7 @@ public final class ControlHandler {
 		xboxX.whenPressed(new MoveElevatorTo(QuickAccessVars.CARGO_SCORING_HEIGHT));
 		rightXboxJoyUp.whenPressed(new GroupExtendHatchPickup());
 		rightXboxJoyDown.whenPressed(new GroupRetractHatchPickup());
-		xboxSTART.whenPressed(new AdjustElevatorRelative(QuickAccessVars.ADJUST_ELEVATOR_BY));
+		xboxSTART.whenPressed(new AdjustElevatorRelative(QuickAccessVars.ELEVATOR_DELTA));
 		xboxSELECT.whenPressed(new ArmResetNZero());
 		rightXboxTrigger.whileHeld(new RunHatchPickupWheels());
 		leftXboxTrigger.whileHeld(new RunCargoPickupWheels());
