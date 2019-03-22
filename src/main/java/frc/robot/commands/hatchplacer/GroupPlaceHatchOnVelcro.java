@@ -34,4 +34,9 @@ public class GroupPlaceHatchOnVelcro extends CommandGroup {
 		System.out.println("Pneumatics: Canceling " + this.getClass().getSimpleName()); // XXX if interrupted, fix launchers?
 	}
 
+	@Override
+	public boolean isInterruptible() {
+		return false;
+	}
+
 }

@@ -18,6 +18,7 @@ public class GroupExtendHatchPickup extends CommandGroup {
 		addParallel(new LoosenScissors());
 		addParallel(new SubgroupExtendHatchPickup());
 		addSequential(new WaitCommand(QuickAccessVars.HATCH_PICKUP_DELAY));
+		addSequential(new LoosenScissors());
 		addSequential(new RunHatchPickupWheels());
 	}
 

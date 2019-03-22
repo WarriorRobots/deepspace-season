@@ -31,7 +31,7 @@ public class DebugResetArmEncoder extends Command {
 
     @Override
     protected void end() {
-        Robot.arm.resetArmAngleTo(0);
+        Robot.arm.resetArmAngleTo(QuickAccessVars.ARM_RESET_ANGLE);
 		System.out.println("Debug: Finishing " + this.getClass().getSimpleName());
     }
 

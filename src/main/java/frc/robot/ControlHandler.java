@@ -19,6 +19,7 @@ import frc.robot.commands.debug.DebugEnableCompressor;
 import frc.robot.commands.debug.DebugRebootAll;
 import frc.robot.commands.autonomous.ApproachCurve;
 import frc.robot.commands.autonomous.LineFollowCommand;
+import frc.robot.commands.cargo.ArmResetNZero;
 import frc.robot.commands.cargo.ExtendCargoLauncherIn;
 import frc.robot.commands.cargo.ExtendCargoPickupArm;
 import frc.robot.commands.cargo.RetractCargoPickupArm;
@@ -149,7 +150,7 @@ public final class ControlHandler {
 		rightXboxJoyUp.whenPressed(new GroupExtendHatchPickup());
 		rightXboxJoyDown.whenPressed(new GroupRetractHatchPickup());
 		xboxSTART.whenPressed(new AdjustElevatorRelative(QuickAccessVars.ADJUST_ELEVATOR_BY));
-		xboxSELECT.whenPressed(new RetractCargoPickupArm());
+		xboxSELECT.whenPressed(new ArmResetNZero());
 		rightXboxTrigger.whileHeld(new RunHatchPickupWheels());
 		leftXboxTrigger.whileHeld(new RunCargoPickupWheels());
 		leftXboxBumper.whenPressed(new RetractCargoPickupArm());
