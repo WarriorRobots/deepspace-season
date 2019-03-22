@@ -50,15 +50,18 @@ Speed the pickup arm goes up at when reseting the encoder.
 
 ## Degrees
 
+The angle at which the arm should rest at.
+- `public static final double ARM_DEFAULT_ANGLE = 3;`
+
 Upper and lower bounds of arm's range of motion.
-- `ARM_MINIMUM_ANGLE = 0;`
-- `ARM_MAXIMUM_ANGLE = 160;`
+- `ARM_MINIMUM_ANGLE = -3;`
+- `ARM_MAXIMUM_ANGLE = 157;`
 
 Angle of the arm when picking up cargo from the floor.
-- `ARM_PICKUP_CARGO_ANGLE = 90;`
+- `ARM_PICKUP_CARGO_ANGLE = 87;`
 
 Angle of the arm when climbing on either platform.
-- `ARM_CLIMB_ANGLE = 145;`
+- `ARM_CLIMB_ANGLE = 142;`
 
 What angle the magnet sets the arm to be when the encoder is reset.
 - `ARM_RESET_ANGLE = -3;`

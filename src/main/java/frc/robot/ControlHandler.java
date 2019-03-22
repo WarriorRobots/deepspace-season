@@ -121,11 +121,12 @@ public final class ControlHandler {
 				false, () -> xbox.getStickButton(Hand.kRight));
 
 		leftJoyTriggerButton.whenPressed(new DropElevator());
+		leftJoyButton3.whenPressed(new LockScissors());
 		leftJoyButton4.whenPressed(new GroupPlaceHatchOnVelcro(QuickAccessVars.HATCH_LAUNCH_SAFETY));
 		leftJoyButton5.whenPressed(new MoveClimbTo(0));
 		leftJoyButton7.whenPressed(new DebugRebootAll());
 		leftJoyButton8.whenPressed(new DebugEnableCompressor());
-		leftJoyButton9.whenPressed(new DebugResetArmEncoder());
+		leftJoyButton9.whenPressed(new ArmResetNZero());
 		leftJoyButton10.whenPressed(new DebugDisableCompressor());
 		leftJoyButton11.whenPressed(new DebugResetClimbEncoder());
 		leftJoyButton12.whenPressed(new AdjustClimbRelative(QuickAccessVars.CLIMB_DELTA));
@@ -151,7 +152,7 @@ public final class ControlHandler {
 		rightXboxJoyUp.whenPressed(new GroupExtendHatchPickup());
 		rightXboxJoyDown.whenPressed(new GroupRetractHatchPickup());
 		xboxSTART.whenPressed(new AdjustElevatorRelative(QuickAccessVars.ELEVATOR_DELTA));
-		xboxSELECT.whenPressed(new ArmResetNZero());
+		xboxSELECT.whenPressed(new RetractCargoPickupArm());
 		rightXboxTrigger.whileHeld(new RunHatchPickupWheels());
 		leftXboxTrigger.whileHeld(new RunCargoPickupWheels());
 		leftXboxBumper.whenPressed(new RetractCargoPickupArm());
