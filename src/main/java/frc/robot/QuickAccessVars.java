@@ -21,7 +21,7 @@ public final class QuickAccessVars {
 	public static final double CLIMB_MAXIMUM_TARGET = 0;
 	
 	// degrees
-	public static final double ARM_MINIMUM_ANGLE = 0;
+	public static final double ARM_MINIMUM_ANGLE = -3;
 	public static final double ARM_MAXIMUM_ANGLE = 157;
 	public static final double ARM_PICKUP_CARGO_ANGLE = 87;
 	public static final double ARM_CLIMB_ANGLE = 142;
