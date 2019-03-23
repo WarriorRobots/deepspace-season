@@ -1,7 +1,6 @@
 package frc.robot.commands.climb;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
 public class SynchronizedClimb extends Command {
@@ -12,6 +11,8 @@ public class SynchronizedClimb extends Command {
 
 	/**
 	 * Move the elevator and climb down in sync.
+	 * <p><b>WARNING:</b> If the climb encoder/motor are reversed,
+	 * the elevator and climb will both crash upwards.
 	 */
 	public SynchronizedClimb(double target) {
 		requires(Robot.climb);

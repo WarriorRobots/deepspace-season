@@ -4,14 +4,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import frc.robot.QuickAccessVars;
 
-public class GroupPlaceHatchOnVelcro extends CommandGroup {
+public class PlaceHatchOnVelcro extends CommandGroup {
 
 	/**
 	 * Command to place a hatch on the velcro strips.
 	 * @param safemode If this is set to true, the hatch cannot be placed without a
 	 *                 signal from the line followers.
 	 */
-	public GroupPlaceHatchOnVelcro(boolean safemode) {
+	public PlaceHatchOnVelcro(boolean safemode) {
 		addParallel(new SubgroupExtendLaunchers(safemode));
 		addSequential(new WaitCommand(QuickAccessVars.PLACE_HATCH_DELAY));
 		addParallel(new LoosenScissors());

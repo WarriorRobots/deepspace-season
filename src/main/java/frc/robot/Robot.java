@@ -3,7 +3,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.cargo.ArmResetNZero;
+import frc.robot.commands.cargo.FindArmZero;
 import frc.robot.commands.debug.DebugRebootAll;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.CameraSubsystem;
@@ -70,6 +70,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		Scheduler.getInstance().removeAll();
+		// XXX run this one at comp and the one in teleop only during drive practice
+		//Scheduler.getInstance().add(new FindArmZero());
 	}
 
 	@Override
@@ -80,7 +82,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		Scheduler.getInstance().removeAll();
-		Scheduler.getInstance().add(new ArmResetNZero());
+		Scheduler.getInstance().add(new FindArmZero());
 	}
 
 	@Override

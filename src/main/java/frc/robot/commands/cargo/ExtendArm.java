@@ -9,13 +9,13 @@ package frc.robot.commands.cargo;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.hatchplacer.SubgroupRetractLaunchers;
-// remove reference to launcher
-public class ExtendCargoLauncherIn extends CommandGroup { // FIXME break up name
+
+public class ExtendArm extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public ExtendCargoLauncherIn(double angle) {
+  public ExtendArm(double angle) {
     addSequential(new SubgroupRetractLaunchers());
-    addSequential(new ExtendCargoPickupArm(angle));
+    addSequential(new SubgroupExtendArm(angle));
   }
 }

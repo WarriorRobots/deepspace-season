@@ -8,14 +8,14 @@
 package frc.robot.commands.cargo;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.debug.DebugResetArmEncoder;
+import frc.robot.commands.cargo.SubgroupFindArmZero;
 
-public class ArmResetNZero extends CommandGroup {
+public class FindArmZero extends CommandGroup {
   /**
    * Used for bringing the arm to the hall effect and then to the zero.
    */
-  public ArmResetNZero() {
-    addSequential(new DebugResetArmEncoder());
-    addSequential(new RetractCargoPickupArm());
+  public FindArmZero() {
+    addSequential(new SubgroupFindArmZero());
+    addSequential(new RetractArm());
   }
 }

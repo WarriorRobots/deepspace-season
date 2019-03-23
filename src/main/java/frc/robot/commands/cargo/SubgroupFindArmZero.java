@@ -1,16 +1,16 @@
-package frc.robot.commands.debug;
+package frc.robot.commands.cargo;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
-public class DebugResetArmEncoder extends Command {
+public class SubgroupFindArmZero extends Command {
 
     /**
      * Slowly moves the arm upwards until the hall effect sensor gets triggered.
      * Use if, in the rare case, the encoder becomes out-of-sync.
      */
-    public DebugResetArmEncoder() {
+    public SubgroupFindArmZero() {
         requires(Robot.arm);
     }
 

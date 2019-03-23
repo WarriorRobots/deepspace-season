@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.QuickAccessVars;
 import frc.robot.commands.elevator.RaiseElevatorTo;
 
-public class LockScissorsNPosition extends CommandGroup {
+public class LockScissorsAndRaiseElevator extends CommandGroup {
   /**
    * Locks Scissors and moves elevator to a height described by the drivers as Level 1 plus delta.
    */
-  public LockScissorsNPosition() {
+  public LockScissorsAndRaiseElevator() {
     addSequential(new LockScissors());
     addSequential(new RaiseElevatorTo(QuickAccessVars.LVL1_HEIGHT+QuickAccessVars.ELEVATOR_DELTA));
     // if this command is interrupted it should be fine because pistons do not require constant signals

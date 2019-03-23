@@ -1,16 +1,19 @@
 package frc.robot.commands.cargo;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
-public class RetractCargoPickupArm extends Command {
+public class SubgroupExtendArm extends Command {
+
+	private double angle;
 
 	/**
-	 * Rotates the arm to zero degrees (straight upwards).
+	 * Rotates the arm to the specified angle.
+	 * @param angle Should always be positive.
 	 */
-	public RetractCargoPickupArm() {
+	public SubgroupExtendArm(double angle) {
 		requires(Robot.arm);
+		this.angle = angle;
 	}
 
 	@Override
@@ -20,7 +23,7 @@ public class RetractCargoPickupArm extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.arm.rotateArmTo(QuickAccessVars.ARM_DEFAULT_ANGLE);
+		Robot.arm.rotateArmTo(angle);
 	}
 
 	@Override

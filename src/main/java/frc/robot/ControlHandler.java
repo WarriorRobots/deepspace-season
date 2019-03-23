@@ -11,7 +11,7 @@ import frc.robot.commands.climb.MoveClimbTo;
 import frc.robot.commands.climb.SynchronizedClimb;
 import frc.robot.commands.debug.DebugLinearArmControl;
 import frc.robot.commands.debug.DebugLinearElevatorControl;
-import frc.robot.commands.debug.DebugResetArmEncoder;
+import frc.robot.commands.cargo.SubgroupFindArmZero;
 import frc.robot.commands.debug.DebugResetClimbEncoder;
 import frc.robot.commands.cargo.ReverseCargoPickupWheels;
 import frc.robot.commands.debug.DebugDisableCompressor;
@@ -20,22 +20,22 @@ import frc.robot.commands.debug.DebugRebootAll;
 import frc.robot.commands.autonomous.ApproachCurve;
 import frc.robot.commands.autonomous.CameraApproach;
 import frc.robot.commands.autonomous.LineFollowCommand;
-import frc.robot.commands.cargo.ArmResetNZero;
-import frc.robot.commands.cargo.ExtendCargoLauncherIn;
-import frc.robot.commands.cargo.ExtendCargoPickupArm;
-import frc.robot.commands.cargo.RetractCargoPickupArm;
+import frc.robot.commands.cargo.FindArmZero;
+import frc.robot.commands.cargo.ExtendArm;
+import frc.robot.commands.cargo.SubgroupExtendArm;
+import frc.robot.commands.cargo.RetractArm;
 import frc.robot.commands.drive.ArcadeDrive;
 import frc.robot.commands.drive.TurnLockDrive;
 import frc.robot.commands.elevator.MoveElevatorTo;
 import frc.robot.commands.elevator.AdjustElevatorRelative;
 import frc.robot.commands.elevator.DropElevator;
-import frc.robot.commands.hatchpickup.GroupExtendHatchPickup;
-import frc.robot.commands.hatchpickup.GroupRetractHatchPickup;
+import frc.robot.commands.hatchpickup.ExtendHatchPickup;
+import frc.robot.commands.hatchpickup.RetractHatchPickup;
 import frc.robot.commands.hatchpickup.RunHatchPickupWheels;
 import frc.robot.commands.hatchplacer.LockScissors;
-import frc.robot.commands.hatchplacer.LockScissorsNPosition;
+import frc.robot.commands.hatchplacer.LockScissorsAndRaiseElevator;
 import frc.robot.commands.hatchplacer.LoosenScissors;
-import frc.robot.commands.hatchplacer.GroupPlaceHatchOnVelcro;
+import frc.robot.commands.hatchplacer.PlaceHatchOnVelcro;
 import frc.robot.util.triggers.DpadTrigger;
 import frc.robot.util.triggers.ThresholdTrigger;
 
@@ -123,23 +123,23 @@ public final class ControlHandler {
 
 		leftJoyTriggerButton.whenPressed(new DropElevator());
 		leftJoyButton3.whenPressed(new LockScissors());
-		leftJoyButton4.whenPressed(new GroupPlaceHatchOnVelcro(QuickAccessVars.HATCH_LAUNCH_SAFETY));
+		leftJoyButton4.whenPressed(new PlaceHatchOnVelcro(QuickAccessVars.HATCH_LAUNCH_SAFETY));
 		leftJoyButton5.whenPressed(new MoveClimbTo(0));
 		leftJoyButton6.whenPressed(new SynchronizedClimb(QuickAccessVars.CLIMB_TARGET_HAB2));
 		leftJoyButton7.whenPressed(new DebugRebootAll());
 		leftJoyButton8.whenPressed(new DebugEnableCompressor());
-		leftJoyButton9.whenPressed(new ArmResetNZero());
+		leftJoyButton9.whenPressed(new FindArmZero());
 		leftJoyButton10.whenPressed(new DebugDisableCompressor());
 		leftJoyButton11.whenPressed(new DebugResetClimbEncoder());
 		leftJoyButton12.whenPressed(new AdjustClimbRelative(QuickAccessVars.CLIMB_DELTA));
 
 		rightJoyThumbButton.whileHeld(new ArcadeDrive());
 		rightJoyTriggerButton.whileHeld(new TurnLockDrive());
-		rightJoyButton3.whenPressed(new ExtendCargoLauncherIn(QuickAccessVars.ARM_PICKUP_CARGO_ANGLE));
+		rightJoyButton3.whenPressed(new ExtendArm(QuickAccessVars.ARM_PICKUP_CARGO_ANGLE));
 		rightJoyButton3.whenPressed(new LockScissors());
 		rightJoyButton4.whileHeld(new CameraApproach());
 		// rightJoyButton4.whileHeld(new LineFollowCommand());
-		rightJoyButton5.whenPressed(new ExtendCargoLauncherIn(QuickAccessVars.ARM_CLIMB_ANGLE));
+		rightJoyButton5.whenPressed(new ExtendArm(QuickAccessVars.ARM_CLIMB_ANGLE));
 		rightJoyButton6.whenPressed(new SynchronizedClimb(QuickAccessVars.CLIMB_TARGET_HAB3));
 
 		xboxL3.whileHeld(new DebugLinearElevatorControl(
@@ -151,16 +151,16 @@ public final class ControlHandler {
 		xboxB.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL2_HEIGHT));
 		xboxY.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL3_HEIGHT));
 		xboxX.whenPressed(new MoveElevatorTo(QuickAccessVars.CARGO_SCORING_HEIGHT));
-		rightXboxJoyUp.whenPressed(new GroupExtendHatchPickup());
-		rightXboxJoyDown.whenPressed(new GroupRetractHatchPickup());
+		rightXboxJoyUp.whenPressed(new ExtendHatchPickup());
+		rightXboxJoyDown.whenPressed(new RetractHatchPickup());
 		xboxSTART.whenPressed(new AdjustElevatorRelative(QuickAccessVars.ELEVATOR_DELTA));
-		xboxSELECT.whenPressed(new RetractCargoPickupArm());
+		xboxSELECT.whenPressed(new RetractArm());
 		rightXboxTrigger.whileHeld(new RunHatchPickupWheels());
 		leftXboxTrigger.whileHeld(new RunCargoPickupWheels());
-		leftXboxBumper.whenPressed(new RetractCargoPickupArm());
+		leftXboxBumper.whenPressed(new RetractArm());
 		leftXboxBumper.whileHeld(new ReverseCargoPickupWheels());
 		xboxLeft.whenPressed(new LoosenScissors());
-		xboxRight.whenPressed(new LockScissorsNPosition());
+		xboxRight.whenPressed(new LockScissorsAndRaiseElevator());
 	}
 
 	// -----------------------------------------------------------------//
