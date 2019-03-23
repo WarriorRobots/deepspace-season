@@ -64,6 +64,7 @@ public class ApproachCurve extends Command {
 	/** Left:Right height ratio of targets */
 	private double heightRatio;
 
+	@Deprecated
 	public ApproachCurve() {
 		requires(Robot.drivetrain);
 		requires(Robot.camera);

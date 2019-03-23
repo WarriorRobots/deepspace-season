@@ -64,6 +64,7 @@ public class ApproachCurveVerbose extends Command {
 	/** Left:Right height ratio of targets */
 	private double heightRatio;
 
+	@Deprecated
     public ApproachCurveVerbose() {
 		requires(Robot.drivetrain);
 		requires(Robot.camera);

@@ -34,6 +34,7 @@ public class ApproachStraight extends Command {
 	 *                 {@link frc.robot.subsystems.CameraSubsystem#PIPELINE_LEFT} or
 	 *                 {@link frc.robot.subsystems.CameraSubsystem#PIPELINE_RIGHT}).
 	 */
+	@Deprecated
 	public ApproachStraight(int pipeline) {
 		requires(Robot.drivetrain);
 		requires(Robot.camera);

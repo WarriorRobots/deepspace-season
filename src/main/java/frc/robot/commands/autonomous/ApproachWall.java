@@ -21,6 +21,7 @@ public class ApproachWall extends Command {
 	/** Calculated PID output from {@link #PIDcenter} should stored in value. */
 	private double valuecenter;
 
+	@Deprecated
 	public ApproachWall() {
 		requires(Robot.drivetrain);
 		requires(Robot.camera);
