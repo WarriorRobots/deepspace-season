@@ -125,6 +125,7 @@ public final class ControlHandler {
 		leftJoyButton3.whenPressed(new LockScissors());
 		leftJoyButton4.whenPressed(new GroupPlaceHatchOnVelcro(QuickAccessVars.HATCH_LAUNCH_SAFETY));
 		leftJoyButton5.whenPressed(new MoveClimbTo(0));
+		leftJoyButton6.whenPressed(new SynchronizedClimb(QuickAccessVars.CLIMB_TARGET_HAB2));
 		leftJoyButton7.whenPressed(new DebugRebootAll());
 		leftJoyButton8.whenPressed(new DebugEnableCompressor());
 		leftJoyButton9.whenPressed(new ArmResetNZero());
@@ -139,7 +140,7 @@ public final class ControlHandler {
 		rightJoyButton4.whileHeld(new CameraApproach());
 		// rightJoyButton4.whileHeld(new LineFollowCommand());
 		rightJoyButton5.whenPressed(new ExtendCargoLauncherIn(QuickAccessVars.ARM_CLIMB_ANGLE));
-		rightJoyButton6.whenPressed(new SynchronizedClimb());
+		rightJoyButton6.whenPressed(new SynchronizedClimb(QuickAccessVars.CLIMB_TARGET_HAB3));
 
 		xboxL3.whileHeld(new DebugLinearElevatorControl(
 				() -> xbox.getY(Hand.kLeft) * QuickAccessVars.LINEAR_CONTROLS_MODIFIER * -1));

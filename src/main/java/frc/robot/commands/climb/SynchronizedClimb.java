@@ -8,12 +8,16 @@ public class SynchronizedClimb extends Command {
 
 	private double initialClimbPos, initialElevPos;
 
+	private double target;
+
 	/**
 	 * Move the elevator and climb down in sync.
 	 */
-	public SynchronizedClimb() {
+	public SynchronizedClimb(double target) {
 		requires(Robot.climb);
 		requires(Robot.elevator);
+
+		this.target = target;
 	}
 
 	@Override
@@ -25,7 +29,7 @@ public class SynchronizedClimb extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.climb.moveClimbTo(QuickAccessVars.CLIMB_TARGET_HEIGHT);
+		Robot.climb.moveClimbTo(target);
 		// current - initial climb position gets the difference
 		// then add initial elevator position to find out where the elevator should be
 		Robot.elevator.moveElevatorTo(Robot.climb.getClimbPosition() - initialClimbPos + initialElevPos);
