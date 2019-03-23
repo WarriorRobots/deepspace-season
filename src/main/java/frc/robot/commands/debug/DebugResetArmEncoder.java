@@ -21,7 +21,7 @@ public class DebugResetArmEncoder extends Command {
 	
     @Override
     protected void execute() {
-        Robot.arm.rotateArmLinear(QuickAccessVars.ARM_RESET_SPEED);
+        Robot.arm.rotateArmLinearNoSafety(QuickAccessVars.ARM_RESET_SPEED);
     }
 
     @Override

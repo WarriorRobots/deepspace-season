@@ -59,7 +59,8 @@ public class LineFollowerSubsystem extends Subsystem {
 		boolean l = getLeftLineFollower();
 		boolean m = getMiddleLineFollower();
 		boolean r = getRightLineFollower();
-		if ( (l && m && r) || (l && !m && r) || (!l && !m && !r) ) return Direction.STOP; // XXX add curly brackets
+		if ( (l && m && r) || (l && !m && r) ) return Direction.STOP; // XXX add curly brackets
+		if (!l && !m && !r) return Direction.STRAIGHT;
 		if (!l && m && !r) return Direction.STRAIGHT;
 		if (l && m && !r) return Direction.WEAKLEFT;
 		if (l && !m && !r) return Direction.STRONGLEFT;

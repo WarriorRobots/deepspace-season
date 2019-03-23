@@ -18,6 +18,7 @@ import frc.robot.commands.debug.DebugDisableCompressor;
 import frc.robot.commands.debug.DebugEnableCompressor;
 import frc.robot.commands.debug.DebugRebootAll;
 import frc.robot.commands.autonomous.ApproachCurve;
+import frc.robot.commands.autonomous.ApproachStraight;
 import frc.robot.commands.autonomous.LineFollowCommand;
 import frc.robot.commands.cargo.ArmResetNZero;
 import frc.robot.commands.cargo.ExtendCargoLauncherIn;
@@ -135,8 +136,8 @@ public final class ControlHandler {
 		rightJoyTriggerButton.whileHeld(new TurnLockDrive());
 		rightJoyButton3.whenPressed(new ExtendCargoLauncherIn(QuickAccessVars.ARM_PICKUP_CARGO_ANGLE));
 		rightJoyButton3.whenPressed(new LockScissors());
-		// rightJoyButton4.whileHeld(new ApproachCurve());
-		rightJoyButton4.whileHeld(new LineFollowCommand());
+		rightJoyButton4.whileHeld(new ApproachStraight(0));
+		// rightJoyButton4.whileHeld(new LineFollowCommand());
 		rightJoyButton5.whenPressed(new ExtendCargoLauncherIn(QuickAccessVars.ARM_CLIMB_ANGLE));
 		rightJoyButton6.whenPressed(new SynchronizedClimb());
 

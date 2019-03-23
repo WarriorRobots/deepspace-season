@@ -10,10 +10,10 @@ public final class QuickAccessVars {
 	public static final double LVL2_HEIGHT = 47;
 	public static final double LVL3_HEIGHT = 74;
 	public static final double CARGO_SCORING_HEIGHT = 29;
-	public static final double ELEVATOR_DELTA = 6;
+	public static final double ELEVATOR_DELTA = 3;
 	public static final double ELEVATOR_DOWNWARD_DRIFT_THRESHOLD = 10;
 	public static final double ELEVATOR_MINIMUM_TARGET = 0.5;
-	public static final double ELEVATOR_MAXIMUM_TARGET = 75;
+	public static final double ELEVATOR_MAXIMUM_TARGET = 62;
 	public static final double ELEVATOR_BASE_HEIGHT = 13;
 	public static final double CLIMB_TARGET_HEIGHT = -20;
 	public static final double CLIMB_DELTA = 0.5;
@@ -21,7 +21,7 @@ public final class QuickAccessVars {
 	public static final double CLIMB_MAXIMUM_TARGET = 0;
 	
 	// degrees
-	public static final double ARM_DEFAULT_ANGLE = 3;
+	public static final double ARM_DEFAULT_ANGLE = 2;
 	public static final double ARM_MINIMUM_ANGLE = -3;
 	public static final double ARM_MAXIMUM_ANGLE = 157;
 	public static final double ARM_PICKUP_CARGO_ANGLE = 87;
@@ -31,8 +31,8 @@ public final class QuickAccessVars {
 	// motor speeds (-1.0 to 1.0)
 	public static final double ELEVATOR_DROP_SPEED = -1;
 	public static final double ELEVATOR_DOWNWARD_DRIFT_SPEED = -0.05;
-	public static final double CARGO_PICKUP_IDLE_SPEED = 0.1;
-	public static final double ARM_RESET_SPEED = -0.2;
+	public static final double CARGO_PICKUP_IDLE_SPEED = 0.15;
+	public static final double ARM_RESET_SPEED = -0.3;
 	public static final double ARCADE_FORWARD_MODIFIER = 0.5;
 	public static final double ARCADE_TURN_MODIFIER = 0.75;
 
@@ -66,7 +66,7 @@ public final class QuickAccessVars {
 		// how much are the linear elevator/TreeUIarm/climb commands modified by?
 
 	// camera
-	public static final double CAMERA_TILT = 22 * Math.PI / 180;
+	// public static final double CAMERA_TILT = 22 * Math.PI / 180;
 	public static final double ELEVATION = 40;
 	public static final double TARGET_ELEVATION = 25;
 	public static final double TARGET_HEIGHT = 5.83;

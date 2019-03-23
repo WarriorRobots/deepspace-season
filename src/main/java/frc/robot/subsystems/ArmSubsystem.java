@@ -95,6 +95,10 @@ public class ArmSubsystem extends Subsystem {
         } // @formatter:on
 	}
 
+	public void rotateArmLinearNoSafety(double speed) {
+		armRotator.set(speed);
+	}
+
 	/**
 	 * Holds the arm at the specified number of degrees.
 	 * This has no safeties, so be careful!

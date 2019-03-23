@@ -9,7 +9,7 @@ package frc.robot.commands.hatchplacer;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.QuickAccessVars;
-import frc.robot.commands.elevator.MoveElevatorTo;
+import frc.robot.commands.elevator.RaiseElevatorTo;
 
 public class LockScissorsNPosition extends CommandGroup {
   /**
@@ -17,8 +17,7 @@ public class LockScissorsNPosition extends CommandGroup {
    */
   public LockScissorsNPosition() {
     addSequential(new LockScissors());
-    // XXX check if this has issues when it moves down autonomously
-    addSequential(new MoveElevatorTo(QuickAccessVars.LVL1_HEIGHT+QuickAccessVars.ELEVATOR_DELTA));
+    addSequential(new RaiseElevatorTo(QuickAccessVars.LVL1_HEIGHT+QuickAccessVars.ELEVATOR_DELTA));
     // if this command is interrupted it should be fine because pistons do not require constant signals
     // and the elevator has the stabilize command as it's default so it is unnessecary to check that case
   }

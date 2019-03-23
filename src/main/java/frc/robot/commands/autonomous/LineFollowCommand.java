@@ -12,12 +12,6 @@ public class LineFollowCommand extends Command {
 		requires(Robot.drivetrain);
 	}
 
-	@Override
-	protected void initialize() {
-		leftSpeed = 0.25;
-		rightSpeed = 0.25;
-	}
-
 	/**
 	 * STEPS:
 	 * 1. Make sure that program only searches for line, does not start following until Approach sends "stop"
@@ -27,8 +21,8 @@ public class LineFollowCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		double normal = 0.4;
-		double weak = 0.25;
+		double weak = 0.15;
+		double normal = 0.3;
 		double strong = 0.05;
 		switch (Robot.lineFollowers.getCorrection()) {
 		case STRAIGHT:
