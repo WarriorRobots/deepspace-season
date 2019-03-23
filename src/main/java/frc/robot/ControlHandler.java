@@ -127,11 +127,11 @@ public final class ControlHandler {
 		leftJoyButton4.whenPressed(new PlaceHatchOnVelcro(QuickAccessVars.HATCH_LAUNCH_SAFETY));
 		leftJoyButton5.whenPressed(new MoveClimbTo(0));
 		leftJoyButton6.whenPressed(new SynchronizedClimb(QuickAccessVars.CLIMB_TARGET_HAB2));
-		leftJoyButton7.whenPressed(new DebugRebootAll());
+		leftJoyButton7.whenPressed(new DebugRebootAll()); // COMPTEST
 		leftJoyButton8.whenPressed(new DebugEnableCompressor());
 		leftJoyButton9.whenPressed(new FindArmZero());
-		leftJoyButton10.whenPressed(new DebugDisableCompressor());
-		leftJoyButton11.whenPressed(new DebugResetClimbEncoder());
+		// leftJoyButton10.whenPressed(new DebugDisableCompressor());
+		// leftJoyButton11.whenPressed(new DebugResetClimbEncoder());
 		leftJoyButton12.whenPressed(new AdjustClimbRelative(QuickAccessVars.CLIMB_DELTA));
 
 		rightJoyThumbButton.whileHeld(new ArcadeDrive());

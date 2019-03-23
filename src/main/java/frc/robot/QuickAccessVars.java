@@ -25,7 +25,7 @@ public final class QuickAccessVars {
 	public static final double ARM_DEFAULT_ANGLE = 2;
 	public static final double ARM_MINIMUM_ANGLE = -3;
 	public static final double ARM_MAXIMUM_ANGLE = 157;
-	public static final double ARM_PICKUP_CARGO_ANGLE = 87;
+	public static final double ARM_PICKUP_CARGO_ANGLE = 90; // 87
 	public static final double ARM_CLIMB_ANGLE = 142;
 	public static final double ARM_RESET_ANGLE = -3;
 
