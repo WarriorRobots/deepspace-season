@@ -26,6 +26,7 @@ public class CameraApproach extends Command {
   public CameraApproach() {
     requires(Robot.drivetrain);
     requires(Robot.camera);
+    requires(Robot.lineFollowers);
 
     valueApproach = 0;
     valueCenter = 0;
@@ -38,7 +39,7 @@ public class CameraApproach extends Command {
 
   @Override
   protected void initialize() {
-    System.out.println("Camera: Starting " + this.getClass().getSimpleName());
+    System.out.println("Alignment: Starting " + this.getClass().getSimpleName());
     Robot.camera.setPipeline(CameraSubsystem.PIPELINE_CENTER);
 
     PIDcenter.setSetpoint(0); // keep the target in the center of the screen
@@ -54,8 +55,8 @@ public class CameraApproach extends Command {
       valueCenter = 0;
     }
 
-    // valueApproach = Robot.input.getRightY();
-    valueApproach = ( Robot.input.getLeftY() + Robot.input.getRightY() ) / 2;
+    valueApproach = Robot.input.getRightY();
+    //valueApproach = ( Robot.input.getLeftY() + Robot.input.getRightY() ) / 2;
 
     Robot.drivetrain.arcadeDriveRaw(valueApproach, -valueCenter);
   }
@@ -63,11 +64,12 @@ public class CameraApproach extends Command {
   @Override
   protected boolean isFinished() {
     return false;
+    //return Robot.lineFollowers.touchingLine();
   }
 
   @Override
   protected void end() {
-    System.out.println("Camera: Ending " + this.getClass().getSimpleName());
+    System.out.println("Alignment: Ending " + this.getClass().getSimpleName());
     timer.stop();
 		PIDcenter.reset();
 		valueApproach = 0;

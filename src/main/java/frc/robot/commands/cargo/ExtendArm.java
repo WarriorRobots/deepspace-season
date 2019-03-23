@@ -15,7 +15,7 @@ public class ExtendArm extends CommandGroup {
    * Add your docs here.
    */
   public ExtendArm(double angle) {
-    addSequential(new SubgroupRetractLaunchers());
-    addSequential(new SubgroupExtendArm(angle));
+    addParallel(new SubgroupRetractLaunchers());
+    addParallel(new SubgroupExtendArm(angle));
   }
 }

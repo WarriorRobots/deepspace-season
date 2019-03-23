@@ -55,6 +55,13 @@ public class LineFollowerSubsystem extends Subsystem {
 		return !rightFollower.get(); // inverted because it reads white as false
 	}
 
+	/*
+	 * Return true when any of the line followers are touching a line.
+	 */
+	public boolean touchingLine() {
+		return (getLeftLineFollower() || getMiddleLineFollower() || getRightLineFollower());
+	}
+
 	public Direction getCorrection() {
 		boolean l = getLeftLineFollower();
 		boolean m = getMiddleLineFollower();

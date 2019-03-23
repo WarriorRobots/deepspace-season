@@ -175,6 +175,6 @@ public class ElevatorSubsystem extends Subsystem {
 		builder.addDoubleProperty("position", () -> getElevatorPosition(), null);
 		builder.addDoubleProperty("clicks", () -> winch.getSelectedSensorPosition(), null);
 		builder.addBooleanProperty("floored?", () -> isElevatorFloored(), null);
-		builder.addDoubleProperty("speed", () -> winch.get(), null);
+		builder.addDoubleProperty("speed", () -> winch.getMotorOutputPercent(), null);
 	}
 }

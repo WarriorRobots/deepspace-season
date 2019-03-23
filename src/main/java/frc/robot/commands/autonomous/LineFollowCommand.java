@@ -2,14 +2,28 @@ package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.CameraSubsystem;
 
 public class LineFollowCommand extends Command {
 
-	double leftSpeed, rightSpeed;
+	private double leftSpeed, rightSpeed;
+
+	private double weak = 0.23;		//0.15
+	private double normal = 0.45;	//0.3
+	private double strong = 0.08;	//0.05
+
+	private double porportion;
 
 	public LineFollowCommand() {
 		requires(Robot.lineFollowers);
 		requires(Robot.drivetrain);
+		requires(Robot.camera);
+	}
+
+	@Override
+	protected void initialize() {
+		System.out.println("Alignment: Starting " + this.getClass().getSimpleName());
+		Robot.camera.setPipeline(CameraSubsystem.PIPELINE_DRIVER);
 	}
 
 	/**
@@ -21,9 +35,6 @@ public class LineFollowCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		double weak = 0.15;
-		double normal = 0.3;
-		double strong = 0.05;
 		switch (Robot.lineFollowers.getCorrection()) {
 		case STRAIGHT:
 			leftSpeed = normal;
@@ -54,7 +65,15 @@ public class LineFollowCommand extends Command {
 
 		System.out.println(Robot.lineFollowers.getCorrection().toString());
 
-		Robot.drivetrain.tankDriveRaw(leftSpeed, rightSpeed);
+		porportion = Robot.input.getRightY();
+		//porportion = ( Robot.input.getLeftY() + Robot.input.getRightY() ) / 2;
+
+		Robot.drivetrain.tankDriveRaw(leftSpeed * porportion, rightSpeed * porportion);
+	}
+
+	@Override
+	protected void end() {
+		System.out.println("Alignment: Ending " + this.getClass().getSimpleName());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
