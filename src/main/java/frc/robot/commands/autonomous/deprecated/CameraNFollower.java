@@ -1,7 +1,8 @@
-package frc.robot.commands.autonomous;
+package frc.robot.commands.autonomous.deprecated;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.autonomous.LineFollowCommand;
+import frc.robot.commands.autonomous.CameraApproach;
+import frc.robot.commands.autonomous.deprecated.LineFollowCommand;
 
 @Deprecated
 public class CameraNFollower extends CommandGroup {

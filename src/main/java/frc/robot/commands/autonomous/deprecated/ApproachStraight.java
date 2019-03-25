@@ -1,4 +1,4 @@
-package frc.robot.commands.autonomous;
+package frc.robot.commands.autonomous.deprecated;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.QuickAccessVars;
