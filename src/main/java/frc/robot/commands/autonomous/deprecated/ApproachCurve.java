@@ -1,4 +1,4 @@
-package frc.robot.commands.autonomous;
+package frc.robot.commands.autonomous.deprecated;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.util.SynchronousPIDF;
@@ -13,6 +13,7 @@ import frc.robot.subsystems.CameraSubsystem;
  * on the direction of approach) and when it is aligned up (by the aspect ratio
  * being 2.3 or above), it approach the rest of the distance with it in front.
  */
+@Deprecated
 public class ApproachCurve extends Command {
 
 	/** PID used for approaching the wall. */
@@ -64,6 +65,7 @@ public class ApproachCurve extends Command {
 	/** Left:Right height ratio of targets */
 	private double heightRatio;
 
+	@Deprecated
 	public ApproachCurve() {
 		requires(Robot.drivetrain);
 		requires(Robot.camera);

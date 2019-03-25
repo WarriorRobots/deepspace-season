@@ -17,6 +17,11 @@ public class MoveClimbTo extends Command {
 	}
 
 	@Override
+	protected void initialize() {
+		System.out.println("Climb: Starting " + this.getClass().getSimpleName());
+	}
+
+	@Override
 	protected void execute() {
 		Robot.climb.moveClimbTo(target);
 	}
@@ -29,5 +34,12 @@ public class MoveClimbTo extends Command {
 	@Override
 	protected void end() {
 		Robot.climb.stopClimb();
+		System.out.println("Climb: Finishing " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		Robot.climb.stopClimb();
+		System.out.println("Climb: Canceling " + this.getClass().getSimpleName());
 	}
 }

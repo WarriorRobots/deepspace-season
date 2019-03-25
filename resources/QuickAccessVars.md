@@ -6,7 +6,7 @@ Upper and lower bounds of elevator's range of motion.
 - `ELEVATOR_MAXIMUM_TARGET = 75;`
 
 Amount to adjust elevator by when using +2
-- `ADJUST_ELEVATOR_BY = 4;`
+- `ELEVATOR_DELTA = 6;`
 
 Height of elevator when placing cargo in the bay and when trying to climb to hab platform 3.
 - `CARGO_SCORING_HEIGHT = 29;`
@@ -27,7 +27,7 @@ Upper and lower bounds of the elevator's range of motion.
 - `CLIMB_MAXIMUM_TARGET = 0;`
 
 Amount to adjust climb by when using +1/2
-- `ADJUST_CLIMB_BY = 0.5;`
+- `CLIMB_DELTA = 0.5;`
 
 ## Motor Speeds
 All motor speeds are from -1 to 1.
@@ -50,15 +50,18 @@ Speed the pickup arm goes up at when reseting the encoder.
 
 ## Degrees
 
+The angle at which the arm should rest at.
+- `public static final double ARM_DEFAULT_ANGLE = 3;`
+
 Upper and lower bounds of arm's range of motion.
-- `ARM_MINIMUM_ANGLE = 0;`
-- `ARM_MAXIMUM_ANGLE = 160;`
+- `ARM_MINIMUM_ANGLE = -3;`
+- `ARM_MAXIMUM_ANGLE = 157;`
 
 Angle of the arm when picking up cargo from the floor.
-- `ARM_PICKUP_CARGO_ANGLE = 90;`
+- `ARM_PICKUP_CARGO_ANGLE = 87;`
 
 Angle of the arm when climbing on either platform.
-- `ARM_CLIMB_ANGLE = 145;`
+- `ARM_CLIMB_ANGLE = 142;`
 
 What angle the magnet sets the arm to be when the encoder is reset.
 - `ARM_RESET_ANGLE = -3;`

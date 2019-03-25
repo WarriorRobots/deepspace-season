@@ -16,6 +16,11 @@ public class TurnLockDrive extends Command {
 	}
 
 	@Override
+	protected void initialize() {
+		System.out.println("Drivetrain: Starting " + this.getClass().getSimpleName());
+	}
+
+	@Override
 	protected void execute() {
 		double leftSpeed = Robot.input.getLeftY();
 		double rightSpeed = Robot.input.getRightY();
@@ -37,6 +42,18 @@ public class TurnLockDrive extends Command {
 	@Override
 	protected boolean isFinished() {
 		return false;
+	}
+
+	@Override
+	protected void end() {
+		Robot.drivetrain.stopDrive();
+		System.out.println("Drivetrain: Finishing " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		Robot.drivetrain.stopDrive();
+		System.out.println("Drivetrain: Canceling " + this.getClass().getSimpleName());
 	}
 
 }

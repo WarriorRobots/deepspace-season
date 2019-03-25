@@ -15,23 +15,24 @@ public class SubgroupExtendLaunchers extends Command {
 	 * @param safemode If this is true, the launchers cannot fire without a signal from the line followers.
 	 */
 	public SubgroupExtendLaunchers(boolean safemode) {
-		requires(Robot.pneumatics);
+		requires(Robot.launchers);
 		this.safemode = safemode;
 	}
 
 	@Override
 	protected void initialize() {
 		counter = 0;
+		System.out.println("Launchers: Starting " + this.getClass().getSimpleName());
 	}
 
 	@Override
 	protected void execute() {
 		if (safemode) {
 			if (Robot.lineFollowers.getMiddleLineFollower()) {
-				Robot.pneumatics.extendLaunchers();
+				Robot.launchers.extendLaunchers();
 			} //else do nothing
 		} else {
-			Robot.pneumatics.extendLaunchers();
+			Robot.launchers.extendLaunchers();
 		}
 		counter++;
 	}
@@ -43,7 +44,14 @@ public class SubgroupExtendLaunchers extends Command {
 
 	@Override
 	protected void end() {
-		Robot.pneumatics.neutralizeLaunchers();
+		Robot.launchers.neutralizeLaunchers();
+		System.out.println("Launchers: Finishing " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		Robot.launchers.neutralizeLaunchers();
+		System.out.println("Launchers: Canceling " + this.getClass().getSimpleName());
 	}
 
 }

@@ -22,6 +22,11 @@ public class DebugLinearElevatorControl extends Command {
 	}
 
 	@Override
+	protected void initialize() {
+		System.out.println("Debug: Starting " + this.getClass().getSimpleName());
+	}
+
+	@Override
 	protected void execute() {
 		Robot.elevator.adjustElevatorLinear(input.getAsDouble());
 	}
@@ -34,6 +39,13 @@ public class DebugLinearElevatorControl extends Command {
 	@Override
 	protected void end() {
 		Robot.elevator.stopElevator();
+		System.out.println("Debug: Finishing " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    protected void interrupted() {
+		Robot.elevator.stopElevator();
+		System.out.println("Debug: Canceling " + this.getClass().getSimpleName());
 	}
 
 }

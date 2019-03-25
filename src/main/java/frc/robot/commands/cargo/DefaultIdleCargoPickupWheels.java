@@ -15,6 +15,11 @@ public class DefaultIdleCargoPickupWheels extends Command {
 	}
 
 	@Override
+	protected void initialize() {
+		System.out.println("CargoPickup: Starting " + this.getClass().getSimpleName());
+	}
+
+	@Override
 	protected void execute() {
 		Robot.cargoPickupWheels.runPickup(QuickAccessVars.CARGO_PICKUP_IDLE_SPEED);
 	}
@@ -27,6 +32,13 @@ public class DefaultIdleCargoPickupWheels extends Command {
 	@Override
 	protected void end() {
 		Robot.cargoPickupWheels.stopPickup();
+		System.out.println("CargoPickup: Finishing " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		Robot.cargoPickupWheels.stopPickup();
+		System.out.println("CargoPickup: Canceling " + this.getClass().getSimpleName());
 	}
 
 }

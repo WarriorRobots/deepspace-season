@@ -3,6 +3,7 @@ package frc.robot.commands.debug;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
+@Deprecated // do not use except for troubleshooting
 public class DebugEnableCompressor extends InstantCommand {
 
 	/**
@@ -16,7 +17,7 @@ public class DebugEnableCompressor extends InstantCommand {
 	@Override
 	protected void execute() {
 		Robot.pneumatics.enableCompressor();
-		System.out.println("WWDEBUG: DebugEnableCompressor");
+		System.out.println("Debug: Running " + this.getClass().getSimpleName());
 	}
 
 }

@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.cargo.FindArmZero;
 import frc.robot.commands.debug.DebugRebootAll;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.CameraSubsystem;
@@ -11,6 +12,7 @@ import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.HatchPickupSubsystem;
+import frc.robot.subsystems.PneumaticLauncherSubsystem;
 import frc.robot.subsystems.PneumaticSubsystem;
 import frc.robot.subsystems.LineFollowerSubsystem;
 
@@ -28,6 +30,7 @@ public class Robot extends TimedRobot {
 	public static final HatchPickupSubsystem hatchPickupWheels = new HatchPickupSubsystem();
 	public static final LineFollowerSubsystem lineFollowers = new LineFollowerSubsystem();
 	public static final PneumaticSubsystem pneumatics = new PneumaticSubsystem();
+	public static final PneumaticLauncherSubsystem launchers = new PneumaticLauncherSubsystem();
 
 	/** Reference this to get input from the joysticks and Xbox controller. */
 	public static ControlHandler input;
@@ -44,6 +47,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData(hatchPickupWheels);
 		SmartDashboard.putData(lineFollowers);
 		SmartDashboard.putData(pneumatics);
+		SmartDashboard.putData(launchers);
 		climb.resetEncoder();
 	}
 
@@ -54,13 +58,19 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledInit() {
-		Scheduler.getInstance().removeAll();
 		DebugRebootAll.rebootAll();
+		Scheduler.getInstance().removeAll();
+	}
+
+	@Override
+	public void disabledPeriodic() {
+		camera.setPipeline(CameraSubsystem.PIPELINE_DRIVER);
 	}
 
 	@Override
 	public void autonomousInit() {
 		Scheduler.getInstance().removeAll();
+		Scheduler.getInstance().add(new FindArmZero());
 	}
 
 	@Override
@@ -71,6 +81,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		Scheduler.getInstance().removeAll();
+		Scheduler.getInstance().add(new FindArmZero()); // TODO remove at comp
 	}
 
 	@Override

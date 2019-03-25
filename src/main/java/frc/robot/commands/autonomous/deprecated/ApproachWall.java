@@ -1,27 +1,19 @@
-package frc.robot.commands.autonomous;
+package frc.robot.commands.autonomous.deprecated;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
-import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.util.SynchronousPIDF;
 import edu.wpi.first.wpilibj.Timer;
 
-/**
- * ApproachCurve approachs the target keeping it to the left or right (depending
- * on the direction of approach) and when it is aligned up (by the aspect ratio
- * being 2.3 or above), it approach the rest of the distance with it in front.
- */
+/** Approach the wall keeping the target centered using 2 different PIDs. */
 @Deprecated
-public class ApproachStraight extends Command {
+public class ApproachWall extends Command {
 
 	/** PID used for approaching the wall. */
 	private SynchronousPIDF PIDapproach;
 	/** PID for keeping the target centered */
 	private SynchronousPIDF PIDcenter;
-
-	/** Pipeline that ApproachCurve will use. */
-	private int pipeline;
 
 	private Timer timer;
 	/** Calculated PID output from {@link #PIDapproach} should stored in value. */
@@ -29,16 +21,11 @@ public class ApproachStraight extends Command {
 	/** Calculated PID output from {@link #PIDcenter} should stored in value. */
 	private double valuecenter;
 
-	/**
-	 * @param pipeline Pipeline to show direction to turn and align in (use
-	 *                 {@link frc.robot.subsystems.CameraSubsystem#PIPELINE_LEFT} or
-	 *                 {@link frc.robot.subsystems.CameraSubsystem#PIPELINE_RIGHT}).
-	 */
-	public ApproachStraight(int pipeline) {
+	@Deprecated
+	public ApproachWall() {
 		requires(Robot.drivetrain);
 		requires(Robot.camera);
 
-		this.pipeline = pipeline;
 		valueapproach = 0;
 		valuecenter = 0;
 
@@ -61,18 +48,12 @@ public class ApproachStraight extends Command {
 		PIDcenter.setSetpoint(QuickAccessVars.SETPOINT_CENTER); // Robot should aim to keep the target centered on the
 																// crosshair
 
-		Robot.camera.setPipeline(pipeline);
-
 		timer.start();
 
 	}
 
 	@Override
 	protected void execute() {
-
-		if (Robot.camera.getObjectAspectRatio() >= 2.6) { // when the object is aligned
-			Robot.camera.setPipeline(CameraSubsystem.PIPELINE_CENTER); // it should go straight on
-		}
 
 		if (Robot.camera.canSeeObject()) {
 			valueapproach = PIDapproach.calculate(Robot.camera.getTargetDistance(), timer.get());
@@ -87,7 +68,8 @@ public class ApproachStraight extends Command {
 			// attempting to turn.
 		}
 
-		Robot.drivetrain.arcadeDriveRaw(-valueapproach, -valuecenter);
+		Robot.drivetrain.arcadeDriveRaw(valueapproach, -valuecenter);
+
 	}
 
 	@Override
@@ -106,7 +88,6 @@ public class ApproachStraight extends Command {
 		PIDcenter.reset();
 		valueapproach = 0;
 		valuecenter = 0;
-		Robot.camera.setPipeline(CameraSubsystem.PIPELINE_CENTER);
 		Robot.drivetrain.stopDrive();
 	}
 

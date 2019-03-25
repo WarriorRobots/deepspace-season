@@ -18,6 +18,7 @@ public class DefaultStabilizeClimb extends Command {
 	@Override
 	protected void initialize() {
 		initialPosition = Robot.climb.getClimbPosition();
+		System.out.println("Climb: Starting " + this.getClass().getSimpleName());
 	}
 
 	@Override
@@ -33,6 +34,13 @@ public class DefaultStabilizeClimb extends Command {
 	@Override
 	protected void end() {
 		Robot.climb.stopClimb();
+		System.out.println("Climb: Finishing " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		Robot.climb.stopClimb();
+		System.out.println("Climb: Canceling " + this.getClass().getSimpleName());
 	}
 
 }

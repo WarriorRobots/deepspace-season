@@ -12,6 +12,7 @@ public class DebugResetClimbEncoder extends InstantCommand {
 	@Override
 	protected void execute() {
 		Robot.climb.resetEncoder();
+		System.out.println("Debug: Running " + this.getClass().getSimpleName());
 	}
 
 }

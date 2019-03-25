@@ -4,16 +4,20 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
-public class MoveElevatorTo extends Command {
+public class RaiseElevatorTo extends Command {
 
 	/** The position, in inches, that the elevator will move to. */
 	private double target;
 
+	/** Initial position of the elevator when the command is called. */
+	private double initial;
+
 	/**
-	 * Move the elevator's central assembly to a certain number of inches <b>above the floor</b>.
+	 * Raise the elevator's central assembly to a certain number of inches <b>above the floor</b>.
+	 * If the commanded position is greater than the elevator's current position, the elevator will not move.
 	 * @param positionInches How far ABOVE THE FLOOR the elevator should be, in inches.
 	 */
-	public MoveElevatorTo(double positionInches) {
+	public RaiseElevatorTo(double positionInches) {
 		requires(Robot.elevator);
 		this.target = positionInches - QuickAccessVars.ELEVATOR_BASE_HEIGHT;
 	}
@@ -21,11 +25,16 @@ public class MoveElevatorTo extends Command {
 	@Override
 	protected void initialize() {
 		System.out.println("Elevator: Starting " + this.getClass().getSimpleName());
+		initial = Robot.elevator.getElevatorPosition();
 	}
 
 	@Override
 	protected void execute() {
-		Robot.elevator.moveElevatorTo(target);
+		if (target > initial) {
+			Robot.elevator.moveElevatorTo(target);
+		} else {
+			Robot.elevator.moveElevatorTo(initial); // act like the stabilize command if the elevator starts higher
+		}
 	}
 
 	@Override

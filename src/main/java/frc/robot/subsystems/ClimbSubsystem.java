@@ -147,6 +147,6 @@ public class ClimbSubsystem extends Subsystem {
 	public void initSendable(SendableBuilder builder) {
 		builder.addDoubleProperty("position", () -> getClimbPosition(), null);
 		builder.addDoubleProperty("clicks", () -> winch.getSelectedSensorPosition(), null);
-		builder.addDoubleProperty("speed", () -> winch.get(), null);
+		builder.addDoubleProperty("speed", () -> winch.getMotorOutputPercent(), null);
 	}
 }

@@ -22,6 +22,11 @@ public class DebugLinearClimbControl extends Command {
 	}
 
 	@Override
+	protected void initialize() {
+		System.out.println("Debug: Starting " + this.getClass().getSimpleName());
+	}
+
+	@Override
 	protected void execute() {
 		Robot.climb.adjustClimbLinear(input.getAsDouble());
 	}
@@ -34,5 +39,13 @@ public class DebugLinearClimbControl extends Command {
 	@Override
 	protected void end() {
 		Robot.climb.stopClimb();
+		System.out.println("Debug: Finishing " + this.getClass().getSimpleName());
 	}
+
+	@Override
+	protected void interrupted() {
+		Robot.climb.stopClimb();
+		System.out.println("Debug: Canceling " + this.getClass().getSimpleName());
+	}
+	
 }

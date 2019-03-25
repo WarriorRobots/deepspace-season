@@ -17,6 +17,7 @@ public class DefaultStabilizeArm extends Command {
 	@Override
 	protected void initialize() {
 		initialPosition = Robot.arm.getArmAngle();
+		System.out.println("Arm: Starting " + this.getClass().getSimpleName());
 	}
 
 	@Override
@@ -32,5 +33,13 @@ public class DefaultStabilizeArm extends Command {
 	@Override
 	protected void end() {
 		Robot.arm.stopArm();
+		System.out.println("Arm: Finishing " + this.getClass().getSimpleName());
 	}
+
+	@Override
+	protected void interrupted() {
+		Robot.arm.stopArm();
+		System.out.println("Arm: Canceling " + this.getClass().getSimpleName());
+	}
+
 }

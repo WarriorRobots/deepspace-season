@@ -1,4 +1,4 @@
-package frc.robot.commands.autonomous;
+package frc.robot.commands.autonomous.deprecated;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.util.SynchronousPIDF;
@@ -64,6 +64,7 @@ public class ApproachCurveVerbose extends Command {
 	/** Left:Right height ratio of targets */
 	private double heightRatio;
 
+	@Deprecated
     public ApproachCurveVerbose() {
 		requires(Robot.drivetrain);
 		requires(Robot.camera);

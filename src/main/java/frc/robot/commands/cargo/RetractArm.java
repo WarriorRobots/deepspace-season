@@ -1,26 +1,26 @@
 package frc.robot.commands.cargo;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
-public class ReverseCargoPickupWheels extends Command {
+public class RetractArm extends Command {
 
 	/**
-	 * Runs the cargo pickup wheels backwards at full speed,
-	 * hopefully for scoring a ball into a cargo/rocket bay.
+	 * Rotates the arm to zero degrees (straight upwards).
 	 */
-	public ReverseCargoPickupWheels() {
-		requires(Robot.cargoPickupWheels);
+	public RetractArm() {
+		requires(Robot.arm);
 	}
 
 	@Override
 	protected void initialize() {
-		System.out.println("CargoPickup: Starting " + this.getClass().getSimpleName());
+		System.out.println("Arm: Starting " + this.getClass().getSimpleName());
 	}
 
 	@Override
 	protected void execute() {
-		Robot.cargoPickupWheels.runPickup(-1);
+		Robot.arm.rotateArmTo(QuickAccessVars.ARM_DEFAULT_ANGLE);
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class ReverseCargoPickupWheels extends Command {
 
 	@Override
 	protected void end() {
-		Robot.cargoPickupWheels.stopPickup();
+		Robot.arm.stopArm();
 		System.out.println("Arm: Finishing " + this.getClass().getSimpleName());
 	}
 

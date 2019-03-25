@@ -95,6 +95,10 @@ public class ArmSubsystem extends Subsystem {
         } // @formatter:on
 	}
 
+	public void rotateArmLinearNoSafety(double speed) {
+		armRotator.set(speed);
+	}
+
 	/**
 	 * Holds the arm at the specified number of degrees.
 	 * This has no safeties, so be careful!
@@ -175,8 +179,9 @@ public class ArmSubsystem extends Subsystem {
 	@Override
 	public void initSendable(SendableBuilder builder) {
 		builder.addDoubleProperty("angle", () -> getArmAngle(), null);
-		builder.addDoubleProperty("master speed", () -> armRotator.get(), null);
-		builder.addDoubleProperty("clone speed", () -> armRotatorClone.get(), null);
+		builder.addDoubleProperty("master speed", () -> armRotator.getMotorOutputPercent(), null);
+		builder.addDoubleProperty("clone speed", () -> armRotatorClone.getMotorOutputPercent(), null);
+		builder.addBooleanProperty("limit switch?", () -> isLimitSwitchTriggered(), null);
 	}
 
 }

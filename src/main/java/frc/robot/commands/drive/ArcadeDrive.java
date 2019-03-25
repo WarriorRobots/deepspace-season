@@ -15,6 +15,11 @@ public class ArcadeDrive extends Command {
 	}
 
 	@Override
+	protected void initialize() {
+		System.out.println("Drivetrain: Starting " + this.getClass().getSimpleName());
+	}
+
+	@Override
 	protected void execute() {
 		Robot.drivetrain.arcadeDriveTeleop(Robot.input.getRightY(QuickAccessVars.ARCADE_FORWARD_MODIFIER),
 				Robot.input.getRightX(QuickAccessVars.ARCADE_TURN_MODIFIER));
@@ -28,5 +33,12 @@ public class ArcadeDrive extends Command {
 	@Override
 	protected void end() {
 		Robot.drivetrain.stopDrive();
+		System.out.println("Drivetrain: Finishing " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		Robot.drivetrain.stopDrive();
+		System.out.println("Drivetrain: Canceling " + this.getClass().getSimpleName());
 	}
 }

@@ -12,15 +12,13 @@ import frc.robot.Constants;
  */
 public class PneumaticSubsystem extends Subsystem {
 
-	private static final int SCISSOR_FORWARD = 5;
-	private static final int SCISSOR_REVERSE = 2;
-	private static final int LAUNCH_FORWARD = 4;
-	private static final int LAUNCH_REVERSE = 3;
+	private static final int SCISSOR_FORWARD = 2;
+	private static final int SCISSOR_REVERSE = 5;
 	private static final int PICKUP_FORWARD = 0;
 	private static final int PICKUP_REVERSE = 7;
 
 	private Compressor compressor;
-	private DoubleSolenoid scissorSol, launcherSol, pickupSol;
+	private DoubleSolenoid scissorSol, pickupSol;
 
 	/**
 	 * Instantiates new subsystem; make ONLY ONE.
@@ -33,7 +31,6 @@ public class PneumaticSubsystem extends Subsystem {
 		compressor.start();
 
 		scissorSol = new DoubleSolenoid(Constants.PCM_2, SCISSOR_FORWARD, SCISSOR_REVERSE);
-		launcherSol = new DoubleSolenoid(Constants.PCM_2, LAUNCH_FORWARD, LAUNCH_REVERSE);
 		pickupSol = new DoubleSolenoid(Constants.PCM_1, PICKUP_FORWARD, PICKUP_REVERSE);
 	}
 
@@ -41,30 +38,14 @@ public class PneumaticSubsystem extends Subsystem {
 	 * Secures the hatch in place by opening the scissors.
 	 */
 	public void lockScissors() {
-		scissorSol.set(Value.kReverse);
+		scissorSol.set(Value.kForward);
 	}
 
 	/**
 	 * Releases the hatch by closing the scissors; it will hang loosely and can fall off.
 	 */
 	public void loosenScissors() {
-		scissorSol.set(Value.kForward);
-	}
-
-	/**
-	 * Extend the pistons that push the hatch off the scissors.
-	 * Only use if the scissors are loose!
-	 */
-	public void extendLaunchers() {
-		launcherSol.set(Value.kForward);
-	}
-
-	/**
-	 * Retract the pistons that push the hatch off the scissors.
-	 * Always run this after launching to avoid unsafe conditions.
-	 */
-	public void retractLaunchers() {
-		launcherSol.set(Value.kReverse);
+		scissorSol.set(Value.kReverse);
 	}
 
 	/**
@@ -80,14 +61,6 @@ public class PneumaticSubsystem extends Subsystem {
 	 */
 	public void retractPickup() {
 		pickupSol.set(Value.kReverse);
-	}
-
-	/**
-	 * Shuts off power to the launcher solenoid(s).
-	 * Use after extending or retracting; this will not move the piston.
-	 */
-	public void neutralizeLaunchers() {
-		launcherSol.set(Value.kOff);
 	}
 
 	/**
@@ -112,7 +85,6 @@ public class PneumaticSubsystem extends Subsystem {
 	 */
 	public void neutralizeAll() {
 		neutralizeScissors();
-		neutralizeLaunchers();
 		neutralizePickup();
 	}
 
@@ -140,7 +112,6 @@ public class PneumaticSubsystem extends Subsystem {
 		builder.addBooleanProperty("low pressure?", () -> !compressor.getPressureSwitchValue(), null);
 		builder.addBooleanProperty("compressor?", () -> compressor.enabled(), null);
 		builder.addStringProperty("scissors", () -> scissorSol.get().toString(), null);
-		builder.addStringProperty("launchers", () -> launcherSol.get().toString(), null);
 		builder.addStringProperty("hatchpickup", () -> pickupSol.get().toString(), null);
 	}
 

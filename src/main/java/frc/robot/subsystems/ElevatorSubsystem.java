@@ -111,7 +111,7 @@ public class ElevatorSubsystem extends Subsystem {
 	}
 
 	/**
-	 * Returns the position of the elevator in inches
+	 * Returns the position of the elevator in inches relative to the bottom frame (NOT THE FLOOR)
 	 */
 	public double getElevatorPosition() {
 		return toInches(winch.getSelectedSensorPosition());
@@ -175,6 +175,6 @@ public class ElevatorSubsystem extends Subsystem {
 		builder.addDoubleProperty("position", () -> getElevatorPosition(), null);
 		builder.addDoubleProperty("clicks", () -> winch.getSelectedSensorPosition(), null);
 		builder.addBooleanProperty("floored?", () -> isElevatorFloored(), null);
-		builder.addDoubleProperty("speed", () -> winch.get(), null);
+		builder.addDoubleProperty("speed", () -> winch.getMotorOutputPercent(), null);
 	}
 }

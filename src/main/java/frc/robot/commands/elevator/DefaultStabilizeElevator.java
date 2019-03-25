@@ -18,6 +18,7 @@ public class DefaultStabilizeElevator extends Command {
 	@Override
 	protected void initialize() {
 		initialPosition = Robot.elevator.getElevatorPosition();
+		System.out.println("Elevator: Starting " + this.getClass().getSimpleName());
 	}
 
 	@Override
@@ -33,6 +34,13 @@ public class DefaultStabilizeElevator extends Command {
 	@Override
 	protected void end() {
 		Robot.elevator.stopElevator();
+		System.out.println("Elevator: Finishing " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		Robot.elevator.stopElevator();
+		System.out.println("Elevator: Canceling " + this.getClass().getSimpleName());
 	}
 
 }

@@ -15,6 +15,11 @@ public class DefaultStopHatchPickupWheels extends Command {
 	}
 
 	@Override
+	protected void initialize() {
+		System.out.println("HatchPickup: Starting " + this.getClass().getSimpleName());
+	}
+
+	@Override
 	protected void execute() {
 		Robot.hatchPickupWheels.stopPickup();
 	}
@@ -22,6 +27,16 @@ public class DefaultStopHatchPickupWheels extends Command {
 	@Override
 	protected boolean isFinished() {
 		return false;
+	}
+
+	@Override
+	protected void end() {
+		System.out.println("HatchPickup: Ending " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		System.out.println("HatchPickup: Canceling " + this.getClass().getSimpleName());
 	}
 
 }

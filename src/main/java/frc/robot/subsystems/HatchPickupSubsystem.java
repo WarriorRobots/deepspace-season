@@ -50,7 +50,7 @@ public class HatchPickupSubsystem extends Subsystem {
 
 	@Override
 	public void initSendable(SendableBuilder builder) {
-		builder.addDoubleProperty("speed", () -> pickupMotor.get(), null);
+		builder.addDoubleProperty("speed", () -> pickupMotor.getMotorOutputPercent(), null);
 	}
 
 }

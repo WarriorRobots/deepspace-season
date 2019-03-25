@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.Constants;
 import frc.robot.QuickAccessVars;
-import frc.robot.commands.ChangePipeline;
+import frc.robot.commands.ChangeCameraPipeline;
 
 /**
  * CameraSubsystem is supposed to recive data from the limelight to be output or processed.
@@ -147,8 +147,7 @@ public class CameraSubsystem extends Subsystem {
 	 * (Target may not be visible at very close range, use a sonar.)
 	 * @return Distance from target in inches.
 	 */
-	@Deprecated
-	public double getTargetDistanceAdjacent() {
+	public double getTargetDistance() {
 
 		if (!canSeeObject())
 			return -1;
@@ -171,7 +170,8 @@ public class CameraSubsystem extends Subsystem {
 	 * (Target may not be visible at very close range, use a sonar.)
 	 * @return Distance from target in inches.
 	 */
-	public double getTargetDistance() {
+	@Deprecated
+	public double getTargetDistanceTilted() {
 
 		if (!canSeeObject())
 			return -1;
@@ -184,14 +184,14 @@ public class CameraSubsystem extends Subsystem {
 				- QuickAccessVars.TARGET_HEIGHT / 2;
 
 		// Angle from the elevator to the center of the target
-		double angle = Math.PI / 2 - QuickAccessVars.CAMERA_TILT + target_offset;
+		double angle = Math.PI / 2 - 0/*QuickAccessVars.CAMERA_TILT*/ + target_offset;
 
 		//System.out.println("Angle:");
 		//System.out.println(angle);
 
 		// if the math is acting weird, return a working value
 		if (height_difference == 0 || angle == 0)
-			return getTargetDistanceAdjacent();
+			return getTargetDistance(); //getTargetDistanceAdjacent();
 
 		// range = opp = adj*tan(Theta)
 		double range = height_difference * Math.tan(angle);
@@ -251,7 +251,7 @@ public class CameraSubsystem extends Subsystem {
 
 	@Override
 	public void initDefaultCommand() {
-		setDefaultCommand(new ChangePipeline(PIPELINE_DRIVER));
+		setDefaultCommand(new ChangeCameraPipeline(PIPELINE_DRIVER));
 	}
 
 }

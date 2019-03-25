@@ -21,6 +21,7 @@ public class AdjustElevatorRelative extends Command {
 	protected void initialize() {
 		initialPosition = Robot.elevator.getElevatorPosition();
 		target = initialPosition + adjustBy; // works with negatives too
+		System.out.println("Elevator: Starting " + this.getClass().getSimpleName());
 	}
 
 	@Override
@@ -36,6 +37,13 @@ public class AdjustElevatorRelative extends Command {
 	@Override
 	protected void end() {
 		Robot.elevator.stopElevator();
+		System.out.println("Elevator: Finishing " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	protected void interrupted() {
+		Robot.elevator.stopElevator();
+		System.out.println("Elevator: Canceling " + this.getClass().getSimpleName());
 	}
 
 }
