@@ -1,6 +1,7 @@
 package frc.robot.commands.hatchplacer;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import frc.robot.QuickAccessVars;
 
@@ -12,6 +13,7 @@ public class PlaceHatchOnVelcro extends CommandGroup {
 	 *                 signal from the line followers.
 	 */
 	public PlaceHatchOnVelcro(boolean safemode) {
+		this.setInterruptible(false);
 		addParallel(new SubgroupExtendLaunchers(safemode));
 		addSequential(new WaitCommand(QuickAccessVars.PLACE_HATCH_DELAY));
 		addParallel(new LoosenScissors());
@@ -32,13 +34,7 @@ public class PlaceHatchOnVelcro extends CommandGroup {
 	@Override
 	protected void interrupted() {
 		System.out.println("Pneumatics: Canceling " + this.getClass().getSimpleName()); // XXX if interrupted, fix launchers?
-	}
-
-	@Override
-	public boolean isInterruptible() {
-		return false; // returns false so the launcher pistons are unable to be stuck out
-		// this is because if it cannot be interrupted the command must go to completion
-		// making sure the retract launcher command runs
+		Scheduler.getInstance().add(new SubgroupRetractLaunchers());
 	}
 
 }

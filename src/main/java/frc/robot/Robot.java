@@ -70,8 +70,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		Scheduler.getInstance().removeAll();
-		// XXX run this one at comp and the one in teleop only during drive practice
-		//Scheduler.getInstance().add(new FindArmZero());
+		Scheduler.getInstance().add(new FindArmZero());
 	}
 
 	@Override
@@ -82,7 +81,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		Scheduler.getInstance().removeAll();
-		Scheduler.getInstance().add(new FindArmZero());
+		Scheduler.getInstance().add(new FindArmZero()); // TODO remove at comp
 	}
 
 	@Override

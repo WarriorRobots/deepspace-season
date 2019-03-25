@@ -12,8 +12,8 @@ import frc.robot.Constants;
  */
 public class PneumaticSubsystem extends Subsystem {
 
-	private static final int SCISSOR_FORWARD = 5;
-	private static final int SCISSOR_REVERSE = 2;
+	private static final int SCISSOR_FORWARD = 2;
+	private static final int SCISSOR_REVERSE = 5;
 	private static final int PICKUP_FORWARD = 0;
 	private static final int PICKUP_REVERSE = 7;
 
@@ -38,14 +38,14 @@ public class PneumaticSubsystem extends Subsystem {
 	 * Secures the hatch in place by opening the scissors.
 	 */
 	public void lockScissors() {
-		scissorSol.set(Value.kReverse);
+		scissorSol.set(Value.kForward);
 	}
 
 	/**
 	 * Releases the hatch by closing the scissors; it will hang loosely and can fall off.
 	 */
 	public void loosenScissors() {
-		scissorSol.set(Value.kForward);
+		scissorSol.set(Value.kReverse);
 	}
 
 	/**

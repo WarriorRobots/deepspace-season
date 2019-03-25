@@ -62,19 +62,20 @@ public class LineFollowerSubsystem extends Subsystem {
 		return (getLeftLineFollower() || getMiddleLineFollower() || getRightLineFollower());
 	}
 
-	public Direction getCorrection() {
+	public Direction getCorrection() { // @formatter:off
 		boolean l = getLeftLineFollower();
 		boolean m = getMiddleLineFollower();
 		boolean r = getRightLineFollower();
-		if ( (l && m && r) || (l && !m && r) ) return Direction.STOP; // XXX add curly brackets
-		if (!l && !m && !r) return Direction.STRAIGHT;
-		if (!l && m && !r) return Direction.STRAIGHT;
-		if (l && m && !r) return Direction.WEAKLEFT;
-		if (l && !m && !r) return Direction.STRONGLEFT;
-		if (!l && m && r) return Direction.WEAKRIGHT;
-		if (!l && !m && r) return Direction.STRONGRIGHT;
+		if ( (l && m && r) || (l && !m && r) ) { return Direction.STOP; }
+		if (!l && !m && !r) { return Direction.STRAIGHT; }
+		if (!l && m && !r) { return Direction.STRAIGHT; }
+		if (l && m && !r) { return Direction.WEAKLEFT; }
+		if (l && !m && !r) { return Direction.STRONGLEFT; }
+		if (!l && m && r) { return Direction.WEAKRIGHT; }
+		if (!l && !m && r) { return Direction.STRONGRIGHT; }
 		// else
 		return Direction.STOP;
+		// @formatter:on
 	}
 
 	@Override
