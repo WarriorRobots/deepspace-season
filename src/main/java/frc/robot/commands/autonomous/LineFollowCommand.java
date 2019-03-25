@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.CameraSubsystem;
 
+@Deprecated
 public class LineFollowCommand extends Command {
 
 	private double leftSpeed, rightSpeed;

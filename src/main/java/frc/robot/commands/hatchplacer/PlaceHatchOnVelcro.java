@@ -33,7 +33,7 @@ public class PlaceHatchOnVelcro extends CommandGroup {
 
 	@Override
 	protected void interrupted() {
-		System.out.println("Pneumatics: Canceling " + this.getClass().getSimpleName()); // XXX if interrupted, fix launchers?
+		System.out.println("Pneumatics: Canceling " + this.getClass().getSimpleName());
 		Scheduler.getInstance().add(new SubgroupRetractLaunchers());
 	}
 

@@ -13,6 +13,7 @@ import frc.robot.subsystems.CameraSubsystem;
  * on the direction of approach) and when it is aligned up (by the aspect ratio
  * being 2.3 or above), it approach the rest of the distance with it in front.
  */
+@Deprecated
 public class ApproachCurve extends Command {
 
 	/** PID used for approaching the wall. */

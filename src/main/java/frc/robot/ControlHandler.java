@@ -11,19 +11,12 @@ import frc.robot.commands.climb.MoveClimbTo;
 import frc.robot.commands.climb.SynchronizedClimb;
 import frc.robot.commands.debug.DebugLinearArmControl;
 import frc.robot.commands.debug.DebugLinearElevatorControl;
-import frc.robot.commands.cargo.SubgroupFindArmZero;
-import frc.robot.commands.debug.DebugResetClimbEncoder;
 import frc.robot.commands.cargo.ReverseCargoPickupWheels;
-import frc.robot.commands.debug.DebugDisableCompressor;
-import frc.robot.commands.debug.DebugEnableCompressor;
 import frc.robot.commands.debug.DebugRebootAll;
-import frc.robot.commands.autonomous.ApproachCurve;
+import frc.robot.commands.debug.DebugResetClimbEncoder;
 import frc.robot.commands.autonomous.CameraApproach;
-import frc.robot.commands.autonomous.CameraNFollower;
-import frc.robot.commands.autonomous.LineFollowCommand;
 import frc.robot.commands.cargo.FindArmZero;
 import frc.robot.commands.cargo.ExtendArm;
-import frc.robot.commands.cargo.SubgroupExtendArm;
 import frc.robot.commands.cargo.RetractArm;
 import frc.robot.commands.drive.ArcadeDrive;
 import frc.robot.commands.drive.TurnLockDrive;
@@ -127,18 +120,15 @@ public final class ControlHandler {
 		leftJoyButton4.whenPressed(new PlaceHatchOnVelcro(QuickAccessVars.HATCH_LAUNCH_SAFETY));
 		leftJoyButton5.whenPressed(new MoveClimbTo(0));
 		leftJoyButton6.whenPressed(new SynchronizedClimb(QuickAccessVars.CLIMB_TARGET_HAB2));
-		leftJoyButton7.whenPressed(new DebugRebootAll()); // COMPTEST
-		leftJoyButton8.whenPressed(new DebugEnableCompressor());
+		leftJoyButton7.whenPressed(new DebugRebootAll()); // TODO remove at comp
 		leftJoyButton9.whenPressed(new FindArmZero());
-		// leftJoyButton10.whenPressed(new DebugDisableCompressor());
-		// leftJoyButton11.whenPressed(new DebugResetClimbEncoder());
+		leftJoyButton11.whenPressed(new DebugResetClimbEncoder());
 		leftJoyButton12.whenPressed(new AdjustClimbRelative(QuickAccessVars.CLIMB_DELTA));
 
 		rightJoyThumbButton.whileHeld(new ArcadeDrive());
 		rightJoyTriggerButton.whileHeld(new TurnLockDrive());
 		rightJoyButton3.whenPressed(new ExtendArm(QuickAccessVars.ARM_PICKUP_CARGO_ANGLE));
 		rightJoyButton3.whenPressed(new LockScissors());
-		//rightJoyButton4.whileHeld(new CameraNFollower());
 		rightJoyButton4.whileHeld(new CameraApproach());
 		rightJoyButton5.whenPressed(new ExtendArm(QuickAccessVars.ARM_CLIMB_ANGLE));
 		rightJoyButton6.whenPressed(new SynchronizedClimb(QuickAccessVars.CLIMB_TARGET_HAB3));

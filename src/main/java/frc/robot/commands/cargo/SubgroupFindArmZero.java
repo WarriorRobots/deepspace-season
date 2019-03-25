@@ -16,7 +16,7 @@ public class SubgroupFindArmZero extends Command {
 
 	@Override
 	protected void initialize() {
-		System.out.println("Debug: Starting " + this.getClass().getSimpleName());
+		System.out.println("Arm: Starting " + this.getClass().getSimpleName());
 	}
 	
     @Override
@@ -32,13 +32,13 @@ public class SubgroupFindArmZero extends Command {
     @Override
     protected void end() {
         Robot.arm.resetArmAngleTo(QuickAccessVars.ARM_RESET_ANGLE);
-		System.out.println("Debug: Finishing " + this.getClass().getSimpleName());
+		System.out.println("Arm: Finishing " + this.getClass().getSimpleName());
     }
 
     @Override
     protected void interrupted() {
 		// do NOT reset arm angle
-		System.out.println("Debug: Canceling " + this.getClass().getSimpleName());
+		System.out.println("Arm: Canceling " + this.getClass().getSimpleName());
 	}
 	
 }

@@ -39,7 +39,7 @@ public class CameraApproach extends Command {
 
   @Override
   protected void initialize() {
-    System.out.println("Alignment: Starting " + this.getClass().getSimpleName());
+    System.out.println("Camera: Starting " + this.getClass().getSimpleName());
     Robot.camera.setPipeline(CameraSubsystem.PIPELINE_CENTER);
 
     PIDcenter.setSetpoint(0); // keep the target in the center of the screen
@@ -69,7 +69,17 @@ public class CameraApproach extends Command {
 
   @Override
   protected void end() {
-    System.out.println("Alignment: Ending " + this.getClass().getSimpleName());
+    System.out.println("Camera: Finishing " + this.getClass().getSimpleName());
+    timer.stop();
+		PIDcenter.reset();
+		valueApproach = 0;
+		valueCenter = 0;
+		Robot.drivetrain.stopDrive();
+  }
+
+  @Override
+  protected void interrupted() {
+    System.out.println("Camera: Canceling " + this.getClass().getSimpleName());
     timer.stop();
 		PIDcenter.reset();
 		valueApproach = 0;

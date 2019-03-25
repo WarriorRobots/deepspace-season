@@ -13,11 +13,12 @@ import frc.robot.commands.elevator.RaiseElevatorTo;
 
 public class LockScissorsAndRaiseElevator extends CommandGroup {
   /**
-   * Locks Scissors and moves elevator to a height described by the drivers as Level 1 plus delta.
+   * Locks the scissors, then raises the elevator so that a disc will clear the
+   * pickup mechanism or loading station brushes.
    */
   public LockScissorsAndRaiseElevator() {
     addSequential(new LockScissors());
-    addSequential(new RaiseElevatorTo(QuickAccessVars.LVL1_HEIGHT+QuickAccessVars.ELEVATOR_DELTA));
+    addSequential(new RaiseElevatorTo(QuickAccessVars.LVL1_HEIGHT + QuickAccessVars.ELEVATOR_DELTA));
     // if this command is interrupted it should be fine because pistons do not require constant signals
     // and the elevator has the stabilize command as it's default so it is unnessecary to check that case
   }

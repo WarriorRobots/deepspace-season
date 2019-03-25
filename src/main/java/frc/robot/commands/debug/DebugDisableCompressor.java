@@ -3,6 +3,7 @@ package frc.robot.commands.debug;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
+@Deprecated // do not use except for troubleshooting
 public class DebugDisableCompressor extends InstantCommand {
 
 	/**

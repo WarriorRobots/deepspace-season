@@ -111,7 +111,7 @@ public class ElevatorSubsystem extends Subsystem {
 	}
 
 	/**
-	 * Returns the position of the elevator in inches
+	 * Returns the position of the elevator in inches relative to the bottom frame (NOT THE FLOOR)
 	 */
 	public double getElevatorPosition() {
 		return toInches(winch.getSelectedSensorPosition());

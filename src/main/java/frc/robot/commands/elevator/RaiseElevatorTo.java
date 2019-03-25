@@ -14,7 +14,7 @@ public class RaiseElevatorTo extends Command {
 
 	/**
 	 * Raise the elevator's central assembly to a certain number of inches <b>above the floor</b>.
-	 * This command only works going up however.
+	 * If the commanded position is greater than the elevator's current position, the elevator will not move.
 	 * @param positionInches How far ABOVE THE FLOOR the elevator should be, in inches.
 	 */
 	public RaiseElevatorTo(double positionInches) {
@@ -33,7 +33,7 @@ public class RaiseElevatorTo extends Command {
 		if (target > initial) {
 			Robot.elevator.moveElevatorTo(target);
 		} else {
-			Robot.elevator.moveElevatorTo(initial); // act like the stailize command if the elevator starts higher
+			Robot.elevator.moveElevatorTo(initial); // act like the stabilize command if the elevator starts higher
 		}
 	}
 

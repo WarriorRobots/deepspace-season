@@ -16,18 +16,16 @@ import frc.robot.Constants;
 /**
  * Add your docs here.
  */
-public class LauncherSubsystem extends Subsystem {
+public class PneumaticLauncherSubsystem extends Subsystem {
 
 	private static final int LAUNCH_FORWARD = 4;
 	private static final int LAUNCH_REVERSE = 3;
-  
-  private DoubleSolenoid launcherSol;
 
-  public LauncherSubsystem() {
+	private DoubleSolenoid launcherSol;
 
+	public PneumaticLauncherSubsystem() {
 		launcherSol = new DoubleSolenoid(Constants.PCM_2, LAUNCH_FORWARD, LAUNCH_REVERSE);
-
-  }
+	}
 
 	/**
 	 * Extend the pistons that push the hatch off the scissors.
@@ -43,23 +41,23 @@ public class LauncherSubsystem extends Subsystem {
 	 */
 	public void retractLaunchers() {
 		launcherSol.set(Value.kReverse);
-  }
+	}
 
 	/**
-	 * Shuts off power to the launcher solenoid(s).
+	 * Shuts off power to the launcher solenoids.
 	 * Use after extending or retracting; this will not move the piston.
 	 */
 	public void neutralizeLaunchers() {
 		launcherSol.set(Value.kOff);
 	}
 
-  @Override
-  public void initDefaultCommand() {
-    //none
-  }
+	@Override
+	public void initDefaultCommand() {
+		//none
+	}
 
-  @Override
-  public void initSendable(SendableBuilder builder) {
+	@Override
+	public void initSendable(SendableBuilder builder) {
 		builder.addStringProperty("launchers", () -> launcherSol.get().toString(), null);
-  }
+	}
 }

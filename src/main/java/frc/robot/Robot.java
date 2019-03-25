@@ -12,7 +12,7 @@ import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.HatchPickupSubsystem;
-import frc.robot.subsystems.LauncherSubsystem;
+import frc.robot.subsystems.PneumaticLauncherSubsystem;
 import frc.robot.subsystems.PneumaticSubsystem;
 import frc.robot.subsystems.LineFollowerSubsystem;
 
@@ -30,7 +30,7 @@ public class Robot extends TimedRobot {
 	public static final HatchPickupSubsystem hatchPickupWheels = new HatchPickupSubsystem();
 	public static final LineFollowerSubsystem lineFollowers = new LineFollowerSubsystem();
 	public static final PneumaticSubsystem pneumatics = new PneumaticSubsystem();
-	public static final LauncherSubsystem launchers = new LauncherSubsystem();
+	public static final PneumaticLauncherSubsystem launchers = new PneumaticLauncherSubsystem();
 
 	/** Reference this to get input from the joysticks and Xbox controller. */
 	public static ControlHandler input;
