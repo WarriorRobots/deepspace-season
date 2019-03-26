@@ -16,6 +16,6 @@ public class FindArmZero extends CommandGroup {
    */
   public FindArmZero() {
     addSequential(new SubgroupFindArmZero());
-    addSequential(new RetractArm());
+    addSequential(new SubgroupRetractArm());
   }
 }

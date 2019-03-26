@@ -8,6 +8,7 @@
 package frc.robot.commands.cargo;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.hatchplacer.LockScissors;
 import frc.robot.commands.hatchplacer.SubgroupRetractLaunchers;
 
 public class ExtendArm extends CommandGroup {
@@ -16,6 +17,7 @@ public class ExtendArm extends CommandGroup {
    */
   public ExtendArm(double angle) {
     addParallel(new SubgroupRetractLaunchers());
+    addParallel(new LockScissors());
     addParallel(new SubgroupExtendArm(angle));
   }
 }
