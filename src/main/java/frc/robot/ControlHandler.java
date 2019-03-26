@@ -16,8 +16,8 @@ import frc.robot.commands.debug.DebugRebootAll;
 import frc.robot.commands.debug.DebugResetClimbEncoder;
 import frc.robot.commands.autonomous.CameraApproach;
 import frc.robot.commands.cargo.FindArmZero;
-import frc.robot.commands.cargo.ExtendArm;
 import frc.robot.commands.cargo.RetractArm;
+import frc.robot.commands.cargo.ExtendArm;
 import frc.robot.commands.drive.ArcadeDrive;
 import frc.robot.commands.drive.TurnLockDrive;
 import frc.robot.commands.elevator.MoveElevatorTo;
@@ -128,7 +128,6 @@ public final class ControlHandler {
 		rightJoyThumbButton.whileHeld(new ArcadeDrive());
 		rightJoyTriggerButton.whileHeld(new TurnLockDrive());
 		rightJoyButton3.whenPressed(new ExtendArm(QuickAccessVars.ARM_PICKUP_CARGO_ANGLE));
-		rightJoyButton3.whenPressed(new LockScissors());
 		rightJoyButton4.whileHeld(new CameraApproach());
 		rightJoyButton5.whenPressed(new ExtendArm(QuickAccessVars.ARM_CLIMB_ANGLE));
 		rightJoyButton6.whenPressed(new SynchronizedClimb(QuickAccessVars.CLIMB_TARGET_HAB3));
