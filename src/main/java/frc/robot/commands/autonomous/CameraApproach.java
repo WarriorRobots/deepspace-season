@@ -55,8 +55,8 @@ public class CameraApproach extends Command {
       valueCenter = 0;
     }
 
-    valueApproach = Robot.input.getRightY();
-    //valueApproach = ( Robot.input.getLeftY() + Robot.input.getRightY() ) / 2;
+    //valueApproach = Robot.input.getRightY();
+    valueApproach = ( Robot.input.getLeftY() + Robot.input.getRightY() ) / 2;
 
     Robot.drivetrain.arcadeDriveRaw(valueApproach, -valueCenter);
   }
