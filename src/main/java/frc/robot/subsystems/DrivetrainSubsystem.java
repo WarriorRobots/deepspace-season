@@ -236,6 +236,8 @@ public class DrivetrainSubsystem extends Subsystem {
 		builder.addStringProperty("encoders", () -> {
 			return (Integer.toString(getLeftEncoderClicks()) + " " + Integer.toString(getRightEncoderClicks()));
 		}, null);
+		builder.addDoubleProperty("left speed", () -> leftGroup.get(), null);
+		builder.addDoubleProperty("right speed", () -> rightGroup.get(), null);
 		builder.addDoubleProperty("angle", () -> getAngleDegrees(), null);
 	}
 
