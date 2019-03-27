@@ -1,13 +1,12 @@
 # Systems Checklist - Before Match
 
 ### Driver Station:
-- Battery Voltage high?
-- Camera bright?
+- Battery Voltage High?
+- Camera Connected?
+- Camera Bright?
 
 ### Elevator:
 - Level 1 (20.5")
-- Home
-- Level 1
 - Delta (23.5")
 - Cargo (29")
 - Level 2 (47")
@@ -15,70 +14,63 @@
 - Home
 
 ### Arm:
-- Out (90 degrees, for ball pickup)
-- Pick up Ball
-- Up (0 degrees)
-- Cargo Level
-- Shoot out Ball
-- Home
+- Arm Down
+- Wheels In
+- Arm Up
+- Wheels Out
 - Reset Encoder
 
 ### Pneumatics:
-- RILEY scissors open
-- CONNOR close
-- RILEY open
-- RILEY close
-    - elevator moves up?
-- CONNOR launch
-- MANUAL release pressure
-    - Compressor on?
+- Open Scissors
+- Close and Lift (Riley)
+- Open Scissors
+- Close (Connor)
+- Launch Hatch
+- Build Air Pressure
 
 # Extras: Robot on Cart
 
 ### Climb:
-- MANUAL pull climb to the top
-- Reset Encoder
 - Cargo Level
 - Arm Down
-- HAB 3 climb
+- HAB 3 Climb
 - Arm Up
-- Reset climb
+- Reset Climb
 - Arm Down
-- HAB 2 climb
-- Reset climb
+- HAB 2 Climb
+- Reset Climb
 
 # Extras: Robot on Floor
 
 ### Drivetrain:
-- Forwards
-- Backwards
-- Left Turn
-- Right Turn
+- Left Wheels Forwards
+- Left Wheels Backwards
+- Right Wheels Forwards
+- Right Wheels Backwards
 - Arcade Drive
-- Camera Lineup
-    - LEDs turn on?
+- Camera Drive
+	- LEDs On?
 
 ### Ground Pickup:
-- Down
-    - Wheels run automatically?
-    - Scissors open?
-- Run wheels manually
-    - Wheels stop when released?
-- Up
-    - Wheels stop running?
+- Ground Pickup Down
+    - Wheels Run Automatically?
+    - Scissors Open?
+- Ground Pickup Up
+    - Wheels Stop Running?
 
 ### Pneumatics:
-- MANUAL release pressure
-    - Compressor on?
+- Build Air Pressure
+- Robot Off
 
 # Extras: Robot Off
 
 ### Checking for broken components:
-- Pneumatics leaking?
+- Air pressure not leaking?
 - Wheels turn freely (no binding)?
-- Compressor hot?
+- Arm turns freely (no binding)?
+- Compressor not overheating?
 - Broken zipties?
-- Damaged wires (arm and ground pickup)
+- Damaged wires? (arm and ground pickup)
 - Loose wheels or bearings?
 - Chains too loose/tight?
 - Loose screws?
