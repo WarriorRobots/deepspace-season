@@ -11,7 +11,7 @@ public final class QuickAccessVars {
 	public static final double LVL3_HEIGHT = 74;
 	public static final double CARGO_SCORING_HEIGHT = 32; // 29 original
 	public static final double ELEVATOR_DELTA = 3;
-	public static final double ELEVATOR_DOWNWARD_DRIFT_THRESHOLD = 10;
+	public static final double ELEVATOR_DOWNWARD_DRIFT_THRESHOLD = 13; // 10 original
 	public static final double ELEVATOR_MINIMUM_TARGET = 0.5;
 	public static final double ELEVATOR_MAXIMUM_TARGET = 62;
 	public static final double ELEVATOR_BASE_HEIGHT = 13;
@@ -86,7 +86,7 @@ public final class QuickAccessVars {
 	public static final double KD_APPROACH = 0;
 	public static final double SETPOINT_APPROACH = 23;
 	public static final double TOLERANCE_APPROACH = 2;
-	public static final double KP_CENTER = 0.045;
+	public static final double KP_CENTER = 0.045; // 0.045
 	public static final double KI_CENTER = 0;
 	public static final double KD_CENTER = 0;
 	public static final double SETPOINT_CENTER = 0;
