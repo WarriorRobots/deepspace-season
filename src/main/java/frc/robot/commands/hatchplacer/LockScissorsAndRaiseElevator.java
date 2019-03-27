@@ -18,7 +18,7 @@ public class LockScissorsAndRaiseElevator extends CommandGroup {
    */
   public LockScissorsAndRaiseElevator() {
     addSequential(new LockScissors());
-    addSequential(new RaiseElevatorTo(QuickAccessVars.LVL1_HEIGHT + QuickAccessVars.ELEVATOR_DELTA));
+    addSequential(new RaiseElevatorTo(QuickAccessVars.LOCK_AND_RAISE_HEIGHT));
     // if this command is interrupted it should be fine because pistons do not require constant signals
     // and the elevator has the stabilize command as it's default so it is unnessecary to check that case
   }
