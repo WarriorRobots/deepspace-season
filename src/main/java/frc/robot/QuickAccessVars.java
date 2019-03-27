@@ -9,7 +9,7 @@ public final class QuickAccessVars {
 	public static final double LVL1_HEIGHT = 20.5;
 	public static final double LVL2_HEIGHT = 47;
 	public static final double LVL3_HEIGHT = 74;
-	public static final double CARGO_SCORING_HEIGHT = 29;
+	public static final double CARGO_SCORING_HEIGHT = 32; // 29 original
 	public static final double ELEVATOR_DELTA = 3;
 	public static final double ELEVATOR_DOWNWARD_DRIFT_THRESHOLD = 10;
 	public static final double ELEVATOR_MINIMUM_TARGET = 0.5;
@@ -76,7 +76,8 @@ public final class QuickAccessVars {
 
 	// pid
 	public static final double ELEVATOR_P = 0.4;
-	public static final double ARM_P = 1.2;
+	public static final double ARM_P = 1.4; // 1.2
+	public static final double ARM_I = 0.00015;
 	public static final double CLIMB_P = 0.4;
 
 	// camera pid

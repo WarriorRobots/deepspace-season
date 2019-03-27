@@ -39,7 +39,9 @@ public class ArmSubsystem extends Subsystem {
 		armRotator.setInverted(QuickAccessVars.ARM_ROTATOR_INVERTED);
 		armRotator.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
 		armRotator.setSensorPhase(QuickAccessVars.ARM_ENCODER_INVERTED);
+
 		armRotator.config_kP(Constants.PID_ID, QuickAccessVars.ARM_P, Constants.TIMEOUT_MS);
+		armRotator.config_kI(Constants.PID_ID, QuickAccessVars.ARM_I, Constants.TIMEOUT_MS);
 
 		armRotatorClone = new WPI_TalonSRX(CLONE_ID);
 		armRotatorClone.setInverted(QuickAccessVars.ARM_ROTATOR_CLONE_INVERTED);
