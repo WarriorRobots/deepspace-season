@@ -3,17 +3,18 @@
 ### Driver Station:
 - Battery Voltage High?
 - Camera Connected?
-- Camera Bright?
+- Camera Bright? (camera visible? normal?)
 
 ### Elevator:
 - Level 1 (20.5")
-- Delta (23.5")
+- Delta (26.5")
 - Cargo (29")
 - Level 2 (47")
 - Level 3 (74")
 - Home
 
 ### Arm:
+- Wheels running automatically?
 - Arm Down
 - Wheels In
 - Arm Up
@@ -51,7 +52,7 @@
 - Camera Drive
 	- LEDs On?
 
-### Ground Pickup:
+### Ground Pickup: (Hatch Pickup)
 - Ground Pickup Down
     - Wheels Run Automatically?
     - Scissors Open?
@@ -65,7 +66,7 @@
 # Extras: Robot Off
 
 ### Checking for broken components:
-- Air pressure not leaking?
+- Air pressure not leaking????
 - Wheels turn freely (no binding)?
 - Arm turns freely (no binding)?
 - Compressor not overheating?
