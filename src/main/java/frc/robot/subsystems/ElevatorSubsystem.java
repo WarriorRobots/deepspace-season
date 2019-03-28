@@ -110,10 +110,16 @@ public class ElevatorSubsystem extends Subsystem {
 	}
 
 	/**
-	 * Holds the elevator at the position specified.
+	 * Holds the elevator at the position specified,
+	 * for use only in the StabilizeElevator command.
 	 * @param inches Should always be positive.
 	 */
 	public void stabilizeElevator(double inches) {
+		/* why no safety? When enabled the elevator should NOT move,
+		 * no matter where it is. If safeties are implemented, the
+		 * elevator (if at zero) will move to the minimum; that's not what we want.
+		 * Best solution I've found is to create a method without safeties, and only
+		 * use it for stabilization (aka non-movement) commands. */
 		enableSetpointMode();
 		ELEVATOR_SETPOINT = inches;
 		winch.set(ControlMode.Position, toClicks(inches));
