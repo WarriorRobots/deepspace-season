@@ -19,7 +19,7 @@ public class AdjustElevatorRelative extends Command {
 
 	@Override
 	protected void initialize() {
-		initialPosition = Robot.elevator.getElevatorPosition();
+		initialPosition = Robot.elevator.getElevatorSetpoint();
 		target = initialPosition + adjustBy; // works with negatives too
 		System.out.println("Elevator: Starting " + this.getClass().getSimpleName());
 	}

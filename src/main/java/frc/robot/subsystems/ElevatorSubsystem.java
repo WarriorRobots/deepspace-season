@@ -22,6 +22,9 @@ public class ElevatorSubsystem extends Subsystem {
 	private static final int WINCH_ID = 7;
 	private static final int LIMIT_SWITCH_PORT = 4;
 
+	/** Commanded position of the elevator */
+	private double ELEVATOR_SETPOINT;
+
 	private WPI_TalonSRX winch;
 	/** Magnetic "Hall effect" sensor. */
 	private DigitalInput limitSwitch;
@@ -39,6 +42,10 @@ public class ElevatorSubsystem extends Subsystem {
 		winch.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
 		winch.setSensorPhase(QuickAccessVars.ELEVATOR_ENCODER_INVERTED);
 		winch.config_kP(Constants.PID_ID, QuickAccessVars.ELEVATOR_P, Constants.TIMEOUT_MS);
+
+		// uses get position rather than zero because the robot could have been disabled and then
+		// re-enabled while the elevator was still up
+		ELEVATOR_SETPOINT = getElevatorPosition();
 	}
 
 	/**
@@ -47,6 +54,7 @@ public class ElevatorSubsystem extends Subsystem {
 	 */
 	public void resetEncoderWhenFloored() {
 		if (isElevatorFloored()) {
+			ELEVATOR_SETPOINT = 0;
 			resetEncoder();
 		}
 	}
@@ -66,7 +74,21 @@ public class ElevatorSubsystem extends Subsystem {
 			System.out.println("Elevator moving to " + inches + ", cutting short to prevent crash!");
 		} else {
 			winch.set(ControlMode.Position, toClicks(inches));
+			ELEVATOR_SETPOINT = inches;
 		}
+	}
+
+	/**
+	 * Tells where the elevator was last commanded to go. Remebers this value from the commands
+	 * referenced below.
+	 * @return The last commanded position of the elevator in inches from the bottom of the elevator.
+	 * 
+	 * @see #resetEncoderWhenFloored()
+	 * @see #moveElevatorTo(double inches)
+	 * @see #adjustElevatorLinear(double speed)
+	 */
+	public double getElevatorSetpoint() {
+		return ELEVATOR_SETPOINT;
 	}
 
 	/**
@@ -92,6 +114,7 @@ public class ElevatorSubsystem extends Subsystem {
 			}
 		} else {
 			winch.set(speed);
+			ELEVATOR_SETPOINT = getElevatorPosition();
 		}
 	}
 
