@@ -5,7 +5,7 @@ import frc.robot.Robot;
 
 public class AdjustElevatorRelative extends Command {
 
-	private double initialPosition, adjustBy, target;
+	private double initialPosition, currentSetpoint, adjustBy, target;
 
 	/**
 	 * Adjust the elevator position relative to its current position.
@@ -19,14 +19,20 @@ public class AdjustElevatorRelative extends Command {
 
 	@Override
 	protected void initialize() {
-		initialPosition = Robot.elevator.getElevatorSetpoint();
-		target = initialPosition + adjustBy; // works with negatives too
+		initialPosition = Robot.elevator.getElevatorPosition();
+		currentSetpoint = Robot.elevator.getElevatorSetpoint();
+		target = currentSetpoint + adjustBy; // works with negatives too
 		System.out.println("Elevator: Starting " + this.getClass().getSimpleName());
 	}
 
 	@Override
 	protected void execute() {
-		Robot.elevator.moveElevatorTo(target);
+		if (Robot.elevator.doesSetpointExist()) {
+			Robot.elevator.moveElevatorTo(target);
+		} else {
+			// if there's no setpoint, just keep the elevator stable
+			Robot.elevator.stabilizeElevator(initialPosition);
+		}
 	}
 
 	@Override

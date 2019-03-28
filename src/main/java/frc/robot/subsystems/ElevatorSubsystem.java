@@ -23,7 +23,9 @@ public class ElevatorSubsystem extends Subsystem {
 	private static final int LIMIT_SWITCH_PORT = 4;
 
 	/** Commanded position of the elevator */
-	private double ELEVATOR_SETPOINT;
+	private double ELEVATOR_SETPOINT = 0; // default values will get overridden quickly, this just prevents null errors
+	/** Does the elevator have a commanded position? */
+	private boolean DOES_SETPOINT_EXIST = true;
 
 	private WPI_TalonSRX winch;
 	/** Magnetic "Hall effect" sensor. */
@@ -42,10 +44,6 @@ public class ElevatorSubsystem extends Subsystem {
 		winch.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
 		winch.setSensorPhase(QuickAccessVars.ELEVATOR_ENCODER_INVERTED);
 		winch.config_kP(Constants.PID_ID, QuickAccessVars.ELEVATOR_P, Constants.TIMEOUT_MS);
-
-		// uses get position rather than zero because the robot could have been disabled and then
-		// re-enabled while the elevator was still up
-		ELEVATOR_SETPOINT = getElevatorPosition();
 	}
 
 	/**
@@ -54,7 +52,8 @@ public class ElevatorSubsystem extends Subsystem {
 	 */
 	public void resetEncoderWhenFloored() {
 		if (isElevatorFloored()) {
-			ELEVATOR_SETPOINT = 0;
+			// don't modify ELEVATOR_SETPOINT because adjustElevatorLinear() and
+			// stabilizeElevator() will handle it
 			resetEncoder();
 		}
 	}
@@ -66,29 +65,20 @@ public class ElevatorSubsystem extends Subsystem {
 	 * 		  to a positive number (distance traveled on the inner carriage).
 	 */
 	public void moveElevatorTo(double inches) {
+		enableSetpointMode();
 		if (belowMinimum(inches)) {
+			// because the elevator doesn't move past min/max, assume the setpoint is AT min/max
+			ELEVATOR_SETPOINT = QuickAccessVars.ELEVATOR_MINIMUM_TARGET;
 			winch.set(ControlMode.Position, toClicks(QuickAccessVars.ELEVATOR_MINIMUM_TARGET));
 			System.out.println("Elevator moving to " + inches + ", cutting short to prevent crash!");
 		} else if (aboveMaximum(inches)) {
+			ELEVATOR_SETPOINT = QuickAccessVars.ELEVATOR_MAXIMUM_TARGET;
 			winch.set(ControlMode.Position, toClicks(QuickAccessVars.ELEVATOR_MAXIMUM_TARGET));
 			System.out.println("Elevator moving to " + inches + ", cutting short to prevent crash!");
 		} else {
-			winch.set(ControlMode.Position, toClicks(inches));
 			ELEVATOR_SETPOINT = inches;
+			winch.set(ControlMode.Position, toClicks(inches));
 		}
-	}
-
-	/**
-	 * Tells where the elevator was last commanded to go. Remebers this value from the commands
-	 * referenced below.
-	 * @return The last commanded position of the elevator in inches from the bottom of the elevator.
-	 * 
-	 * @see #resetEncoderWhenFloored()
-	 * @see #moveElevatorTo(double inches)
-	 * @see #adjustElevatorLinear(double speed)
-	 */
-	public double getElevatorSetpoint() {
-		return ELEVATOR_SETPOINT;
 	}
 
 	/**
@@ -97,6 +87,8 @@ public class ElevatorSubsystem extends Subsystem {
 	* @param speed Percentage speed of the winch, from -1 (down) to 1 (up).
 	*/
 	public void adjustElevatorLinear(double speed) {
+		// linear motion does NOT use setpoints
+		disableSetpointMode();
 		double pos = getElevatorPosition();
 		if (belowMinimum(pos)) {
 			if (speed > 0) {
@@ -114,7 +106,6 @@ public class ElevatorSubsystem extends Subsystem {
 			}
 		} else {
 			winch.set(speed);
-			ELEVATOR_SETPOINT = getElevatorPosition();
 		}
 	}
 
@@ -123,6 +114,8 @@ public class ElevatorSubsystem extends Subsystem {
 	 * @param inches Should always be positive.
 	 */
 	public void stabilizeElevator(double inches) {
+		enableSetpointMode();
+		ELEVATOR_SETPOINT = inches;
 		winch.set(ControlMode.Position, toClicks(inches));
 	}
 
@@ -130,6 +123,7 @@ public class ElevatorSubsystem extends Subsystem {
 	 * Shuts off the elevator winch motor.
 	 */
 	public void stopElevator() {
+		// don't modify ELEVATOR_SETPOINT, this runs when commands end and it will wipe out stored data
 		winch.stopMotor();
 	}
 
@@ -138,6 +132,50 @@ public class ElevatorSubsystem extends Subsystem {
 	 */
 	public double getElevatorPosition() {
 		return toInches(winch.getSelectedSensorPosition());
+	}
+
+	/**
+	 * Tells where the elevator was last commanded to go. 
+	 * <p>Remembers this value from the commands referenced below.
+	 * <p>Use {@link #doesSetpointExist()} to check if this is OK to use!
+	 * @return The last commanded position of the elevator in inches from the bottom of the elevator.
+	 * 
+	 * @see #doesSetpointExist()
+	 */
+	public double getElevatorSetpoint() {
+		return ELEVATOR_SETPOINT;
+	}
+
+	/**
+	 * Returns whether the elevator is currently using setpoint logic.
+	 * <p>If this returns false, do NOT run {@link #getElevatorSetpoint()}
+	 * 
+	 * @see #getElevatorSetpoint()
+	 */
+	public boolean doesSetpointExist() {
+		return DOES_SETPOINT_EXIST;
+	}
+
+	/**
+	 * Run this inside any method which uses setpoints.
+	 * <p>Make sure ELEVATOR_SETPOINT is set to a number.
+	 */
+	private void enableSetpointMode() {
+		DOES_SETPOINT_EXIST = true;
+		// This is used as a safe backup height if someone forgets to set ELEVATOR_SETPOINT.
+		// it is generally OK for the elevator to be at this position.
+		ELEVATOR_SETPOINT = QuickAccessVars.LOCK_AND_RAISE_HEIGHT;
+	}
+
+	/**
+	 * Run this inside any method which does NOT use setpoints.
+	 * <p>ELEVATOR_SETPOINT is set inside this method, do not modify it.
+	 */
+	private void disableSetpointMode() {
+		DOES_SETPOINT_EXIST = false;
+		// This is used as a safe backup height just in case a safety doesn't work:
+		// it is generally OK for the elevator to be at this position.
+		ELEVATOR_SETPOINT = QuickAccessVars.LOCK_AND_RAISE_HEIGHT;
 	}
 
 	/**
@@ -199,5 +237,7 @@ public class ElevatorSubsystem extends Subsystem {
 		builder.addDoubleProperty("clicks", () -> winch.getSelectedSensorPosition(), null);
 		builder.addBooleanProperty("floored?", () -> isElevatorFloored(), null);
 		builder.addDoubleProperty("speed", () -> winch.getMotorOutputPercent(), null);
+		builder.addBooleanProperty("has setpoint?", () -> doesSetpointExist(), null);
+		builder.addDoubleProperty("setpoint", () -> getElevatorSetpoint(), null);
 	}
 }
