@@ -78,7 +78,7 @@ public final class QuickAccessVars {
 	// pid
 	public static final double ELEVATOR_P = 0.4;
 	public static final double ARM_P = 1.4; // 1.2
-	public static final double ARM_I = 0.00015;
+	public static final double ARM_I = 0; // 0.00015
 	public static final double CLIMB_P = 0.4;
 
 	// camera pid
