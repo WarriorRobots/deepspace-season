@@ -32,7 +32,7 @@ public final class QuickAccessVars {
 
 	// motor speeds (-1.0 to 1.0)
 	public static final double ELEVATOR_DROP_SPEED = -1;
-	public static final double ELEVATOR_DOWNWARD_DRIFT_SPEED = -0.05;
+	public static final double ELEVATOR_DOWNWARD_DRIFT_SPEED = -0.15; // originally -0.05
 	public static final double CARGO_PICKUP_IDLE_SPEED = 0.15;
 	public static final double ARM_RESET_SPEED = -0.3;
 	public static final double ARCADE_FORWARD_MODIFIER = 0.5;
