@@ -9,8 +9,8 @@ public final class QuickAccessVars {
 	public static final double LVL1_HEIGHT = 20.5;
 	public static final double LVL2_HEIGHT = 47;
 	public static final double LVL3_HEIGHT = 74;
-	public static final double CARGO_SCORING_HEIGHT = 32; // 29 original
-	public static final double ELEVATOR_DELTA = 6;
+	public static final double CARGO_SCORING_HEIGHT = 31.5; // 29 original
+	public static final double ELEVATOR_DELTA = 7;
 	public static final double LOCK_AND_RAISE_HEIGHT = 23.5;
 	public static final double ELEVATOR_DOWNWARD_DRIFT_THRESHOLD = 13; // 10 original
 	public static final double ELEVATOR_MINIMUM_TARGET = 0.5;
