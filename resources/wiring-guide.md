@@ -14,6 +14,7 @@
 * [VRM](#vrm)
 * [PCM](#pcm)
 * [Radio](#radio)
+* [PoE](#poe)
 * [Talon](#talon)
 * [RSL](#rls)
 * [DIO](#dio)
