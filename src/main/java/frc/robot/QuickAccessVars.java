@@ -17,7 +17,7 @@ public final class QuickAccessVars {
 	public static final double ELEVATOR_MAXIMUM_TARGET = 62;
 	public static final double ELEVATOR_BASE_HEIGHT = 13;
 	public static final double CLIMB_TARGET_HAB3 = -20;
-	public static final double CLIMB_TARGET_HAB2 = -6;
+	public static final double CLIMB_TARGET_HAB2 = -7;
 	public static final double CLIMB_DELTA = 0.5;
 	public static final double CLIMB_MINIMUM_TARGET = -22;
 	public static final double CLIMB_MAXIMUM_TARGET = 0;
