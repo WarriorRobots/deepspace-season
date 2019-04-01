@@ -14,6 +14,7 @@
 * [VRM](#vrm)
 * [PCM](#pcm)
 * [Radio](#radio)
+* [PoE](#poe)
 * [Talon](#talon)
 * [RSL](#rls)
 * [DIO](#dio)
@@ -85,6 +86,7 @@
 * Power Cables in 12V (top)
 * 12V/2A (upper left)
     * [Radio](#radio) Power (circular plug)
+    * [PoE](#poe) Power
 
 <a id="pcm"></a>
 ## Pneumatic Control Module (PCM)
@@ -106,6 +108,14 @@
 * Radio Power circular plug in left
 * Camera ethernet in middle (not required)
 * [RoboRIO](#rio) ethernet in right
+
+<a id="poe"></a>
+### Power over Ethernet (PoE)
+![PoE Diagram](./images/poediagram.png)
+
+* PoE power goes in [VRM](#vrm) in same spot as circular plug
+* PoE ethernet goes in middle in the radio
+* PoE female end goes to Camera unlike in diagram
 
 <a id="talon"></a>
 ## Talon SRX & Victor
