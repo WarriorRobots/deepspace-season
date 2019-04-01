@@ -3,6 +3,7 @@ package frc.robot.commands.elevator;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+@Deprecated // no longer in use
 public class AdjustElevatorRelative extends Command {
 
 	private double initialPosition, adjustBy, target;
