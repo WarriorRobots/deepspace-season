@@ -11,7 +11,8 @@ public final class QuickAccessVars {
 	public static final double LVL3_HEIGHT = 74;
 	// public static final double CARGO_SCORING_HEIGHT = 32; // 31.5 original
 	// public static final double ELEVATOR_DELTA = 6; // 7 originally
-	// Please note these are using old values, drivers said "don't change it" 
+		// Please note these are using old values
+		// I forgot to 'git pull' and drivers said "don't change it" 
 	public static final double CARGO_BAY_HEIGHT = 38; // CARGO_SCORING_HEIGHT + ELEVATOR_DELTA
 	public static final double ELEVATOR_CLIMB_HEIGHT_HAB3 = 32; // CARGO_SCORING_HEIGHT used during climbing
 	public static final double LOCK_AND_RAISE_HEIGHT = 23.5;
@@ -19,8 +20,8 @@ public final class QuickAccessVars {
 	public static final double ELEVATOR_MINIMUM_TARGET = 0.5;
 	public static final double ELEVATOR_MAXIMUM_TARGET = 62;
 	public static final double ELEVATOR_BASE_HEIGHT = 13;
+	public static final double CLIMB_TARGET_HAB2 = -6; // -7 originally
 	public static final double CLIMB_TARGET_HAB3 = -20;
-	public static final double CLIMB_TARGET_HAB2 = -7;
 	public static final double CLIMB_DELTA = 0.5;
 	public static final double CLIMB_MINIMUM_TARGET = -22;
 	public static final double CLIMB_MAXIMUM_TARGET = 0;
