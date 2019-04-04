@@ -119,7 +119,7 @@ public final class ControlHandler {
 		leftJoyButton4.whenPressed(new PlaceHatchOnVelcro(QuickAccessVars.HATCH_LAUNCH_SAFETY));
 		leftJoyButton5.whenPressed(new MoveClimbTo(0));
 		leftJoyButton6.whenPressed(new SynchronizedClimb(QuickAccessVars.CLIMB_TARGET_HAB2));
-		leftJoyButton7.whenPressed(new DebugRebootAll()); // TODO remove at comp
+		leftJoyButton7.whenPressed(new DebugRebootAll());
 		leftJoyButton9.whenPressed(new FindArmZero());
 		leftJoyButton11.whenPressed(new DebugResetClimbEncoder());
 		leftJoyButton12.whenPressed(new AdjustClimbRelative(QuickAccessVars.CLIMB_DELTA));

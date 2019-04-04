@@ -8,7 +8,7 @@ public final class QuickAccessVars {
 	// in inches from the floor
 	public static final double LVL1_HEIGHT = 20.5;
 	public static final double LVL2_HEIGHT = 47;
-	public static final double LVL3_HEIGHT = 74;
+	public static final double LVL3_HEIGHT = 67.5; // 74, 72 real life
 	// public static final double CARGO_SCORING_HEIGHT = 32; // 31.5 original
 	// public static final double ELEVATOR_DELTA = 6; // 7 originally
 		// Please note these are using old values
@@ -18,7 +18,7 @@ public final class QuickAccessVars {
 	public static final double LOCK_AND_RAISE_HEIGHT = 23.5;
 	public static final double ELEVATOR_DOWNWARD_DRIFT_THRESHOLD = 13; // 10 original
 	public static final double ELEVATOR_MINIMUM_TARGET = 0.5;
-	public static final double ELEVATOR_MAXIMUM_TARGET = 62;
+	public static final double ELEVATOR_MAXIMUM_TARGET = 57; // 62
 	public static final double ELEVATOR_BASE_HEIGHT = 13;
 	public static final double CLIMB_TARGET_HAB2 = -6; // -7 originally
 	public static final double CLIMB_TARGET_HAB3 = -20;

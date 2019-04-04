@@ -81,7 +81,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		Scheduler.getInstance().removeAll();
-		Scheduler.getInstance().add(new FindArmZero()); // TODO remove at comp
 	}
 
 	@Override
