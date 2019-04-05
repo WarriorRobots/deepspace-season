@@ -7,7 +7,7 @@ public final class QuickAccessVars {
 
 	// in inches from the floor
 	public static final double LVL1_HEIGHT = 20.5;
-	public static final double LVL2_HEIGHT = 47;
+	public static final double LVL2_HEIGHT = 45; // 47
 	public static final double LVL3_HEIGHT = 67.5; // 74, 72 real life
 	// public static final double CARGO_SCORING_HEIGHT = 32; // 31.5 original
 	// public static final double ELEVATOR_DELTA = 6; // 7 originally
