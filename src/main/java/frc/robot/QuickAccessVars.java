@@ -9,15 +9,19 @@ public final class QuickAccessVars {
 	public static final double LVL1_HEIGHT = 20.5;
 	public static final double LVL2_HEIGHT = 47;
 	public static final double LVL3_HEIGHT = 74;
-	public static final double CARGO_SCORING_HEIGHT = 32; // 29 original
-	public static final double ELEVATOR_DELTA = 6;
+	// public static final double CARGO_SCORING_HEIGHT = 32; // 31.5 original
+	// public static final double ELEVATOR_DELTA = 6; // 7 originally
+		// Please note these are using old values
+		// I forgot to 'git pull' and drivers said "don't change it" 
+	public static final double CARGO_BAY_HEIGHT = 38; // CARGO_SCORING_HEIGHT + ELEVATOR_DELTA
+	public static final double ELEVATOR_CLIMB_HEIGHT_HAB3 = 32; // CARGO_SCORING_HEIGHT used during climbing
 	public static final double LOCK_AND_RAISE_HEIGHT = 23.5;
 	public static final double ELEVATOR_DOWNWARD_DRIFT_THRESHOLD = 13; // 10 original
 	public static final double ELEVATOR_MINIMUM_TARGET = 0.5;
 	public static final double ELEVATOR_MAXIMUM_TARGET = 62;
 	public static final double ELEVATOR_BASE_HEIGHT = 13;
+	public static final double CLIMB_TARGET_HAB2 = -6; // -7 originally
 	public static final double CLIMB_TARGET_HAB3 = -20;
-	public static final double CLIMB_TARGET_HAB2 = -6;
 	public static final double CLIMB_DELTA = 0.5;
 	public static final double CLIMB_MINIMUM_TARGET = -22;
 	public static final double CLIMB_MAXIMUM_TARGET = 0;
@@ -32,7 +36,7 @@ public final class QuickAccessVars {
 
 	// motor speeds (-1.0 to 1.0)
 	public static final double ELEVATOR_DROP_SPEED = -1;
-	public static final double ELEVATOR_DOWNWARD_DRIFT_SPEED = -0.05;
+	public static final double ELEVATOR_DOWNWARD_DRIFT_SPEED = -0.15; // originally -0.05
 	public static final double CARGO_PICKUP_IDLE_SPEED = 0.15;
 	public static final double ARM_RESET_SPEED = -0.3;
 	public static final double ARCADE_FORWARD_MODIFIER = 0.5;
@@ -78,7 +82,7 @@ public final class QuickAccessVars {
 	// pid
 	public static final double ELEVATOR_P = 0.4;
 	public static final double ARM_P = 1.4; // 1.2
-	public static final double ARM_I = 0.00015;
+	public static final double ARM_I = 0; // 0.00015
 	public static final double CLIMB_P = 0.4;
 
 	// camera pid
