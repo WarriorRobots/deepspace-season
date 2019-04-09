@@ -40,7 +40,15 @@ public class CameraApproach extends Command {
   @Override
   protected void initialize() {
     System.out.println("Camera: Starting " + this.getClass().getSimpleName());
-    Robot.camera.setPipeline(CameraSubsystem.PIPELINE_CENTER);
+    
+    // This sets the pipeline to be the cargo pipeline when the elevator is at its cargo height
+    if (Robot.elevator.doesSetpointExist() && Robot.elevator.getElevatorSetpoint() == QuickAccessVars.CARGO_BAY_HEIGHT) {
+      Robot.camera.setPipeline(CameraSubsystem.PIPELINE_CARGO);
+    }
+    // This otherwise sets the pipeline to be its default center pipeline for all other cases
+    else {
+      Robot.camera.setPipeline(CameraSubsystem.PIPELINE_CENTER);
+    }
 
     PIDcenter.setSetpoint(0); // keep the target in the center of the screen
 

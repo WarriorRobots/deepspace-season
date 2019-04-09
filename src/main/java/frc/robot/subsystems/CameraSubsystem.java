@@ -33,11 +33,13 @@ public class CameraSubsystem extends Subsystem {
 
 	/** Vision table for Limelight */
 	private NetworkTable visionTable;
-
-	/** Pipeline id for the crosshair in the center. */
+	
+	/** Pipeline id for the crosshair in the center without intersection tracking that confuses blocks with strips. */
 	public static final int PIPELINE_CENTER = 0;
 	/** Pipeline id for Driver exposure and use */
 	public static final int PIPELINE_DRIVER = 1;
+	/** Pipeline id for the crosshair in the center with intersection tracking for the cargo bay. */
+	public static final int PIPELINE_CARGO = 2;
 	/** Pipeline id for a single target on the left. */
 	public static final int PIPELINE_TARGETLEFT = 3;
 	/** Pipeline id for a single target on the right. */
