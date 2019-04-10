@@ -139,16 +139,13 @@ public final class ControlHandler {
 		xboxA.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL1_HEIGHT));
 		xboxB.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL2_HEIGHT));
 		xboxY.whenPressed(new MoveElevatorTo(QuickAccessVars.LVL3_HEIGHT));
-		// xboxX.whenPressed(new MoveElevatorTo(QuickAccessVars.CARGO_SCORING_HEIGHT));
 		xboxX.whenPressed(new MoveElevatorTo(QuickAccessVars.CARGO_BAY_HEIGHT));
 		rightXboxJoyUp.whenPressed(new ExtendHatchPickup());
 		rightXboxJoyDown.whenPressed(new RetractHatchPickup());
-		// xboxSTART.whenPressed(new AdjustElevatorRelative(QuickAccessVars.ELEVATOR_DELTA));
 		xboxSTART.whenPressed(new MoveElevatorTo(QuickAccessVars.ELEVATOR_CLIMB_HEIGHT_HAB3));
 		xboxSELECT.whenPressed(new RetractArm());
 		rightXboxTrigger.whileHeld(new RunHatchPickupWheels());
 		leftXboxTrigger.whileHeld(new RunCargoPickupWheels());
-		leftXboxBumper.whenPressed(new RetractArm());
 		leftXboxBumper.whileHeld(new ReverseCargoPickupWheels());
 		xboxLeft.whenPressed(new LoosenScissors());
 		xboxRight.whenPressed(new LockScissorsAndRaiseElevator());
