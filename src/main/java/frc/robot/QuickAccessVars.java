@@ -36,8 +36,8 @@ public final class QuickAccessVars {
 	public static final double ELEVATOR_DOWNWARD_DRIFT_SPEED = -0.15; // originally -0.05
 	public static final double CARGO_PICKUP_IDLE_SPEED = 0.15;
 	public static final double ARM_RESET_SPEED = -0.3;
-	public static final double ARCADE_FORWARD_MODIFIER = 0.5;
-	public static final double ARCADE_TURN_MODIFIER = 0.75;
+	public static final double ARCADE_FORWARD_MODIFIER = 1;
+	public static final double ARCADE_TURN_MODIFIER = 1;
 
 	// delay timers (seconds)
 	public static final double PLACE_HATCH_DELAY = 0.2; // seconds
