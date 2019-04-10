@@ -26,6 +26,7 @@ public class RaiseElevatorTo extends Command {
 	protected void initialize() {
 		System.out.println("Elevator: Starting " + this.getClass().getSimpleName());
 		initial = Robot.elevator.getElevatorPosition();
+		Robot.ELEVATOR_SETPOINT = target;
 	}
 
 	@Override

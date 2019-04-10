@@ -35,6 +35,8 @@ public class Robot extends TimedRobot {
 	/** Reference this to get input from the joysticks and Xbox controller. */
 	public static ControlHandler input;
 
+	public static double ELEVATOR_SETPOINT;
+
 	@Override
 	public void robotInit() {
 		input = new ControlHandler();

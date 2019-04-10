@@ -21,6 +21,7 @@ public class DropElevator extends Command {
 	@Override
 	protected void initialize() {
 		System.out.println("Elevator: Starting " + this.getClass().getSimpleName());
+		Robot.ELEVATOR_SETPOINT = 0;
 	}
 
 	@Override

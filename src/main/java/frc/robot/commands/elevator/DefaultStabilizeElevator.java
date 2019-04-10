@@ -19,6 +19,7 @@ public class DefaultStabilizeElevator extends Command {
 	protected void initialize() {
 		initialPosition = Robot.elevator.getElevatorPosition();
 		System.out.println("Elevator: Starting " + this.getClass().getSimpleName());
+		Robot.ELEVATOR_SETPOINT = initialPosition;
 	}
 
 	@Override
