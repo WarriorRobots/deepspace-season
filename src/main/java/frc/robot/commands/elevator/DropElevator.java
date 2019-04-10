@@ -25,9 +25,9 @@ public class DropElevator extends Command {
 
 	@Override
 	protected void execute() {
-		// Elevator stops running if it thinks it is below its minimum to let it drift slowly down to the bottom
+		// Elevator stops running if it thinks it is below 0 to let it drift slowly down to the bottom
 		// (This is implemented due to the behavior displayed in Match 34 of AZ West)
-		if (Robot.elevator.belowMinimum()) {
+		if (Robot.elevator.getElevatorPosition() < 0) {
 			Robot.elevator.stopElevator();
 		}
 		// Elevator runs slower if it thinks it is close to the bottom of its travel
