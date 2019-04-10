@@ -25,16 +25,25 @@ public class DropElevator extends Command {
 
 	@Override
 	protected void execute() {
-		if (Robot.elevator.getElevatorPosition() > QuickAccessVars.ELEVATOR_DOWNWARD_DRIFT_THRESHOLD) {
-			Robot.elevator.adjustElevatorLinear(QuickAccessVars.ELEVATOR_DROP_SPEED);
-		} else {
+		// Elevator stops running if it thinks it is below its minimum to let it drift slowly down to the bottom
+		// (This is implemented due to the behavior displayed in Match 34 of AZ West)
+		if (Robot.elevator.belowMinimum()) {
+			Robot.elevator.stopElevator();
+		}
+		// Elevator runs slower if it thinks it is close to the bottom of its travel
+		else if (Robot.elevator.getElevatorPosition() < QuickAccessVars.ELEVATOR_DOWNWARD_DRIFT_THRESHOLD) {
 			Robot.elevator.adjustElevatorLinear(QuickAccessVars.ELEVATOR_DOWNWARD_DRIFT_SPEED);
+		}
+		// Elevator runs downwards at its fast speed if not prohibited by previous statements
+		else {
+			Robot.elevator.adjustElevatorLinear(QuickAccessVars.ELEVATOR_DROP_SPEED);
 		}
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return Robot.elevator.isElevatorFloored() || Robot.elevator.getElevatorPosition() < 0;
+		// This command should only be finished when the elevator reaches the bottom of its travel
+		return Robot.elevator.isElevatorFloored();
 	}
 
 	@Override
