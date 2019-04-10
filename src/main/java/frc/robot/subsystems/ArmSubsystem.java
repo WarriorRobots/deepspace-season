@@ -160,7 +160,7 @@ public class ArmSubsystem extends Subsystem {
 	 * <p>True is BAD. Use this in code to avoid crashing the arm.
 	 * @param degrees Any degree measurement related to the arm.
 	 */
-	public boolean belowMinimum(double degrees) {
+	private boolean belowMinimum(double degrees) {
 		return degrees < QuickAccessVars.ARM_MINIMUM_ANGLE;
 	}
 
@@ -169,7 +169,7 @@ public class ArmSubsystem extends Subsystem {
 	 * <p>True is BAD. Use this in code to avoid crashing the arm.
 	 * @param degrees Any degree measurement related to the arm.
 	 */
-	public boolean aboveMaximum(double degrees) {
+	private boolean aboveMaximum(double degrees) {
 		return degrees > QuickAccessVars.ARM_MAXIMUM_ANGLE;
 	}
 

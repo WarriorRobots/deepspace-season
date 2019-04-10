@@ -7,15 +7,15 @@ public final class QuickAccessVars {
 
 	// in inches from the floor
 	public static final double LVL1_HEIGHT = 21; // all levels are measured from comp
-	public static final double LVL2_HEIGHT = 48; // 47
-	public static final double LVL3_HEIGHT = 73; // 74, 72 real life
+	public static final double LVL2_HEIGHT = 48;
+	public static final double LVL3_HEIGHT = 73;
 	public static final double CARGO_BAY_HEIGHT = 38; // CARGO_SCORING_HEIGHT + ELEVATOR_DELTA
 	// XXX needs tuning
 	public static final double ELEVATOR_CLIMB_HEIGHT_HAB3 = 32; // CARGO_SCORING_HEIGHT used during climbing
 	public static final double LOCK_AND_RAISE_HEIGHT = 23.5;
 	public static final double ELEVATOR_DOWNWARD_DRIFT_THRESHOLD = 13; // 10 original
 	public static final double ELEVATOR_MINIMUM_TARGET = 0.5;
-	public static final double ELEVATOR_MAXIMUM_TARGET = 60.5; // + 13 XXX fix this
+	public static final double ELEVATOR_MAXIMUM_TARGET = 60.5; // 73.5 relative to floor
 	public static final double ELEVATOR_BASE_HEIGHT = 13;
 	public static final double CLIMB_TARGET_HAB2 = -6; // -7 originally
 	public static final double CLIMB_TARGET_HAB3 = -20;
@@ -27,13 +27,13 @@ public final class QuickAccessVars {
 	public static final double ARM_DEFAULT_ANGLE = 2;
 	public static final double ARM_MINIMUM_ANGLE = -3;
 	public static final double ARM_MAXIMUM_ANGLE = 157;
-	public static final double ARM_PICKUP_CARGO_ANGLE = 90; // 87
+	public static final double ARM_PICKUP_CARGO_ANGLE = 90;
 	public static final double ARM_CLIMB_ANGLE = 142;
 	public static final double ARM_RESET_ANGLE = -3;
 
 	// motor speeds (-1.0 to 1.0)
 	public static final double ELEVATOR_DROP_SPEED = -1;
-	public static final double ELEVATOR_DOWNWARD_DRIFT_SPEED = -0.15; // originally -0.05
+	public static final double ELEVATOR_DOWNWARD_DRIFT_SPEED = -0.15;
 	public static final double CARGO_PICKUP_IDLE_SPEED = 0.15;
 	public static final double ARM_RESET_SPEED = -0.3;
 	public static final double ARCADE_FORWARD_MODIFIER = 1;
@@ -65,7 +65,7 @@ public final class QuickAccessVars {
 	public static final double PNEUMATIC_LOOP_COUNT = 5; // how many loops will a pneumatic command run?
 	public static final double XBOX_JOYSTICK_THRESHOLD = 0.7;
 		// this seems high, but the xbox joysticks reach 1 before hitting the edge
-	public static final double LINEAR_CONTROLS_MODIFIER = 0.5;
+	public static final double LINEAR_CONTROLS_MODIFIER = 1;
 		// how much are the linear elevator/TreeUIarm/climb commands modified by?
 
 	// camera

@@ -142,16 +142,16 @@ public class ElevatorSubsystem extends Subsystem {
 	 * <p>True is BAD. Use this in code to avoid crashing the elevator.
 	 * @param inches Any distance measurement related to the elevator.
 	 */
-	public boolean belowMinimum(double inches) {
+	private boolean belowMinimum(double inches) {
 		return inches < QuickAccessVars.ELEVATOR_MINIMUM_TARGET;
 	}
 
 	/**
-	 * Returns true if the specified distance is above the upper bound of motion.
+	 * Returns true if the specified distance is above the upper bound of motion RELATIVE TO THE FRAME.
 	 * <p>True is BAD. Use this in code to avoid crashing the elevator.
 	 * @param inches Any distance measurement related to the elevator.
 	 */
-	public boolean aboveMaximum(double inches) {
+	private boolean aboveMaximum(double inches) {
 		return inches > QuickAccessVars.ELEVATOR_MAXIMUM_TARGET;
 	}
 
