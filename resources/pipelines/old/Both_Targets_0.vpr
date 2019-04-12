@@ -1,8 +1,9 @@
 area_max:9.487940062500003
-area_min:0.004521217599999998
-aspect_max:20
-aspect_min:0
-black_level:14
+area_min:0.0141158161
+area_similarity:30
+aspect_max:2.5919999999999996
+aspect_min:0.31764601249999996
+black_level:20
 blue_balance:959
 calibration_type:0
 contour_grouping:1
@@ -45,6 +46,6 @@ solve3d_guess:0
 solve3d_iterations:50
 solve3d_precise:0
 val_max:254
-val_min:100
+val_min:60
 y_max:1.000000
 y_min:-1.000000
