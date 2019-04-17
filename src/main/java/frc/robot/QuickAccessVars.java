@@ -6,10 +6,10 @@ import edu.wpi.first.wpilibj.DriverStation;
 public final class QuickAccessVars {
 
 	// in inches from the floor
-	public static final double LVL1_HEIGHT = 21; // all levels are measured from comp
-	public static final double LVL2_HEIGHT = 48;
-	public static final double LVL3_HEIGHT = 73;
-	public static final double CARGO_BAY_HEIGHT = 38; // CARGO_SCORING_HEIGHT + ELEVATOR_DELTA
+	public static final double LVL1_HEIGHT = 20.5; // all levels are measured from comp
+	public static final double LVL2_HEIGHT = 45;
+	public static final double LVL3_HEIGHT = 67.5;
+	public static final double CARGO_BAY_HEIGHT = 34; // CARGO_SCORING_HEIGHT + ELEVATOR_DELTA
 	public static final double ELEVATOR_CLIMB_HEIGHT_HAB3 = 32; // CARGO_SCORING_HEIGHT used during climbing
 	public static final double LOCK_AND_RAISE_HEIGHT = 23.5;
 	public static final double ELEVATOR_DOWNWARD_DRIFT_THRESHOLD = 13; // 10 original
