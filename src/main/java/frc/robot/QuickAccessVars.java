@@ -10,7 +10,7 @@ public final class QuickAccessVars {
 	public static final double LVL2_HEIGHT = 45;
 	public static final double LVL3_HEIGHT = 67.5;
 	public static final double CARGO_BAY_HEIGHT = 34; // CARGO_SCORING_HEIGHT + ELEVATOR_DELTA
-	public static final double ELEVATOR_CLIMB_HEIGHT_HAB3 = 32; // CARGO_SCORING_HEIGHT used during climbing
+	public static final double ELEVATOR_CLIMB_HEIGHT_HAB3 = 33; // CARGO_SCORING_HEIGHT used during climbing
 	public static final double LOCK_AND_RAISE_HEIGHT = 23.5;
 	public static final double ELEVATOR_DOWNWARD_DRIFT_THRESHOLD = 13; // 10 original
 	public static final double ELEVATOR_MINIMUM_TARGET = 0.5;
@@ -28,7 +28,7 @@ public final class QuickAccessVars {
 	public static final double ARM_MINIMUM_ANGLE = -3;
 	public static final double ARM_MAXIMUM_ANGLE = 157;
 	public static final double ARM_PICKUP_CARGO_ANGLE = 90;
-	public static final double ARM_CLIMB_ANGLE = 142;
+	public static final double ARM_CLIMB_ANGLE = 145;
 	public static final double ARM_RESET_ANGLE = -3;
 	public static final double ARM_EMERGENCY_CLIMB_DELTA = 5;
 
