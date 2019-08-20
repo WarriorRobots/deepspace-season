@@ -42,7 +42,7 @@ public class ElevatorSubsystem extends Subsystem {
 		winch.config_kP(Constants.PID_ID, QuickAccessVars.ELEVATOR_P, Constants.TIMEOUT_MS);
 		
 		winchClone = new WPI_TalonSRX(CLONE_ID);
-		winchClone.setInverted(QuickAccessVars.ARM_ROTATOR_CLONE_INVERTED);
+		winchClone.setInverted(QuickAccessVars.ELEVATOR_WINCH_CLONE_INVERTED);
 		winchClone.follow(winch);
 		
 		limitSwitch = new DigitalInput(LIMIT_SWITCH_PORT);
