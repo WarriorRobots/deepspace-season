@@ -48,6 +48,7 @@ public final class QuickAccessVars {
 
 	// settings COMPTEST be careful
 	public static final boolean ELEVATOR_WINCH_INVERTED = false;
+	public static final boolean ELEVATOR_WINCH_CLONE_INVERTED = true;
 	public static final boolean ELEVATOR_ENCODER_INVERTED = true;
 	public static final boolean CLIMB_WINCH_INVERTED = true;
 	public static final boolean CLIMB_ENCODER_INVERTED = true;

@@ -20,9 +20,11 @@ public class ElevatorSubsystem extends Subsystem {
 	public static final double CLICKS_PER_INCH = 512;
 
 	private static final int WINCH_ID = 7;
+	private static final int CLONE_ID = 9; // TODO Make sure the ID of the clone is 9
 	private static final int LIMIT_SWITCH_PORT = 4;
 
 	private WPI_TalonSRX winch;
+	private WPI_TalonSRX winchClone;
 	/** Magnetic "Hall effect" sensor. */
 	private DigitalInput limitSwitch;
 
@@ -34,11 +36,16 @@ public class ElevatorSubsystem extends Subsystem {
 	 */
 	public ElevatorSubsystem() {
 		winch = new WPI_TalonSRX(WINCH_ID);
-		limitSwitch = new DigitalInput(LIMIT_SWITCH_PORT);
 		winch.setInverted(QuickAccessVars.ELEVATOR_WINCH_INVERTED);
 		winch.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
 		winch.setSensorPhase(QuickAccessVars.ELEVATOR_ENCODER_INVERTED);
 		winch.config_kP(Constants.PID_ID, QuickAccessVars.ELEVATOR_P, Constants.TIMEOUT_MS);
+		
+		winchClone = new WPI_TalonSRX(CLONE_ID);
+		winchClone.setInverted(QuickAccessVars.ELEVATOR_WINCH_CLONE_INVERTED);
+		winchClone.follow(winch);
+		
+		limitSwitch = new DigitalInput(LIMIT_SWITCH_PORT);
 	}
 
 	/**
@@ -183,5 +190,6 @@ public class ElevatorSubsystem extends Subsystem {
 		builder.addDoubleProperty("clicks", () -> winch.getSelectedSensorPosition(), null);
 		builder.addBooleanProperty("floored?", () -> isElevatorFloored(), null);
 		builder.addDoubleProperty("speed", () -> winch.getMotorOutputPercent(), null);
+		builder.addDoubleProperty("clone speed", () -> winchClone.getMotorOutputPercent(), null);
 	}
 }
