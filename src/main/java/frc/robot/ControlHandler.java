@@ -23,7 +23,7 @@ import frc.robot.commands.cargo.ExtendArm;
 import frc.robot.commands.drive.ArcadeDrive;
 import frc.robot.commands.drive.TurnLockDrive;
 import frc.robot.commands.elevator.MoveElevatorTo;
-import frc.robot.commands.elevator.DropElevator;
+import frc.robot.commands.elevator.HomeElevator;
 import frc.robot.commands.hatchpickup.ExtendHatchPickup;
 import frc.robot.commands.hatchpickup.RetractHatchPickup;
 import frc.robot.commands.hatchpickup.RunHatchPickupWheels;
@@ -116,7 +116,7 @@ public final class ControlHandler {
 		rightXboxJoyDown = new ThresholdTrigger(() -> -xbox.getY(Hand.kRight), -QuickAccessVars.XBOX_JOYSTICK_THRESHOLD,
 				false, () -> xbox.getStickButton(Hand.kRight));
 
-		leftJoyTriggerButton.whenPressed(new DropElevator());
+		leftJoyTriggerButton.whenPressed(new HomeElevator());
 		leftJoyButton3.whenPressed(new LockScissors());
 		leftJoyButton4.whenPressed(new PlaceHatchOnVelcro(QuickAccessVars.HATCH_LAUNCH_SAFETY));
 		leftJoyButton5.whenPressed(new MoveClimbTo(0));
