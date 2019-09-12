@@ -8,7 +8,6 @@ import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.util.SynchronousPIDF;
 
 /** Approach the target keeping the target centered and stopping at a distance using 2 different PIDs. */
-@Deprecated
 public class CameraStopAtDistance extends Command {
 
 	/** PID used for approaching the target. */
@@ -64,7 +63,7 @@ public class CameraStopAtDistance extends Command {
 			// attempting to turn.
 		}
 
-		Robot.drivetrain.arcadeDriveRaw(valueApproach, -valueCenter);
+		Robot.drivetrain.arcadeDriveRaw(-valueApproach, -valueCenter);
 
 	}
 
