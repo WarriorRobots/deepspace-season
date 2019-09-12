@@ -20,18 +20,21 @@ public class LedControllerSubsystem extends Subsystem {
 
   /**
    * Spark value for color of the LED strip when there is no other command.
+   * <p>
    * 55 Color 1 Pattern Breath Slow
    */
   public static final double IDLE = 0.09;
   
   /**
    * Spark value for pattern for when the robot sees the target (in approach distance)
+   * <p>
    * 45 Fixed Pallete Pattern Strobe, Red
    */
   public static final double seeTarget = -0.11;
 
   /**
    * Spark value for pattern for when the robot is at the target (and is ready to place)
+   * <p>
    * 58 Color 1 Pattern Strobe
    */
   public static final double atTarget = 0.15;
