@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 import frc.robot.subsystems.CameraSubsystem;
+import frc.robot.subsystems.LedControllerSubsystem;
 import frc.robot.util.SynchronousPIDF;
 
 public class CameraApproach extends Command {
@@ -26,6 +27,7 @@ public class CameraApproach extends Command {
   public CameraApproach() {
     requires(Robot.drivetrain);
     requires(Robot.camera);
+    requires(Robot.leds);
     requires(Robot.lineFollowers);
 
     valueApproach = 0;
@@ -51,8 +53,21 @@ public class CameraApproach extends Command {
   protected void execute() {
     if (Robot.camera.canSeeObject()) {
       valueCenter = PIDcenter.calculate(Robot.camera.getObjectX(), timer.get());
+
+      // if the robot within the specified range then RED STROBING
+      if (Math.abs(Robot.camera.getTargetDistance()-QuickAccessVars.SETPOINT_APPROACH) <
+			QuickAccessVars.TOLERANCE_APPROACH) {
+				Robot.leds.setChannel(LedControllerSubsystem.atTarget);
+			}
+			// if the robot sees the target however is not where it should be BLUE STROBING
+			else {
+				Robot.leds.setChannel(LedControllerSubsystem.seeTarget);
+			}
     } else {
       valueCenter = 0;
+
+      // if the robot doesn't see the target it should be BLUE BREATHING
+			Robot.leds.setChannel(LedControllerSubsystem.IDLE);
     }
 
     //valueApproach = Robot.input.getRightY();

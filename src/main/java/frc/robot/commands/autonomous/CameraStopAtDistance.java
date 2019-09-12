@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 import frc.robot.subsystems.CameraSubsystem;
+import frc.robot.subsystems.LedControllerSubsystem;
 import frc.robot.util.SynchronousPIDF;
 
 /** Approach the target keeping the target centered and stopping at a distance using 2 different PIDs. */
@@ -24,6 +25,7 @@ public class CameraStopAtDistance extends Command {
 	public CameraStopAtDistance() {
 		requires(Robot.drivetrain);
 		requires(Robot.camera);
+		requires(Robot.leds);
 
 		valueApproach = 0;
 		valueCenter = 0;
@@ -55,8 +57,21 @@ public class CameraStopAtDistance extends Command {
 		if (Robot.camera.canSeeObject()) {
 			valueApproach = PIDapproach.calculate(Robot.camera.getTargetDistance(), timer.get());
 			valueCenter = PIDcenter.calculate(Robot.camera.getObjectX(), timer.get());
+
+			// if the robot within the specified range then RED STROBING
+			if (Math.abs(Robot.camera.getTargetDistance()-QuickAccessVars.SETPOINT_APPROACH) <
+			QuickAccessVars.TOLERANCE_APPROACH) {
+				Robot.leds.setChannel(LedControllerSubsystem.atTarget);
+			}
+			// if the robot sees the target however is not where it should be BLUE STROBING
+			else {
+				Robot.leds.setChannel(LedControllerSubsystem.seeTarget);
+			}
 		} else {
 			valueApproach = 0;
+
+			// if the robot doesn't see the target it should be BLUE BREATHING
+			Robot.leds.setChannel(LedControllerSubsystem.IDLE);
 
 			// TODO The following line should be tested for accuracy in what is intended 
 			// Don't 0 valuecenter because it should "remember" what direction it's
