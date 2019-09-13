@@ -79,7 +79,7 @@ public final class QuickAccessVars {
 		// how far does the driver push the joystick to activate arcade drive during ApproachCurve
 
 	// pid
-	public static final double ELEVATOR_P = 0.15; // 0.4
+	public static final double ELEVATOR_P = 0.18; // 0.4
 	public static final double ARM_P = 1.4; // 1.2
 	public static final double ARM_I = 0; // 0.00015
 	public static final double CLIMB_P = 0.4;
@@ -89,7 +89,7 @@ public final class QuickAccessVars {
 	public static final double KI_APPROACH = 0;
 	public static final double KD_APPROACH = 0;
 	public static final double SETPOINT_APPROACH = 15;
-	public static final double TOLERANCE_APPROACH = 2;
+	public static final double TOLERANCE_APPROACH = 5; // for leds
 	public static final double KP_CENTER = 0.055; // 0.045
 	public static final double KI_CENTER = 0;
 	public static final double KD_CENTER = 0;
