@@ -10,7 +10,7 @@ import frc.robot.commands.ChangeLEDPattern;
  */
 public class LedControllerSubsystem extends Subsystem {
 
-  private static final int LED_CONTROLLER_ID = 0; // TODO find a place for the controller on the PWM channels
+  private static final int LED_CONTROLLER_ID = 0;
 
   /** LED controller acts as a Spark motor controller for it's inputs for changing patterns. */
   private Spark LED_controller;

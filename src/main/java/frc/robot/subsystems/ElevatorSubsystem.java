@@ -20,7 +20,7 @@ public class ElevatorSubsystem extends Subsystem {
 	public static final double CLICKS_PER_INCH = 512;
 
 	private static final int WINCH_ID = 7;
-	private static final int CLONE_ID = 9; // TODO Make sure the ID of the clone is 9
+	private static final int CLONE_ID = 9;
 	private static final int LIMIT_SWITCH_PORT = 4;
 
 	private WPI_TalonSRX winch;

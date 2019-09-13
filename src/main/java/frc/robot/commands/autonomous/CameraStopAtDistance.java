@@ -72,10 +72,6 @@ public class CameraStopAtDistance extends Command {
 
 			// if the robot doesn't see the target it should be BLUE BREATHING
 			Robot.leds.setChannel(LedControllerSubsystem.IDLE);
-
-			// TODO The following line should be tested for accuracy in what is intended 
-			// Don't 0 valuecenter because it should "remember" what direction it's
-			// attempting to turn.
 		}
 
 		Robot.drivetrain.arcadeDriveRaw(-valueApproach, -valueCenter);
