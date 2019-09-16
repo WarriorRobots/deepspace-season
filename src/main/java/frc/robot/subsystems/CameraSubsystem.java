@@ -141,13 +141,55 @@ public class CameraSubsystem extends Subsystem {
 	}
 
 	/**
+	 * Finds the distance to the target depending on the ratio of the width to height.
+	 * (If ratio>2.51, uses width to find distance as part of the target is cutting.)
+	 * (If ratio<=2.51, uses height to find distance as the target is perfect or off center.)
+	 * See page 7 of the programming book for more details.
+	 * @return Distance from target in inches.
+	 */
+	public double getTargetDistance() {
+
+		if (!canSeeObject())
+			return -1;
+
+		double height, width, angle, range;
+		
+		// height in pixels
+		height = visionTable.getEntry(TARGET_HEIGHT).getDouble(0);
+
+		// width in pixels
+		width = visionTable.getEntry(TARGET_WIDTH).getDouble(0);
+
+		// if ratio > 2.51, use width to calculate distance
+		if (width/height>2.51) {
+			// angle in radians
+			angle = width / Constants.PPR_H;
+
+			// range = adj = opp/tan(Theta/2)
+			range = (QuickAccessVars.TARGET_WIDTH/2) / Math.tan(angle/2);
+		}
+
+		// if ratio <= 2.51, use height to calculate distance
+		else
+		{
+			// angle in radians
+			angle = height / Constants.PPR_V;
+
+			// range = adj = opp/tan(Theta)
+			range = QuickAccessVars.TARGET_HEIGHT / Math.tan(angle);
+		}
+
+		return range;
+	}
+
+	/**
 	 * (Adjacent because the range is the adjacent side.)
 	 * Uses the conversion from pixels to radians and uses radians to figures out the trigonometry
 	 * between the height of the target and the range.
 	 * (Target may not be visible at very close range, use a sonar.)
 	 * @return Distance from target in inches.
 	 */
-	public double getTargetDistance() {
+	public double getTargetDistanceByHeight() {
 
 		if (!canSeeObject())
 			return -1;

@@ -75,6 +75,7 @@ public final class QuickAccessVars {
 	public static final double ELEVATION = 40;
 	public static final double TARGET_ELEVATION = 25;
 	public static final double TARGET_HEIGHT = 5.83;
+	public static final double TARGET_WIDTH = 14.64;
 	public static final double CAMERA_DRIVE_THRESHOLD = 0.2;
 		// how far does the driver push the joystick to activate arcade drive during ApproachCurve
 
