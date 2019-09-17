@@ -4,6 +4,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
+/**
+ * Deprecated due to running the elevator at full speed down and not fully utilizing the PID
+ * (This causes the elevator to crash using 2 motors)
+ */
+@Deprecated
 public class DropElevator extends Command {
 
 	/**

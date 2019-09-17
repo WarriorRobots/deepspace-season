@@ -33,8 +33,8 @@ public final class QuickAccessVars {
 	public static final double ARM_EMERGENCY_CLIMB_DELTA = 5;
 
 	// motor speeds (-1.0 to 1.0)
-	public static final double ELEVATOR_DROP_SPEED = -1;
-	public static final double ELEVATOR_DOWNWARD_DRIFT_SPEED = -0.15;
+	public static final double ELEVATOR_DROP_SPEED = -1; // Deprecated
+	public static final double ELEVATOR_DOWNWARD_DRIFT_SPEED = -0.05; // -0.15
 	public static final double CARGO_PICKUP_IDLE_SPEED = 0.15;
 	public static final double ARM_RESET_SPEED = -0.3;
 	public static final double ARCADE_FORWARD_MODIFIER = 1;
@@ -79,18 +79,18 @@ public final class QuickAccessVars {
 		// how far does the driver push the joystick to activate arcade drive during ApproachCurve
 
 	// pid
-	public static final double ELEVATOR_P = 0.4;
+	public static final double ELEVATOR_P = 0.18; // 0.4
 	public static final double ARM_P = 1.4; // 1.2
 	public static final double ARM_I = 0; // 0.00015
 	public static final double CLIMB_P = 0.4;
 
 	// camera pid
-	public static final double KP_APPROACH = 0.015;
+	public static final double KP_APPROACH = 0.020; // 0.015
 	public static final double KI_APPROACH = 0;
 	public static final double KD_APPROACH = 0;
-	public static final double SETPOINT_APPROACH = 23;
-	public static final double TOLERANCE_APPROACH = 2;
-	public static final double KP_CENTER = 0.045; // 0.045
+	public static final double SETPOINT_APPROACH = 15;
+	public static final double TOLERANCE_APPROACH = 5; // for leds
+	public static final double KP_CENTER = 0.055; // 0.045
 	public static final double KI_CENTER = 0;
 	public static final double KD_CENTER = 0;
 	public static final double SETPOINT_CENTER = 0;

@@ -9,6 +9,7 @@ import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.CargoPickupSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.LedControllerSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.HatchPickupSubsystem;
@@ -25,6 +26,7 @@ public class Robot extends TimedRobot {
 	public static final CameraSubsystem camera = new CameraSubsystem();
 	public static final CargoPickupSubsystem cargoPickupWheels = new CargoPickupSubsystem();
 	public static final ClimbSubsystem climb = new ClimbSubsystem();
+	public static final LedControllerSubsystem leds = new LedControllerSubsystem();
 	public static final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
 	public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
 	public static final HatchPickupSubsystem hatchPickupWheels = new HatchPickupSubsystem();
@@ -40,6 +42,7 @@ public class Robot extends TimedRobot {
 		input = new ControlHandler();
 		SmartDashboard.putData(arm);
 		SmartDashboard.putData(camera);
+		SmartDashboard.putData(leds);
 		SmartDashboard.putData(cargoPickupWheels);
 		SmartDashboard.putData(climb);
 		SmartDashboard.putData(drivetrain);

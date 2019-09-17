@@ -21,6 +21,8 @@
 * [Encoder](#encoder)
 * [IR Sensor](#ir)
 * [Hall Effect Sensor](#halleffect)
+* [Pulse-Width Modulation](#pwm)
+* [REV Blinkin](#leds)
 * [CAN Wiring](#can)
 * [Wire Gauge](#gauge)
 
@@ -70,6 +72,7 @@
 * [PWM](#pwm) sensors in PWM (right side)
     * Analog sensors go in PWM ports (Analog sensors are sensors with a range of outputs)
     * (e.g. ultrasonic sensors, potentiometers)
+    * Some motor controllers and the Blinkin go in PWM ports
     * Begin plugging in sensors at 0 and count up
 * [RSL](#rsl) light in RSL (left-most bottom port)
     * **Positive** goes in S
@@ -178,6 +181,22 @@
 * **GND** on the sensor goes in ground (bottom pin)
 * **5V** on the sensor goes in the positive (middle pin)
 * **SIG** on the sensor goes in signal (top pin)
+
+<a id="pwm"></a>
+### Pulse-Width Modulation (PWM)
+![PWM image](./images/pwmports.jpg)
+
+* Ports labeled from 0 through 9 on [RoboRio](#rio)
+* All analog sensors and some controllers go in PWM ports
+* Begin plugging in sensors at 0 and count up (not required, good wiring practice)
+
+<a id="leds"></a>
+### REV Blinkin
+![Blinkin image](./images/blinkin.jpg)
+
+* Rated for 12V/5A
+* **~** is the signal PWM and is closes to the power wires on the Blinkin
+* **~** goes in the signal (some pin relative to image)
 
 ---
 
