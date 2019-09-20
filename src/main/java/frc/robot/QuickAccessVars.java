@@ -6,15 +6,15 @@ import edu.wpi.first.wpilibj.DriverStation;
 public final class QuickAccessVars {
 
 	// in inches from the floor
-	public static final double LVL1_HEIGHT = 20.5; // all levels are measured from comp
-	public static final double LVL2_HEIGHT = 45;
-	public static final double LVL3_HEIGHT = 68;
+	public static final double LVL1_HEIGHT = 20.5;
+	public static final double LVL2_HEIGHT = 42;
+	public static final double LVL3_HEIGHT = 63;
 	public static final double CARGO_BAY_HEIGHT = 34; // CARGO_SCORING_HEIGHT + ELEVATOR_DELTA
 	public static final double ELEVATOR_CLIMB_HEIGHT_HAB3 = 32; // CARGO_SCORING_HEIGHT used during climbing
 	public static final double LOCK_AND_RAISE_HEIGHT = 23.5;
 	public static final double ELEVATOR_DOWNWARD_DRIFT_THRESHOLD = 13; // 10 original
 	public static final double ELEVATOR_MINIMUM_TARGET = 0.5;
-	public static final double ELEVATOR_MAXIMUM_TARGET = 60.5; // 73.5 relative to floor
+	public static final double ELEVATOR_MAXIMUM_TARGET = 63; // 76 relative to floor
 	public static final double ELEVATOR_BASE_HEIGHT = 13;
 	
 	public static final double CLIMB_TARGET_HAB2 = -6; // -7 originally
@@ -90,11 +90,13 @@ public final class QuickAccessVars {
 	public static final double KI_APPROACH = 0;
 	public static final double KD_APPROACH = 0;
 	public static final double SETPOINT_APPROACH = 15;
-	public static final double TOLERANCE_APPROACH = 5; // for leds
+	public static final double TOLERANCE_APPROACH = 2; // for leds
 	public static final double KP_CENTER = 0.055; // 0.045
 	public static final double KI_CENTER = 0;
 	public static final double KD_CENTER = 0;
 	public static final double SETPOINT_CENTER = 0;
+	public static final double CAMERA_BIAS = 0.5;
+		// amount of degrees added to the center the target when driving in
 
 	// DO NOT USE THIS CONSTRUCTOR
 	private QuickAccessVars() {

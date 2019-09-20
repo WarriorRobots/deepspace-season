@@ -56,7 +56,7 @@ public class CameraStopAtDistance extends Command {
 
 		if (Robot.camera.canSeeObject()) {
 			valueApproach = PIDapproach.calculate(Robot.camera.getTargetDistance(), timer.get());
-			valueCenter = PIDcenter.calculate(Robot.camera.getObjectX(), timer.get());
+			valueCenter = PIDcenter.calculate(Robot.camera.getObjectX()+QuickAccessVars.CAMERA_BIAS, timer.get());
 
 			// if the robot within the specified range then RED STROBING
 			if (Math.abs(Robot.camera.getTargetDistance()-QuickAccessVars.SETPOINT_APPROACH) <
