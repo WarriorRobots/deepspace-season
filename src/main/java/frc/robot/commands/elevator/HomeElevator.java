@@ -10,7 +10,7 @@ public class HomeElevator extends Command {
 	 * The position, in inches above the bottom of the elevator,
 	 * the PID will target to when going home.
 	 */
-	private double target = 1; // TODO consider putting 'target' and 'tolerance' in QuickAccessVars
+	private double target = 0.5; // TODO consider putting 'target' and 'tolerance' in QuickAccessVars
 
 	/** The amount of inches above the elevator will start drifting the rest of the way down. */
 	private double tolerance = 0.5;

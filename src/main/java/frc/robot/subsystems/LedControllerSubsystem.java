@@ -35,9 +35,9 @@ public class LedControllerSubsystem extends Subsystem {
   /**
    * Spark value for pattern for when the robot is at the target (and is ready to place)
    * <p>
-   * 46 Fixed Pallete Pattern Strobe, Blue
+   * 48 Fixed Pallete Pattern Strobe, White
    */
-  public static final double atTarget = -0.09;
+  public static final double atTarget = -0.05;
 
   // 94 Solid Colors Blue
   //public static final double solidblue = 0.87;
