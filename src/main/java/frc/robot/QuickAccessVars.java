@@ -78,6 +78,11 @@ public final class QuickAccessVars {
 	public static final double TARGET_WIDTH = 14.64;
 	public static final double CAMERA_DRIVE_THRESHOLD = 0.2;
 		// how far does the driver push the joystick to activate arcade drive during ApproachCurve
+	
+	// auto
+	public static final double MAX_VELOCITY = 132; // inches/sec
+	// wheel diameter in DrivetrainSubsystem
+	// clicks per rev in DrivetrainSubsystem
 
 	// pid
 	public static final double ELEVATOR_P = 0.18; // 0.4
@@ -97,6 +102,16 @@ public final class QuickAccessVars {
 	public static final double SETPOINT_CENTER = 0;
 	public static final double CAMERA_BIAS = 0.5;
 		// amount of degrees added to the center the target when driving in
+	
+	// auto pid
+	public static final double KP_LEFTAUTO = 0.8; // 0.8 is the default
+	public static final double KI_LEFTAUTO = 0;
+	public static final double KD_LEFTAUTO = 0;
+	public static final double KA_LEFTAUTO = 0; // The acceleration term for left. Adjust this if you want to reach higher or lower speeds faster. 0.0 is the default
+	public static final double KP_RIGHTAUTO = 0.8;
+	public static final double KI_RIGHTAUTO = 0;
+	public static final double KD_RIGHTAUTO = 0;
+	public static final double KA_RIGHTAUTO = 0; // The acceleration term for right. 0.0 is the default
 
 	// DO NOT USE THIS CONSTRUCTOR
 	private QuickAccessVars() {
