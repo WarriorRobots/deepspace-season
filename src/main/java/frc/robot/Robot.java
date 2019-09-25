@@ -75,7 +75,7 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		Scheduler.getInstance().removeAll();
 		Scheduler.getInstance().add(new FindArmZero());
-		Scheduler.getInstance().add(new AutoDrive("LeftRocket")); // XXX temporary, move this to a new object that handles calling auto
+		Scheduler.getInstance().add(new AutoDrive("Forwards")); // XXX temporary, move this to a new object that handles calling auto
 	}
 
 	@Override
