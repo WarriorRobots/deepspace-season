@@ -22,4 +22,19 @@ public class LockScissorsAndRaiseElevator extends CommandGroup {
     // if this command is interrupted it should be fine because pistons do not require constant signals
     // and the elevator has the stabilize command as it's default so it is unnessecary to check that case
   }
+
+  @Override
+  public void initialize() {
+    System.out.println("Elevator/Pneumatics: Starting " + this.getClass().getSimpleName());
+  }
+
+  @Override
+  public void end() {
+    System.out.println("Elevator/Pneumatics: Finishing " + this.getClass().getSimpleName());
+  }
+
+  @Override
+  public void interrupted() {
+    System.out.println("Elevator/Pneumatics: Canceling " + this.getClass().getSimpleName());
+  }
 }
