@@ -23,6 +23,9 @@ public class ElevatorSubsystem extends Subsystem {
 	private static final int CLONE_ID = 9;
 	private static final int LIMIT_SWITCH_PORT = 4;
 
+	/** Holds the the most recent position value that is commanded to the Talons */
+	private static double previouscommand=0;
+
 	private WPI_TalonSRX winch;
 	private WPI_TalonSRX winchClone;
 	/** Magnetic "Hall effect" sensor. */
@@ -67,12 +70,15 @@ public class ElevatorSubsystem extends Subsystem {
 	public void moveElevatorTo(double inches) {
 		if (belowMinimum(inches)) {
 			winch.set(ControlMode.Position, toClicks(QuickAccessVars.ELEVATOR_MINIMUM_TARGET));
+			previouscommand=toClicks(QuickAccessVars.ELEVATOR_MINIMUM_TARGET);
 			System.out.println("Elevator moving to " + inches + ", cutting short to prevent crash!");
 		} else if (aboveMaximum(inches)) {
 			winch.set(ControlMode.Position, toClicks(QuickAccessVars.ELEVATOR_MAXIMUM_TARGET));
+			previouscommand=toClicks(QuickAccessVars.ELEVATOR_MAXIMUM_TARGET);
 			System.out.println("Elevator moving to " + inches + ", cutting short to prevent crash!");
 		} else {
 			winch.set(ControlMode.Position, toClicks(inches));
+			previouscommand=toClicks(inches);
 		}
 	}
 
@@ -114,6 +120,7 @@ public class ElevatorSubsystem extends Subsystem {
 		 * Best solution I've found is to create a method without safeties, and only
 		 * use it for stabilization (aka non-movement) commands. */
 		winch.set(ControlMode.Position, toClicks(inches));
+		previouscommand=toClicks(inches);
 	}
 
 	/**
@@ -128,6 +135,14 @@ public class ElevatorSubsystem extends Subsystem {
 	 */
 	public double getElevatorPosition() {
 		return toInches(winch.getSelectedSensorPosition());
+	}
+
+	/**
+	 * Last position the robot was commanded to go to
+	 * @return position of elevator in inchest relative to the bottom of the frame (NOT THE FLOOR)
+	 */
+	public double getElevatorCommand() {
+		return previouscommand;
 	}
 
 	/**
@@ -185,6 +200,7 @@ public class ElevatorSubsystem extends Subsystem {
 
 	@Override
 	public void initSendable(SendableBuilder builder) {
+		builder.addDoubleProperty("commanded", () -> getElevatorCommand(), null);
 		builder.addDoubleProperty("position", () -> getElevatorPosition(), null);
 		builder.addDoubleProperty("position + 13", () -> getElevatorPosition() + QuickAccessVars.ELEVATOR_BASE_HEIGHT, null);
 		builder.addDoubleProperty("clicks", () -> winch.getSelectedSensorPosition(), null);
