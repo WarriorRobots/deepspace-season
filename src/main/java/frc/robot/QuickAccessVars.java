@@ -104,11 +104,11 @@ public final class QuickAccessVars {
 		// amount of degrees added to the center the target when driving in
 	
 	// auto pid
-	public static final double KP_LEFTAUTO = 0.8; // 0.8 is the default
+	public static final double KP_LEFTAUTO = 0.2;
 	public static final double KI_LEFTAUTO = 0;
 	public static final double KD_LEFTAUTO = 0;
 	public static final double KA_LEFTAUTO = 0; // The acceleration term for left. Adjust this if you want to reach higher or lower speeds faster. 0.0 is the default
-	public static final double KP_RIGHTAUTO = 0.8;
+	public static final double KP_RIGHTAUTO = 0.2;
 	public static final double KI_RIGHTAUTO = 0;
 	public static final double KD_RIGHTAUTO = 0;
 	public static final double KA_RIGHTAUTO = 0; // The acceleration term for right. 0.0 is the default

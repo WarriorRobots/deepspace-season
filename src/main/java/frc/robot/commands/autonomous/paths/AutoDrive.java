@@ -33,8 +33,11 @@ public class AutoDrive extends Command {
   protected void initialize() {
     // Create trajectories for each side to follow
     // (trajectories are instantiated inside the initialize because the WPI docs show it that way)
-    Trajectory left_trajectory = PathfinderFRC.getTrajectory(k_path_name + ".left");
-    Trajectory right_trajectory = PathfinderFRC.getTrajectory(k_path_name + ".right");
+    Trajectory left_trajectory = PathfinderFRC.getTrajectory(k_path_name + ".right");
+    Trajectory right_trajectory = PathfinderFRC.getTrajectory(k_path_name + ".left");
+    // left and right trajectories are flipped to fix the issue listed on the WPI Docs
+    // https://wpilib.screenstepslive.com/s/currentCS/m/84338/l/1021631-integrating-path-following-into-a-robot-program#known-issue
+
     // Create followerers that follow the trajectories above
     m_left_follower = new EncoderFollower(left_trajectory);
     m_right_follower = new EncoderFollower(right_trajectory);
@@ -64,7 +67,10 @@ public class AutoDrive extends Command {
 
       // calculate desired amount to turn for motors
       double heading = Robot.drivetrain.getAngleDegrees();
-      double desired_heading = Pathfinder.r2d(m_left_follower.getHeading());
+      double desired_heading = -Pathfinder.r2d(m_left_follower.getHeading());
+      // the value has a negative sign in front to fix the issue listed on the WPI Docs
+      // https://wpilib.screenstepslive.com/s/currentCS/m/84338/l/1021631-integrating-path-following-into-a-robot-program#known-issue
+
       double heading_difference = Pathfinder.boundHalfDegrees(desired_heading - heading);
       double turn =  0.8 * (-1.0/80.0) * heading_difference;
 
