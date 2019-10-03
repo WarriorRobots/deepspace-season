@@ -37,6 +37,8 @@ public class ElevatorSubsystem extends Subsystem {
 	public ElevatorSubsystem() {
 		winch = new WPI_TalonSRX(WINCH_ID);
 		winch.setInverted(QuickAccessVars.ELEVATOR_WINCH_INVERTED);
+		// Max output stops the elevator from going down too quickly and helps to compensate for the force of gravity
+		winch.configPeakOutputReverse(QuickAccessVars.ELEVATOR_MAXREVERSE);
 		winch.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.PID_ID, Constants.TIMEOUT_MS);
 		winch.setSensorPhase(QuickAccessVars.ELEVATOR_ENCODER_INVERTED);
 		winch.config_kP(Constants.PID_ID, QuickAccessVars.ELEVATOR_P, Constants.TIMEOUT_MS);
