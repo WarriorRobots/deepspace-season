@@ -86,7 +86,7 @@ public final class QuickAccessVars {
 	public static final double CLIMB_P = 0.4;
 
 	// camera pid
-	public static final double KP_APPROACH = 0.020; // 0.015
+	public static final double KP_APPROACH = 0.023; // 0.020
 	public static final double KI_APPROACH = 0;
 	public static final double KD_APPROACH = 0;
 	public static final double SETPOINT_APPROACH = 15;
