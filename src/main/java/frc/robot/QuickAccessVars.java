@@ -35,6 +35,8 @@ public final class QuickAccessVars {
 	// motor speeds (-1.0 to 1.0)
 	public static final double ELEVATOR_DROP_SPEED = -1; // Deprecated
 	public static final double ELEVATOR_DOWNWARD_DRIFT_SPEED = -0.05; // -0.15
+	public static final double ELEVATOR_CLIMB_EXTRA = 0.07;
+		// percent increase of distance the elevator goes when climbing (compared to the climb)
 	public static final double CARGO_PICKUP_IDLE_SPEED = 0.15;
 	public static final double ARM_RESET_SPEED = -0.3;
 	public static final double ARCADE_FORWARD_MODIFIER = 1;
@@ -91,7 +93,7 @@ public final class QuickAccessVars {
 	public static final double KI_APPROACH = 0;
 	public static final double KD_APPROACH = 0;
 	public static final double SETPOINT_APPROACH = 15;
-	public static final double TOLERANCE_APPROACH = 2; // for leds
+	public static final double TOLERANCE_APPROACH = 2; // in inches for leds
 	public static final double KP_CENTER = 0.055; // 0.045
 	public static final double KI_CENTER = 0;
 	public static final double KD_CENTER = 0;
