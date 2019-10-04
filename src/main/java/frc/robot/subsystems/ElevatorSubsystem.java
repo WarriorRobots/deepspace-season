@@ -57,7 +57,21 @@ public class ElevatorSubsystem extends Subsystem {
 			resetEncoder();
 		}
 	}
-
+	
+	/**
+	 * Configures the elevator PID to the values meant for it's normal function.
+	 */
+	public void config_defaultPID() {
+		winch.config_kP(Constants.PID_ID, QuickAccessVars.ELEVATOR_P, Constants.TIMEOUT_MS);
+	}
+	
+	/**
+	 * Configures the elevator PID to the values specified for climbing.
+	 */
+	public void config_climbPID() {
+		winch.config_kP(Constants.PID_ID, QuickAccessVars.ELEVATOR_CLIMB_P, Constants.TIMEOUT_MS);
+	}
+	
 	/**
 	 * Moves the elevator to the position specified.
 	 * This has safeties built in to avoid crashing the elevator.
