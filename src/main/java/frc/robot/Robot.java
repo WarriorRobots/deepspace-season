@@ -17,6 +17,7 @@ import frc.robot.subsystems.HatchPickupSubsystem;
 import frc.robot.subsystems.PneumaticLauncherSubsystem;
 import frc.robot.subsystems.PneumaticSubsystem;
 import frc.robot.util.AutoHandler;
+import frc.robot.util.DashboardHandler;
 import frc.robot.subsystems.LineFollowerSubsystem;
 
 /**
@@ -66,6 +67,7 @@ public class Robot extends TimedRobot {
 		DebugRebootAll.rebootAll();
 		Scheduler.getInstance().removeAll();
 		AutoHandler.getInstance().reset();
+		DashboardHandler.getInstance().init();
 	}
 
 	@Override
