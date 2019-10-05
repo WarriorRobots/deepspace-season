@@ -11,7 +11,9 @@ public class AutoHandler {
   // object of this class
   private static AutoHandler instance = null;
 
+  // Name of auto to run
   private String autoname = null;
+  // The command to run for auto
   private Command autocommand = null;
 
   /**
@@ -43,7 +45,10 @@ public class AutoHandler {
 
   //public void stopAuto() {}
 
-  // (void) create dashboard data
+  /**
+   * Set AutoHandler data from dashbaord
+   */
+  public void getDashboardData () {}
 
   /**
    * Resets the data in the AutoHandler
