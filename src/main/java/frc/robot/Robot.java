@@ -16,6 +16,7 @@ import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.HatchPickupSubsystem;
 import frc.robot.subsystems.PneumaticLauncherSubsystem;
 import frc.robot.subsystems.PneumaticSubsystem;
+import frc.robot.util.AutoHandler;
 import frc.robot.subsystems.LineFollowerSubsystem;
 
 /**
@@ -64,6 +65,7 @@ public class Robot extends TimedRobot {
 	public void disabledInit() {
 		DebugRebootAll.rebootAll();
 		Scheduler.getInstance().removeAll();
+		AutoHandler.getInstance().reset();
 	}
 
 	@Override
@@ -74,8 +76,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		Scheduler.getInstance().removeAll();
+		AutoHandler.getInstance().selectCase();		
 		Scheduler.getInstance().add(new FindArmZero());
-		Scheduler.getInstance().add(new AutoDrive("TESTLeft90")); // XXX temporary, move this to a new object that handles calling auto
+		Scheduler.getInstance().add(AutoHandler.getInstance().getCase());
 	}
 
 	@Override
