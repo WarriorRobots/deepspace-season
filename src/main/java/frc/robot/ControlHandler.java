@@ -16,6 +16,7 @@ import frc.robot.commands.debug.DebugRebootAll;
 import frc.robot.commands.debug.DebugResetClimbEncoder;
 import frc.robot.commands.autonomous.CameraApproach;
 import frc.robot.commands.autonomous.CameraStopAtDistance;
+import frc.robot.commands.autonomous.paths.StopAuto;
 import frc.robot.commands.cargo.FindArmZero;
 import frc.robot.commands.cargo.RetractArm;
 import frc.robot.commands.cargo.AdjustArmRelative;
@@ -123,6 +124,7 @@ public final class ControlHandler {
 		leftJoyButton6.whenPressed(new SynchronizedClimb(QuickAccessVars.CLIMB_TARGET_HAB2));
 		// debug
 		leftJoyButton7.whenPressed(new DebugRebootAll());
+		leftJoyButton8.whenPressed(new StopAuto());
 		leftJoyButton9.whenPressed(new FindArmZero());
 		leftJoyButton11.whenPressed(new AdjustArmRelative(QuickAccessVars.ARM_EMERGENCY_CLIMB_DELTA));
 		leftJoyButton12.whenPressed(new AdjustClimbRelative(QuickAccessVars.CLIMB_DELTA));

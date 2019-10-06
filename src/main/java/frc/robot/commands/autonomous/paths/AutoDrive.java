@@ -27,6 +27,10 @@ public class AutoDrive extends Command {
 
   private double heading_difference;
 
+  /**
+   * Autonomous code to follow a path weaver path.
+   * @param path_name The name of the pathweaver path to be followed.
+   */
   public AutoDrive(String path_name) {
     requires(Robot.drivetrain);
 
