@@ -30,25 +30,59 @@ public class AutoHandler {
      * Have AutoHandler select a case based on dashboard values
     */
     public void selectCase() {
-        autoname = "TESTLeft90"; // XXX temporary, have the value based on inputs from the dashboard
-        autocommand = new AutoDrive(autoname);
+        switch (DashboardHandler.getInstance().getAutoAction()) {
+            case FORWARDS:
+                switch (DashboardHandler.getInstance().getStartingHab()) {
+                    case HAB1:
+                        autoname = "ForwardsHab1";
+                        break;
+                    case HAB2:
+                        autoname = "ForwardsHab2";
+                        break;
+                }
+                break;
+            case ROCKET:
+                switch (DashboardHandler.getInstance().getStartingPosition()) {
+                    case LEFT:
+                        switch (DashboardHandler.getInstance().getStartingHab()) {
+                            case HAB1:
+                                autoname = "RocketLeftHab1";
+                                break;
+                            case HAB2:
+                                autoname = "RocketLeftHab2";
+                                break;
+                        }
+                        break;
+                    case RIGHT:
+                        switch (DashboardHandler.getInstance().getStartingHab()) {
+                            case HAB1:
+                                autoname = "RocketRightHab1";
+                                break;
+                            case HAB2:
+                                autoname = "RocketRightHab2";
+                                break;
+                        }
+                        break;
+                }
+                break;
+            case CARGOSHIP:
+                // There is currently no cargoship autos
+                break;
+        }
+        // Only set autocommand to something if something was chosen for it above
+        if (autocommand != null) {
+            autocommand = new AutoDrive(autoname);
+        }
     }
 
     /**
+     * Gives back the command selected in {@link #selectCase()} </p>
+     * NOTE: this can return {@code null} however the scheduler can handle null and does nothing with it.
      * @return The command the AutoHandler has chosen
      */
     public Command getCase() {
         return autocommand;
     }
-
-    //public void startAuto() {}
-
-    //public void stopAuto() {}
-
-    /**
-     * Set AutoHandler data from dashbaord
-     */
-    public void getDashboardData () {}
 
     /**
      * Resets the data in the AutoHandler
