@@ -28,16 +28,16 @@ public class LedControllerSubsystem extends Subsystem {
   /**
    * Spark value for pattern for when the robot sees the target (in approach distance)
    * <p>
-   * 45 Fixed Pallete Pattern Strobe, Red
+   * 81 Solid Colors, Hot Pink
    */
-  public static final double seeTarget = -0.11;
+  public static final double seeTarget = 0.57;
 
   /**
    * Spark value for pattern for when the robot is at the target (and is ready to place)
    * <p>
-   * 48 Fixed Pallete Pattern Strobe, White
+   * 45 Fixed Pallete Pattern Strobe, Red
    */
-  public static final double atTarget = -0.05;
+  public static final double atTarget = -0.11;
 
   // 94 Solid Colors Blue
   //public static final double solidblue = 0.87;
