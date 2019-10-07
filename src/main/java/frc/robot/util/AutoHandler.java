@@ -63,10 +63,16 @@ public class AutoHandler {
                                 break;
                         }
                         break;
+                    case MIDDLE:
+                        // There is currently no middle rocket auto
+                        break;
                 }
                 break;
             case CARGOSHIP:
                 // There is currently no cargoship autos
+                break;
+            case NONE:
+                // There is no action, this is purposely left blank
                 break;
         }
         // Only set autocommand to something if something was chosen for it above
