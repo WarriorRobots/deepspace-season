@@ -39,7 +39,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	private AHRS navx;
 
 	/** The robot wheel is {@value} inches in diameter. */
-	public static final double WHEEL_DIAMETER = 6.0;
+	public static final double WHEEL_DIAMETER = 5.0;
 
 	/** A Grayhill encoder has {@value} clicks per revolution. */
 	public static final int CLICKS_PER_REV = 128;
