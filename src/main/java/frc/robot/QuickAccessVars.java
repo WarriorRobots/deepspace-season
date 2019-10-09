@@ -79,17 +79,12 @@ public final class QuickAccessVars {
 	public static final double CAMERA_DRIVE_THRESHOLD = 0.2;
 		// how far does the driver push the joystick to activate arcade drive during ApproachCurve
 	
-	// auto
-	public static final double MAX_VELOCITY = 132; // inches/sec
-	// wheel diameter in DrivetrainSubsystem
-	// clicks per rev in DrivetrainSubsystem
-
 	// pid
 	public static final double ELEVATOR_P = 0.18; // 0.4
 	public static final double ARM_P = 1.4; // 1.2
 	public static final double ARM_I = 0; // 0.00015
 	public static final double CLIMB_P = 0.4;
-
+	
 	// camera pid
 	public static final double KP_APPROACH = 0.020; // 0.015
 	public static final double KI_APPROACH = 0;
@@ -101,17 +96,27 @@ public final class QuickAccessVars {
 	public static final double KD_CENTER = 0;
 	public static final double SETPOINT_CENTER = 0;
 	public static final double CAMERA_BIAS = 0.5;
-		// amount of degrees added to the center the target when driving in
+	// amount of degrees added to the center the target when driving in
 	
+	// auto
+	// wheel diameter in DrivetrainSubsystem
+	// clicks per rev in DrivetrainSubsystem
+	public static final double MAX_VELOCITY = 114.6; // inches/sec
+
 	// auto pid
-	public static final double KP_LEFTAUTO = 0.3;
+	public static final double KP_LEFTAUTO = 0.4;
 	public static final double KI_LEFTAUTO = 0;
-	public static final double KD_LEFTAUTO = 0;
-	public static final double KA_LEFTAUTO = 0; // The acceleration term for left. Adjust this if you want to reach higher or lower speeds faster. 0.0 is the default
-	public static final double KP_RIGHTAUTO = 0.3;
+	public static final double KD_LEFTAUTO = 0.02;
+	public static final double KV_LEFTAUTO = 1 / MAX_VELOCITY;
+	public static final double KA_LEFTAUTO = 0.0; // The acceleration term for left. Adjust this if you want to reach higher or lower speeds faster. 0.0 is the default
+
+	public static final double KP_RIGHTAUTO = 0.4;
 	public static final double KI_RIGHTAUTO = 0;
-	public static final double KD_RIGHTAUTO = 0;
-	public static final double KA_RIGHTAUTO = 0; // The acceleration term for right. 0.0 is the default
+	public static final double KD_RIGHTAUTO = 0.02;
+	public static final double KV_RIGHTAUTO = 1 / MAX_VELOCITY;
+	public static final double KA_RIGHTAUTO = 0.0; // The acceleration term for right. 0.0 is the default
+
+	public static final double KG_AUTO = 0.8 * (-1.0/80.0);
 
 	// DO NOT USE THIS CONSTRUCTOR
 	private QuickAccessVars() {

@@ -2,6 +2,7 @@ package frc.robot.util;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.commands.autonomous.paths.AutoDrive;
+import frc.robot.commands.autonomous.paths.AutoReverse;
 
 /**
  * Add your docs here.
@@ -75,10 +76,13 @@ public class AutoHandler {
                 // There is no action, this is purposely left blank
                 break;
         }
+
+        autoname = "TESTBackRightRightRocket"; // XXX TEST
         // Only set autocommand to something if something was chosen for it above
-        if (autocommand != null) {
+        if (autoname != null) {
             autocommand = new AutoDrive(autoname);
         }
+        //autocommand = new AutoReverse(autoname);
     }
 
     /**

@@ -34,19 +34,19 @@ public class DashboardHandler {
         actionDropdown = new SendableChooser<>();
 
         // Give habDropdown options
-        habDropdown.addDefault("Hab1", StartingHab.HAB1);
-        habDropdown.addObject("Hab2", StartingHab.HAB2);
+        habDropdown.setDefaultOption("Hab1", StartingHab.HAB1);
+        habDropdown.addOption("Hab2", StartingHab.HAB2);
 
         // Give positionDropdown options
-        positionDropdown.addDefault("Right", StartingPosition.RIGHT);
-        positionDropdown.addObject("Middle", StartingPosition.MIDDLE);
-        positionDropdown.addObject("Left", StartingPosition.LEFT);
+        positionDropdown.setDefaultOption("Right", StartingPosition.RIGHT);
+        positionDropdown.addOption("Middle", StartingPosition.MIDDLE);
+        positionDropdown.addOption("Left", StartingPosition.LEFT);
 
         // Give actionDropdown options
-        actionDropdown.addDefault("Forwards", AutoAction.FORWARDS);
-        actionDropdown.addObject("None", AutoAction.NONE);
-        actionDropdown.addObject("Rocket", AutoAction.ROCKET);
-        actionDropdown.addObject("CargoShip", AutoAction.CARGOSHIP);
+        actionDropdown.setDefaultOption("Forwards", AutoAction.FORWARDS);
+        actionDropdown.addOption("None", AutoAction.NONE);
+        actionDropdown.addOption("Rocket", AutoAction.ROCKET);
+        actionDropdown.addOption("CargoShip", AutoAction.CARGOSHIP);
     }
 
     /**
