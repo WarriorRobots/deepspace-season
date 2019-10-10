@@ -1,0 +1,5 @@
+package frc.robot.util.enums;
+
+public enum TestAction {
+    NONE, BACKSTRAIGHTROCKET, FORWARDS, LEFT90, RIGHT90, ROCKETFRONTMID, ROCKETRIGHT, TURNAROUND
+}

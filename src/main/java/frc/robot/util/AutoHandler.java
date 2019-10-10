@@ -77,7 +77,32 @@ public class AutoHandler {
                 break;
         }
 
-        autoname = "TESTBackRightRightRocket"; // XXX TEST
+        switch (DashboardHandler.getInstance().getTestAction()) {
+            case BACKSTRAIGHTROCKET:
+                autoname = "TESTBackStraightRocket";
+                break;
+            case FORWARDS:
+                autoname = "TESTForwards";
+                break;
+            case LEFT90:
+                autoname = "TESTLeft90";
+                break;
+            case RIGHT90:
+                autoname = "TESTRight90";
+                break;
+            case ROCKETFRONTMID:
+                autoname = "TESTRocketFrontMid";
+                break;
+            case ROCKETRIGHT:
+                autoname = "TESTRocketRight";
+                break;
+            case TURNAROUND:
+                autoname = "TESTTurnAround";
+                break;
+            case NONE:
+                break;
+        }
+
         // Only set autocommand to something if something was chosen for it above
         if (autoname != null) {
             autocommand = new AutoDrive(autoname);

@@ -101,22 +101,21 @@ public final class QuickAccessVars {
 	// auto
 	// wheel diameter in DrivetrainSubsystem
 	// clicks per rev in DrivetrainSubsystem
-	public static final double MAX_VELOCITY = 114.6; // inches/sec
+	public static final double MAX_VELOCITY = 114; // inches/sec
 
 	// auto pid
-	public static final double KP_LEFTAUTO = 0.4;
+	public static final double KP_LEFTAUTO = 1.3;
 	public static final double KI_LEFTAUTO = 0;
-	public static final double KD_LEFTAUTO = 0.02;
+	public static final double KD_LEFTAUTO = 0.07;
 	public static final double KV_LEFTAUTO = 1 / MAX_VELOCITY;
-	public static final double KA_LEFTAUTO = 0.0; // The acceleration term for left. Adjust this if you want to reach higher or lower speeds faster. 0.0 is the default
-
-	public static final double KP_RIGHTAUTO = 0.4;
-	public static final double KI_RIGHTAUTO = 0;
-	public static final double KD_RIGHTAUTO = 0.02;
-	public static final double KV_RIGHTAUTO = 1 / MAX_VELOCITY;
-	public static final double KA_RIGHTAUTO = 0.0; // The acceleration term for right. 0.0 is the default
-
+	public static final double KA_LEFTAUTO = 0.001; // The acceleration term for left. Adjust this if you want to reach higher or lower speeds faster. 0.0 is the default
 	public static final double KG_AUTO = 0.8 * (-1.0/80.0);
+
+	public static final double KP_RIGHTAUTO = KP_LEFTAUTO;
+	public static final double KI_RIGHTAUTO = KI_LEFTAUTO;
+	public static final double KD_RIGHTAUTO = KD_LEFTAUTO;
+	public static final double KV_RIGHTAUTO = KV_LEFTAUTO;
+	public static final double KA_RIGHTAUTO = KA_LEFTAUTO; // The acceleration term for right. 0.0 is the default
 
 	// DO NOT USE THIS CONSTRUCTOR
 	private QuickAccessVars() {

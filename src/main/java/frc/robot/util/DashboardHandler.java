@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.util.enums.AutoAction;
 import frc.robot.util.enums.StartingHab;
 import frc.robot.util.enums.StartingPosition;
+import frc.robot.util.enums.TestAction;
 
 public class DashboardHandler {
 
@@ -14,6 +15,7 @@ public class DashboardHandler {
     private static SendableChooser<StartingHab> habDropdown;
     private static SendableChooser<StartingPosition> positionDropdown;
     private static SendableChooser<AutoAction> actionDropdown;
+    private static SendableChooser<TestAction> testDropdown;
 
     /**
      * @return The only instance of DashboardHandler.
@@ -32,6 +34,7 @@ public class DashboardHandler {
         habDropdown = new SendableChooser<>();
         positionDropdown = new SendableChooser<>();
         actionDropdown = new SendableChooser<>();
+        testDropdown = new SendableChooser<>();
 
         // Give habDropdown options
         habDropdown.setDefaultOption("Hab1", StartingHab.HAB1);
@@ -47,6 +50,15 @@ public class DashboardHandler {
         actionDropdown.addOption("None", AutoAction.NONE);
         actionDropdown.addOption("Rocket", AutoAction.ROCKET);
         actionDropdown.addOption("CargoShip", AutoAction.CARGOSHIP);
+
+        testDropdown.setDefaultOption("None", TestAction.NONE);
+        testDropdown.addOption("BackStraightRocket", TestAction.BACKSTRAIGHTROCKET);
+        testDropdown.addOption("Forwards", TestAction.FORWARDS);
+        testDropdown.addOption("Left90", TestAction.LEFT90);
+        testDropdown.addOption("Right90", TestAction.RIGHT90);
+        testDropdown.addOption("RocketFrontMid", TestAction.ROCKETFRONTMID);
+        testDropdown.addOption("RocketRight", TestAction.ROCKETRIGHT);
+        testDropdown.addOption("TurnAround", TestAction.TURNAROUND);
     }
 
     /**
@@ -56,6 +68,7 @@ public class DashboardHandler {
         SmartDashboard.putData("Starting Hab selector", habDropdown);
         SmartDashboard.putData("Position selector", positionDropdown);
         SmartDashboard.putData("Action selector", actionDropdown);
+        SmartDashboard.putData("Test case selector", testDropdown);
     }
 
     /**
@@ -77,5 +90,12 @@ public class DashboardHandler {
      */
     public AutoAction getAutoAction() {
         return actionDropdown.getSelected();
+    }
+
+    /**
+     * @return The selected test case for auto.
+     */
+    public TestAction getTestAction() {
+        return testDropdown.getSelected();
     }
 }

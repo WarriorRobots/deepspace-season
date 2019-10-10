@@ -18,6 +18,7 @@ import jaci.pathfinder.PathfinderFRC;
 import jaci.pathfinder.Trajectory;
 import jaci.pathfinder.followers.EncoderFollower;
 
+@Deprecated
 public class AutoReverse extends Command {
 
   private String k_path_name;
@@ -44,13 +45,12 @@ public class AutoReverse extends Command {
     m_right_follower = new EncoderFollower(right_trajectory);
 
     // Configure both followers to have the right encoder values and PIDVA values
-    m_left_follower.configureEncoder(Robot.drivetrain.getLeftEncoderClicks(), DrivetrainSubsystem.CLICKS_PER_REV, DrivetrainSubsystem.WHEEL_DIAMETER);
+    m_left_follower.configureEncoder(-Robot.drivetrain.getRightEncoderClicks(), DrivetrainSubsystem.CLICKS_PER_REV, DrivetrainSubsystem.WHEEL_DIAMETER);
     m_left_follower.configurePIDVA(QuickAccessVars.KP_LEFTAUTO, QuickAccessVars.KI_LEFTAUTO, QuickAccessVars.KD_LEFTAUTO, QuickAccessVars.KV_LEFTAUTO, QuickAccessVars.KA_LEFTAUTO);
 
-    m_right_follower.configureEncoder(Robot.drivetrain.getRightEncoderClicks(), DrivetrainSubsystem.CLICKS_PER_REV, DrivetrainSubsystem.WHEEL_DIAMETER);
+    m_right_follower.configureEncoder(-Robot.drivetrain.getLeftEncoderClicks(), DrivetrainSubsystem.CLICKS_PER_REV, DrivetrainSubsystem.WHEEL_DIAMETER);
     m_right_follower.configurePIDVA(QuickAccessVars.KP_RIGHTAUTO, QuickAccessVars.KI_RIGHTAUTO, QuickAccessVars.KD_RIGHTAUTO, QuickAccessVars.KV_RIGHTAUTO, QuickAccessVars.KA_RIGHTAUTO);
-    // the left and right encoders are opposite and flipped sides of each other for going reverse
-    
+
     // zero gyro so that it thinks it starts facing 0 like as described by the CSV path
     Robot.drivetrain.resetAngle();
     
@@ -67,16 +67,14 @@ public class AutoReverse extends Command {
     // when it is still following the path (aka it isn't finished)
     else {
       // calculate desired output for motors
-      double left_speed = -m_right_follower.calculate(Robot.drivetrain.getLeftEncoderClicks());
-      double right_speed = -m_left_follower.calculate(Robot.drivetrain.getRightEncoderClicks());
-      // the right path is the left side in reverse and the left path is the right side in reverse
+      double left_speed = m_left_follower.calculate(Robot.drivetrain.getLeftEncoderClicks());
+      double right_speed = m_right_follower.calculate(Robot.drivetrain.getRightEncoderClicks());
 
       // calculate desired amount to turn for motors
-      double heading = Robot.drivetrain.getAngleDegrees();
-      double desired_heading = Pathfinder.r2d(m_left_follower.getHeading());
+      double heading = (Robot.drivetrain.getAngleDegrees()+180)%360;
+      double desired_heading = -Pathfinder.r2d(m_left_follower.getHeading());
       // the value has a negative sign in front to fix the issue listed on the WPI Docs
       // https://wpilib.screenstepslive.com/s/currentCS/m/84338/l/1021631-integrating-path-following-into-a-robot-program#known-issue
-      // the value is negated again because the robot is going backwards
       SmartDashboard.putNumber("Desired Heading", desired_heading); // XXX test
 
       double heading_difference = Pathfinder.boundHalfDegrees(desired_heading - heading);
@@ -86,7 +84,6 @@ public class AutoReverse extends Command {
 
       // drive the motors using the desired outputs for the motors combined with the amount it should turn
       Robot.drivetrain.tankDriveRaw(left_speed + turn, right_speed - turn);
-      // going in reverse means the motor values are the reverse of their own side
     }
   }
 
