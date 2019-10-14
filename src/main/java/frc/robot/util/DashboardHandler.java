@@ -30,9 +30,7 @@ public class DashboardHandler {
         // Give actionDropdown options
         actionDropdown.setDefaultOption("Forwards", AutoAction.FORWARDS);
         actionDropdown.addOption("None", AutoAction.NONE);
-        actionDropdown.addOption("Right Rocket Hab1", AutoAction.RIGHTROCKETHAB1);
         actionDropdown.addOption("Right Rocket Hab2", AutoAction.RIGHTROCKETHAB2);
-        actionDropdown.addOption("Left Rocket Hab1", AutoAction.LEFTROCKETHAB1);
         actionDropdown.addOption("Left Rocket Hab2", AutoAction.LEFTROCKETHAB2);
     }
 

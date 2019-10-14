@@ -34,14 +34,8 @@ public class AutoHandler {
     */
     public void selectCase() {
         switch (DashboardHandler.getInstance().getAutoAction()) {
-            case RIGHTROCKETHAB1:
-                autocommand = new Rocket("RocketRightHab1");
-                break;
             case RIGHTROCKETHAB2:
                 autocommand = new Rocket("RocketRightHab2");
-                break;
-            case LEFTROCKETHAB1:
-                autocommand = new Rocket("RocketLeftHab1");
                 break;
             case LEFTROCKETHAB2:
                 autocommand = new Rocket("RocketLeftHab2");
