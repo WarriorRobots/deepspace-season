@@ -2,7 +2,6 @@ package frc.robot.util;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.commands.autonomous.paths.AutoDrive;
-import frc.robot.commands.autonomous.paths.AutoReverse;
 import frc.robot.commands.autonomous.paths.routines.RightRocket;
 import frc.robot.commands.autonomous.paths.routines.Rocket;
 
@@ -14,8 +13,6 @@ public class AutoHandler {
     // object of this class
     private static AutoHandler instance = null;
 
-    // Name of auto to run
-    private String autoname = null;
     // The command to run for auto
     private Command autocommand = null;
 
@@ -37,88 +34,25 @@ public class AutoHandler {
     */
     public void selectCase() {
         switch (DashboardHandler.getInstance().getAutoAction()) {
-            case FORWARDS:
-                switch (DashboardHandler.getInstance().getStartingHab()) {
-                    case HAB1:
-                        autoname = "ForwardsHab1";
-                        break;
-                    case HAB2:
-                        autoname = "ForwardsHab2";
-                        break;
-                }
+            case RIGHTROCKETHAB1:
+                autocommand = new Rocket("RocketRightHab1");
                 break;
-            case ROCKET:
-                switch (DashboardHandler.getInstance().getStartingPosition()) {
-                    case LEFT:
-                        switch (DashboardHandler.getInstance().getStartingHab()) {
-                            case HAB1:
-                                autoname = "RocketLeftHab1";
-                                break;
-                            case HAB2:
-                                autoname = "RocketLeftHab2";
-                                break;
-                        }
-                        break;
-                    case RIGHT:
-                        switch (DashboardHandler.getInstance().getStartingHab()) {
-                            case HAB1:
-                                //autoname = "RocketRightHab1";
-                                autoname = null;
-                                autocommand = new Rocket("RocketRightHab1");
-                                break;
-                            case HAB2:
-                                autoname = "RocketRightHab2";
-                                break;
-                        }
-                        break;
-                    case MIDDLE:
-                        // There is currently no middle rocket auto
-                        break;
-                }
+            case RIGHTROCKETHAB2:
+                autocommand = new Rocket("RocketRightHab2");
                 break;
-            case CARGOSHIP:
-                // There is currently no cargoship autos
+            case LEFTROCKETHAB1:
+                autocommand = new Rocket("RocketLeftHab1");
                 break;
-            case NONE:
-                // There is no action, this is purposely left blank
-                break;
-        }
-
-        switch (DashboardHandler.getInstance().getTestAction()) {
-            case BACKSTRAIGHTROCKET:
-                autoname = "TESTBackStraightRocket";
+            case LEFTROCKETHAB2:
+                autocommand = new Rocket("RocketLeftHab2");
                 break;
             case FORWARDS:
-                autoname = "TESTForwards";
-                break;
-            case LEFT90:
-                autoname = "TESTLeft90";
-                break;
-            case RIGHT90:
-                autoname = "TESTRight90";
-                break;
-            case ROCKETFRONTMID:
-                autoname = "TESTRocketFrontMid";
-                break;
-            case ROCKETRIGHT:
-                autoname = "TESTRocketRight";
-                break;
-            case TURNAROUND:
-                autoname = "TESTTurnAround";
-                break;
-            case BACKSTRAIGHTROCKETWTURN:
-                autoname = null;
-                autocommand = new RightRocket();
+                autocommand = new AutoDrive("ForwardsHab1");
                 break;
             case NONE:
+                // does nothing
                 break;
         }
-
-        // Only set autocommand to something if something was chosen for it above
-        if (autoname != null) {
-            autocommand = new AutoDrive(autoname);
-        }
-        //autocommand = new AutoReverse(autoname);
     }
 
     /**
@@ -134,7 +68,6 @@ public class AutoHandler {
      * Resets the data in the AutoHandler
      */
     public void reset() {
-        autoname = null;
         autocommand = null;
     }
 
