@@ -28,8 +28,8 @@ public class DashboardHandler {
         actionDropdown = new SendableChooser<>();
         
         // Give actionDropdown options
-        actionDropdown.setDefaultOption("Forwards", AutoAction.FORWARDS);
-        actionDropdown.addOption("None", AutoAction.NONE);
+        actionDropdown.setDefaultOption("None", AutoAction.NONE);
+        actionDropdown.addOption("Forwards", AutoAction.FORWARDS);
         actionDropdown.addOption("Right Rocket Hab2", AutoAction.RIGHTROCKETHAB2);
         actionDropdown.addOption("Left Rocket Hab2", AutoAction.LEFTROCKETHAB2);
     }
