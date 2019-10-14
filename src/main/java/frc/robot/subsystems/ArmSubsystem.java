@@ -180,10 +180,10 @@ public class ArmSubsystem extends Subsystem {
 
 	@Override
 	public void initSendable(SendableBuilder builder) {
-		builder.addDoubleProperty("angle", () -> getArmAngle(), null);
-		builder.addDoubleProperty("master speed", () -> armRotator.getMotorOutputPercent(), null);
-		builder.addDoubleProperty("clone speed", () -> armRotatorClone.getMotorOutputPercent(), null);
-		builder.addBooleanProperty("limit switch?", () -> isLimitSwitchTriggered(), null);
+		// builder.addDoubleProperty("angle", () -> getArmAngle(), null);
+		// builder.addDoubleProperty("master speed", () -> armRotator.getMotorOutputPercent(), null);
+		// builder.addDoubleProperty("clone speed", () -> armRotatorClone.getMotorOutputPercent(), null);
+		// builder.addBooleanProperty("limit switch?", () -> isLimitSwitchTriggered(), null);
 	}
 
 }

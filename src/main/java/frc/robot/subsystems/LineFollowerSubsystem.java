@@ -84,9 +84,9 @@ public class LineFollowerSubsystem extends Subsystem {
 	}
 
 	public void initSendable(SendableBuilder builder) {
-		builder.addBooleanProperty("left", () -> getLeftLineFollower(), null);
-		builder.addBooleanProperty("mid", () -> getMiddleLineFollower(), null);
-		builder.addBooleanProperty("right", () -> getRightLineFollower(), null);
+		// builder.addBooleanProperty("left", () -> getLeftLineFollower(), null);
+		// builder.addBooleanProperty("mid", () -> getMiddleLineFollower(), null);
+		// builder.addBooleanProperty("right", () -> getRightLineFollower(), null);
 	}
 
 }

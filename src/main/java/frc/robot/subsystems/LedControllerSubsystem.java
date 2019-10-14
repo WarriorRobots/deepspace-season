@@ -71,6 +71,6 @@ public class LedControllerSubsystem extends Subsystem {
 
   @Override
 	public void initSendable(SendableBuilder builder) {
-    builder.addDoubleProperty("channel", () -> getChannel(), null);
+    // builder.addDoubleProperty("channel", () -> getChannel(), null);
   }
 }

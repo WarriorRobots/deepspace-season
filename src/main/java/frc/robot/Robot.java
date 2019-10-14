@@ -78,8 +78,8 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		Scheduler.getInstance().removeAll();
 		AutoHandler.getInstance().selectCase();		
-		//Scheduler.getInstance().add(new FindArmZero());
 		Scheduler.getInstance().add(AutoHandler.getInstance().getCase());
+		Scheduler.getInstance().add(new FindArmZero());
 	}
 
 	@Override

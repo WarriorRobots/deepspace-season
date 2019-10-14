@@ -59,6 +59,7 @@ public class DashboardHandler {
         testDropdown.addOption("RocketFrontMid", TestAction.ROCKETFRONTMID);
         testDropdown.addOption("RocketRight", TestAction.ROCKETRIGHT);
         testDropdown.addOption("TurnAround", TestAction.TURNAROUND);
+        testDropdown.addOption("BackStraightRocketWTURN", TestAction.BACKSTRAIGHTROCKETWTURN);
     }
 
     /**

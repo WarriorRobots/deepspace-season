@@ -185,11 +185,11 @@ public class ElevatorSubsystem extends Subsystem {
 
 	@Override
 	public void initSendable(SendableBuilder builder) {
-		builder.addDoubleProperty("position", () -> getElevatorPosition(), null);
-		builder.addDoubleProperty("position + 13", () -> getElevatorPosition() + QuickAccessVars.ELEVATOR_BASE_HEIGHT, null);
-		builder.addDoubleProperty("clicks", () -> winch.getSelectedSensorPosition(), null);
-		builder.addBooleanProperty("floored?", () -> isElevatorFloored(), null);
-		builder.addDoubleProperty("speed", () -> winch.getMotorOutputPercent(), null);
-		builder.addDoubleProperty("clone speed", () -> winchClone.getMotorOutputPercent(), null);
+		// builder.addDoubleProperty("position", () -> getElevatorPosition(), null);
+		// builder.addDoubleProperty("position + 13", () -> getElevatorPosition() + QuickAccessVars.ELEVATOR_BASE_HEIGHT, null);
+		// builder.addDoubleProperty("clicks", () -> winch.getSelectedSensorPosition(), null);
+		// builder.addBooleanProperty("floored?", () -> isElevatorFloored(), null);
+		// builder.addDoubleProperty("speed", () -> winch.getMotorOutputPercent(), null);
+		// builder.addDoubleProperty("clone speed", () -> winchClone.getMotorOutputPercent(), null);
 	}
 }

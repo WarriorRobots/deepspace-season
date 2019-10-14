@@ -233,12 +233,12 @@ public class DrivetrainSubsystem extends Subsystem {
 
 	@Override
 	public void initSendable(SendableBuilder builder) {
-		builder.addStringProperty("encoders", () -> {
-			return (Integer.toString(getLeftEncoderClicks()) + " " + Integer.toString(getRightEncoderClicks()));
-		}, null);
-		builder.addDoubleProperty("left speed", () -> leftGroup.get(), null);
-		builder.addDoubleProperty("right speed", () -> rightGroup.get(), null);
-		builder.addDoubleProperty("angle", () -> getAngleDegrees(), null);
+		// builder.addStringProperty("encoders", () -> {
+		// 	return (Integer.toString(getLeftEncoderClicks()) + " " + Integer.toString(getRightEncoderClicks()));
+		// }, null);
+		// builder.addDoubleProperty("left speed", () -> leftGroup.get(), null);
+		// builder.addDoubleProperty("right speed", () -> rightGroup.get(), null);
+		// builder.addDoubleProperty("angle", () -> getAngleDegrees(), null);
 	}
 
 	@Override

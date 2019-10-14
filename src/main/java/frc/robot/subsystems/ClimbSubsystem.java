@@ -145,8 +145,8 @@ public class ClimbSubsystem extends Subsystem {
 
 	@Override
 	public void initSendable(SendableBuilder builder) {
-		builder.addDoubleProperty("position", () -> getClimbPosition(), null);
-		builder.addDoubleProperty("clicks", () -> winch.getSelectedSensorPosition(), null);
-		builder.addDoubleProperty("speed", () -> winch.getMotorOutputPercent(), null);
+		// builder.addDoubleProperty("position", () -> getClimbPosition(), null);
+		// builder.addDoubleProperty("clicks", () -> winch.getSelectedSensorPosition(), null);
+		// builder.addDoubleProperty("speed", () -> winch.getMotorOutputPercent(), null);
 	}
 }

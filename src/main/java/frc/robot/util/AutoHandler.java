@@ -3,6 +3,8 @@ package frc.robot.util;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.commands.autonomous.paths.AutoDrive;
 import frc.robot.commands.autonomous.paths.AutoReverse;
+import frc.robot.commands.autonomous.paths.routines.RightRocket;
+import frc.robot.commands.autonomous.paths.routines.Rocket;
 
 /**
  * Add your docs here.
@@ -16,6 +18,9 @@ public class AutoHandler {
     private String autoname = null;
     // The command to run for auto
     private Command autocommand = null;
+
+    /** Leftover amount of degrees that the PathFinder did not get */
+    private double leftover = 0;
 
     /**
      * @return The only instance of AutoHandler
@@ -57,7 +62,9 @@ public class AutoHandler {
                     case RIGHT:
                         switch (DashboardHandler.getInstance().getStartingHab()) {
                             case HAB1:
-                                autoname = "RocketRightHab1";
+                                //autoname = "RocketRightHab1";
+                                autoname = null;
+                                autocommand = new Rocket("RocketRightHab1");
                                 break;
                             case HAB2:
                                 autoname = "RocketRightHab2";
@@ -99,6 +106,10 @@ public class AutoHandler {
             case TURNAROUND:
                 autoname = "TESTTurnAround";
                 break;
+            case BACKSTRAIGHTROCKETWTURN:
+                autoname = null;
+                autocommand = new RightRocket();
+                break;
             case NONE:
                 break;
         }
@@ -125,5 +136,21 @@ public class AutoHandler {
     public void reset() {
         autoname = null;
         autocommand = null;
+    }
+
+
+    /**
+     * Set the leftover amount of degrees after attempting to do a path
+     * @param leftover degrees left that PathFinder was unable to complete
+     */
+    public void setLeftOver(double leftover) {
+        this.leftover = leftover;
+    }
+
+    /**
+     * @return Degrees left over that Pathfinder was unable to complete
+     */
+    public double getLeftOver() {
+        return this.leftover;
     }
 }

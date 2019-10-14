@@ -109,10 +109,10 @@ public class PneumaticSubsystem extends Subsystem {
 
 	@Override
 	public void initSendable(SendableBuilder builder) {
-		builder.addBooleanProperty("low pressure?", () -> !compressor.getPressureSwitchValue(), null);
-		builder.addBooleanProperty("compressor?", () -> compressor.enabled(), null);
-		builder.addStringProperty("scissors", () -> scissorSol.get().toString(), null);
-		builder.addStringProperty("hatchpickup", () -> pickupSol.get().toString(), null);
+		// builder.addBooleanProperty("low pressure?", () -> !compressor.getPressureSwitchValue(), null);
+		// builder.addBooleanProperty("compressor?", () -> compressor.enabled(), null);
+		// builder.addStringProperty("scissors", () -> scissorSol.get().toString(), null);
+		// builder.addStringProperty("hatchpickup", () -> pickupSol.get().toString(), null);
 	}
 
 }

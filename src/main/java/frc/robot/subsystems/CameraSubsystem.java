@@ -274,21 +274,21 @@ public class CameraSubsystem extends Subsystem {
 
 	@Override
 	public void initSendable(SendableBuilder builder) {
-		builder.setSmartDashboardType("subsystem-camera");
-		builder.addBooleanProperty("object-exists", () -> canSeeObject(), null);
-		builder.addDoubleArrayProperty("object-x&y", () -> {
+		// builder.setSmartDashboardType("subsystem-camera");
+		// builder.addBooleanProperty("object-exists", () -> canSeeObject(), null);
+		// builder.addDoubleArrayProperty("object-x&y", () -> {
 
-			return new double[] { getObjectX(), getObjectY() };
+		// 	return new double[] { getObjectX(), getObjectY() };
 
-		}, null);
-		builder.addDoubleProperty("object-x", () -> getObjectX(), null);
-		builder.addDoubleProperty("object-y", () -> getObjectX(), null);
-		builder.addDoubleProperty("object-area", () -> getObjectArea(), null);
-		builder.addDoubleProperty("object-skew", () -> getObjectRotationAngle(), null);
+		// }, null);
+		// builder.addDoubleProperty("object-x", () -> getObjectX(), null);
+		// builder.addDoubleProperty("object-y", () -> getObjectX(), null);
+		// builder.addDoubleProperty("object-area", () -> getObjectArea(), null);
+		// builder.addDoubleProperty("object-skew", () -> getObjectRotationAngle(), null);
 
-		builder.addDoubleProperty("object-ratio", () -> getObjectAspectRatio(), null);
-		builder.addDoubleProperty("object-distance", () -> getTargetDistance(), null);
-		builder.addDoubleProperty("object-widthrange", () -> getObjectWidthRange(), null);
+		// builder.addDoubleProperty("object-ratio", () -> getObjectAspectRatio(), null);
+		// builder.addDoubleProperty("object-distance", () -> getTargetDistance(), null);
+		// builder.addDoubleProperty("object-widthrange", () -> getObjectWidthRange(), null);
 	}
 
 	@Override

@@ -86,9 +86,9 @@ public final class QuickAccessVars {
 	public static final double CLIMB_P = 0.4;
 	
 	// camera pid
-	public static final double KP_APPROACH = 0.020; // 0.015
+	public static final double KP_APPROACH = 0.030; // 0.015
 	public static final double KI_APPROACH = 0;
-	public static final double KD_APPROACH = 0;
+	public static final double KD_APPROACH = 0.08;
 	public static final double SETPOINT_APPROACH = 15;
 	public static final double TOLERANCE_APPROACH = 2; // for leds
 	public static final double KP_CENTER = 0.055; // 0.045
@@ -104,11 +104,11 @@ public final class QuickAccessVars {
 	public static final double MAX_VELOCITY = 114; // inches/sec
 
 	// auto pid
-	public static final double KP_LEFTAUTO = 1.3;
+	public static final double KP_LEFTAUTO = 0.2;
 	public static final double KI_LEFTAUTO = 0;
-	public static final double KD_LEFTAUTO = 0.07;
+	public static final double KD_LEFTAUTO = 0.02;
 	public static final double KV_LEFTAUTO = 1 / MAX_VELOCITY;
-	public static final double KA_LEFTAUTO = 0.001; // The acceleration term for left. Adjust this if you want to reach higher or lower speeds faster. 0.0 is the default
+	public static final double KA_LEFTAUTO = 0.0175; // The acceleration term for left. Adjust this if you want to reach higher or lower speeds faster. 0.0 is the default
 	public static final double KG_AUTO = 0.8 * (-1.0/80.0);
 
 	public static final double KP_RIGHTAUTO = KP_LEFTAUTO;
@@ -116,6 +116,11 @@ public final class QuickAccessVars {
 	public static final double KD_RIGHTAUTO = KD_LEFTAUTO;
 	public static final double KV_RIGHTAUTO = KV_LEFTAUTO;
 	public static final double KA_RIGHTAUTO = KA_LEFTAUTO; // The acceleration term for right. 0.0 is the default
+
+	public static final double AUTO_TURN_P = 0.05;
+	public static final double AUTO_TURN_I = 0;
+	public static final double AUTO_TURN_D = 0.0;
+	public static final double AUTO_TURN_TOLERANCE = 10; // degrees
 
 	// DO NOT USE THIS CONSTRUCTOR
 	private QuickAccessVars() {

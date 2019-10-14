@@ -58,6 +58,6 @@ public class PneumaticLauncherSubsystem extends Subsystem {
 
 	@Override
 	public void initSendable(SendableBuilder builder) {
-		builder.addStringProperty("launchers", () -> launcherSol.get().toString(), null);
+		// builder.addStringProperty("launchers", () -> launcherSol.get().toString(), null);
 	}
 }

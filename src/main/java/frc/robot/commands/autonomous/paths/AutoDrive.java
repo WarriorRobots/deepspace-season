@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.util.AutoHandler;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.PathfinderFRC;
 import jaci.pathfinder.Trajectory;
@@ -23,6 +24,8 @@ public class AutoDrive extends Command {
   private String k_path_name;
   private EncoderFollower m_left_follower, m_right_follower;
   private Notifier m_follower_notifier;
+
+  private double heading_difference;
 
   public AutoDrive(String path_name) {
     requires(Robot.drivetrain);
@@ -71,18 +74,21 @@ public class AutoDrive extends Command {
 
       // calculate desired amount to turn for motors
       double heading = Robot.drivetrain.getAngleDegrees();
-      double desired_heading = -Pathfinder.r2d(m_left_follower.getHeading());
+      double desired_heading = Pathfinder.r2d(m_left_follower.getHeading());
       // the value has a negative sign in front to fix the issue listed on the WPI Docs
       // https://wpilib.screenstepslive.com/s/currentCS/m/84338/l/1021631-integrating-path-following-into-a-robot-program#known-issue
-      SmartDashboard.putNumber("Desired Heading", desired_heading); // XXX test
+      //SmartDashboard.putNumber("Desired Heading", desired_heading); // XXX test
 
-      double heading_difference = Pathfinder.boundHalfDegrees(desired_heading - heading);
-      SmartDashboard.putNumber("Heading Difference", heading_difference); // XXX test
+      heading_difference = Pathfinder.boundHalfDegrees(desired_heading - heading);
+      //SmartDashboard.putNumber("Heading Difference", heading_difference); // XXX test
       double turn =  QuickAccessVars.KG_AUTO * heading_difference;
-      SmartDashboard.putNumber("Auto motor Turn", turn); // XXX test
+      //SmartDashboard.putNumber("Auto motor Turn", turn); // XXX test
+
+      SmartDashboard.putNumber("Auto Left Speed", left_speed);
+      SmartDashboard.putNumber("Auto Right Speed", right_speed);
 
       // drive the motors using the desired outputs for the motors combined with the amount it should turn
-      Robot.drivetrain.tankDriveRaw(left_speed + turn, right_speed - turn);
+      Robot.drivetrain.tankDriveRaw(left_speed/2.5 - turn, right_speed/2.5 + turn);
     }
   }
 
@@ -104,5 +110,6 @@ public class AutoDrive extends Command {
   protected void end() {
     m_follower_notifier.stop();
     Robot.drivetrain.stopDrive();
+    AutoHandler.getInstance().setLeftOver(heading_difference);
   }
 }

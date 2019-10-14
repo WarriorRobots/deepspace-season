@@ -47,7 +47,7 @@ public class CargoPickupSubsystem extends Subsystem {
 
 	@Override
 	public void initSendable(SendableBuilder builder) {
-		builder.addDoubleProperty("speed", () -> pickupWheels.getMotorOutputPercent(), null);
+		// builder.addDoubleProperty("speed", () -> pickupWheels.getMotorOutputPercent(), null);
 	}
 
 }
