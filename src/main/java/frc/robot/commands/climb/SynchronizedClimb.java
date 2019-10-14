@@ -1,6 +1,7 @@
 package frc.robot.commands.climb;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 
 public class SynchronizedClimb extends Command {
@@ -25,15 +26,18 @@ public class SynchronizedClimb extends Command {
 	protected void initialize() {
 		initialClimbPos = Robot.climb.getClimbPosition();
 		initialElevPos = Robot.elevator.getElevatorPosition();
+		Robot.elevator.config_climbPID();
 		System.out.println("Climb: Starting " + this.getClass().getSimpleName());
 	}
 
 	@Override
 	protected void execute() {
 		Robot.climb.moveClimbTo(target);
-		// current - initial climb position gets the difference
-		// then add initial elevator position to find out where the elevator should be
-		Robot.elevator.moveElevatorTo(Robot.climb.getClimbPosition() - initialClimbPos + initialElevPos);
+		// current - initial = difference
+		// (1+extra%)(current climb - initial climb) = current elevator - initial elevator
+		// (1+extra%)(current climb - initial climb) + initial elevator = current elevator
+		Robot.elevator.moveElevatorTo((1 + QuickAccessVars.ELEVATOR_CLIMB_EXTRA) * (Robot.climb.getClimbPosition() - initialClimbPos) + initialElevPos);
+		// NOTE: extra% is the amount extra as a percent the elevator goes compared to the climb
 	}
 
 	@Override
@@ -45,6 +49,7 @@ public class SynchronizedClimb extends Command {
 	protected void end() {
 		Robot.climb.stopClimb();
 		Robot.elevator.stopElevator();
+		Robot.elevator.config_defaultPID();
 		System.out.println("Climb: Finishing " + this.getClass().getSimpleName());
 	}
 
@@ -52,6 +57,7 @@ public class SynchronizedClimb extends Command {
 	protected void interrupted() {
 		Robot.climb.stopClimb();
 		Robot.elevator.stopElevator();
+		Robot.elevator.config_defaultPID();
 		System.out.println("Climb: Canceling " + this.getClass().getSimpleName());
 	}
 }

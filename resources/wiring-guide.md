@@ -195,8 +195,9 @@
 ![Blinkin image](./images/blinkin.jpg)
 
 * Rated for 12V/5A
-* **~** is the signal PWM and is closes to the power wires on the Blinkin
-* **~** goes in the signal (some pin relative to image)
+* **~** is the signal PWM and is closest to the power wires on the Blinkin
+* **~** goes in the signal on the rio which is closes to the center of the rio
+* Specific documentation can be found [here](./REV-11-1105-UM.pdf)
 
 ---
 

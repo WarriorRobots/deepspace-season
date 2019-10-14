@@ -68,6 +68,7 @@ public class CameraStopAtDistance extends Command {
 				Robot.leds.setChannel(LedControllerSubsystem.seeTarget);
 			}
 		} else {
+			valueCenter = 0;
 			valueApproach = 0;
 
 			// if the robot doesn't see the target it should be BLUE BREATHING
