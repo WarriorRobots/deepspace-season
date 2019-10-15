@@ -125,6 +125,12 @@ public final class QuickAccessVars {
 	public static final double AUTO_TURN_D = 0.0;
 	public static final double AUTO_TURN_TOLERANCE = 10; // degrees
 
+	public static final double AUTO_DISTANCE_ANGLE_P = 0.05;
+	public static final double AUTO_DISTANCE_P = 0.03;
+	public static final double AUTO_DISTANCE_I = 0;
+	public static final double AUTO_DISTANCE_D = 0;
+	public static final double AUTO_DISTANCE_TOLERANCE = 2; // inches
+
 	// DO NOT USE THIS CONSTRUCTOR
 	private QuickAccessVars() {
 		DriverStation.reportError("Do not create a QuickAccessVars object!", false);

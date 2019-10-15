@@ -8,11 +8,17 @@
 package frc.robot.commands.autonomous.paths.routines;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
+import frc.robot.QuickAccessVars;
+import frc.robot.commands.elevator.MoveElevatorTo;
 
-public class Rocket extends CommandGroup {
-  public Rocket(String autoname) {
-    addSequential(new RocketDrive(autoname)); // drive to the target and turn the correct direction
-    addParallel(new RocketElevator()); // at the same time move the elevator up after 2 seconds
-    addSequential(new RocketPlace()); // drive with camera, place, and backup
+public class RocketElevator extends CommandGroup {
+  /**
+   * Used to raise the elevator after 2 seconds of driving
+   * @see Rocket
+   */
+  public RocketElevator() {
+    addSequential(new WaitCommand(2));
+    addSequential(new MoveElevatorTo(QuickAccessVars.LVL2_HEIGHT));
   }
 }

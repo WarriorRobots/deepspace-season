@@ -8,11 +8,16 @@
 package frc.robot.commands.autonomous.paths.routines;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.autonomous.paths.AutoCompleteTurn;
+import frc.robot.commands.autonomous.paths.AutoDrive;
 
-public class Rocket extends CommandGroup {
-  public Rocket(String autoname) {
-    addSequential(new RocketDrive(autoname)); // drive to the target and turn the correct direction
-    addParallel(new RocketElevator()); // at the same time move the elevator up after 2 seconds
-    addSequential(new RocketPlace()); // drive with camera, place, and backup
+public class RocketDrive extends CommandGroup {
+  /**
+   * Used to drive to the rocket and face the propper direction
+   * @see Rocket
+   */
+  public RocketDrive(String autoname) {
+    addSequential(new AutoDrive(autoname));
+    addSequential(new AutoCompleteTurn());
   }
 }

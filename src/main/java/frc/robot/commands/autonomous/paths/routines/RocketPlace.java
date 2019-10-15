@@ -8,18 +8,19 @@
 package frc.robot.commands.autonomous.paths.routines;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.autonomous.paths.AutoDrive;
-import frc.robot.commands.autonomous.paths.AutoTurn;
+import frc.robot.QuickAccessVars;
+import frc.robot.commands.autonomous.CameraStopAtDistance;
+import frc.robot.commands.autonomous.paths.AutoStraightDistance;
+import frc.robot.commands.hatchplacer.PlaceHatchOnVelcro;
 
-@Deprecated
-public class RightRocket extends CommandGroup {
-
-
+public class RocketPlace extends CommandGroup {
   /**
-   * Go behind the rocket and turn 90 degrees right
+   * Used to drive forwards towards the target, place, and backup
+   * @see Rocket
    */
-  public RightRocket() {
-    addSequential(new AutoDrive("TESTBackStraightRocket"));
-    addSequential(new AutoTurn(90)); // 90 right
+  public RocketPlace() {
+    addSequential(new CameraStopAtDistance(),3); // if it overshoots and doesn't backup, it should just shoot
+    addSequential(new PlaceHatchOnVelcro(QuickAccessVars.HATCH_LAUNCH_SAFETY));
+    addSequential(new AutoStraightDistance(-4));
   }
 }

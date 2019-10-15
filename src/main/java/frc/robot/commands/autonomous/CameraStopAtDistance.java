@@ -22,6 +22,12 @@ public class CameraStopAtDistance extends Command {
 	/** Calculated PID output from {@link #PIDcenter} should stored in value. */
 	private double valueCenter;
 
+	// states whether the command can be finished or not
+	private boolean finishable;
+
+	/**
+	 * @param finishable True if the command can be stopped by being at a distance (aka true if in auto).
+	 */
 	public CameraStopAtDistance() {
 		requires(Robot.drivetrain);
 		requires(Robot.camera);
@@ -81,6 +87,14 @@ public class CameraStopAtDistance extends Command {
 
 	@Override
 	protected boolean isFinished() {
+		if (finishable) {
+			if (Math.abs(Robot.camera.getTargetDistance()-QuickAccessVars.SETPOINT_APPROACH) <
+			QuickAccessVars.TOLERANCE_APPROACH) {
+				// returns true if the command is finishable and the camera is at the right distance away
+				return true;
+			}
+		}
+		// returns false if the commmand is not finishable or if it is not at the tolerable zone to say it's finished
 		return false;
     }
 
