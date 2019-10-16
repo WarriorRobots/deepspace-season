@@ -17,8 +17,8 @@ public class Rocket extends CommandGroup {
     addParallel(new RocketElevator()); // at the same time move the elevator up after 2 seconds
     addSequential(new RocketDrive(autoname)); // drive to the target and turn the correct direction
     addSequential(new RocketPlace()); // drive with camera, place, and backup
+    addSequential(new AutoStraightDistance(-26));
     addSequential(new LockScissors());
     addSequential(new HomeElevator(),0.75); // bring elevator back down
-    addSequential(new AutoStraightDistance(-26));
   }
 }
