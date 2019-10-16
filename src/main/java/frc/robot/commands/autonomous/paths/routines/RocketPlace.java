@@ -10,17 +10,15 @@ package frc.robot.commands.autonomous.paths.routines;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.QuickAccessVars;
 import frc.robot.commands.autonomous.CameraStopAtDistance;
-import frc.robot.commands.autonomous.paths.AutoStraightDistance;
 import frc.robot.commands.hatchplacer.PlaceHatchOnVelcro;
 
 public class RocketPlace extends CommandGroup {
   /**
-   * Used to drive forwards towards the target, place, and backup
+   * Used to drive forwards towards the target and place
    * @see Rocket
    */
   public RocketPlace() {
-    addSequential(new CameraStopAtDistance(),3); // if it overshoots and doesn't backup, it should just shoot
+    addSequential(new CameraStopAtDistance(true),1.5); // if it overshoots and doesn't backup, it should just shoot
     addSequential(new PlaceHatchOnVelcro(QuickAccessVars.HATCH_LAUNCH_SAFETY));
-    addSequential(new AutoStraightDistance(-4));
   }
 }

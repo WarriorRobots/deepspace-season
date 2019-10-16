@@ -125,12 +125,12 @@ public final class ControlHandler {
 		leftJoyButton7.whenPressed(new DebugRebootAll());
 		leftJoyButton9.whenPressed(new FindArmZero());
 		leftJoyButton11.whenPressed(new AdjustArmRelative(QuickAccessVars.ARM_EMERGENCY_CLIMB_DELTA));
-		leftJoyButton12.whenPressed(new AdjustClimbRelative(QuickAccessVars.CLIMB_DELTA));
+		// leftJoyButton12.whenPressed(new AdjustClimbRelative(QuickAccessVars.CLIMB_DELTA));
 
 		rightJoyThumbButton.whileHeld(new ArcadeDrive());
 		// TODO Make sure turn lock is absolutely unnecessary, if so delete this
 		//rightJoyTriggerButton.whileHeld(new TurnLockDrive());
-		rightJoyTriggerButton.whileHeld(new CameraStopAtDistance());
+		rightJoyTriggerButton.whileHeld(new CameraStopAtDistance(false));
 		rightJoyButton3.whenPressed(new ExtendArm(QuickAccessVars.ARM_PICKUP_CARGO_ANGLE));
 		rightJoyButton4.whileHeld(new CameraApproach());
 		rightJoyButton5.whenPressed(new ExtendArm(QuickAccessVars.ARM_CLIMB_ANGLE));

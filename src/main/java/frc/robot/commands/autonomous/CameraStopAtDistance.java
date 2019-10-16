@@ -28,7 +28,7 @@ public class CameraStopAtDistance extends Command {
 	/**
 	 * @param finishable True if the command can be stopped by being at a distance (aka true if in auto).
 	 */
-	public CameraStopAtDistance() {
+	public CameraStopAtDistance(boolean finishable) {
 		requires(Robot.drivetrain);
 		requires(Robot.camera);
 		requires(Robot.leds);
@@ -41,6 +41,7 @@ public class CameraStopAtDistance extends Command {
 		PIDcenter = new SynchronousPIDF(QuickAccessVars.KP_CENTER, QuickAccessVars.KI_CENTER,
 				QuickAccessVars.KD_CENTER);
 
+		this.finishable = finishable;
 		timer = new Timer();
 	}
 

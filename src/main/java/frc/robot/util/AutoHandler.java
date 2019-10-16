@@ -2,7 +2,6 @@ package frc.robot.util;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.commands.autonomous.paths.AutoDrive;
-import frc.robot.commands.autonomous.paths.routines.RightRocket;
 import frc.robot.commands.autonomous.paths.routines.Rocket;
 
 /**

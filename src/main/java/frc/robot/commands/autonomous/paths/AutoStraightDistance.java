@@ -82,7 +82,7 @@ public class AutoStraightDistance extends Command {
 		angleOutput = pidAngle.calculate(Robot.drivetrain.getAngleDegrees(), timer.get());
 		distanceOutput = pidDistance.calculate(avgCount, timer.get());
 		
-		Robot.drivetrain.arcadeDriveRaw(-distanceOutput, angleOutput);
+		Robot.drivetrain.arcadeDriveRaw(distanceOutput, angleOutput);
 	}
 
 	@Override

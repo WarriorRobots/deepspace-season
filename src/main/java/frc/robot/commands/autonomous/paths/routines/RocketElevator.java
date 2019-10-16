@@ -14,7 +14,7 @@ import frc.robot.commands.elevator.MoveElevatorTo;
 
 public class RocketElevator extends CommandGroup {
   /**
-   * Used to raise the elevator after 2 seconds of driving
+   * Used to raise the elevator after 1 seconds of driving
    * @see Rocket
    */
   public RocketElevator() {
