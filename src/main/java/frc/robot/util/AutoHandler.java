@@ -1,7 +1,7 @@
 package frc.robot.util;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.commands.autonomous.paths.AutoDrive;
+import frc.robot.commands.autonomous.paths.routines.Forwards;
 import frc.robot.commands.autonomous.paths.routines.Rocket;
 
 /**
@@ -40,7 +40,7 @@ public class AutoHandler {
                 autocommand = new Rocket("RocketLeftHab2");
                 break;
             case FORWARDS:
-                autocommand = new AutoDrive("ForwardsHab1");
+                autocommand = new Forwards("ForwardsHab1");
                 break;
             case NONE:
                 // does nothing
