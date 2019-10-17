@@ -17,6 +17,8 @@ public class AutoHandler {
 
     /** Leftover amount of degrees that the PathFinder did not get */
     private double leftover = 0;
+    /** True if the auto is allowed to place due to being in range */
+    private boolean autoplace = false;
 
     /**
      * @return The only instance of AutoHandler
@@ -78,5 +80,13 @@ public class AutoHandler {
      */
     public double getLeftOver() {
         return this.leftover;
+    }
+
+    public void setLaunchAutoHatch(boolean canplace) {
+        autoplace = canplace;
+    }
+
+    public boolean getLaunchAutoHatch() {
+        return autoplace;
     }
 }

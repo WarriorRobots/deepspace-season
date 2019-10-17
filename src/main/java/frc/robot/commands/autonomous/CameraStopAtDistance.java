@@ -6,6 +6,7 @@ import frc.robot.QuickAccessVars;
 import frc.robot.Robot;
 import frc.robot.subsystems.CameraSubsystem;
 import frc.robot.subsystems.LedControllerSubsystem;
+import frc.robot.util.AutoHandler;
 import frc.robot.util.SynchronousPIDF;
 
 /** Approach the target keeping the target centered and stopping at a distance using 2 different PIDs. */
@@ -91,6 +92,8 @@ public class CameraStopAtDistance extends Command {
 		if (finishable) {
 			if (Math.abs(Robot.camera.getTargetDistance()-QuickAccessVars.SETPOINT_APPROACH) <
 			QuickAccessVars.TOLERANCE_APPROACH) {
+				AutoHandler.getInstance().setLaunchAutoHatch(true);
+
 				// returns true if the command is finishable and the camera is at the right distance away
 				return true;
 			}
