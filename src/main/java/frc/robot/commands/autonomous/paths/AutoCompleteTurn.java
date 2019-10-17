@@ -13,7 +13,8 @@ import frc.robot.util.SynchronousPIDF;
  */
 public class AutoCompleteTurn extends Command {
 	
-	private double angleTarget, output;
+	private double angleStart, angleTarget, output;
+	private double angleTooBig = 90; // amount that it should not try to complete by turning
 	
 	private boolean stopsAtSetpoint = true;
 	
@@ -49,6 +50,7 @@ public class AutoCompleteTurn extends Command {
 	protected void initialize() {
 	Robot.drivetrain.resetAngle();
 	
+	angleStart = Robot.drivetrain.getAngleDegrees();
 	angleTarget = AutoHandler.getInstance().getLeftOver();
 	
     try {
@@ -67,6 +69,14 @@ public class AutoCompleteTurn extends Command {
 
 	@Override
 	protected boolean isFinished() {
+		// if the robot turns more than it ever should turn, then stop it
+		if (Math.abs(Robot.drivetrain.getAngleDegrees()-angleStart) > angleTooBig) {
+			return true;
+		}
+		if (Math.abs(angleTarget-angleStart) > angleTooBig) {
+			return true;
+		}
+
 		if (pidLoop.onTarget(QuickAccessVars.AUTO_TURN_TOLERANCE) && stopsAtSetpoint) {
 			return true;
 		} else {
