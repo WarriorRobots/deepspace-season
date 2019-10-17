@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 public final class QuickAccessVars {
 
 	// in inches from the floor
-	public static final double LVL1_HEIGHT = 20.5;
+	public static final double LVL1_HEIGHT = 19.5;
 	public static final double LVL2_HEIGHT = 42;
 	public static final double LVL3_HEIGHT = 63;
 	public static final double CARGO_BAY_HEIGHT = 34; // CARGO_SCORING_HEIGHT + ELEVATOR_DELTA
