@@ -98,7 +98,7 @@ public final class QuickAccessVars {
 	public static final double KI_CENTER = 0;
 	public static final double KD_CENTER = 0;
 	public static final double SETPOINT_CENTER = 0;
-	public static final double CAMERA_BIAS = 0.5;
+	public static final double CAMERA_BIAS = 0.0;
 	// amount of degrees added to the center the target when driving in
 	
 	// auto
