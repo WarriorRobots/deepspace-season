@@ -2,7 +2,7 @@
 
 <!-- Author: Joshua Budd -->
 <!-- Date: 2019/01/23 -->
-<!-- Revised: 2019/01/23 -->
+<!-- Revised: 2019/11/04 -->
 
 ![Narwals scematic](./images/narwhallayout.jpeg "3128 Aluminum Narwals' scematic")
 

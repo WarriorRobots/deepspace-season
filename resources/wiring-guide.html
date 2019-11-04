@@ -3,7 +3,7 @@
 
 <!-- Date: 2019/01/23 -->
 
-<!-- Revised: 2019/01/23 -->
+<!-- Revised: 2019/11/04 -->
 
 
 <p><img src="./images/narwhallayout.jpeg" title="3128 Aluminum Narwals&#39; scematic" alt="Narwals scematic" /></p>
@@ -22,6 +22,8 @@
 <li><a href="#encoder">Encoder</a><br /></li>
 <li><a href="#ir">IR Sensor</a><br /></li>
 <li><a href="#halleffect">Hall Effect Sensor</a><br /></li>
+<li><a href="#pwm">Pulse-Width Modulation</a><br /></li>
+<li><a href="#leds">REV Blinkin</a><br /></li>
 <li><a href="#can">CAN Wiring</a><br /></li>
 <li><a href="#gauge">Wire Gauge</a></li>
 </ul>
@@ -85,6 +87,7 @@
 <ul>
 <li>Analog sensors go in PWM ports (Analog sensors are sensors with a range of outputs)<br /></li>
 <li>(e.g. ultrasonic sensors, potentiometers)<br /></li>
+<li>Some motor controllers and the Blinkin go in PWM ports<br /></li>
 <li>Begin plugging in sensors at 0 and count up<br /></li>
 </ul></li>
 <li><p><a href="#rsl">RSL</a> light in RSL (left-most bottom port)</p>
@@ -201,6 +204,23 @@
 <li><strong>GND</strong> on the sensor goes in ground (bottom pin)<br /></li>
 <li><strong>5V</strong> on the sensor goes in the positive (middle pin)<br /></li>
 <li><strong>SIG</strong> on the sensor goes in signal (top pin)</li>
+</ul>
+<p><a id="pwm"></a></p>
+<h3 id="pulse-width-modulation-pwm">Pulse-Width Modulation (PWM)</h3>
+<p><img src="./images/pwmports.jpg" alt="PWM image" /></p>
+<ul>
+<li>Ports labeled from 0 through 9 on <a href="#rio">RoboRio</a><br /></li>
+<li>All analog sensors and some controllers go in PWM ports<br /></li>
+<li>Begin plugging in sensors at 0 and count up (not required, good wiring practice)</li>
+</ul>
+<p><a id="leds"></a></p>
+<h3 id="rev-blinkin">REV Blinkin</h3>
+<p><img src="./images/blinkin.jpg" alt="Blinkin image" /></p>
+<ul>
+<li>Rated for 12V/5A<br /></li>
+<li><strong>~</strong> is the signal PWM and is closest to the power wires on the Blinkin<br /></li>
+<li><strong>~</strong> goes in the signal on the rio which is closes to the center of the rio<br /></li>
+<li>Specific documentation can be found <a href="./REV-11-1105-UM.pdf">here</a></li>
 </ul>
 <hr />
 <p><a id="can"></a></p>
